@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: desktop/vocab training
+        working-directory: Desktop/vocab training
 
     steps:
       - name: Checkout
@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: desktop/vocab training/out
+          path: Desktop/vocab training/out
 
   deploy:
     environment:
