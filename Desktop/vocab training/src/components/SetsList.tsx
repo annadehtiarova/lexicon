@@ -93,7 +93,7 @@ export default function SetsList({ sets, onDelete, onRename }: SetsListProps) {
                 {set.words.length} words · {set.masteredWordIds.length} mastered
               </p>
               <Link
-                href={`/study?set=${encodeURIComponent(set.id)}`}
+                href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/study/?set=${encodeURIComponent(set.id)}`}
                 className="mt-4 inline-flex h-9 items-center gap-2 rounded-full bg-[#20293a] px-4 text-sm font-medium text-[#f3f5f9] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] hover:bg-[#263144]"
               >
                 <BookOpenIcon className="h-4 w-4" /> Study
