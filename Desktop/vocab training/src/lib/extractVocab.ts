@@ -123,12 +123,7 @@ function classifyUnknownWord(word: string): ExtractedWord["pos"] | null {
   return null;
 }
 
-type Translator = (
-  inputs: string | string[],
-  options?: Record<string, unknown>,
-) => Promise<Array<{ translation_text?: string }> | { translation_text?: string }>;
-
-let translatorPromise: Promise<Translator> | null = null;
+let translatorPromise: Promise<any> | null = null;
 
 function getTranslator() {
   translatorPromise ??= pipeline(

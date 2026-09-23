@@ -5,6 +5,7 @@ export function generateStaticParams() {
   return [{ id: EXERCISE_SET_ID }];
 }
 
-export default function StudySetPage() {
+export default function StudySetPage({
+}: {}) {
   return <StudySetClient id={EXERCISE_SET_ID} />;
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   deleteWord,
   getSet,
+  setMasteredWordIds,
   updateWord,
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
@@ -60,17 +61,17 @@ function displayGerman(word: VocabWord): string {
 
   const noun = word.german.toLowerCase();
 
-  const article =
-    KNOWN_NOUN_ARTICLES.get(noun) ??
-    (/(ung|heit|keit|schaft|tion|tät|ik|ei|ie)$/.test(noun)
-      ? "die"
-      : /(chen|lein|ment|um)$/.test(noun)
-        ? "das"
-        : /(er|en|el|ling|ismus)$/.test(noun)
-          ? "der"
-          : "die");
+  const article = KNOWN_NOUN_ARTICLES.get(noun) ?? inferNounArticle(noun);
 
   return `${article} ${word.german.charAt(0).toUpperCase()}${word.german.slice(1)}`;
+}
+
+function inferNounArticle(noun: string): string {
+  if (/(chen|lein|ment|um|ma|zeug)$/.test(noun)) return "das";
+  if (/(ung|heit|keit|schaft|tion|tät|ik|ei|ie|ur|enz|anz|age|ade|ette|elle|ose|sis|itis)$/.test(noun)) return "die";
+  if (/(ismus|ling|or|us|ist|ant|ent|eur|är)$/.test(noun)) return "der";
+  if (/e$/.test(noun)) return "die";
+  return "der";
 }
 
 interface ResolvedSet {
@@ -104,12 +105,19 @@ function resolveSet(id: string): ResolvedSet | null {
 
 export default function StudySetClient({ id }: { id: string }) {
 
-  const [set, setSet] = useState<ResolvedSet | null>(() => resolveSet(id));
+  const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
+
+  useEffect(() => {
+    const resolved = resolveSet(id);
+
+    setSet(resolved);
+    setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
+  }, [id]);
 
   const words: VocabWord[] = useMemo(
     () =>
@@ -144,14 +152,13 @@ export default function StudySetClient({ id }: { id: string }) {
     );
   }
 
-  const handleLearn = () => {
-    window.dispatchEvent(new CustomEvent("cards-learn-next"));
-  };
-
   const handleKnewIt = (wordId: string) => {
-    if (set.isPersisted) deleteWord(id, wordId);
+    if (!set.isPersisted) return;
+    deleteWord(id, wordId);
     setSet((current) =>
-      current ? { ...current, words: current.words.filter((word) => word.id !== wordId) } : current,
+      current
+        ? { ...current, words: current.words.filter((word) => word.id !== wordId) }
+        : current,
     );
     setMasteredIds((current) => {
       const next = new Set(current);
@@ -269,7 +276,6 @@ export default function StudySetClient({ id }: { id: string }) {
               <CardsMode
                 words={words}
                 masteredIds={masteredIds}
-                onLearned={handleLearn}
                 onKnewIt={handleKnewIt}
               />
             )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import UploadCard from "@/components/UploadCard";
 import SetsList from "@/components/SetsList";
@@ -11,8 +11,12 @@ import { StudySet } from "@/lib/types";
 import { CameraIcon } from "@/components/icons";
 
 export default function Home() {
-  const [sets, setSets] = useState<StudySet[]>(() => loadSets());
+  const [sets, setSets] = useState<StudySet[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSets(loadSets());
+  }, []);
 
   const handleCreateSet = async (files: File[], name: string) => {
     try {
