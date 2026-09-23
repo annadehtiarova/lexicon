@@ -1,11 +1,10 @@
 "use client";
 
-import { use, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   deleteWord,
   getSet,
-  setMasteredWordIds,
   updateWord,
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
@@ -105,19 +104,12 @@ function resolveSet(id: string): ResolvedSet | null {
 
 export default function StudySetClient({ id }: { id: string }) {
 
-  const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
+  const [set, setSet] = useState<ResolvedSet | null>(() => resolveSet(id));
   const [mode, setMode] = useState<ModeKey>("cards");
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
-
-  useEffect(() => {
-    const resolved = resolveSet(id);
-
-    setSet(resolved);
-    setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
-  }, [id]);
 
   const words: VocabWord[] = useMemo(
     () =>
@@ -152,14 +144,18 @@ export default function StudySetClient({ id }: { id: string }) {
     );
   }
 
-  const handleMastered = (wordId: string) => {
-    setMasteredIds((prev) => {
-      const next = new Set(prev).add(wordId);
+  const handleLearn = () => {
+    window.dispatchEvent(new CustomEvent("cards-learn-next"));
+  };
 
-      if (set.isPersisted) {
-        setMasteredWordIds(id, Array.from(next));
-      }
-
+  const handleKnewIt = (wordId: string) => {
+    if (set.isPersisted) deleteWord(id, wordId);
+    setSet((current) =>
+      current ? { ...current, words: current.words.filter((word) => word.id !== wordId) } : current,
+    );
+    setMasteredIds((current) => {
+      const next = new Set(current);
+      next.delete(wordId);
       return next;
     });
   };
@@ -273,7 +269,8 @@ export default function StudySetClient({ id }: { id: string }) {
               <CardsMode
                 words={words}
                 masteredIds={masteredIds}
-                onMastered={handleMastered}
+                onLearned={handleLearn}
+                onKnewIt={handleKnewIt}
               />
             )}
 

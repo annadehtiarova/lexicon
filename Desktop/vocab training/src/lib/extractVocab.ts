@@ -65,6 +65,32 @@ function removeArticle(word: string): string {
     .trim();
 }
 
+function wordStem(word: string): string {
+  return removeArticle(word).toLowerCase();
+}
+
+function buildKnownForms(): Map<string, BankEntry> {
+  const forms = new Map<string, BankEntry>();
+  for (const entry of WORD_BANK) {
+    const base = wordStem(entry.german);
+    forms.set(base, entry);
+    if (entry.pos === "verb") {
+      const stem = base.replace(/(en|ern|eln|ieren)$/, "");
+      ["e", "st", "t", "en", "te", "test", "ten", "end", "endest", "endete", "iert", "ierte"].forEach((ending) => {
+        forms.set(`${stem}${ending}`, entry);
+      });
+    }
+    if (entry.pos === "noun") {
+      const pluralForms = [
+        `${base}e`, `${base}en`, `${base}er`, `${base}s`,
+        base.replace(/e$/, "en"), base.replace(/ung$/, "ungen"),
+      ];
+      pluralForms.forEach((form) => forms.set(form, entry));
+    }
+  }
+  return forms;
+}
+
 const GERMAN_FUNCTION_WORDS = new Set(
   "aber als am an auch auf aus bei bin bis das dass dein dem den der des die du ein eine einem einen einer eines er es für gegen haben hat ich im in ist ja kein mit nach nicht nur oder sie sind und vom von war was wir zu zum zur"
     .split(" "),
@@ -97,7 +123,12 @@ function classifyUnknownWord(word: string): ExtractedWord["pos"] | null {
   return null;
 }
 
-let translatorPromise: Promise<any> | null = null;
+type Translator = (
+  inputs: string | string[],
+  options?: Record<string, unknown>,
+) => Promise<Array<{ translation_text?: string }> | { translation_text?: string }>;
+
+let translatorPromise: Promise<Translator> | null = null;
 
 function getTranslator() {
   translatorPromise ??= pipeline(
@@ -116,6 +147,7 @@ async function findVocabulary(text: string): Promise<ExtractedWord[]> {
 
   const matches: ExtractedWord[] = [];
   const seen = new Set<string>();
+  const knownForms = buildKnownForms();
 
   for (const rawWord of text.match(/[\p{L}]+(?:['’.-][\p{L}]+)*/gu) ?? []) {
     const key = normalizeWord(rawWord);
@@ -123,7 +155,7 @@ async function findVocabulary(text: string): Promise<ExtractedWord[]> {
     if (seen.has(key)) continue;
     seen.add(key);
 
-    const entry = knownTranslations.get(key);
+    const entry = knownTranslations.get(key) ?? knownForms.get(key);
     const knownPos = entry?.pos;
     const pos = knownPos === "noun"
       ? "noun"

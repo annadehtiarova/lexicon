@@ -1,4 +1,5 @@
-{"timestamp":"00:00:00.849","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:19.149","source":"Server","level":"LOG","message":"○ Compiling / ..."}
-{"timestamp":"00:00:19.840","source":"Server","level":"ERROR","message":"(node:67370) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"}
-{"timestamp":"00:00:46.196","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:00.876","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:04.305","source":"Server","level":"LOG","message":"○ Compiling /study ..."}
+{"timestamp":"00:00:05.094","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:03:57.390","source":"Server","level":"LOG","message":"✓ Compiled in 160ms"}
+{"timestamp":"00:04:22.439","source":"Server","level":"LOG","message":"✓ Compiled in 116ms"}

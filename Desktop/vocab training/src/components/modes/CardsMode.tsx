@@ -12,13 +12,15 @@ import {
 interface CardsModeProps {
   words: VocabWord[];
   masteredIds: Set<string>;
-  onMastered: (id: string) => void;
+  onLearned: (id: string) => void;
+  onKnewIt: (id: string) => void;
 }
 
 export default function CardsMode({
   words,
   masteredIds,
-  onMastered,
+  onLearned,
+  onKnewIt,
 }: CardsModeProps) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -37,8 +39,7 @@ export default function CardsMode({
   };
 
   const handleKnewIt = () => {
-    onMastered(word.id);
-    advance();
+    onKnewIt(word.id);
   };
 
   return (
@@ -82,10 +83,10 @@ export default function CardsMode({
 
         <div className="flex items-start gap-2">
           <button
-            onClick={advance}
+            onClick={() => onLearned(word.id)}
             className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#f3f5f9] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)]"
           >
-            <XIcon /> Again
+            <XIcon /> Learn
           </button>
           <button
             onClick={handleKnewIt}
