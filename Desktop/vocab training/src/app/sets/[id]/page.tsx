@@ -6,9 +6,6 @@ export function generateStaticParams() {
 }
 
 export default function StudySetPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  return <StudySetClient params={params} />;
+}: {}) {
+  return <StudySetClient id={EXERCISE_SET_ID} />;
 }

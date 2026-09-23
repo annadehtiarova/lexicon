@@ -103,12 +103,7 @@ function resolveSet(id: string): ResolvedSet | null {
   };
 }
 
-export default function StudySetClient({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function StudySetClient({ id }: { id: string }) {
 
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");

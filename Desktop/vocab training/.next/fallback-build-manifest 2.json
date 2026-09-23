@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "/_app": []
+  },
+  "devFiles": [],
+  "polyfillFiles": [],
+  "lowPriorityFiles": [
+    "static/WP40ax-jUKJPWe2cOtVn0/_buildManifest.js",
+    "static/WP40ax-jUKJPWe2cOtVn0/_ssgManifest.js",
+    "static/WP40ax-jUKJPWe2cOtVn0/_clientMiddlewareManifest.js"
+  ],
+  "rootMainFiles": [],
+  "rootMainFilesTree": {},
+  "pagesChunkGroupBootstrapParams": {}
+}

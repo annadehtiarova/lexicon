@@ -3,8 +3,12 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/lexicon",
-  assetPrefix: "/lexicon/",
+  ...(process.env.NODE_ENV === "production"
+    ? {
+        basePath: "/lexicon",
+        assetPrefix: "/lexicon/",
+      }
+    : {}),
   turbopack: {
     root: path.resolve(__dirname),
   },
