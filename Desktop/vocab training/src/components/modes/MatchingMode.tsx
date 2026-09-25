@@ -7,9 +7,7 @@ import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 interface MatchingModeProps {
   words: VocabWord[];
   onCorrect: (id: string) => void;
-  onNextBatch?: () => void;
-  correctCount: number;
-  totalWords: number;
+  onBatchComplete: () => void;
 }
 
 interface Tile {
@@ -33,7 +31,7 @@ function buildTiles(words: VocabWord[]): Tile[] {
   return tiles.sort(() => Math.random() - 0.5);
 }
 
-export default function MatchingMode({ words, onCorrect, onNextBatch, correctCount, totalWords }: MatchingModeProps) {
+export default function MatchingMode({ words, onCorrect, onBatchComplete }: MatchingModeProps) {
   const [queue, setQueue] = useState(() => shuffleWords(words));
   const [tiles, setTiles] = useState<Tile[]>(() => buildTiles(words));
   const [selected, setSelected] = useState<Tile | null>(null);
@@ -62,8 +60,8 @@ export default function MatchingMode({ words, onCorrect, onNextBatch, correctCou
       return;
     }
 
-    if (onNextBatch) onNextBatch();
-  }, [isDone, onNextBatch, queue]);
+    onBatchComplete();
+  }, [isDone, onBatchComplete, queue]);
 
   const reshuffle = () => {
     const nextQueue = shuffleWords(words);
@@ -116,7 +114,7 @@ export default function MatchingMode({ words, onCorrect, onNextBatch, correctCou
                 isMatched
                   ? "border-[#b8d34c] bg-[#d8f56d] text-[#172b35]"
                   : isWrong
-                    ? "border-[#c77d85] bg-[#c77d85]/25 text-[#54252b]"
+                    ? "border-red-400 bg-red-500/10 text-[#a63d2d]"
                     : isSelected
                       ? "border-[#b8d34c] bg-[#d8f56d]/45 text-[#172b35]"
                       : "border-[#b8c8c9] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"
@@ -130,14 +128,7 @@ export default function MatchingMode({ words, onCorrect, onNextBatch, correctCou
 
       {isDone && (
         <div className="mt-5 flex w-full flex-col items-center gap-3 rounded-2xl border border-[rgba(198,233,64,0.3)] px-5 py-4">
-          <p className="flex items-center gap-2 text-sm font-semibold text-[#315500]">
-            <CheckIcon />
-            {queue.length > ROUND_SIZE
-              ? "Round complete"
-              : onNextBatch
-                ? "Batch complete"
-                : `Match complete: ${correctCount} out of ${totalWords} correct`}
-          </p>
+          <p className="flex items-center gap-2 text-sm font-semibold text-[#315500]"><CheckIcon /> {queue.length > ROUND_SIZE ? "Round complete" : "All words matched"}</p>
           <button
             onClick={reshuffle}
             className="flex h-9 items-center gap-2 rounded-full bg-[#d8f56d] px-4 text-sm font-semibold text-[#172b35]"

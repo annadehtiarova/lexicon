@@ -53,9 +53,9 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
 
   return (
     <div
-      className="w-full max-w-3xl rounded-[28px] border-2 border-[#08758d] bg-[#fffaf0] p-7 shadow-[0_14px_0_rgba(8,117,141,0.12)]"
+      className="w-full max-w-[760px] rounded-2xl border-2 border-[#263fd6] bg-white p-7 shadow-[0_8px_0_rgba(38,63,214,0.1)]"
       style={{
-        backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.72), rgba(244,239,229,0.72))",
+        backgroundImage: "linear-gradient(135deg, rgba(238,241,255,0.55), rgba(248,251,220,0.55))",
       }}
     >
       <div
@@ -66,10 +66,10 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-3xl border-[1.667px] border-dashed px-6 py-10 text-center transition-colors ${
+        className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-[1.667px] border-dashed px-6 py-10 text-center transition-colors ${
           isDragging
-            ? "border-[#e76548] bg-[#e76548]/5"
-            : "border-[#9bb8bc] hover:border-[#08758d]"
+            ? "border-[#263fd6] bg-[#eef1ff]"
+            : "border-[#9bb8bc] hover:border-[#263fd6]"
         }`}
       >
         <input
@@ -80,7 +80,7 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
           hidden
           onChange={(e) => e.target.files && addFiles(e.target.files)}
         />
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#08758d] text-white">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#263fd6] text-white">
           <ImagePlusIcon className="h-6 w-6" />
         </div>
         <p className="font-heading text-lg tracking-[-0.36px] text-[#172b35]">
@@ -97,7 +97,7 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
             {files.map((f, i) => (
               <li
                 key={`${f.name}-${i}`}
-                className="rounded-full bg-[#dbeaec] px-3 py-1 text-xs text-[#075a70]"
+                className="rounded-full bg-[#eef1ff] px-3 py-1 text-xs text-[#263fd6]"
               >
                 {f.name}
               </li>
@@ -109,7 +109,7 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
       <button
         onClick={handleCreate}
         disabled={!canCreate}
-        className={`mt-5 flex h-10 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] px-8 text-sm font-semibold text-white shadow-[0_4px_0_rgba(7,90,112,0.22)] transition-opacity ${
+        className={`mt-5 flex h-10 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] px-8 text-sm font-semibold text-[#172b35] shadow-[0_4px_0_rgba(38,63,214,0.12)] transition-opacity ${
           canCreate
             ? "opacity-100 hover:opacity-90"
             : "cursor-not-allowed opacity-50"
@@ -129,7 +129,7 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
 
       {isNaming && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm">
-          <div className="w-full max-w-md border border-[#c7d1ca] bg-[#fffaf0] p-6 text-left shadow-[6px_6px_0_rgba(8,117,141,0.12)]">
+          <div className="w-full max-w-md rounded-xl border border-[#dce4bd] bg-white p-6 text-left shadow-[4px_4px_0_rgba(38,63,214,0.1)]">
             <p className="font-heading text-xl text-[#172b35]">Name your study set</p>
             <p className="font-body mt-2 text-sm text-[#5d6f74]">
               Give this vocabulary set a name before extraction starts.
@@ -143,14 +143,14 @@ export default function UploadCard({ onCreateSet }: UploadCardProps) {
                 if (event.key === "Escape") setIsNaming(false);
               }}
               placeholder="e.g. Moving house vocabulary"
-              className="mt-5 h-11 w-full rounded-xl border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]"
+              className="mt-5 h-11 w-full rounded-xl border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]"
               aria-label="Study set name"
             />
             <div className="mt-5 flex justify-end gap-2">
-              <button type="button" onClick={() => setIsNaming(false)} className="rounded-full bg-[#dbeaec] px-4 py-2 text-sm text-[#075a70]">
+              <button type="button" onClick={() => setIsNaming(false)} className="rounded-full bg-[#eef1ff] px-4 py-2 text-sm text-[#263fd6]">
                 Cancel
               </button>
-              <button type="button" onClick={confirmCreate} disabled={!setName.trim()} className="rounded-full bg-[#08758d] px-5 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40">
+              <button type="button" onClick={confirmCreate} disabled={!setName.trim()} className="rounded-full bg-[#d8f56d] px-5 py-2 text-sm font-semibold text-[#172b35] disabled:cursor-not-allowed disabled:opacity-40">
                 Create set
               </button>
             </div>

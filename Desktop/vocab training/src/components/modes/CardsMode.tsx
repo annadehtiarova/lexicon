@@ -13,14 +13,14 @@ interface CardsModeProps {
   words: VocabWord[];
   masteredIds: Set<string>;
   onCorrect: (id: string) => void;
-  onNextBatch?: () => void;
+  onBatchComplete: () => void;
 }
 
 export default function CardsMode({
   words,
   masteredIds,
   onCorrect,
-  onNextBatch,
+  onBatchComplete,
 }: CardsModeProps) {
   const [cardOrder, setCardOrder] = useState(() => words);
   const [index, setIndex] = useState(0);
@@ -31,6 +31,10 @@ export default function CardsMode({
 
   const advance = () => {
     setFlipped(false);
+    if (index === total - 1) {
+      onBatchComplete();
+      return;
+    }
     setIndex((i) => Math.min(i + 1, total - 1));
   };
 
@@ -50,9 +54,9 @@ export default function CardsMode({
 
   return (
     <div className="flex flex-col items-start pt-0">
-      <div className="h-1.5 w-full overflow-hidden bg-[#d5ddd7]">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#d5ddd7]">
         <div
-          className="h-full bg-[#263fd6] transition-all duration-300"
+          className="h-full rounded-full bg-[#263fd6] transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -82,7 +86,7 @@ export default function CardsMode({
         <button
           onClick={goBack}
           disabled={index === 0}
-          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] disabled:opacity-45 sm:w-auto sm:px-4"
+          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-white py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(38,63,214,0.08)] disabled:opacity-45 sm:w-auto sm:px-4"
           aria-label="Back"
           title="Back"
         >
@@ -92,7 +96,7 @@ export default function CardsMode({
         <div className="flex items-start gap-2">
           <button
             onClick={handleAgain}
-            className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d]"
+            className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-white px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(38,63,214,0.08)] hover:border-[#263fd6] hover:text-[#263fd6]"
           >
             <CheckIcon /> Again
           </button>
@@ -110,7 +114,7 @@ export default function CardsMode({
         <button
           type="button"
           onClick={advance}
-          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d] sm:w-auto sm:px-4"
+          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-white py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(38,63,214,0.08)] hover:border-[#263fd6] hover:text-[#263fd6] sm:w-auto sm:px-4"
           aria-label="Next"
           title="Next"
         >
@@ -121,10 +125,10 @@ export default function CardsMode({
       <p className="font-body w-full pt-4 text-center text-xs text-[#5d6f74]">
         Card {index + 1} of {total} · {masteredIds.size} mastered
       </p>
-      {index === total - 1 && onNextBatch && (
+      {index === total - 1 && (
         <button
           type="button"
-          onClick={onNextBatch}
+          onClick={onBatchComplete}
           className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
         >
           Next batch <ArrowRightIcon />

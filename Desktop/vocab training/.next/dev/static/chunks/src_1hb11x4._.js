@@ -6,7 +6,6 @@ __turbopack_context__.s([
     "default",
     ()=>Home
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UploadCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/UploadCard.tsx [app-client] (ecmascript)");
@@ -33,7 +32,14 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-;
+const BUILT_IN_SET_IDS = new Set([
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$arbeitsraeumeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ARBEITSRAEUME_SET_ID"],
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$umzugData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UMZUG_SET_ID"],
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$adilsJobData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ADILS_JOB_SET_ID"],
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$problemData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PROBLEM_SET_ID"],
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$emailHausverwaltungData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EMAIL_HAUSVERWALTUNG_SET_ID"],
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$ausdrueckeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AUSDRUECKE_SET_ID"]
+]);
 const BUILT_IN_SETS = [
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$arbeitsraeumeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getArbeitsraeumeSet"])(),
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$umzugData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getUmzugSet"])(),
@@ -49,33 +55,26 @@ function Home() {
     const [showUpload, setShowUpload] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
-            const builtInIds = new Set([
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$arbeitsraeumeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ARBEITSRAEUME_SET_ID"],
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$umzugData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UMZUG_SET_ID"],
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$adilsJobData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ADILS_JOB_SET_ID"],
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$problemData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PROBLEM_SET_ID"],
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$emailHausverwaltungData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EMAIL_HAUSVERWALTUNG_SET_ID"],
-                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$ausdrueckeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AUSDRUECKE_SET_ID"]
-            ]);
             const builtInSets = BUILT_IN_SETS.map({
                 "Home.useEffect.builtInSets": (set)=>({
                         ...set,
                         masteredWordIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadBuiltInProgress"])(set.id)
                     })
             }["Home.useEffect.builtInSets"]);
+            const customSets = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadSets"])().filter({
+                "Home.useEffect.customSets": (set)=>!BUILT_IN_SET_IDS.has(set.id)
+            }["Home.useEffect.customSets"]);
             setSets([
                 ...builtInSets,
-                ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadSets"])().filter({
-                    "Home.useEffect": (set)=>!builtInIds.has(set.id)
-                }["Home.useEffect"])
+                ...customSets
             ]);
         }
     }["Home.useEffect"], []);
     const handleCreateSet = async (files, name)=>{
-        const { words } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
+        const { topic, words, usedFallback } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
         const newSet = {
             id: crypto.randomUUID(),
-            name,
+            name: name.trim() || topic || "New study set",
             createdAt: Date.now(),
             sourceImageCount: files.length,
             words: words.map((w)=>({
@@ -84,14 +83,18 @@ function Home() {
                 })),
             masteredWordIds: []
         };
-        setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet));
-        setNotice(null);
+        setSets([
+            ...BUILT_IN_SETS.map((set)=>({
+                    ...set,
+                    masteredWordIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadBuiltInProgress"])(set.id)
+                })),
+            ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet).filter((set)=>!BUILT_IN_SET_IDS.has(set.id))
+        ]);
+        setNotice(usedFallback ? "Couldn't reach the Ollama vision model, so this set uses placeholder vocabulary. Make sure `ollama serve` is running with the llava model pulled." : null);
     };
     const handleDelete = (id)=>{
+        if (BUILT_IN_SET_IDS.has(id)) return;
         setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteSet"])(id));
-    };
-    const handleRename = (id, name)=>{
-        setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateSetName"])(id, name));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "relative flex flex-1 flex-col items-center bg-white px-4 pb-16 pt-8",
@@ -100,11 +103,11 @@ function Home() {
                 className: "flex flex-col items-center gap-4 text-center",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "font-heading text-4xl leading-tight tracking-[-1px] text-[#172b35]",
+                        className: "font-heading text-4xl font-semibold leading-tight tracking-[-1px] text-[#172b35]",
                         children: "Learn B2 Beruf Deutsch Vocabulary"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 61,
+                        lineNumber: 90,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -112,26 +115,26 @@ function Home() {
                         children: "Practice German with flashcards, quizzes, and interactive exercises. Build your vocabulary and reinforce what you learn through different ways to practise."
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 62,
+                        lineNumber: 94,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 60,
+                lineNumber: 89,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mt-7 flex w-full flex-col items-center gap-4",
                 children: [
-                    ("TURBOPACK compile-time value", "development") !== "production" && showUpload && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-full max-w-[568px]",
+                    showUpload && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "w-full max-w-[760px]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UploadCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 onCreateSet: handleCreateSet
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 68,
+                                lineNumber: 104,
                                 columnNumber: 13
                             }, this),
                             notice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -139,36 +142,35 @@ function Home() {
                                 children: notice
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 69,
-                                columnNumber: 24
+                                lineNumber: 106,
+                                columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 67,
+                        lineNumber: 103,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SetsList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         sets: sets,
                         onDelete: handleDelete,
-                        onRename: handleRename,
-                        onToggleUpload: ("TURBOPACK compile-time truthy", 1) ? ()=>setShowUpload((current)=>!current) : "TURBOPACK unreachable",
+                        onToggleUpload: ()=>setShowUpload((open)=>!open),
                         uploadOpen: showUpload
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 72,
+                        lineNumber: 112,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 65,
+                lineNumber: 101,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 57,
+        lineNumber: 86,
         columnNumber: 5
     }, this);
 }
@@ -187,7 +189,6 @@ __turbopack_context__.s([
     "default",
     ()=>SetsList
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
@@ -218,24 +219,12 @@ const BUILT_IN_SET_IDS = new Set([
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$emailHausverwaltungData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EMAIL_HAUSVERWALTUNG_SET_ID"],
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$ausdrueckeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AUSDRUECKE_SET_ID"]
 ]);
-function SetsList({ sets, onDelete, onRename, onToggleUpload, uploadOpen = false }) {
+function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
     _s();
-    const [editingId, setEditingId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [draftName, setDraftName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [selectedChapter, setSelectedChapter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("1");
-    const visibleSets = sets.filter((set)=>set.name.startsWith(`Kapitel ${selectedChapter} -`));
-    const startEditing = (set)=>{
-        setEditingId(set.id);
-        setDraftName(set.name);
-    };
-    const saveName = (id)=>{
-        const name = draftName.trim();
-        if (!name) return;
-        onRename(id, name);
-        setEditingId(null);
-    };
+    const visibleSets = sets.filter((set)=>!BUILT_IN_SET_IDS.has(set.id) || set.name.startsWith(`Kapitel ${selectedChapter} -`));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "w-full max-w-[568px] border-t-[3px] border-[#c7c7c7] pt-3.5",
+        className: "w-full max-w-[760px] border-t-[3px] border-[#263fd6] pt-3.5",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex items-center justify-between",
@@ -247,64 +236,64 @@ function SetsList({ sets, onDelete, onRename, onToggleUpload, uploadOpen = false
                                 className: "h-3.5 w-3.5 text-[#d8f56d]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 54,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "font-heading text-[15px] text-[#172b35]",
+                                className: "font-heading text-base font-semibold text-[#172b35]",
                                 children: "Your sets"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 55,
+                                lineNumber: 54,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 53,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    sets.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center gap-3",
                         children: [
-                            onToggleUpload && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 type: "button",
                                 onClick: onToggleUpload,
                                 "aria-label": uploadOpen ? "Close upload" : "Upload a set",
                                 title: uploadOpen ? "Close upload" : "Upload a set",
-                                className: "flex h-7 w-7 items-center justify-center rounded-full text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
+                                className: "flex h-8 w-8 items-center justify-center rounded-full text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CameraIcon"], {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 58,
-                                    columnNumber: 309
+                                    lineNumber: 67,
+                                    columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 58,
-                                columnNumber: 30
+                                lineNumber: 60,
+                                columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-body text-[11px] text-[#5d6f74]",
+                                className: "font-body text-xs text-[#5d6f74]",
                                 children: [
                                     visibleSets.length,
                                     " sets"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 59,
-                                columnNumber: 11
+                                lineNumber: 69,
+                                columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "flex items-center gap-2 text-sm font-semibold text-[#172b35]",
+                                className: "flex items-center",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "relative block",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             value: selectedChapter,
                                             onChange: (event)=>setSelectedChapter(event.target.value),
-                                            className: "h-9 w-[120px] appearance-none rounded-full border border-[#172b35] bg-white pl-4 pr-9 text-sm text-[#172b35] outline-none",
+                                            className: "h-9 w-[120px] appearance-none rounded-full border border-[#263fd6] bg-white pl-4 pr-7 text-sm text-[#172b35] outline-none focus:border-[#1d2fb5]",
                                             "aria-label": "Filter by chapter",
                                             children: Array.from({
                                                 length: 16
@@ -312,152 +301,103 @@ function SetsList({ sets, onDelete, onRename, onToggleUpload, uploadOpen = false
                                                 const chapter = String(index + 1);
                                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: chapter,
-                                                    disabled: chapter !== "1",
                                                     children: [
                                                         "Kapitel ",
                                                         chapter
                                                     ]
                                                 }, chapter, true, {
                                                     fileName: "[project]/src/components/SetsList.tsx",
-                                                    lineNumber: 65,
-                                                    columnNumber: 26
+                                                    lineNumber: 83,
+                                                    columnNumber: 23
                                                 }, this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 62,
-                                            columnNumber: 15
+                                            lineNumber: 74,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChevronDownIcon"], {
-                                            className: "pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#172b35]"
+                                            className: "pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#263fd6]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 68,
-                                            columnNumber: 15
+                                            lineNumber: 89,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 61,
-                                    columnNumber: 13
+                                    lineNumber: 73,
+                                    columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 60,
-                                columnNumber: 11
+                                lineNumber: 72,
+                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 57,
-                        columnNumber: 9
+                        lineNumber: 59,
+                        columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 52,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             visibleSets.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mt-5 border border-dashed border-[#9bb8bc] bg-white py-10 text-center text-[#5d6f74]",
-                children: "No sets in this chapter yet."
+                children: "No sets found in this chapter."
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 75,
+                lineNumber: 97,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                 className: "mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2",
                 children: visibleSets.map((set)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                        className: "min-h-[150px] border border-[#dce4bd] bg-[#F7FAE7] p-5 shadow-[4px_4px_0_#e5ecec]",
+                        className: "min-h-[176px] border border-[#dce4bd] bg-[#F7FAE7] p-6 shadow-[4px_4px_0_#e5ecec]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-start justify-between gap-2",
-                                children: BUILT_IN_SET_IDS.has(set.id) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "font-heading text-lg font-semibold text-[#172b35]",
-                                            children: set.name
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "font-heading text-xl font-semibold text-[#172b35]",
+                                        children: set.name
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SetsList.tsx",
+                                        lineNumber: 108,
+                                        columnNumber: 17
+                                    }, this),
+                                    !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>onDelete(set.id),
+                                        className: "shrink-0 rounded-full p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
+                                        "aria-label": "Delete set",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TrashIcon"], {
+                                            className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 85,
-                                            columnNumber: 21
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "pt-1 text-[9px] font-semibold uppercase tracking-[0.7px] text-[#172b35]",
-                                            children: "Built-in set"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 86,
-                                            columnNumber: 21
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 84,
-                                    columnNumber: 19
-                                }, this) : editingId === set.id ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex min-w-0 flex-1 gap-2",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            autoFocus: true,
-                                            value: draftName,
-                                            onChange: (event)=>setDraftName(event.target.value),
-                                            onKeyDown: (event)=>{
-                                                if (event.key === "Enter") saveName(set.id);
-                                                if (event.key === "Escape") setEditingId(null);
-                                            },
-                                            className: "h-9 min-w-0 flex-1 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]",
-                                            "aria-label": "Study set name"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 90,
-                                            columnNumber: 21
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            type: "button",
-                                            onClick: ()=>saveName(set.id),
-                                            className: "bg-[#263fd6] px-3 text-xs font-semibold text-white",
-                                            children: "Save"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 91,
+                                            lineNumber: 117,
                                             columnNumber: 21
                                         }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 89,
-                                    columnNumber: 19
-                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    type: "button",
-                                    onClick: ()=>startEditing(set),
-                                    className: "text-left font-heading text-lg text-[#172b35]",
-                                    children: set.name
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 94,
-                                    columnNumber: 19
-                                }, this)
-                            }, void 0, false, {
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SetsList.tsx",
+                                        lineNumber: 112,
+                                        columnNumber: 19
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 82,
+                                lineNumber: 107,
                                 columnNumber: 15
                             }, this),
-                            !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>onDelete(set.id),
-                                className: "shrink-0 p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
-                                "aria-label": "Delete set",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TrashIcon"], {
-                                    className: "h-4 w-4"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 97,
-                                    columnNumber: 200
-                                }, this)
+                            BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "pt-1 text-[10px] font-semibold uppercase tracking-[0.7px] text-[#263fd6]",
+                                children: "Built-in set"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 97,
-                                columnNumber: 53
+                                lineNumber: 122,
+                                columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-body pt-1.5 text-[11px] text-[#5d6f74]",
@@ -469,46 +409,46 @@ function SetsList({ sets, onDelete, onRename, onToggleUpload, uploadOpen = false
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 98,
-                                columnNumber: 17
+                                lineNumber: 126,
+                                columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                href: BUILT_IN_SET_IDS.has(set.id) ? `/sets/${set.id}/` : `${__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_BASE_PATH ?? ""}/study/?set=${encodeURIComponent(set.id)}`,
+                                href: `/sets/${set.id}`,
                                 className: "mt-3 inline-flex h-7 items-center gap-1.5 rounded-full bg-[#d8f56d] px-3 text-[11px] font-medium text-[#172b35]",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BookOpenIcon"], {
                                         className: "h-3 w-3"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 99,
-                                        columnNumber: 292
+                                        lineNumber: 133,
+                                        columnNumber: 17
                                     }, this),
                                     " Study"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 99,
-                                columnNumber: 17
+                                lineNumber: 129,
+                                columnNumber: 15
                             }, this)
                         ]
                     }, set.id, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 81,
+                        lineNumber: 103,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 79,
+                lineNumber: 101,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/SetsList.tsx",
-        lineNumber: 51,
+        lineNumber: 50,
         columnNumber: 5
     }, this);
 }
-_s(SetsList, "W1K6QTogdEsqQJDqjCfTsTKGJtY=");
+_s(SetsList, "11rgElXFXFPImy/EZBLms9RLXrY=");
 _c = SetsList;
 var _c;
 __turbopack_context__.k.register(_c, "SetsList");
@@ -577,9 +517,9 @@ function UploadCard({ onCreateSet }) {
     };
     const canCreate = files.length > 0 && !isCreating;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "w-full max-w-3xl rounded-[28px] border-2 border-[#08758d] bg-[#fffaf0] p-7 shadow-[0_14px_0_rgba(8,117,141,0.12)]",
+        className: "w-full max-w-[760px] rounded-2xl border-2 border-[#263fd6] bg-white p-7 shadow-[0_8px_0_rgba(38,63,214,0.1)]",
         style: {
-            backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.72), rgba(244,239,229,0.72))"
+            backgroundImage: "linear-gradient(135deg, rgba(238,241,255,0.55), rgba(248,251,220,0.55))"
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -590,7 +530,7 @@ function UploadCard({ onCreateSet }) {
                 onDragLeave: ()=>setIsDragging(false),
                 onDrop: handleDrop,
                 onClick: ()=>inputRef.current?.click(),
-                className: `flex cursor-pointer flex-col items-center justify-center gap-3 rounded-3xl border-[1.667px] border-dashed px-6 py-10 text-center transition-colors ${isDragging ? "border-[#e76548] bg-[#e76548]/5" : "border-[#9bb8bc] hover:border-[#08758d]"}`,
+                className: `flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-[1.667px] border-dashed px-6 py-10 text-center transition-colors ${isDragging ? "border-[#263fd6] bg-[#eef1ff]" : "border-[#9bb8bc] hover:border-[#263fd6]"}`,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         ref: inputRef,
@@ -605,7 +545,7 @@ function UploadCard({ onCreateSet }) {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex h-12 w-12 items-center justify-center rounded-full bg-[#08758d] text-white",
+                        className: "flex h-12 w-12 items-center justify-center rounded-full bg-[#263fd6] text-white",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ImagePlusIcon"], {
                             className: "h-6 w-6"
                         }, void 0, false, {
@@ -642,7 +582,7 @@ function UploadCard({ onCreateSet }) {
                     files.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                         className: "flex flex-wrap justify-center gap-2 pt-1",
                         children: files.map((f, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                className: "rounded-full bg-[#dbeaec] px-3 py-1 text-xs text-[#075a70]",
+                                className: "rounded-full bg-[#eef1ff] px-3 py-1 text-xs text-[#263fd6]",
                                 children: f.name
                             }, `${f.name}-${i}`, false, {
                                 fileName: "[project]/src/components/UploadCard.tsx",
@@ -663,7 +603,7 @@ function UploadCard({ onCreateSet }) {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: handleCreate,
                 disabled: !canCreate,
-                className: `mt-5 flex h-10 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] px-8 text-sm font-semibold text-white shadow-[0_4px_0_rgba(7,90,112,0.22)] transition-opacity ${canCreate ? "opacity-100 hover:opacity-90" : "cursor-not-allowed opacity-50"}`,
+                className: `mt-5 flex h-10 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] px-8 text-sm font-semibold text-[#172b35] shadow-[0_4px_0_rgba(38,63,214,0.12)] transition-opacity ${canCreate ? "opacity-100 hover:opacity-90" : "cursor-not-allowed opacity-50"}`,
                 children: isCreating ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -703,7 +643,7 @@ function UploadCard({ onCreateSet }) {
             isNaming && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "w-full max-w-md border border-[#c7d1ca] bg-[#fffaf0] p-6 text-left shadow-[6px_6px_0_rgba(8,117,141,0.12)]",
+                    className: "w-full max-w-md rounded-xl border border-[#dce4bd] bg-white p-6 text-left shadow-[4px_4px_0_rgba(38,63,214,0.1)]",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "font-heading text-xl text-[#172b35]",
@@ -730,7 +670,7 @@ function UploadCard({ onCreateSet }) {
                                 if (event.key === "Escape") setIsNaming(false);
                             },
                             placeholder: "e.g. Moving house vocabulary",
-                            className: "mt-5 h-11 w-full rounded-xl border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]",
+                            className: "mt-5 h-11 w-full rounded-xl border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]",
                             "aria-label": "Study set name"
                         }, void 0, false, {
                             fileName: "[project]/src/components/UploadCard.tsx",
@@ -743,7 +683,7 @@ function UploadCard({ onCreateSet }) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setIsNaming(false),
-                                    className: "rounded-full bg-[#dbeaec] px-4 py-2 text-sm text-[#075a70]",
+                                    className: "rounded-full bg-[#eef1ff] px-4 py-2 text-sm text-[#263fd6]",
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/UploadCard.tsx",
@@ -754,7 +694,7 @@ function UploadCard({ onCreateSet }) {
                                     type: "button",
                                     onClick: confirmCreate,
                                     disabled: !setName.trim(),
-                                    className: "rounded-full bg-[#08758d] px-5 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40",
+                                    className: "rounded-full bg-[#d8f56d] px-5 py-2 text-sm font-semibold text-[#172b35] disabled:cursor-not-allowed disabled:opacity-40",
                                     children: "Create set"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/UploadCard.tsx",

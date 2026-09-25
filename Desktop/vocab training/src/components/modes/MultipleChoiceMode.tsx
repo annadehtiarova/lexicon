@@ -7,9 +7,7 @@ import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/icons";
 interface MultipleChoiceModeProps {
   words: VocabWord[];
   onCorrect: (id: string) => void;
-  onNextBatch?: () => void;
-  previousCorrect: number;
-  totalWords: number;
+  onBatchComplete: () => void;
 }
 
 function buildQuestion(words: VocabWord[], index: number) {
@@ -22,13 +20,11 @@ function buildQuestion(words: VocabWord[], index: number) {
   return { correct, options };
 }
 
-export default function MultipleChoiceMode({ words, onCorrect, onNextBatch, previousCorrect, totalWords }: MultipleChoiceModeProps) {
+export default function MultipleChoiceMode({ words, onCorrect, onBatchComplete }: MultipleChoiceModeProps) {
   const [index, setIndex] = useState(0);
+  const [question, setQuestion] = useState(() => buildQuestion(words, 0));
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
-
-  const question = useMemo(() => buildQuestion(words, index), [words, index]);
 
   const handleSelect = (id: string) => {
     if (selected) return;
@@ -40,48 +36,36 @@ export default function MultipleChoiceMode({ words, onCorrect, onNextBatch, prev
   };
 
   const next = () => {
-    if (index === words.length - 1 && onNextBatch) {
-      onNextBatch();
-      return;
-    }
     if (index === words.length - 1) {
-      setFinished(true);
+      onBatchComplete();
       return;
     }
+    const nextIndex = (index + 1) % words.length;
     setSelected(null);
-    setIndex((i) => i + 1);
+    setIndex(nextIndex);
+    setQuestion(buildQuestion(words, nextIndex));
   };
 
   const answered = selected !== null;
   const answeredCount = index + (answered ? 1 : 0);
 
-  if (finished) {
-    return (
-      <div className="flex w-full flex-col items-center gap-3 pt-5 text-center">
-        <div className="flex min-h-[158px] w-full flex-col items-center justify-center border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8">
-          <p className="font-body text-xs uppercase tracking-[2px] text-[#5d6f74]">Quiz complete</p>
-          <p className="font-heading mt-2 text-3xl font-semibold text-[#172b35]">{previousCorrect + score} out of {totalWords} correct</p>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="flex flex-col items-start pt-0">
       <div className="flex w-full items-center justify-between text-xs text-[#5d6f74]">
         <span className="font-body uppercase tracking-[2px]">Question {index + 1}</span>
         <span>{score} correct / {answeredCount} answered</span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden bg-[#d5ddd7]">
-        <div className="h-full bg-[#263fd6] transition-all" style={{ width: `${(answeredCount / words.length) * 100}%` }} />
+      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[#d5ddd7]">
+        <div className="h-full rounded-full bg-[#263fd6] transition-all" style={{ width: `${(answeredCount / words.length) * 100}%` }} />
       </div>
       <div className="mt-4 flex min-h-[158px] w-full flex-col items-center justify-center gap-2 border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8 text-center shadow-none">
         <p className="font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]">
           What does this mean?
         </p>
-        <p className="font-heading mt-1 text-2xl tracking-[-0.4px] text-[#172b35]">
+        <p className="font-heading mt-1 text-2xl text-black">
           {question.correct.german}
         </p>
-        {answered && <p className={`mt-3 text-xs font-semibold ${selected === question.correct.id ? "text-[#08758d]" : "text-[#7a3038]"}`}>{selected === question.correct.id ? "Correct" : "Incorrect"}</p>}
+        {answered && <p className={`mt-2 text-xs ${selected === question.correct.id ? "text-[#315500]" : "text-[#a63d2d]"}`}>{selected === question.correct.id ? "Correct" : "Incorrect"}</p>}
       </div>
 
       <div className="mt-5 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
@@ -92,12 +76,12 @@ export default function MultipleChoiceMode({ words, onCorrect, onNextBatch, prev
             <button
               key={opt.id}
               onClick={() => handleSelect(opt.id)}
-              className={`flex min-h-[46px] items-center justify-between rounded-xl border px-4 py-3 text-left text-sm transition-all ${
-                showState && isCorrect ? "border-[#6f9f70] bg-[#78ae79]/25 text-[#315500]" : showState && opt.id === selected ? "border-[#b84b55] bg-[#b84b55]/20 text-[#7a3038]" : showState ? "border-[#d5ddd7] bg-[#f0eee7] text-[#7a8789]" : "border-[#b8c8c9] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"
+              className={`flex min-h-[58px] items-center justify-between rounded-2xl border px-5 py-3 text-left text-sm transition-all ${
+                showState && opt.id === selected && isCorrect ? "border-[#b8d34c] bg-[#d8f56d]/60 text-[#172b35]" : showState && opt.id === selected ? "border-red-400 bg-red-500/10 text-[#a63d2d]" : "border-[#9bb8bc] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"
               }`}
             >
               <span>{opt.english}</span>
-              {showState && isCorrect && <CheckIcon />}
+              {showState && opt.id === selected && isCorrect && <CheckIcon />}
               {showState && opt.id === selected && !isCorrect && <XIcon />}
             </button>
           );
@@ -107,7 +91,7 @@ export default function MultipleChoiceMode({ words, onCorrect, onNextBatch, prev
       {selected && (
         <button
           onClick={next}
-          className="mt-5 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
+          className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
         >
           Next word <ArrowRightIcon />
         </button>

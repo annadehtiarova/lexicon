@@ -50,6 +50,7 @@ const MODES = [
 ] as const;
 
 type ModeKey = (typeof MODES)[number]["key"];
+const BATCH_SIZE = 15;
 
 const KNOWN_NOUN_ARTICLES = new Map(
   WORD_BANK.filter((word) => word.pos === "noun").map((word) => {
@@ -253,6 +254,7 @@ export default function StudySetClient({ id }: { id: string }) {
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
+  const [completedModes, setCompletedModes] = useState<Set<ModeKey>>(new Set());
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
   const [exerciseProgress, setExerciseProgress] = useState<ExerciseProgress>({
     cards: [],
@@ -288,7 +290,17 @@ export default function StudySetClient({ id }: { id: string }) {
     );
     const progress = loadExerciseProgress(id);
     setExerciseProgress(progress);
-    setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
+    const remainingWords = resolved?.words.filter(
+      (word) => !deletedIds.includes(word.id),
+    ) ?? [];
+    const mastered = remainingWords
+      .filter((word) =>
+        (Object.keys(progress) as ExerciseKey[]).every((exercise) =>
+          progress[exercise].includes(word.id),
+        ),
+      )
+      .map((word) => word.id);
+    setMasteredIds(new Set(mastered));
   }, [id]);
 
   const words: VocabWord[] = useMemo(
@@ -303,10 +315,10 @@ export default function StudySetClient({ id }: { id: string }) {
       })),
     [set],
   );
-  const batchCount = Math.max(1, Math.ceil(words.length / 30));
+  const batchCount = Math.max(1, Math.ceil(words.length / BATCH_SIZE));
   const practiceWords = words.slice(
-    practiceBatch * 30,
-    practiceBatch * 30 + 30,
+    practiceBatch * BATCH_SIZE,
+    practiceBatch * BATCH_SIZE + BATCH_SIZE,
   );
   const visibleWords = words.filter((word) => {
     const query = wordSearch.trim().toLowerCase();
@@ -333,6 +345,33 @@ export default function StudySetClient({ id }: { id: string }) {
       return next;
     });
   };
+
+  const completeModeBatch = (completedMode: ModeKey) => {
+    if (completedModes.has(completedMode)) return;
+    const nextCompleted = new Set(completedModes);
+    nextCompleted.add(completedMode);
+    setCompletedModes(nextCompleted);
+
+    const sequence: ModeKey[] = ["cards", "quiz", "write", "match"];
+    const nextMode = sequence[sequence.indexOf(completedMode) + 1];
+    if (nextMode) {
+      setMode(nextMode);
+      return;
+    }
+
+    setMode("cards");
+    if (practiceBatch < batchCount - 1) {
+      setCompletedModes(new Set());
+      setPracticeBatch((current) => current + 1);
+    }
+  };
+
+  const modeProgress = MODES.map(({ key, label }) => ({
+    key,
+    label,
+    count: practiceWords.filter((word) => exerciseProgress[key].includes(word.id)).length,
+    complete: completedModes.has(key),
+  }));
 
   if (set === undefined) return null;
 
@@ -444,11 +483,11 @@ export default function StudySetClient({ id }: { id: string }) {
 
   return (
     <main className="flex flex-1 justify-center bg-white px-4 pb-16">
-      <div className="w-full max-w-[478px] border-x border-[#dce4e2] bg-white px-5 pb-10">
+      <div className="w-full max-w-[478px] border-x border-[#dce4e2] bg-white px-5 pb-10 md:max-w-[640px]">
         <div className="pt-5">
           <Link
             href="/"
-            className="flex w-fit items-center gap-1.5 text-sm text-[#263fd6] hover:text-[#075a70]"
+            className="flex w-fit items-center gap-1.5 text-sm text-[#263fd6] hover:text-[#1d2fb5]"
           >
             <ChevronLeftIcon />
             All sets
@@ -463,10 +502,14 @@ export default function StudySetClient({ id }: { id: string }) {
           <p className="font-body pt-1 text-[9px] text-[#5d6f74]">
             {words.length} words · {masteredIds.size} mastered
           </p>
+          <div className="mt-2 text-center" aria-label={`${masteredIds.size} of ${words.length} words mastered`}>
+            <p className="font-heading text-2xl font-semibold leading-none text-[#172b35]">{masteredIds.size}/{words.length}</p>
+            <p className="mt-1 text-[10px] text-[#5d6f74]">words mastered</p>
+          </div>
         </div>
 
         <div className="pt-5">
-          <div className="flex h-7 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0.5">
+          <div className="flex h-9 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0">
             {MODES.map(({ key, label, Icon }) => {
               const active = mode === key;
 
@@ -474,7 +517,7 @@ export default function StudySetClient({ id }: { id: string }) {
                 <button
                   key={key}
                   onClick={() => setMode(key)}
-                    className={`flex h-full flex-1 items-center justify-center gap-1.5 rounded-full text-[10px] font-medium transition-colors ${
+                    className={`flex h-full flex-1 items-center justify-center gap-1.5 rounded-full text-[13px] font-medium transition-colors ${
                     active
                       ? "bg-[#d8f56d] text-[#172b35]"
                       : "text-[#172b35] hover:bg-white"
@@ -487,31 +530,6 @@ export default function StudySetClient({ id }: { id: string }) {
             })}
           </div>
 
-          {words.length > 30 && (
-            <div className="mt-2.5 flex h-6 items-center justify-between border-y border-[#536fe8] bg-[#eef1ff] px-3 text-[10px] text-[#172b35]">
-              <button
-                type="button"
-                disabled={practiceBatch === 0}
-                onClick={() => setPracticeBatch((current) => current - 1)}
-                className="disabled:opacity-30"
-              >
-                Previous batch
-              </button>
-              <span>
-                Batch {practiceBatch + 1} of {batchCount} ·{" "}
-                {practiceWords.length} words
-              </span>
-              <button
-                type="button"
-                disabled={practiceBatch === batchCount - 1}
-                onClick={() => setPracticeBatch((current) => current + 1)}
-                className="disabled:opacity-30"
-              >
-                Next batch
-              </button>
-            </div>
-          )}
-
           <div className="border-t-[3px] border-[#d5ddd7] pb-5 pt-2">
             {mode === "cards" && (
               <CardsMode
@@ -519,61 +537,39 @@ export default function StudySetClient({ id }: { id: string }) {
                 words={practiceWords}
                 masteredIds={masteredIds}
                 onCorrect={handleKnewIt}
-                onNextBatch={
-                  practiceBatch < batchCount - 1
-                    ? () => setPracticeBatch((current) => current + 1)
-                    : undefined
-                }
+                onBatchComplete={() => completeModeBatch("cards")}
               />
             )}
 
             {mode === "quiz" && (
-              <div className="pt-8">
+              <div>
                 <MultipleChoiceMode
                   key={`quiz-${practiceBatch}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("quiz", wordId)}
-                  previousCorrect={words.filter((word) => exerciseProgress.quiz.includes(word.id) && !practiceWords.some((currentWord) => currentWord.id === word.id)).length}
-                  totalWords={words.length}
-                  onNextBatch={
-                    practiceBatch < batchCount - 1
-                      ? () => setPracticeBatch((current) => current + 1)
-                      : undefined
-                  }
+                  onBatchComplete={() => completeModeBatch("quiz")}
                 />
               </div>
             )}
 
             {mode === "write" && (
-              <div className="pt-8">
+              <div>
                 <TypingMode
                   key={`write-${practiceBatch}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("write", wordId)}
-                  previousCorrect={words.filter((word) => exerciseProgress.write.includes(word.id) && !practiceWords.some((currentWord) => currentWord.id === word.id)).length}
-                  totalWords={words.length}
-                  onNextBatch={
-                    practiceBatch < batchCount - 1
-                      ? () => setPracticeBatch((current) => current + 1)
-                      : undefined
-                  }
+                  onBatchComplete={() => completeModeBatch("write")}
                 />
               </div>
             )}
 
             {mode === "match" && (
-              <div className="pt-8">
+              <div>
                 <MatchingMode
                   key={`match-${practiceBatch}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("match", wordId)}
-                  correctCount={exerciseProgress.match.filter((wordId) => words.some((word) => word.id === wordId)).length}
-                  totalWords={words.length}
-                  onNextBatch={
-                    practiceBatch < batchCount - 1
-                      ? () => setPracticeBatch((current) => current + 1)
-                      : undefined
-                  }
+                  onBatchComplete={() => completeModeBatch("match")}
                 />
               </div>
             )}
@@ -631,14 +627,14 @@ export default function StudySetClient({ id }: { id: string }) {
                 <button
                   type="button"
                   onClick={saveNewWord}
-                  className="rounded-full bg-[#08758d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#075a70]"
+                  className="rounded-full bg-[#d8f56d] px-4 py-2 text-sm font-semibold text-[#172b35]"
                 >
                   Save word
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsAddingWord(false)}
-                  className="rounded-full bg-[#dbeaec] px-4 py-2 text-sm text-[#172b35]"
+                  className="rounded-full bg-[#eef1ff] px-4 py-2 text-sm text-[#263fd6]"
                 >
                   Cancel
                 </button>
@@ -670,14 +666,14 @@ export default function StudySetClient({ id }: { id: string }) {
                     <input
                       value={draftGerman}
                       onChange={(event) => setDraftGerman(event.target.value)}
-                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
                       aria-label="German word"
                     />
 
                     <input
                       value={draftEnglish}
                       onChange={(event) => setDraftEnglish(event.target.value)}
-                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
                       aria-label="English translation"
                     />
 
@@ -687,7 +683,7 @@ export default function StudySetClient({ id }: { id: string }) {
                         onChange={(event) =>
                           setDraftArticle(event.target.value)
                         }
-                        className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                        className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
                         aria-label="Article"
                       >
                         <option value="der">der</option>
@@ -699,7 +695,7 @@ export default function StudySetClient({ id }: { id: string }) {
                     <select
                       value={draftPos}
                       onChange={(event) => setDraftPos(event.target.value)}
-                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
                       aria-label="Part of speech"
                     >
                       <option value="noun">Noun</option>
