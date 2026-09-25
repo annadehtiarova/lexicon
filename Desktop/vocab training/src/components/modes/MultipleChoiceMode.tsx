@@ -77,11 +77,11 @@ export default function MultipleChoiceMode({ words, onCorrect, onBatchComplete }
               key={opt.id}
               onClick={() => handleSelect(opt.id)}
               className={`flex min-h-[58px] items-center justify-between rounded-2xl border px-5 py-3 text-left text-sm transition-all ${
-                showState && opt.id === selected && isCorrect ? "border-[#b8d34c] bg-[#d8f56d]/60 text-[#172b35]" : showState && opt.id === selected ? "border-red-400 bg-red-500/10 text-[#a63d2d]" : "border-[#9bb8bc] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"
+                showState && isCorrect ? "border-[#263fd6] bg-[#eef1ff]/70 text-[#172b35]" : showState && opt.id === selected ? "border-red-400 bg-red-500/10 text-[#a63d2d]" : "border-[#9bb8bc] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"
               }`}
             >
               <span>{opt.english}</span>
-              {showState && opt.id === selected && isCorrect && <CheckIcon />}
+              {showState && isCorrect && <CheckIcon />}
               {showState && opt.id === selected && !isCorrect && <XIcon />}
             </button>
           );

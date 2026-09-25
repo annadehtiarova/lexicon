@@ -3268,12 +3268,16 @@ __turbopack_context__.s([
     ()=>loadBuiltInProgress,
     "loadExerciseProgress",
     ()=>loadExerciseProgress,
+    "loadLastBatchResult",
+    ()=>loadLastBatchResult,
     "loadSets",
     ()=>loadSets,
     "saveBuiltInProgress",
     ()=>saveBuiltInProgress,
     "saveExerciseProgress",
     ()=>saveExerciseProgress,
+    "saveLastBatchResult",
+    ()=>saveLastBatchResult,
     "saveSets",
     ()=>saveSets,
     "setMasteredWordIds",
@@ -3286,6 +3290,7 @@ __turbopack_context__.s([
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
+const LAST_BATCH_RESULTS_KEY = "lexikon.lastBatchResults";
 const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
@@ -3300,6 +3305,16 @@ function loadExerciseProgress(setId) {
     ;
 }
 function saveExerciseProgress(setId, progress) {
+    if ("TURBOPACK compile-time truthy", 1) return;
+    //TURBOPACK unreachable
+    ;
+}
+function loadLastBatchResult(setId) {
+    if ("TURBOPACK compile-time truthy", 1) return null;
+    //TURBOPACK unreachable
+    ;
+}
+function saveLastBatchResult(setId, result) {
     if ("TURBOPACK compile-time truthy", 1) return;
     //TURBOPACK unreachable
     ;

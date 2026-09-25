@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   addWord,
@@ -10,7 +10,10 @@ import {
   loadBuiltInDeletedWords,
   ExerciseKey,
   ExerciseProgress,
+  LastBatchResult,
+  loadLastBatchResult,
   loadExerciseProgress,
+  saveLastBatchResult,
   saveExerciseProgress,
   setMasteredWordIds,
   updateWord,
@@ -254,9 +257,17 @@ export default function StudySetClient({ id }: { id: string }) {
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
+  const [practiceWordIds, setPracticeWordIds] = useState<string[] | null>(null);
   const [completedModes, setCompletedModes] = useState<Set<ModeKey>>(new Set());
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
+  const [lastBatchResult, setLastBatchResult] = useState<LastBatchResult | null>(null);
   const [exerciseProgress, setExerciseProgress] = useState<ExerciseProgress>({
+    cards: [],
+    quiz: [],
+    write: [],
+    match: [],
+  });
+  const pendingProgressRef = useRef<ExerciseProgress>({
     cards: [],
     quiz: [],
     write: [],
@@ -289,7 +300,11 @@ export default function StudySetClient({ id }: { id: string }) {
         : resolved,
     );
     const progress = loadExerciseProgress(id);
+    pendingProgressRef.current = progress;
     setExerciseProgress(progress);
+    const savedBatchResult = loadLastBatchResult(id);
+    setLastBatchResult(savedBatchResult);
+    setPracticeBatch(savedBatchResult?.batch ?? 0);
     const remainingWords = resolved?.words.filter(
       (word) => !deletedIds.includes(word.id),
     ) ?? [];
@@ -301,6 +316,14 @@ export default function StudySetClient({ id }: { id: string }) {
       )
       .map((word) => word.id);
     setMasteredIds(new Set(mastered));
+    setPracticeWordIds(
+      remainingWords
+        .filter((word) => !mastered.includes(word.id))
+        .map((word) => word.id),
+    );
+    setPracticeBatch(0);
+    setCompletedModes(new Set());
+    setMode("cards");
   }, [id]);
 
   const words: VocabWord[] = useMemo(
@@ -315,11 +338,10 @@ export default function StudySetClient({ id }: { id: string }) {
       })),
     [set],
   );
-  const batchCount = Math.max(1, Math.ceil(words.length / BATCH_SIZE));
-  const practiceWords = words.slice(
-    practiceBatch * BATCH_SIZE,
-    practiceBatch * BATCH_SIZE + BATCH_SIZE,
+  const queuedWords = words.filter(
+    (word) => practiceWordIds?.includes(word.id) ?? false,
   );
+  const practiceWords = queuedWords.slice(0, BATCH_SIZE);
   const visibleWords = words.filter((word) => {
     const query = wordSearch.trim().toLowerCase();
     if (!query) return true;
@@ -330,20 +352,43 @@ export default function StudySetClient({ id }: { id: string }) {
   });
 
   const markCorrect = (exercise: ExerciseKey, wordId: string) => {
-    setExerciseProgress((current) => {
-      if (current[exercise].includes(wordId)) return current;
-      const next = { ...current, [exercise]: [...current[exercise], wordId] };
-      saveExerciseProgress(id, next);
-      const mastered = words
-        .filter((word) =>
-          (Object.keys(next) as ExerciseKey[]).every((key) =>
-            next[key].includes(word.id),
-          ),
-        )
-        .map((word) => word.id);
-      setMasteredIds(new Set(mastered));
-      return next;
-    });
+    const current = pendingProgressRef.current;
+    if (current[exercise].includes(wordId)) return;
+    pendingProgressRef.current = {
+      ...current,
+      [exercise]: [...current[exercise], wordId],
+    };
+  };
+
+  const commitProgress = () => {
+    const next = pendingProgressRef.current;
+    saveExerciseProgress(id, next);
+    setExerciseProgress(next);
+    const masteredWords = words
+      .filter((word) =>
+        (Object.keys(next) as ExerciseKey[]).every((key) =>
+          next[key].includes(word.id),
+        ),
+      )
+    const masteredWordIds = new Set(masteredWords.map((word) => word.id));
+    setMasteredIds(masteredWordIds);
+    const nextPracticeWordIds = [
+      ...queuedWords
+        .slice(practiceWords.length)
+        .filter((word) => !masteredWordIds.has(word.id)),
+      ...practiceWords.filter((word) => !masteredWordIds.has(word.id)),
+    ].map((word) => word.id);
+    setPracticeWordIds(nextPracticeWordIds);
+    const result = {
+      batch: practiceBatch + 1,
+      mastered: practiceWords.filter((word) =>
+        masteredWordIds.has(word.id),
+      ).length,
+      total: practiceWords.length,
+    };
+    saveLastBatchResult(id, result);
+    setPracticeBatch(result.batch);
+    return result;
   };
 
   const completeModeBatch = (completedMode: ModeKey) => {
@@ -353,17 +398,15 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(nextCompleted);
 
     const sequence: ModeKey[] = ["cards", "quiz", "write", "match"];
-    const nextMode = sequence[sequence.indexOf(completedMode) + 1];
+    const nextMode = sequence.find((key) => !nextCompleted.has(key));
     if (nextMode) {
       setMode(nextMode);
       return;
     }
 
+    setLastBatchResult(commitProgress());
     setMode("cards");
-    if (practiceBatch < batchCount - 1) {
-      setCompletedModes(new Set());
-      setPracticeBatch((current) => current + 1);
-    }
+    setCompletedModes(new Set());
   };
 
   const modeProgress = MODES.map(({ key, label }) => ({
@@ -373,7 +416,7 @@ export default function StudySetClient({ id }: { id: string }) {
     complete: completedModes.has(key),
   }));
 
-  if (set === undefined) return null;
+  if (set === undefined || practiceWordIds === null) return null;
 
   if (set === null) {
     return (
@@ -475,6 +518,7 @@ export default function StudySetClient({ id }: { id: string }) {
     setSet((current) =>
       current ? { ...current, words: [...current.words, word] } : current,
     );
+    setPracticeWordIds((current) => (current ? [...current, word.id] : [word.id]));
     setNewGerman("");
     setNewEnglish("");
     setNewExample("");
@@ -483,7 +527,7 @@ export default function StudySetClient({ id }: { id: string }) {
 
   return (
     <main className="flex flex-1 justify-center bg-white px-4 pb-16">
-      <div className="w-full max-w-[478px] border-x border-[#dce4e2] bg-white px-5 pb-10 md:max-w-[640px]">
+      <div className="w-full max-w-[478px] border-x border-[#dce4e2] bg-white px-5 pb-10 md:max-w-[760px]">
         <div className="pt-5">
           <Link
             href="/"
@@ -506,9 +550,21 @@ export default function StudySetClient({ id }: { id: string }) {
             <p className="font-heading text-2xl font-semibold leading-none text-[#172b35]">{masteredIds.size}/{words.length}</p>
             <p className="mt-1 text-[10px] text-[#5d6f74]">words mastered</p>
           </div>
+          <div className="mt-2 text-center">
+            <span className="inline-flex min-h-7 items-center rounded-full border border-[#dce4bd] bg-[#f8fbdc] px-3 text-[10px] font-medium text-[#5d6f74]">
+              {lastBatchResult
+                ? `Last batch ${lastBatchResult.batch}: ${lastBatchResult.mastered}/${lastBatchResult.total} mastered`
+                : "Last batch: none completed yet"}
+            </span>
+          </div>
         </div>
 
-        <div className="pt-5">
+          {practiceWords.length === 0 ? (
+            <p className="mt-5 border-t-[3px] border-[#d5ddd7] py-5 text-center text-sm text-[#5d6f74]">
+              All words mastered. Set complete.
+            </p>
+          ) : (
+          <div className="pt-5">
           <div className="flex h-9 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0">
             {MODES.map(({ key, label, Icon }) => {
               const active = mode === key;
@@ -575,6 +631,7 @@ export default function StudySetClient({ id }: { id: string }) {
             )}
           </div>
         </div>
+        )}
 
         <section className="pt-5">
           <div className="flex items-center justify-between gap-4">

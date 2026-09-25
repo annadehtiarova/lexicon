@@ -98,7 +98,7 @@ export default function CardsMode({
             onClick={handleAgain}
             className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-white px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(38,63,214,0.08)] hover:border-[#263fd6] hover:text-[#263fd6]"
           >
-            <CheckIcon /> Again
+            <CheckIcon /> Forgot
           </button>
           <button
             onClick={() => {

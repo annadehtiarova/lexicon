@@ -3,8 +3,14 @@ import { StudySet } from "./types";
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
+const LAST_BATCH_RESULTS_KEY = "lexikon.lastBatchResults";
 export type ExerciseKey = "cards" | "quiz" | "write" | "match";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
+export interface LastBatchResult {
+  batch: number;
+  mastered: number;
+  total: number;
+}
 
 const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], write: [], match: [] };
 
@@ -30,6 +36,36 @@ export function saveExerciseProgress(setId: string, progress: ExerciseProgress) 
     const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}") as Record<string, ExerciseProgress>;
     allProgress[setId] = progress;
     window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
+
+export function loadLastBatchResult(setId: string): LastBatchResult | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULTS_KEY) ?? "{}") as Record<string, LastBatchResult>;
+    const result = results[setId];
+    if (
+      !result ||
+      !Number.isFinite(result.batch) ||
+      !Number.isFinite(result.mastered) ||
+      !Number.isFinite(result.total)
+    ) {
+      return null;
+    }
+    return result;
+  } catch {
+    return null;
+  }
+}
+
+export function saveLastBatchResult(setId: string, result: LastBatchResult) {
+  if (typeof window === "undefined") return;
+  try {
+    const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULTS_KEY) ?? "{}") as Record<string, LastBatchResult>;
+    results[setId] = result;
+    window.localStorage.setItem(LAST_BATCH_RESULTS_KEY, JSON.stringify(results));
   } catch {
     // Ignore unavailable browser storage.
   }
