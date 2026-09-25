@@ -3,17 +3,29 @@
 import { useEffect, useState } from "react";
 import UploadCard from "@/components/UploadCard";
 import SetsList from "@/components/SetsList";
-import { addSet, deleteSet, loadSets, saveSets, updateSetName } from "@/lib/storage";
+import { addSet, deleteSet, loadBuiltInProgress, loadSets, updateSetName } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
 import { StudySet } from "@/lib/types";
 import { CameraIcon } from "@/components/icons";
+import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
+import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
+import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
+import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
+import { EMAIL_HAUSVERWALTUNG_SET_ID, getEmailHausverwaltungSet } from "@/lib/emailHausverwaltungData";
+
+const BUILT_IN_SETS = [getArbeitsraeumeSet(), getUmzugSet(), getAdilsJobSet(), getProblemSet(), getEmailHausverwaltungSet()];
 
 export default function Home() {
   const [sets, setSets] = useState<StudySet[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    setSets(loadSets());
+    const builtInIds = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID]);
+    const builtInSets = BUILT_IN_SETS.map((set) => ({
+      ...set,
+      masteredWordIds: loadBuiltInProgress(set.id),
+    }));
+    setSets([...builtInSets, ...loadSets().filter((set) => !builtInIds.has(set.id))]);
   }, []);
 
   const handleCreateSet = async (files: File[], name: string) => {
@@ -38,13 +50,6 @@ export default function Home() {
     setSets(updateSetName(id, name));
   };
 
-  const handleImport = (importedSets: StudySet[]) => {
-    const currentSets = loadSets();
-    const mergedSets = [...importedSets, ...currentSets.filter((current) => !importedSets.some((imported) => imported.id === current.id))];
-    saveSets(mergedSets);
-    setSets(mergedSets);
-  };
-
   return (
     <main
       className="relative flex flex-1 flex-col items-center px-4 pb-24 pt-12"
@@ -57,14 +62,12 @@ export default function Home() {
         <span className="flex items-center gap-2 rounded-none border-l-4 border-[#e76548] bg-[#fffaf0] px-4 py-1.5 text-xs font-semibold tracking-[2.4px] text-[#08758d] shadow-[4px_4px_0_rgba(231,101,72,0.16)]">
           <CameraIcon className="h-3.5 w-3.5" /> PHOTO TO FLASHCARDS
         </span>
-
         <h1 className="font-heading max-w-4xl text-5xl leading-[1.05] tracking-[-1.2px] text-[#172b35] sm:text-6xl">
           Learn German words{" "}
           <span className="text-[#e76548]">
             straight off the page
           </span>
         </h1>
-
         <p className="font-body max-w-xl text-base text-[#5d6f74]">
           Photograph a textbook page, a menu or a street sign. Lexikon pulls out
           the German vocabulary, adds English translations, and builds four ways
@@ -79,7 +82,7 @@ export default function Home() {
             {notice}
           </p>
         )}
-        <SetsList sets={sets} onDelete={handleDelete} onRename={handleRename} onImport={handleImport} />
+        <SetsList sets={sets} onDelete={handleDelete} onRename={handleRename} />
       </div>
     </main>
   );

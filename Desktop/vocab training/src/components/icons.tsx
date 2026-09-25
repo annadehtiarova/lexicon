@@ -20,6 +20,22 @@ export function ChevronLeftIcon({ className = base }: IconProps) {
   );
 }
 
+export function ChevronDownIcon({ className = base }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function SparklesIcon({ className = base }: IconProps) {
   return (
     <svg

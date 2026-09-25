@@ -6,6 +6,8 @@ import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/icons";
 
 interface MultipleChoiceModeProps {
   words: VocabWord[];
+  onCorrect: (id: string) => void;
+  onNextBatch?: () => void;
 }
 
 function buildQuestion(words: VocabWord[], index: number) {
@@ -18,7 +20,7 @@ function buildQuestion(words: VocabWord[], index: number) {
   return { correct, options };
 }
 
-export default function MultipleChoiceMode({ words }: MultipleChoiceModeProps) {
+export default function MultipleChoiceMode({ words, onCorrect, onNextBatch }: MultipleChoiceModeProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -28,10 +30,17 @@ export default function MultipleChoiceMode({ words }: MultipleChoiceModeProps) {
   const handleSelect = (id: string) => {
     if (selected) return;
     setSelected(id);
-    if (id === question.correct.id) setScore((s) => s + 1);
+    if (id === question.correct.id) {
+      setScore((s) => s + 1);
+      onCorrect(id);
+    }
   };
 
   const next = () => {
+    if (index === words.length - 1 && onNextBatch) {
+      onNextBatch();
+      return;
+    }
     setSelected(null);
     setIndex((i) => (i + 1) % words.length);
   };

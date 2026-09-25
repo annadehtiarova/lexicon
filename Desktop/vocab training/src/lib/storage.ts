@@ -1,6 +1,54 @@
 import { StudySet } from "./types";
 
 const STORAGE_KEY = "lexikon.sets";
+const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
+export type ExerciseKey = "cards" | "quiz" | "write" | "match";
+export type ExerciseProgress = Record<ExerciseKey, string[]>;
+
+const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], write: [], match: [] };
+
+export function loadExerciseProgress(setId: string): ExerciseProgress {
+  if (typeof window === "undefined") return { ...EMPTY_PROGRESS };
+  try {
+    const progress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}") as Record<string, Partial<ExerciseProgress>>;
+    const saved = progress[setId] ?? {};
+    return {
+      cards: Array.isArray(saved.cards) ? saved.cards : [],
+      quiz: Array.isArray(saved.quiz) ? saved.quiz : [],
+      write: Array.isArray(saved.write) ? saved.write : [],
+      match: Array.isArray(saved.match) ? saved.match : [],
+    };
+  } catch {
+    return { ...EMPTY_PROGRESS };
+  }
+}
+
+export function saveExerciseProgress(setId: string, progress: ExerciseProgress) {
+  if (typeof window === "undefined") return;
+  try {
+    const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}") as Record<string, ExerciseProgress>;
+    allProgress[setId] = progress;
+    window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
+
+export function loadBuiltInProgress(setId: string): string[] {
+  const progress = loadExerciseProgress(setId);
+  return progress.cards.filter((id) => progress.quiz.includes(id) && progress.write.includes(id) && progress.match.includes(id));
+}
+
+export function saveBuiltInProgress(setId: string, masteredWordIds: string[]) {
+  if (typeof window === "undefined") return;
+  try {
+    const progress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}") as Record<string, string[]>;
+    progress[setId] = masteredWordIds;
+    window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(progress));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
 
 export function loadSets(): StudySet[] {
   if (typeof window === "undefined") return [];

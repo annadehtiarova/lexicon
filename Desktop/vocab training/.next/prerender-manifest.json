@@ -5,7 +5,7 @@
       "routeType": "page",
       "response": "complete",
       "compute": "static",
-      "htmlSize": 12919,
+      "htmlSize": 14202,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -118,11 +118,11 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/sets/demo-workspaces-moving-renting": {
+    "/sets/41a3417a-43ac-44e8-96ff-8b863209587f": {
       "routeType": "page",
       "response": "complete",
       "compute": "static",
-      "htmlSize": 9728,
+      "htmlSize": 10017,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -136,7 +136,119 @@
       ],
       "initialRevalidateSeconds": false,
       "srcRoute": "/sets/[id]",
-      "dataRoute": "/sets/demo-workspaces-moving-renting.rsc",
+      "dataRoute": "/sets/41a3417a-43ac-44e8-96ff-8b863209587f.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/sets/58f9f2b4-c4ca-4d67-ba44-941d194d2e16": {
+      "routeType": "page",
+      "response": "complete",
+      "compute": "static",
+      "htmlSize": 10017,
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sets/[id]",
+      "dataRoute": "/sets/58f9f2b4-c4ca-4d67-ba44-941d194d2e16.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/sets/a5441fb1-8899-4efb-843b-f568be8a4df7": {
+      "routeType": "page",
+      "response": "complete",
+      "compute": "static",
+      "htmlSize": 10017,
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sets/[id]",
+      "dataRoute": "/sets/a5441fb1-8899-4efb-843b-f568be8a4df7.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/sets/aed92006-9161-46d9-b09b-7258a00942fe": {
+      "routeType": "page",
+      "response": "complete",
+      "compute": "static",
+      "htmlSize": 10017,
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sets/[id]",
+      "dataRoute": "/sets/aed92006-9161-46d9-b09b-7258a00942fe.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/sets/db410b05-cd3c-4a41-bf0c-ba2a5dbee787": {
+      "routeType": "page",
+      "response": "complete",
+      "compute": "static",
+      "htmlSize": 10017,
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sets/[id]",
+      "dataRoute": "/sets/db410b05-cd3c-4a41-bf0c-ba2a5dbee787.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",

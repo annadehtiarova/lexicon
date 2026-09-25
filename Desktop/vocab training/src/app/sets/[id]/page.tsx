@@ -1,11 +1,15 @@
 import StudySetClient from "./StudySetClient";
-import { EXERCISE_SET_ID } from "@/lib/exerciseData";
+import { ARBEITSRAEUME_SET_ID } from "@/lib/arbeitsraeumeData";
+import { UMZUG_SET_ID } from "@/lib/umzugData";
+import { ADILS_JOB_SET_ID } from "@/lib/adilsJobData";
+import { PROBLEM_SET_ID } from "@/lib/problemData";
+import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
 
 export function generateStaticParams() {
-  return [{ id: EXERCISE_SET_ID }];
+  return [{ id: ARBEITSRAEUME_SET_ID }, { id: UMZUG_SET_ID }, { id: ADILS_JOB_SET_ID }, { id: PROBLEM_SET_ID }, { id: EMAIL_HAUSVERWALTUNG_SET_ID }];
 }
 
-export default function StudySetPage({
-}: {}) {
-  return <StudySetClient id={EXERCISE_SET_ID} />;
+export default async function StudySetPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <StudySetClient id={id} />;
 }

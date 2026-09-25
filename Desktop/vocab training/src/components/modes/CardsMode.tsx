@@ -12,20 +12,21 @@ import {
 interface CardsModeProps {
   words: VocabWord[];
   masteredIds: Set<string>;
-  onKnewIt: (id: string) => void;
+  onCorrect: (id: string) => void;
   onNextBatch?: () => void;
 }
 
 export default function CardsMode({
   words,
   masteredIds,
-  onKnewIt,
+  onCorrect,
   onNextBatch,
 }: CardsModeProps) {
+  const [cardOrder, setCardOrder] = useState(() => words);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const word = words[index];
-  const total = words.length;
+  const word = cardOrder[index];
+  const total = cardOrder.length;
   const progress = total > 1 ? (index / (total - 1)) * 100 : 100;
 
   const advance = () => {
@@ -38,10 +39,13 @@ export default function CardsMode({
     setIndex((i) => Math.max(i - 1, 0));
   };
 
-  const handleKnewIt = () => {
-    onKnewIt(word.id);
+  const handleAgain = () => {
+    const remaining = cardOrder.filter((card) => card.id !== word.id);
+    const insertionIndex = Math.min(index + 5, remaining.length);
+    remaining.splice(insertionIndex, 0, word);
+    setCardOrder(remaining);
     setFlipped(false);
-    setIndex((current) => Math.min(current, Math.max(words.length - 2, 0)));
+    setIndex(Math.min(index, Math.max(remaining.length - 1, 0)));
   };
 
   return (
@@ -85,16 +89,19 @@ export default function CardsMode({
 
         <div className="flex items-start gap-2">
           <button
-            onClick={handleKnewIt}
+            onClick={handleAgain}
             className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d]"
           >
-            <CheckIcon /> Delete
+            <CheckIcon /> Again
           </button>
           <button
-            onClick={advance}
+            onClick={() => {
+              onCorrect(word.id);
+              advance();
+            }}
             className="flex h-9 items-center gap-2 rounded-full bg-[#08758d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#075a70]"
           >
-            <XIcon /> Learn
+            <XIcon /> I know it
           </button>
         </div>
 

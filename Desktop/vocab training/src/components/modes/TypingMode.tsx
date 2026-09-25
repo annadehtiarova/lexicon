@@ -6,6 +6,8 @@ import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/icons";
 
 interface TypingModeProps {
   words: VocabWord[];
+  onCorrect: (id: string) => void;
+  onNextBatch?: () => void;
 }
 
 function normalize(text: string) {
@@ -15,7 +17,7 @@ function normalize(text: string) {
     .replace(/^(the|der|die|das)\s+/, "");
 }
 
-export default function TypingMode({ words }: TypingModeProps) {
+export default function TypingMode({ words, onCorrect, onNextBatch }: TypingModeProps) {
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
@@ -23,11 +25,16 @@ export default function TypingMode({ words }: TypingModeProps) {
 
   const check = () => {
     if (!input.trim()) return;
-    const isCorrect = normalize(input) === normalize(word.english);
+    const isCorrect = normalize(input) === normalize(word.german);
     setResult(isCorrect ? "correct" : "incorrect");
+    if (isCorrect) onCorrect(word.id);
   };
 
   const next = () => {
+    if (index === words.length - 1 && onNextBatch) {
+      onNextBatch();
+      return;
+    }
     setInput("");
     setResult(null);
     setIndex((i) => (i + 1) % words.length);
@@ -57,7 +64,7 @@ export default function TypingMode({ words }: TypingModeProps) {
       />
 
       {result && (
-        <div className={`mt-4 flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-sm ${result === "correct" ? "border-[rgba(198,233,64,0.35)] text-[#dff58a]" : "border-[rgba(255,102,87,0.35)] text-[#ffb0a6]"}`}>{result === "correct" ? <CheckIcon /> : <XIcon />}<span>
+        <div className={`mt-4 flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-sm ${result === "correct" ? "border-[#b7d83a] bg-[#f3f8d5] font-semibold text-[#315500]" : "border-[rgba(255,102,87,0.35)] text-[#ffb0a6]"}`}>{result === "correct" ? <CheckIcon /> : <XIcon />}<span>
           {result === "correct"
             ? "Correct!"
             : `Correct answer: ${word.german}`}</span></div>

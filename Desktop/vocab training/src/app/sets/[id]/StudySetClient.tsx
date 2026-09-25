@@ -6,16 +6,20 @@ import {
   addWord,
   deleteWord,
   getSet,
+  ExerciseKey,
+  ExerciseProgress,
+  loadExerciseProgress,
+  saveExerciseProgress,
   setMasteredWordIds,
   updateWord,
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
 import { WORD_BANK } from "@/lib/wordBank";
-import {
-  EXERCISE_SET_ID,
-  EXERCISE_SET_NAME,
-  getExerciseSetWords,
-} from "@/lib/exerciseData";
+import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
+import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
+import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
+import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
+import { EMAIL_HAUSVERWALTUNG_SET_ID, getEmailHausverwaltungSet } from "@/lib/emailHausverwaltungData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -98,10 +102,51 @@ interface ResolvedSet {
 }
 
 function resolveSet(id: string): ResolvedSet | null {
-  if (id === EXERCISE_SET_ID) {
+  if (id === ARBEITSRAEUME_SET_ID) {
+    const builtInSet = getArbeitsraeumeSet();
     return {
-      name: EXERCISE_SET_NAME,
-      words: getExerciseSetWords(),
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === UMZUG_SET_ID) {
+    const builtInSet = getUmzugSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === ADILS_JOB_SET_ID) {
+    const builtInSet = getAdilsJobSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === PROBLEM_SET_ID) {
+    const builtInSet = getProblemSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === EMAIL_HAUSVERWALTUNG_SET_ID) {
+    const builtInSet = getEmailHausverwaltungSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
       masteredWordIds: [],
       isPersisted: false,
     };
@@ -125,9 +170,12 @@ export default function StudySetClient({ id }: { id: string }) {
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
+  const [exerciseProgress, setExerciseProgress] = useState<ExerciseProgress>({ cards: [], quiz: [], write: [], match: [] });
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
+  const [draftPos, setDraftPos] = useState("noun");
+  const [draftArticle, setDraftArticle] = useState("der");
   const [isAddingWord, setIsAddingWord] = useState(false);
   const [newGerman, setNewGerman] = useState("");
   const [newEnglish, setNewEnglish] = useState("");
@@ -139,6 +187,8 @@ export default function StudySetClient({ id }: { id: string }) {
     const resolved = resolveSet(id);
 
     setSet(resolved);
+    const progress = loadExerciseProgress(id);
+    setExerciseProgress(progress);
     setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
   }, [id]);
 
@@ -166,6 +216,19 @@ export default function StudySetClient({ id }: { id: string }) {
       .includes(query);
   });
 
+  const markCorrect = (exercise: ExerciseKey, wordId: string) => {
+    setExerciseProgress((current) => {
+      if (current[exercise].includes(wordId)) return current;
+      const next = { ...current, [exercise]: [...current[exercise], wordId] };
+      saveExerciseProgress(id, next);
+      const mastered = words
+        .filter((word) => (Object.keys(next) as ExerciseKey[]).every((key) => next[key].includes(word.id)))
+        .map((word) => word.id);
+      setMasteredIds(new Set(mastered));
+      return next;
+    });
+  };
+
   if (set === undefined) return null;
 
   if (set === null) {
@@ -186,18 +249,7 @@ export default function StudySetClient({ id }: { id: string }) {
   }
 
   const handleKnewIt = (wordId: string) => {
-    if (!set.isPersisted) return;
-    deleteWord(id, wordId);
-    setSet((current) =>
-      current
-        ? { ...current, words: current.words.filter((word) => word.id !== wordId) }
-        : current,
-    );
-    setMasteredIds((current) => {
-      const next = new Set(current);
-      next.delete(wordId);
-      return next;
-    });
+    markCorrect("cards", wordId);
   };
 
   const handleDeleteWord = (wordId: string) => {
@@ -225,23 +277,29 @@ export default function StudySetClient({ id }: { id: string }) {
     if (!set.isPersisted) return;
 
     setEditingWordId(word.id);
-    setDraftGerman(word.german);
+    const articleMatch = word.german.match(/^(der|die|das)\s+(.+)$/i);
+    setDraftGerman(articleMatch ? articleMatch[2] : word.german);
     setDraftEnglish(word.english);
+    setDraftPos(word.pos);
+    setDraftArticle(articleMatch?.[1].toLowerCase() ?? "der");
   };
 
   const cancelEditing = () => {
     setEditingWordId(null);
     setDraftGerman("");
     setDraftEnglish("");
+    setDraftPos("noun");
+    setDraftArticle("der");
   };
 
   const saveEditing = (wordId: string) => {
-    const german = draftGerman.trim();
+    const germanWord = draftGerman.trim().replace(/^(der|die|das)\s+/i, "");
+    const german = draftPos === "noun" ? `${draftArticle} ${germanWord}` : germanWord;
     const english = draftEnglish.trim();
 
     if (!german || !english) return;
 
-    updateWord(id, wordId, { german, english });
+    updateWord(id, wordId, { german, english, pos: draftPos });
 
     setSet((current) =>
       current
@@ -249,7 +307,7 @@ export default function StudySetClient({ id }: { id: string }) {
             ...current,
             words: current.words.map((word) =>
               word.id === wordId
-                ? { ...word, german, english }
+                ? { ...word, german, english, pos: draftPos }
                 : word,
             ),
           }
@@ -349,7 +407,7 @@ export default function StudySetClient({ id }: { id: string }) {
                 key={`cards-${practiceBatch}`}
                 words={practiceWords}
                 masteredIds={masteredIds}
-                onKnewIt={handleKnewIt}
+                onCorrect={handleKnewIt}
                 onNextBatch={
                   practiceBatch < batchCount - 1
                     ? () => setPracticeBatch((current) => current + 1)
@@ -360,19 +418,34 @@ export default function StudySetClient({ id }: { id: string }) {
 
             {mode === "quiz" && (
               <div className="pt-8">
-                <MultipleChoiceMode key={`quiz-${practiceBatch}`} words={practiceWords} />
+                <MultipleChoiceMode
+                  key={`quiz-${practiceBatch}`}
+                  words={practiceWords}
+                  onCorrect={(wordId) => markCorrect("quiz", wordId)}
+                  onNextBatch={practiceBatch < batchCount - 1 ? () => setPracticeBatch((current) => current + 1) : undefined}
+                />
               </div>
             )}
 
             {mode === "write" && (
               <div className="pt-8">
-                <TypingMode key={`write-${practiceBatch}`} words={practiceWords} />
+                <TypingMode
+                  key={`write-${practiceBatch}`}
+                  words={practiceWords}
+                  onCorrect={(wordId) => markCorrect("write", wordId)}
+                  onNextBatch={practiceBatch < batchCount - 1 ? () => setPracticeBatch((current) => current + 1) : undefined}
+                />
               </div>
             )}
 
             {mode === "match" && (
               <div className="pt-8">
-                <MatchingMode key={`match-${practiceBatch}`} words={practiceWords} />
+                <MatchingMode
+                  key={`match-${practiceBatch}`}
+                  words={practiceWords}
+                  onCorrect={(wordId) => markCorrect("match", wordId)}
+                  onNextBatch={practiceBatch < batchCount - 1 ? () => setPracticeBatch((current) => current + 1) : undefined}
+                />
               </div>
             )}
           </div>
@@ -397,7 +470,7 @@ export default function StudySetClient({ id }: { id: string }) {
               <input value={newGerman} onChange={(event) => setNewGerman(event.target.value)} placeholder="German word" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
               <input value={newEnglish} onChange={(event) => setNewEnglish(event.target.value)} placeholder="English translation" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
               <select value={newPos} onChange={(event) => setNewPos(event.target.value)} className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]">
-                <option value="noun">Noun</option><option value="verb">Verb</option><option value="adjective">Adjective</option><option value="adverb">Adverb</option>
+                <option value="noun">Noun</option><option value="verb">Verb</option><option value="adjective">Adjective</option><option value="adverb">Adverb</option><option value="other">Other</option>
               </select>
               <input value={newExample} onChange={(event) => setNewExample(event.target.value)} placeholder="German example (optional)" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
               <div className="flex gap-2 sm:col-span-2">
@@ -446,6 +519,32 @@ export default function StudySetClient({ id }: { id: string }) {
                       aria-label="English translation"
                     />
 
+                    {draftPos === "noun" && (
+                      <select
+                        value={draftArticle}
+                        onChange={(event) => setDraftArticle(event.target.value)}
+                        className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                        aria-label="Article"
+                      >
+                        <option value="der">der</option>
+                        <option value="die">die</option>
+                        <option value="das">das</option>
+                      </select>
+                    )}
+
+                    <select
+                      value={draftPos}
+                      onChange={(event) => setDraftPos(event.target.value)}
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
+                      aria-label="Part of speech"
+                    >
+                      <option value="noun">Noun</option>
+                      <option value="verb">Verb</option>
+                      <option value="adjective">Adjective</option>
+                      <option value="adverb">Adverb</option>
+                      <option value="other">Other</option>
+                    </select>
+
                     <div className="flex gap-2">
                       <button
                         type="button"
@@ -466,7 +565,9 @@ export default function StudySetClient({ id }: { id: string }) {
                   </div>
                 ) : (
                   <>
-                    <div>
+                    <div className="flex items-start gap-2">
+                      {masteredIds.has(word.id) && <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#08758d]" aria-label="Mastered" />}
+                      <div>
                       <button
                         type="button"
                         onClick={() => startEditing(word)}
@@ -478,6 +579,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       <p className="font-body pt-1 text-xs italic text-[#5d6f74]">
                         {word.example}
                       </p>
+                      </div>
                     </div>
 
                     <div className="flex shrink-0 items-center gap-3">
