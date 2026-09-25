@@ -3,6 +3,7 @@
 import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
+  addWord,
   deleteWord,
   getSet,
   setMasteredWordIds,
@@ -18,14 +19,12 @@ import {
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
-import GapsMode from "@/components/modes/GapsMode";
 import MatchingMode from "@/components/modes/MatchingMode";
 import {
   ChevronLeftIcon,
   SparklesIcon,
   ListChecksIcon,
   KeyboardIcon,
-  ColumnsIcon,
   GridIcon,
   TrashIcon,
 } from "@/components/icons";
@@ -34,7 +33,6 @@ const MODES = [
   { key: "cards", label: "Cards", Icon: SparklesIcon },
   { key: "quiz", label: "Quiz", Icon: ListChecksIcon },
   { key: "write", label: "Write", Icon: KeyboardIcon },
-  { key: "gaps", label: "Gaps", Icon: ColumnsIcon },
   { key: "match", label: "Match", Icon: GridIcon },
 ] as const;
 
@@ -50,6 +48,23 @@ const KNOWN_NOUN_ARTICLES = new Map(
   }),
 );
 
+const IRREGULAR_NOUN_ARTICLES = new Map(Object.entries({
+  "apfel": "der", "baum": "der", "berg": "der", "brief": "der", "computer": "der",
+  "film": "der", "freund": "der", "garten": "der", "gedanke": "der", "hafen": "der",
+  "kaffee": "der", "kuchen": "der", "monat": "der", "name": "der", "schlüssel": "der",
+  "schnee": "der", "sommer": "der", "staat": "der", "stuhl": "der", "tisch": "der",
+  "vater": "der", "winter": "der", "zeitpunkt": "der", "zug": "der",
+  "arbeit": "die", "blume": "die", "farbe": "die", "frage": "die", "freundschaft": "die",
+  "geschichte": "die", "hand": "die", "idee": "die", "karte": "die", "katze": "die",
+  "kirche": "die", "küche": "die", "luft": "die", "miete": "die", "musik": "die",
+  "nacht": "die", "reise": "die", "schule": "die", "sprache": "die", "stadt": "die",
+  "straße": "die", "sonne": "die", "tür": "die", "wohnung": "die", "zeit": "die",
+  "auto": "das", "auge": "das", "bild": "das", "buch": "das", "essen": "das",
+  "fenster": "das", "haus": "das", "jahr": "das", "kind": "das", "land": "das",
+  "leben": "das", "licht": "das", "mädchen": "das", "meer": "das", "problem": "das",
+  "spiel": "das", "wasser": "das", "wetter": "das", "wort": "das", "zimmer": "das",
+}));
+
 function displayGerman(word: VocabWord): string {
   if (word.pos !== "noun") return word.german.toLowerCase();
 
@@ -61,12 +76,13 @@ function displayGerman(word: VocabWord): string {
 
   const noun = word.german.toLowerCase();
 
-  const article = KNOWN_NOUN_ARTICLES.get(noun) ?? inferNounArticle(noun);
+  const article = KNOWN_NOUN_ARTICLES.get(noun) ?? IRREGULAR_NOUN_ARTICLES.get(noun) ?? inferNounArticle(noun);
 
   return `${article} ${word.german.charAt(0).toUpperCase()}${word.german.slice(1)}`;
 }
 
 function inferNounArticle(noun: string): string {
+  if (/(schaft|tum|werk|zeug|haus|zimmer|buch|land|recht|wesen)$/.test(noun)) return "das";
   if (/(chen|lein|ment|um|ma|zeug)$/.test(noun)) return "das";
   if (/(ung|heit|keit|schaft|tion|tät|ik|ei|ie|ur|enz|anz|age|ade|ette|elle|ose|sis|itis)$/.test(noun)) return "die";
   if (/(ismus|ling|or|us|ist|ant|ent|eur|är)$/.test(noun)) return "der";
@@ -111,6 +127,11 @@ export default function StudySetClient({ id }: { id: string }) {
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
+  const [isAddingWord, setIsAddingWord] = useState(false);
+  const [newGerman, setNewGerman] = useState("");
+  const [newEnglish, setNewEnglish] = useState("");
+  const [newPos, setNewPos] = useState("noun");
+  const [newExample, setNewExample] = useState("");
 
   useEffect(() => {
     const resolved = resolveSet(id);
@@ -226,6 +247,23 @@ export default function StudySetClient({ id }: { id: string }) {
     cancelEditing();
   };
 
+  const saveNewWord = () => {
+    if (!set.isPersisted || !newGerman.trim() || !newEnglish.trim()) return;
+    const word: VocabWord = {
+      id: crypto.randomUUID(),
+      german: newGerman.trim(),
+      english: newEnglish.trim(),
+      pos: newPos,
+      example: newExample.trim(),
+    };
+    addWord(id, word);
+    setSet((current) => current ? { ...current, words: [...current.words, word] } : current);
+    setNewGerman("");
+    setNewEnglish("");
+    setNewExample("");
+    setIsAddingWord(false);
+  };
+
   return (
     <main className="flex flex-1 justify-center px-4 pb-24">
       <div className="w-full max-w-3xl">
@@ -292,8 +330,6 @@ export default function StudySetClient({ id }: { id: string }) {
               </div>
             )}
 
-            {mode === "gaps" && <GapsMode words={words} />}
-
             {mode === "match" && (
               <div className="pt-8">
                 <MatchingMode words={words} />
@@ -303,9 +339,33 @@ export default function StudySetClient({ id }: { id: string }) {
         </div>
 
         <section className="pt-6">
-          <h2 className="font-heading text-2xl text-[#f3f5f9]">
-            All words
-          </h2>
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="font-heading text-2xl text-[#f3f5f9]">All words</h2>
+            {set.isPersisted && (
+              <button
+                type="button"
+                onClick={() => setIsAddingWord(true)}
+                className="rounded-full bg-[#c6e940] px-4 py-2 text-sm font-semibold text-[#0e1a01]"
+              >
+                Add word
+              </button>
+            )}
+          </div>
+
+          {isAddingWord && (
+            <div className="mt-4 grid gap-3 rounded-2xl border border-[#2b3342] bg-[#111827] p-4 sm:grid-cols-2">
+              <input value={newGerman} onChange={(event) => setNewGerman(event.target.value)} placeholder="German word" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
+              <input value={newEnglish} onChange={(event) => setNewEnglish(event.target.value)} placeholder="English translation" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
+              <select value={newPos} onChange={(event) => setNewPos(event.target.value)} className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white">
+                <option value="noun">Noun</option><option value="verb">Verb</option><option value="adjective">Adjective</option><option value="adverb">Adverb</option>
+              </select>
+              <input value={newExample} onChange={(event) => setNewExample(event.target.value)} placeholder="German example (optional)" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
+              <div className="flex gap-2 sm:col-span-2">
+                <button type="button" onClick={saveNewWord} className="rounded-full bg-[#c6e940] px-4 py-2 text-sm font-semibold text-[#0e1a01]">Save word</button>
+                <button type="button" onClick={() => setIsAddingWord(false)} className="rounded-full bg-[#20293a] px-4 py-2 text-sm text-white">Cancel</button>
+              </div>
+            </div>
+          )}
 
           <div className="mt-4 overflow-hidden rounded-2xl border-[0.556px] border-[#2b3342]">
             {words.map((word, i) => (

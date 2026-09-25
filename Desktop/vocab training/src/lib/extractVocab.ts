@@ -59,6 +59,32 @@ function normalizeWord(word: string): string {
     .replace(/\s+/g, " ");
 }
 
+function normalizeGermanForm(word: string): string {
+  return normalizeWord(word)
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss");
+}
+
+function b2Candidates(word: string): string[] {
+  const normalized = normalizeGermanForm(word);
+  const candidates = new Set([normalized]);
+  const endings = [
+    "ern", "eln", "ieren", "est", "en", "er", "es", "em", "et", "st",
+    "te", "ten", "test", "t", "e", "n", "s",
+  ];
+  for (const ending of endings) {
+    if (normalized.endsWith(ending) && normalized.length - ending.length >= 3) {
+      candidates.add(normalized.slice(0, -ending.length) + "en");
+      candidates.add(normalized.slice(0, -ending.length));
+    }
+  }
+  if (normalized.endsWith("ungen")) candidates.add(`${normalized.slice(0, -5)}ung`);
+  if (normalized.endsWith("en")) candidates.add(normalized.slice(0, -2));
+  return [...candidates];
+}
+
 function removeArticle(word: string): string {
   return word
     .replace(/^(der|die|das|den|dem|des|ein|eine|einer|einem|einen)\s+/i, "")
@@ -100,10 +126,16 @@ const COMMON_PERSON_NAMES = new Set(
   "anna andreas anton ben benjamin carla carmen christian christina daniel david denise dieter dirk dominik elena elias emil emma eric erika felix finn florian franz friedrich gabriel georg gregor hans hannah heike helena henrik henriette holger ines ingrid jan jana jasmin johann johanna jonas josef julia julian justin karl karla katharina katja klaus konrad laura lea lena leon leonard lia linda lisa lorenz lukas lukas marc marcel maria marie mario markus martin matthias max maximilian maya michael miriam monika nadine niklas nico nina noah norbert oliver oskar otto paul paula peter philipp sabine sara sarah simon sofia sophie stefan stefanie susanne theo theresa thomas tim tina tobias tom ulrich ursula viktor walter wilhelm wilma wolfgang yvonne zara zoe",
 ); 
 
+const EXERCISE_NOISE_WORDS = new Set(
+  "aufgabe aufgaben übung übungen frage fragen antwort antworten lösung lösungen beispiel beispiele text texte satz sätze lücke lücken wort wörter wortsatz ordne ordnen markiere markieren ergänze ergänzen vervollständige vervollständigen verbinde verbinden kreuze kreuzen wähle wählen schreibe schreiben lies lesen höre hören sprich sprechen wiederhole wiederholen diskutiert diskutieren arbeitsblatt nummer nummern punkt punkte teil teile abschnitt abschnitte erklärung erklärungen information informationen hinweis hinweise richtig falsch möglich möglichkeiten singular plural singularform pluralform einzahl mehrzahl männlich weiblich sächlich maskulin feminin neutrum genitiv dativ akkusativ nominativ artikel artikeln pronomen präposition präpositionen verb verben nomen substantiv substantive adjektiv adjektive adverb adverbien grammatik grammatische grammatikalisch konjugation konjugiere deklination beispielsatz bedeutung bedeutungen übersetzung übersetzungen wortart wortarten vokabel vokabeln"
+    .split(" "),
+);
+
 function classifyUnknownWord(word: string): ExtractedWord["pos"] | null {
   const lower = word.toLowerCase();
   if (GERMAN_FUNCTION_WORDS.has(lower) || lower.length < 3) return null;
   if (COMMON_PERSON_NAMES.has(lower)) return null;
+  if (EXERCISE_NOISE_WORDS.has(lower)) return null;
 
   // German infinitives are safest to recognize by their infinitive endings.
   if (/(en|ern|eln|ieren)$/.test(lower)) return "verb";
@@ -124,7 +156,6 @@ function classifyUnknownWord(word: string): ExtractedWord["pos"] | null {
 }
 
 let translatorPromise: Promise<any> | null = null;
-
 function getTranslator() {
   translatorPromise ??= pipeline(
     "translation",
@@ -151,6 +182,7 @@ async function findVocabulary(text: string): Promise<ExtractedWord[]> {
     seen.add(key);
 
     const entry = knownTranslations.get(key) ?? knownForms.get(key);
+    if (EXERCISE_NOISE_WORDS.has(key)) continue;
     const knownPos = entry?.pos;
     const pos = knownPos === "noun"
       ? "noun"
@@ -171,8 +203,9 @@ async function findVocabulary(text: string): Promise<ExtractedWord[]> {
     });
   }
 
-  const unknownWords = matches.filter((word) => !word.english);
-  if (unknownWords.length === 0) return matches;
+  const selectedMatches = matches.slice(0, 60);
+  const unknownWords = selectedMatches.filter((word) => !word.english);
+  if (unknownWords.length === 0) return selectedMatches;
 
   const translator = await getTranslator();
   const translations = await translator(unknownWords.map((word) => word.german), {
@@ -183,7 +216,7 @@ async function findVocabulary(text: string): Promise<ExtractedWord[]> {
   const output = Array.isArray(translations) ? translations : [translations];
   let translationIndex = 0;
 
-  return matches.map((word) => {
+  return selectedMatches.map((word) => {
     if (word.english) return word;
     const translation = output[translationIndex++]?.translation_text;
     return {
@@ -219,12 +252,18 @@ export async function extractVocabFromImages(
         words?: Array<{ confidence: number; text: string }>;
       };
       const confidentWords = pageData.words
-        ?.filter((word) => word.confidence >= 45)
+        ?.filter((word) => word.confidence >= 25)
         .map((word) => word.text)
         .filter(Boolean);
       recognizedText.push(
         confidentWords?.length ? confidentWords.join(" ") : result.data.text,
       );
+      await worker.setParameters({ tessedit_pageseg_mode: 11 as never });
+      const sparseResult = await worker.recognize(file);
+      await worker.setParameters({ tessedit_pageseg_mode: 6 as never });
+      if (sparseResult.data.text.trim()) {
+        recognizedText.push(sparseResult.data.text);
+      }
     }
 
     const text = recognizedText.join("\n");

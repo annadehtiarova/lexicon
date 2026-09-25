@@ -1627,6 +1627,45 @@ async function prepareImage(file) {
 function normalizeWord(word) {
     return word.toLowerCase().trim().replace(/[.,;:!?()[\]{}"„“”]/g, "").replace(/\s+/g, " ");
 }
+function normalizeGermanForm(word) {
+    return normalizeWord(word).replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+}
+function b2Candidates(word) {
+    const normalized = normalizeGermanForm(word);
+    const candidates = new Set([
+        normalized
+    ]);
+    const endings = [
+        "ern",
+        "eln",
+        "ieren",
+        "est",
+        "en",
+        "er",
+        "es",
+        "em",
+        "et",
+        "st",
+        "te",
+        "ten",
+        "test",
+        "t",
+        "e",
+        "n",
+        "s"
+    ];
+    for (const ending of endings){
+        if (normalized.endsWith(ending) && normalized.length - ending.length >= 3) {
+            candidates.add(normalized.slice(0, -ending.length) + "en");
+            candidates.add(normalized.slice(0, -ending.length));
+        }
+    }
+    if (normalized.endsWith("ungen")) candidates.add(`${normalized.slice(0, -5)}ung`);
+    if (normalized.endsWith("en")) candidates.add(normalized.slice(0, -2));
+    return [
+        ...candidates
+    ];
+}
 function removeArticle(word) {
     return word.replace(/^(der|die|das|den|dem|des|ein|eine|einer|einem|einen)\s+/i, "").trim();
 }
@@ -1673,10 +1712,12 @@ function buildKnownForms() {
 }
 const GERMAN_FUNCTION_WORDS = new Set("aber als am an auch auf aus bei bin bis das dass dein dem den der des die du ein eine einem einen einer eines er es für gegen haben hat ich im in ist ja kein mit nach nicht nur oder sie sind und vom von war was wir zu zum zur".split(" "));
 const COMMON_PERSON_NAMES = new Set("anna andreas anton ben benjamin carla carmen christian christina daniel david denise dieter dirk dominik elena elias emil emma eric erika felix finn florian franz friedrich gabriel georg gregor hans hannah heike helena henrik henriette holger ines ingrid jan jana jasmin johann johanna jonas josef julia julian justin karl karla katharina katja klaus konrad laura lea lena leon leonard lia linda lisa lorenz lukas lukas marc marcel maria marie mario markus martin matthias max maximilian maya michael miriam monika nadine niklas nico nina noah norbert oliver oskar otto paul paula peter philipp sabine sara sarah simon sofia sophie stefan stefanie susanne theo theresa thomas tim tina tobias tom ulrich ursula viktor walter wilhelm wilma wolfgang yvonne zara zoe");
+const EXERCISE_NOISE_WORDS = new Set("aufgabe aufgaben übung übungen frage fragen antwort antworten lösung lösungen beispiel beispiele text texte satz sätze lücke lücken wort wörter wortsatz ordne ordnen markiere markieren ergänze ergänzen vervollständige vervollständigen verbinde verbinden kreuze kreuzen wähle wählen schreibe schreiben lies lesen höre hören sprich sprechen wiederhole wiederholen diskutiert diskutieren arbeitsblatt nummer nummern punkt punkte teil teile abschnitt abschnitte erklärung erklärungen information informationen hinweis hinweise richtig falsch möglich möglichkeiten singular plural singularform pluralform einzahl mehrzahl männlich weiblich sächlich maskulin feminin neutrum genitiv dativ akkusativ nominativ artikel artikeln pronomen präposition präpositionen verb verben nomen substantiv substantive adjektiv adjektive adverb adverbien grammatik grammatische grammatikalisch konjugation konjugiere deklination beispielsatz bedeutung bedeutungen übersetzung übersetzungen wortart wortarten vokabel vokabeln".split(" "));
 function classifyUnknownWord(word) {
     const lower = word.toLowerCase();
     if (GERMAN_FUNCTION_WORDS.has(lower) || lower.length < 3) return null;
     if (COMMON_PERSON_NAMES.has(lower)) return null;
+    if (EXERCISE_NOISE_WORDS.has(lower)) return null;
     // German infinitives are safest to recognize by their infinitive endings.
     if (/(en|ern|eln|ieren)$/.test(lower)) return "verb";
     // Common productive adjective/adverb endings.
@@ -1710,6 +1751,7 @@ async function findVocabulary(text) {
         if (seen.has(key)) continue;
         seen.add(key);
         const entry = knownTranslations.get(key) ?? knownForms.get(key);
+        if (EXERCISE_NOISE_WORDS.has(key)) continue;
         const knownPos = entry?.pos;
         const pos = knownPos === "noun" ? "noun" : knownPos === "verb" ? "verb" : knownPos === "adjective" ? "adjective" : knownPos === "adverb" ? "adverb" : classifyUnknownWord(rawWord);
         if (!pos) continue;
@@ -1720,8 +1762,9 @@ async function findVocabulary(text) {
             example: entry?.example ?? ""
         });
     }
-    const unknownWords = matches.filter((word)=>!word.english);
-    if (unknownWords.length === 0) return matches;
+    const selectedMatches = matches.slice(0, 60);
+    const unknownWords = selectedMatches.filter((word)=>!word.english);
+    if (unknownWords.length === 0) return selectedMatches;
     const translator = await getTranslator();
     const translations = await translator(unknownWords.map((word)=>word.german), {
         max_new_tokens: 32,
@@ -1732,7 +1775,7 @@ async function findVocabulary(text) {
         translations
     ];
     let translationIndex = 0;
-    return matches.map((word)=>{
+    return selectedMatches.map((word)=>{
         if (word.english) return word;
         const translation = output[translationIndex++]?.translation_text;
         return {
@@ -1755,8 +1798,18 @@ async function extractVocabFromImages(files) {
         for (const file of preparedFiles){
             const result = await worker.recognize(file);
             const pageData = result.data;
-            const confidentWords = pageData.words?.filter((word)=>word.confidence >= 45).map((word)=>word.text).filter(Boolean);
+            const confidentWords = pageData.words?.filter((word)=>word.confidence >= 25).map((word)=>word.text).filter(Boolean);
             recognizedText.push(confidentWords?.length ? confidentWords.join(" ") : result.data.text);
+            await worker.setParameters({
+                tessedit_pageseg_mode: 11
+            });
+            const sparseResult = await worker.recognize(file);
+            await worker.setParameters({
+                tessedit_pageseg_mode: 6
+            });
+            if (sparseResult.data.text.trim()) {
+                recognizedText.push(sparseResult.data.text);
+            }
         }
         const text = recognizedText.join("\n");
         if (!text.trim()) {
@@ -1784,6 +1837,8 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 __turbopack_context__.s([
     "addSet",
     ()=>addSet,
+    "addWord",
+    ()=>addWord,
     "deleteSet",
     ()=>deleteSet,
     "deleteWord",
@@ -1828,6 +1883,17 @@ function addSet(set) {
         set,
         ...loadSets()
     ];
+    saveSets(sets);
+    return sets;
+}
+function addWord(setId, word) {
+    const sets = loadSets().map((set)=>set.id === setId ? {
+            ...set,
+            words: [
+                ...set.words,
+                word
+            ]
+        } : set);
     saveSets(sets);
     return sets;
 }

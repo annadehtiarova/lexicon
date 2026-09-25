@@ -75,6 +75,7 @@
     --color-slate-800: #1d293d;
     --color-slate-900: #0f172b;
     --color-black: #000;
+    --color-white: #fff;
     --spacing: .25rem;
     --container-md: 28rem;
     --container-lg: 32rem;
@@ -999,6 +1000,10 @@
     padding: calc(var(--spacing) * 1.5);
   }
 
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+
   .p-5 {
     padding: calc(var(--spacing) * 5);
   }
@@ -1317,6 +1322,10 @@
     color: #0000;
   }
 
+  .text-white {
+    color: var(--color-white);
+  }
+
   .capitalize {
     text-transform: capitalize;
   }
@@ -1506,6 +1515,10 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:col-span-2 {
+      grid-column: span 2 / span 2;
+    }
+
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

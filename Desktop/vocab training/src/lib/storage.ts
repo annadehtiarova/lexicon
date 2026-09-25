@@ -29,6 +29,14 @@ export function addSet(set: StudySet): StudySet[] {
   return sets;
 }
 
+export function addWord(setId: string, word: StudySet["words"][number]): StudySet[] {
+  const sets = loadSets().map((set) =>
+    set.id === setId ? { ...set, words: [...set.words, word] } : set,
+  );
+  saveSets(sets);
+  return sets;
+}
+
 export function deleteSet(id: string): StudySet[] {
   const sets = loadSets().filter((s) => s.id !== id);
   saveSets(sets);
