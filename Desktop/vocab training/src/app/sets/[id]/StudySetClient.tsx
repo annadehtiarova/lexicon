@@ -586,12 +586,11 @@ export default function StudySetClient({ id }: { id: string }) {
             })}
           </div>
 
-          <div className="border-t-[3px] border-[#d5ddd7] pb-5 pt-2">
+          <div className="pb-5 pt-2">
             {mode === "cards" && (
               <CardsMode
                 key={`cards-${practiceBatch}`}
                 words={practiceWords}
-                masteredIds={masteredIds}
                 onCorrect={handleKnewIt}
                 onBatchComplete={() => completeModeBatch("cards")}
               />

@@ -11,14 +11,12 @@ import {
 
 interface CardsModeProps {
   words: VocabWord[];
-  masteredIds: Set<string>;
   onCorrect: (id: string) => void;
   onBatchComplete: () => void;
 }
 
 export default function CardsMode({
   words,
-  masteredIds,
   onCorrect,
   onBatchComplete,
 }: CardsModeProps) {
@@ -54,6 +52,10 @@ export default function CardsMode({
 
   return (
     <div className="flex flex-col items-start pt-0">
+      <div className="mb-2 flex w-full items-center justify-between text-xs text-[#5d6f74]">
+        <span>CARD {index + 1}</span>
+        <span>{index + 1}/{total}</span>
+      </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#d5ddd7]">
         <div
           className="h-full rounded-full bg-[#263fd6] transition-all duration-300"
@@ -122,9 +124,6 @@ export default function CardsMode({
         </button>
       </div>
 
-      <p className="font-body w-full pt-4 text-center text-xs text-[#5d6f74]">
-        Card {index + 1} of {total} · {masteredIds.size} mastered
-      </p>
       {index === total - 1 && (
         <button
           type="button"

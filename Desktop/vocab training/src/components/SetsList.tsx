@@ -102,36 +102,41 @@ export default function SetsList({
           {visibleSets.map((set) => (
             <li
               key={set.id}
-                className="min-h-[176px] border border-[#dce4bd] bg-[#F7FAE7] p-6 shadow-[4px_4px_0_#e5ecec]"
+              className="relative"
             >
-              <div className="flex items-start justify-between gap-2">
-                <p className="font-heading text-xl font-semibold text-[#172b35]">
-                  {set.name}
-                </p>
-                {!BUILT_IN_SET_IDS.has(set.id) && (
-                  <button
-                    onClick={() => onDelete(set.id)}
-                    className="shrink-0 rounded-full p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]"
-                    aria-label="Delete set"
-                  >
-                    <TrashIcon className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-              {BUILT_IN_SET_IDS.has(set.id) && (
-                <p className="pt-1 text-[10px] font-semibold uppercase tracking-[0.7px] text-[#263fd6]">
-                  Built-in set
-                </p>
-              )}
-              <p className="font-body pt-1.5 text-[11px] text-[#5d6f74]">
-                {set.words.length} words · {set.masteredWordIds.length} mastered
-              </p>
               <Link
                 href={`/sets/${set.id}`}
-                className="mt-3 inline-flex h-7 items-center gap-1.5 rounded-full bg-[#d8f56d] px-3 text-[11px] font-medium text-[#172b35]"
+                aria-label={`Study ${set.name}`}
+                className="group block min-h-[176px] border border-[#dce4bd] bg-[#F7FAE7] p-6 text-[#172b35] shadow-[4px_4px_0_#e5ecec] transition-colors hover:border-[#263fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#263fd6]"
               >
-                <BookOpenIcon className="h-3 w-3" /> Study
+                <div className="flex items-start justify-between gap-2">
+                  <p className="font-heading text-xl font-semibold text-[#172b35]">
+                    {set.name}
+                  </p>
+                  {!BUILT_IN_SET_IDS.has(set.id) && <span className="h-7 w-7 shrink-0" aria-hidden="true" />}
+                </div>
+                {BUILT_IN_SET_IDS.has(set.id) && (
+                  <p className="pt-1 text-[10px] font-semibold uppercase tracking-[0.7px] text-[#263fd6]">
+                    Built-in set
+                  </p>
+                )}
+                <p className="font-body pt-1.5 text-[11px] text-[#5d6f74]">
+                  {set.words.length} words · {set.masteredWordIds.length} mastered
+                </p>
+                <span className="mt-3 inline-flex h-9 items-center gap-1.5 rounded-full bg-[#d8f56d] px-4 text-sm font-semibold text-[#172b35]">
+                  <BookOpenIcon className="h-4 w-4" /> Study
+                </span>
               </Link>
+              {!BUILT_IN_SET_IDS.has(set.id) && (
+                <button
+                  type="button"
+                  onClick={() => onDelete(set.id)}
+                  className="absolute right-4 top-4 z-10 rounded-full p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]"
+                  aria-label={`Delete ${set.name}`}
+                >
+                  <TrashIcon className="h-4 w-4" />
+                </button>
+              )}
             </li>
           ))}
         </ul>
