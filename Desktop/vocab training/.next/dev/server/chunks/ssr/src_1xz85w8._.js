@@ -72,75 +72,75 @@ const KNOWN_NOUN_ARTICLES = new Map(__TURBOPACK__imported__module__$5b$project$5
     ];
 }));
 const IRREGULAR_NOUN_ARTICLES = new Map(Object.entries({
-    "apfel": "der",
-    "baum": "der",
-    "berg": "der",
-    "brief": "der",
-    "computer": "der",
-    "film": "der",
-    "freund": "der",
-    "garten": "der",
-    "gedanke": "der",
-    "hafen": "der",
-    "kaffee": "der",
-    "kuchen": "der",
-    "monat": "der",
-    "name": "der",
-    "schlüssel": "der",
-    "schnee": "der",
-    "sommer": "der",
-    "staat": "der",
-    "stuhl": "der",
-    "tisch": "der",
-    "vater": "der",
-    "winter": "der",
-    "zeitpunkt": "der",
-    "zug": "der",
-    "arbeit": "die",
-    "blume": "die",
-    "farbe": "die",
-    "frage": "die",
-    "freundschaft": "die",
-    "geschichte": "die",
-    "hand": "die",
-    "idee": "die",
-    "karte": "die",
-    "katze": "die",
-    "kirche": "die",
-    "küche": "die",
-    "luft": "die",
-    "miete": "die",
-    "musik": "die",
-    "nacht": "die",
-    "reise": "die",
-    "schule": "die",
-    "sprache": "die",
-    "stadt": "die",
-    "straße": "die",
-    "sonne": "die",
-    "tür": "die",
-    "wohnung": "die",
-    "zeit": "die",
-    "auto": "das",
-    "auge": "das",
-    "bild": "das",
-    "buch": "das",
-    "essen": "das",
-    "fenster": "das",
-    "haus": "das",
-    "jahr": "das",
-    "kind": "das",
-    "land": "das",
-    "leben": "das",
-    "licht": "das",
-    "mädchen": "das",
-    "meer": "das",
-    "problem": "das",
-    "spiel": "das",
-    "wasser": "das",
-    "wetter": "das",
-    "wort": "das",
-    "zimmer": "das"
+    apfel: "der",
+    baum: "der",
+    berg: "der",
+    brief: "der",
+    computer: "der",
+    film: "der",
+    freund: "der",
+    garten: "der",
+    gedanke: "der",
+    hafen: "der",
+    kaffee: "der",
+    kuchen: "der",
+    monat: "der",
+    name: "der",
+    schlüssel: "der",
+    schnee: "der",
+    sommer: "der",
+    staat: "der",
+    stuhl: "der",
+    tisch: "der",
+    vater: "der",
+    winter: "der",
+    zeitpunkt: "der",
+    zug: "der",
+    arbeit: "die",
+    blume: "die",
+    farbe: "die",
+    frage: "die",
+    freundschaft: "die",
+    geschichte: "die",
+    hand: "die",
+    idee: "die",
+    karte: "die",
+    katze: "die",
+    kirche: "die",
+    küche: "die",
+    luft: "die",
+    miete: "die",
+    musik: "die",
+    nacht: "die",
+    reise: "die",
+    schule: "die",
+    sprache: "die",
+    stadt: "die",
+    straße: "die",
+    sonne: "die",
+    tür: "die",
+    wohnung: "die",
+    zeit: "die",
+    auto: "das",
+    auge: "das",
+    bild: "das",
+    buch: "das",
+    essen: "das",
+    fenster: "das",
+    haus: "das",
+    jahr: "das",
+    kind: "das",
+    land: "das",
+    leben: "das",
+    licht: "das",
+    mädchen: "das",
+    meer: "das",
+    problem: "das",
+    spiel: "das",
+    wasser: "das",
+    wetter: "das",
+    wort: "das",
+    zimmer: "das"
 }));
 function displayGerman(word) {
     if (word.pos !== "noun") return word.german.toLowerCase();
@@ -304,22 +304,22 @@ function StudySetClient({ id }) {
                     children: "This study set couldn't be found."
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 251,
+                    lineNumber: 342,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     href: "/",
-                    className: "rounded-full bg-[#c6e940] px-5 py-2 font-medium text-[#0e1a01] hover:opacity-90",
+                    className: "rounded-full bg-[#d8f56d] px-5 py-2 font-medium text-[#172b35] hover:opacity-90",
                     children: "Back home"
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 255,
+                    lineNumber: 344,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-            lineNumber: 250,
+            lineNumber: 341,
             columnNumber: 7
         }, this);
     }
@@ -402,46 +402,46 @@ function StudySetClient({ id }) {
         setIsAddingWord(false);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "flex flex-1 justify-center px-4 pb-24",
+        className: "flex flex-1 justify-center bg-white px-4 pb-16",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "w-full max-w-3xl border-x border-[#d0d9d2] bg-[#fffaf0] px-5 pb-10 shadow-[0_0_30px_rgba(8,117,141,0.08)] sm:px-8",
+            className: "w-full max-w-[478px] border-x border-[#dce4e2] bg-white px-5 pb-10",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "pt-10",
+                    className: "pt-5",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         href: "/",
-                        className: "flex w-fit items-center gap-1.5 text-sm text-[#08758d] hover:text-[#e76548]",
+                        className: "flex w-fit items-center gap-1.5 text-sm text-[#263fd6] hover:text-[#075a70]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ChevronLeftIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                lineNumber: 361,
+                                lineNumber: 453,
                                 columnNumber: 13
                             }, this),
                             "All sets"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                        lineNumber: 357,
+                        lineNumber: 449,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 356,
+                    lineNumber: 448,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "pt-5",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                            className: "font-heading text-4xl tracking-[-0.72px] text-[#172b35]",
+                            className: "font-heading text-[23px] font-medium tracking-[-0.35px] text-[#172b35]",
                             children: set.name
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 367,
+                            lineNumber: 459,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "font-body pt-2 text-sm text-[#5d6f74]",
+                            className: "font-body pt-1 text-[9px] text-[#5d6f74]",
                             children: [
                                 words.length,
                                 " words · ",
@@ -450,46 +450,46 @@ function StudySetClient({ id }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 371,
+                            lineNumber: 463,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 366,
+                    lineNumber: 458,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "pt-8",
+                    className: "pt-5",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex h-10 w-full items-center rounded-none border-y-2 border-[#08758d] bg-[#dbeaec] p-1",
+                            className: "flex h-7 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0.5",
                             children: MODES.map(({ key, label, Icon })=>{
                                 const active = mode === key;
                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: ()=>setMode(key),
-                                    className: `flex h-full flex-1 items-center justify-center gap-2 rounded-full text-sm font-medium transition-colors ${active ? "bg-[#08758d] text-white" : "text-[#075a70] hover:bg-[#fffaf0]"}`,
+                                    className: `flex h-full flex-1 items-center justify-center gap-1.5 rounded-full text-[10px] font-medium transition-colors ${active ? "bg-[#d8f56d] text-[#172b35]" : "text-[#172b35] hover:bg-white"}`,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {}, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 391,
+                                            lineNumber: 483,
                                             columnNumber: 19
                                         }, this),
                                         label
                                     ]
                                 }, key, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 382,
+                                    lineNumber: 474,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 377,
+                            lineNumber: 469,
                             columnNumber: 11
                         }, this),
                         words.length > 30 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mt-4 flex items-center justify-between border-y border-[#e76548] bg-[#fff0df] px-4 py-2 text-sm text-[#075a70]",
+                            className: "mt-2.5 flex h-6 items-center justify-between border-y border-[#536fe8] bg-[#eef1ff] px-3 text-[10px] text-[#172b35]",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
@@ -499,7 +499,7 @@ function StudySetClient({ id }) {
                                     children: "Previous batch"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 400,
+                                    lineNumber: 492,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -508,13 +508,14 @@ function StudySetClient({ id }) {
                                         practiceBatch + 1,
                                         " of ",
                                         batchCount,
-                                        " · ",
+                                        " ·",
+                                        " ",
                                         practiceWords.length,
                                         " words"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 408,
+                                    lineNumber: 500,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -525,17 +526,17 @@ function StudySetClient({ id }) {
                                     children: "Next batch"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 409,
+                                    lineNumber: 504,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 399,
+                            lineNumber: 491,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "border-t-2 border-[#e76548] pb-6 pt-1",
+                            className: "border-t-[3px] border-[#d5ddd7] pb-5 pt-2",
                             children: [
                                 mode === "cards" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$modes$2f$CardsMode$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     words: practiceWords,
@@ -544,7 +545,7 @@ function StudySetClient({ id }) {
                                     onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                 }, `cards-${practiceBatch}`, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 422,
+                                    lineNumber: 517,
                                     columnNumber: 15
                                 }, this),
                                 mode === "quiz" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -552,15 +553,17 @@ function StudySetClient({ id }) {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$modes$2f$MultipleChoiceMode$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         words: practiceWords,
                                         onCorrect: (wordId)=>markCorrect("quiz", wordId),
+                                        previousCorrect: words.filter((word)=>exerciseProgress.quiz.includes(word.id) && !practiceWords.some((currentWord)=>currentWord.id === word.id)).length,
+                                        totalWords: words.length,
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `quiz-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 437,
+                                        lineNumber: 532,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 436,
+                                    lineNumber: 531,
                                     columnNumber: 15
                                 }, this),
                                 mode === "write" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -568,15 +571,17 @@ function StudySetClient({ id }) {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$modes$2f$TypingMode$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         words: practiceWords,
                                         onCorrect: (wordId)=>markCorrect("write", wordId),
+                                        previousCorrect: words.filter((word)=>exerciseProgress.write.includes(word.id) && !practiceWords.some((currentWord)=>currentWord.id === word.id)).length,
+                                        totalWords: words.length,
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `write-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 448,
+                                        lineNumber: 549,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 447,
+                                    lineNumber: 548,
                                     columnNumber: 15
                                 }, this),
                                 mode === "match" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -584,61 +589,63 @@ function StudySetClient({ id }) {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$modes$2f$MatchingMode$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         words: practiceWords,
                                         onCorrect: (wordId)=>markCorrect("match", wordId),
+                                        correctCount: exerciseProgress.match.filter((wordId)=>words.some((word)=>word.id === wordId)).length,
+                                        totalWords: words.length,
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `match-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 459,
+                                        lineNumber: 566,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 458,
+                                    lineNumber: 565,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 420,
+                            lineNumber: 515,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 376,
+                    lineNumber: 468,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                    className: "pt-6",
+                    className: "pt-5",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex items-center justify-between gap-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "font-heading text-2xl text-[#172b35]",
+                                    className: "font-heading text-xl font-semibold text-[#172b35]",
                                     children: "Vocabulary notes"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 472,
+                                    lineNumber: 585,
                                     columnNumber: 13
                                 }, this),
                                 set.isPersisted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setIsAddingWord(true),
-                                    className: "rounded-full border border-[#08758d] bg-[#08758d] px-4 py-2 text-sm font-semibold text-white",
+                                    className: "rounded-full bg-[#d8f56d] px-4 py-2 text-sm font-semibold text-[#172b35]",
                                     children: "Add word"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 474,
+                                    lineNumber: 589,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 471,
+                            lineNumber: 584,
                             columnNumber: 11
                         }, this),
                         isAddingWord && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mt-4 grid gap-3 border border-[#c7d1ca] bg-[#fff0df] p-4 sm:grid-cols-2",
+                            className: "mt-4 grid gap-3 border border-[#dce4bd] bg-[#f8fbdc] p-4 sm:grid-cols-2",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                     value: newGerman,
@@ -647,7 +654,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 486,
+                                    lineNumber: 601,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -657,7 +664,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 487,
+                                    lineNumber: 607,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -670,7 +677,7 @@ function StudySetClient({ id }) {
                                             children: "Noun"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 489,
+                                            lineNumber: 618,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -678,37 +685,37 @@ function StudySetClient({ id }) {
                                             children: "Verb"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 489,
-                                            columnNumber: 51
+                                            lineNumber: 619,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                             value: "adjective",
                                             children: "Adjective"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 489,
-                                            columnNumber: 85
+                                            lineNumber: 620,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                             value: "adverb",
                                             children: "Adverb"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 489,
-                                            columnNumber: 129
+                                            lineNumber: 621,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                             value: "other",
                                             children: "Other"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 489,
-                                            columnNumber: 167
+                                            lineNumber: 622,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 488,
+                                    lineNumber: 613,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -718,7 +725,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 491,
+                                    lineNumber: 624,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -731,29 +738,29 @@ function StudySetClient({ id }) {
                                             children: "Save word"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 493,
+                                            lineNumber: 631,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: ()=>setIsAddingWord(false),
-                                            className: "rounded-full bg-[#20293a] px-4 py-2 text-sm text-white",
+                                            className: "rounded-full bg-[#dbeaec] px-4 py-2 text-sm text-[#172b35]",
                                             children: "Cancel"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 494,
+                                            lineNumber: 638,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 492,
+                                    lineNumber: 630,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 485,
+                            lineNumber: 600,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -761,17 +768,17 @@ function StudySetClient({ id }) {
                             value: wordSearch,
                             onChange: (event)=>setWordSearch(event.target.value),
                             placeholder: "Search words, translations, or types",
-                            className: "mt-4 h-11 w-full rounded-none border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]",
+                            className: "mt-4 h-11 w-full rounded-xl border border-[#b8c8c9] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]",
                             "aria-label": "Search all words"
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 499,
+                            lineNumber: 649,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mt-4 overflow-hidden border border-[#c7d1ca] bg-[#fffaf0]",
+                            className: "mt-4 overflow-hidden rounded-xl border border-[#dce4bd] bg-white",
                             children: visibleWords.map((word, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: `flex items-center justify-between gap-4 px-5 py-3.5 ${i !== visibleWords.length - 1 ? "border-b border-[#d5ddd7]" : ""}`,
+                                    className: `flex items-center justify-between gap-4 px-3 py-2.5 ${i !== visibleWords.length - 1 ? "border-b border-[#d5ddd7]" : ""}`,
                                     children: editingWordId === word.id ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex w-full flex-col gap-3",
                                         children: [
@@ -782,7 +789,7 @@ function StudySetClient({ id }) {
                                                 "aria-label": "German word"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 520,
+                                                lineNumber: 670,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -792,7 +799,7 @@ function StudySetClient({ id }) {
                                                 "aria-label": "English translation"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 529,
+                                                lineNumber: 677,
                                                 columnNumber: 21
                                             }, this),
                                             draftPos === "noun" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -806,7 +813,7 @@ function StudySetClient({ id }) {
                                                         children: "der"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 545,
+                                                        lineNumber: 693,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -814,7 +821,7 @@ function StudySetClient({ id }) {
                                                         children: "die"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 546,
+                                                        lineNumber: 694,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -822,13 +829,13 @@ function StudySetClient({ id }) {
                                                         children: "das"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 547,
+                                                        lineNumber: 695,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 539,
+                                                lineNumber: 685,
                                                 columnNumber: 23
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -842,7 +849,7 @@ function StudySetClient({ id }) {
                                                         children: "Noun"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 557,
+                                                        lineNumber: 705,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -850,7 +857,7 @@ function StudySetClient({ id }) {
                                                         children: "Verb"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 558,
+                                                        lineNumber: 706,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -858,7 +865,7 @@ function StudySetClient({ id }) {
                                                         children: "Adjective"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 559,
+                                                        lineNumber: 707,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -866,7 +873,7 @@ function StudySetClient({ id }) {
                                                         children: "Adverb"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 560,
+                                                        lineNumber: 708,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -874,13 +881,13 @@ function StudySetClient({ id }) {
                                                         children: "Other"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 561,
+                                                        lineNumber: 709,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 551,
+                                                lineNumber: 699,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -889,33 +896,33 @@ function StudySetClient({ id }) {
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         type: "button",
                                                         onClick: ()=>saveEditing(word.id),
-                                                        className: "rounded-full bg-[#c6e940] px-4 py-1.5 text-xs font-semibold text-[#0e1a01]",
+                                                        className: "rounded-full bg-[#d8f56d] px-4 py-1.5 text-xs font-semibold text-[#172b35]",
                                                         children: "Save"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 565,
+                                                        lineNumber: 713,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         type: "button",
                                                         onClick: cancelEditing,
-                                                        className: "rounded-full bg-[#dbeaec] px-4 py-1.5 text-xs text-[#075a70]",
+                                                        className: "rounded-full bg-[#eef1ff] px-4 py-1.5 text-xs text-[#172b35]",
                                                         children: "Cancel"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 573,
+                                                        lineNumber: 721,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 564,
+                                                lineNumber: 712,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 519,
+                                        lineNumber: 669,
                                         columnNumber: 19
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: [
@@ -923,12 +930,12 @@ function StudySetClient({ id }) {
                                                 className: "flex items-start gap-2",
                                                 children: [
                                                     masteredIds.has(word.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#08758d]",
+                                                        className: "mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#263fd6]",
                                                         "aria-label": "Mastered"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 585,
-                                                        columnNumber: 52
+                                                        lineNumber: 734,
+                                                        columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         children: [
@@ -939,27 +946,27 @@ function StudySetClient({ id }) {
                                                                 children: displayGerman(word)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 587,
-                                                                columnNumber: 23
+                                                                lineNumber: 740,
+                                                                columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                 className: "font-body pt-1 text-xs italic text-[#5d6f74]",
                                                                 children: word.example
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 595,
-                                                                columnNumber: 23
+                                                                lineNumber: 748,
+                                                                columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 586,
+                                                        lineNumber: 739,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 584,
+                                                lineNumber: 732,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -971,11 +978,11 @@ function StudySetClient({ id }) {
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                 type: "button",
                                                                 onClick: ()=>startEditing(word),
-                                                                className: "font-body text-right text-sm text-[#075a70]",
+                                                                className: "font-body text-right text-sm text-black",
                                                                 children: word.english
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 603,
+                                                                lineNumber: 756,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -983,68 +990,68 @@ function StudySetClient({ id }) {
                                                                 children: word.pos
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 611,
+                                                                lineNumber: 764,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 602,
+                                                        lineNumber: 755,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         onClick: ()=>handleDeleteWord(word.id),
-                                                        className: "rounded-full p-1.5 text-[#5d6f74] hover:bg-[#fff0df] hover:text-[#e76548]",
+                                                        className: "rounded-full p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
                                                         "aria-label": `Delete ${word.german}`,
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TrashIcon"], {
                                                             className: "h-4 w-4"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                            lineNumber: 621,
+                                                            lineNumber: 774,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 616,
+                                                        lineNumber: 769,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 601,
+                                                lineNumber: 754,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 583,
+                                        lineNumber: 731,
                                         columnNumber: 19
                                     }, this)
                                 }, word.id, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 510,
+                                    lineNumber: 660,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 508,
+                            lineNumber: 658,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 470,
+                    lineNumber: 583,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-            lineNumber: 355,
+            lineNumber: 447,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-        lineNumber: 354,
+        lineNumber: 446,
         columnNumber: 5
     }, this);
 }
@@ -1604,12 +1611,12 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
         setIndex(Math.min(index, Math.max(remaining.length - 1, 0)));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col items-start pt-8",
+        className: "flex flex-col items-start pt-0",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "h-1.5 w-full overflow-hidden bg-[#d5ddd7]",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "h-full bg-[#08758d] transition-all duration-300",
+                    className: "h-full bg-[#263fd6] transition-all duration-300",
                     style: {
                         width: `${progress}%`
                     }
@@ -1627,9 +1634,9 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                 className: "w-full pt-4",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                     onClick: ()=>setFlipped((f)=>!f),
-                    className: "flex min-h-[256px] w-full flex-col items-center justify-center gap-3 border border-[#c7d1ca] bg-[#fffaf0] px-6 py-12 text-center shadow-[6px_6px_0_rgba(8,117,141,0.1)]",
+                    className: "flex min-h-[158px] w-full flex-col items-center justify-center gap-2 border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8 text-center shadow-none",
                     style: {
-                        backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.8), rgba(244,239,229,0.8))"
+                        backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.35), rgba(248,251,220,0.8))"
                     },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1641,7 +1648,7 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "font-heading text-4xl tracking-[-0.72px] text-[#172b35]",
+                            className: "font-heading text-2xl tracking-[-0.4px] text-[#172b35]",
                             children: flipped ? word.english : word.german
                         }, void 0, false, {
                             fileName: "[project]/src/components/modes/CardsMode.tsx",
@@ -1721,7 +1728,7 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                                     onCorrect(word.id);
                                     advance();
                                 },
-                                className: "flex h-9 items-center gap-2 rounded-full bg-[#08758d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#075a70]",
+                                className: "flex h-9 items-center gap-2 rounded-full bg-[#d8f56d] px-4 py-2 text-sm font-semibold text-[#172b35]",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["XIcon"], {}, void 0, false, {
                                         fileName: "[project]/src/components/modes/CardsMode.tsx",
@@ -1795,7 +1802,7 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
             index === total - 1 && onNextBatch && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 type: "button",
                 onClick: onNextBatch,
-                className: "mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]",
+                className: "mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]",
                 children: [
                     "Next batch ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
@@ -1854,7 +1861,7 @@ function buildTiles(words) {
         ]);
     return tiles.sort(()=>Math.random() - 0.5);
 }
-function MatchingMode({ words, onCorrect, onNextBatch }) {
+function MatchingMode({ words, onCorrect, onNextBatch, correctCount, totalWords }) {
     const [queue, setQueue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>shuffleWords(words));
     const [tiles, setTiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>buildTiles(words));
     const [selected, setSelected] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -1918,7 +1925,7 @@ function MatchingMode({ words, onCorrect, onNextBatch }) {
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col items-start pt-8",
+        className: "flex flex-col items-start pt-0",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex w-full justify-between text-sm text-[#5d6f74]",
@@ -1931,7 +1938,7 @@ function MatchingMode({ words, onCorrect, onNextBatch }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                        lineNumber: 101,
+                        lineNumber: 103,
                         columnNumber: 75
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1943,17 +1950,17 @@ function MatchingMode({ words, onCorrect, onNextBatch }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                        lineNumber: 101,
+                        lineNumber: 103,
                         columnNumber: 100
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                lineNumber: 101,
+                lineNumber: 103,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-4 grid w-full grid-cols-2 gap-3 sm:grid-cols-3",
+                className: "mt-4 grid w-full grid-cols-2 gap-2 sm:grid-cols-3",
                 children: tiles.map((tile)=>{
                     const isMatched = matched.has(tile.key);
                     const isSelected = selected?.key === tile.key;
@@ -1961,17 +1968,17 @@ function MatchingMode({ words, onCorrect, onNextBatch }) {
                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>handleClick(tile),
                         disabled: isMatched,
-                        className: `flex min-h-[96px] items-center justify-center rounded-[22px] border px-3 py-4 text-center text-sm font-medium transition-all ${isMatched ? "border-[#6f9f70] bg-[#78ae79] text-[#172b35]" : isWrong ? "border-red-500 bg-red-500/10 text-red-200" : isSelected ? "border-[#6f9f70] bg-[#dcebdc] text-[#172b35]" : "border-[#9bb8bc] bg-[#fffaf0] text-[#172b35] hover:-translate-y-0.5 hover:border-[#08758d]"}`,
+                        className: `flex min-h-[76px] items-center justify-center rounded-xl border px-3 py-3 text-center text-sm font-medium transition-all ${isMatched ? "border-[#b8d34c] bg-[#d8f56d] text-[#172b35]" : isWrong ? "border-[#c77d85] bg-[#c77d85]/25 text-[#54252b]" : isSelected ? "border-[#b8d34c] bg-[#d8f56d]/45 text-[#172b35]" : "border-[#b8c8c9] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"}`,
                         children: tile.label
                     }, tile.key, false, {
                         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                        lineNumber: 109,
+                        lineNumber: 111,
                         columnNumber: 13
                     }, this);
                 })
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                lineNumber: 103,
+                lineNumber: 105,
                 columnNumber: 7
             }, this),
             isDone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1982,43 +1989,42 @@ function MatchingMode({ words, onCorrect, onNextBatch }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CheckIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                                lineNumber: 131,
-                                columnNumber: 87
+                                lineNumber: 134,
+                                columnNumber: 13
                             }, this),
-                            " ",
-                            queue.length > ROUND_SIZE ? "Round complete" : "All words matched"
+                            queue.length > ROUND_SIZE ? "Round complete" : onNextBatch ? "Batch complete" : `Match complete: ${correctCount} out of ${totalWords} correct`
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                        lineNumber: 131,
+                        lineNumber: 133,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: reshuffle,
-                        className: "flex items-center gap-2 rounded-full bg-[#08758d] px-5 py-2 text-sm font-semibold text-white hover:bg-[#075a70]",
+                        className: "flex h-9 items-center gap-2 rounded-full bg-[#d8f56d] px-4 text-sm font-semibold text-[#172b35]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                                lineNumber: 136,
+                                lineNumber: 145,
                                 columnNumber: 13
                             }, this),
                             " Play again"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                        lineNumber: 132,
+                        lineNumber: 141,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/MatchingMode.tsx",
-                lineNumber: 130,
+                lineNumber: 132,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/modes/MatchingMode.tsx",
-        lineNumber: 100,
+        lineNumber: 102,
         columnNumber: 5
     }, this);
 }
@@ -2049,10 +2055,11 @@ function buildQuestion(words, index) {
         options
     };
 }
-function MultipleChoiceMode({ words, onCorrect, onNextBatch }) {
+function MultipleChoiceMode({ words, onCorrect, onNextBatch, previousCorrect, totalWords }) {
     const [index, setIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [selected, setSelected] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [score, setScore] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [finished, setFinished] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const question = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>buildQuestion(words, index), [
         words,
         index
@@ -2070,13 +2077,56 @@ function MultipleChoiceMode({ words, onCorrect, onNextBatch }) {
             onNextBatch();
             return;
         }
+        if (index === words.length - 1) {
+            setFinished(true);
+            return;
+        }
         setSelected(null);
-        setIndex((i)=>(i + 1) % words.length);
+        setIndex((i)=>i + 1);
     };
     const answered = selected !== null;
     const answeredCount = index + (answered ? 1 : 0);
+    if (finished) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex w-full flex-col items-center gap-3 pt-5 text-center",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex min-h-[158px] w-full flex-col items-center justify-center border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-body text-xs uppercase tracking-[2px] text-[#5d6f74]",
+                        children: "Quiz complete"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
+                        lineNumber: 62,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-heading mt-2 text-3xl font-semibold text-[#172b35]",
+                        children: [
+                            previousCorrect + score,
+                            " out of ",
+                            totalWords,
+                            " correct"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
+                        lineNumber: 63,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
+                lineNumber: 61,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
+            lineNumber: 60,
+            columnNumber: 7
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col items-start pt-8",
+        className: "flex flex-col items-start pt-0",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex w-full items-center justify-between text-xs text-[#5d6f74]",
@@ -2089,7 +2139,7 @@ function MultipleChoiceMode({ words, onCorrect, onNextBatch }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 54,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2101,63 +2151,63 @@ function MultipleChoiceMode({ words, onCorrect, onNextBatch }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 55,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                lineNumber: 53,
+                lineNumber: 70,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-3 h-1.5 w-full overflow-hidden bg-[#d5ddd7]",
+                className: "h-1.5 w-full overflow-hidden bg-[#d5ddd7]",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "h-full bg-[#08758d] transition-all",
+                    className: "h-full bg-[#263fd6] transition-all",
                     style: {
                         width: `${answeredCount / words.length * 100}%`
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                    lineNumber: 58,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                lineNumber: 57,
+                lineNumber: 74,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-6 flex min-h-[224px] w-full flex-col items-center justify-center border border-[#c7d1ca] bg-[#fffaf0] px-6 py-12 text-center shadow-[6px_6px_0_rgba(8,117,141,0.1)]",
+                className: "mt-4 flex min-h-[158px] w-full flex-col items-center justify-center gap-2 border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8 text-center shadow-none",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]",
                         children: "What does this mean?"
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 61,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "font-heading mt-3 text-4xl text-[#172b35]",
+                        className: "font-heading mt-1 text-2xl tracking-[-0.4px] text-[#172b35]",
                         children: question.correct.german
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 64,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, this),
                     answered && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: `mt-3 text-xs ${selected === question.correct.id ? "text-[#08758d]" : "text-[#b44735]"}`,
-                        children: selected === question.correct.id ? "Correct" : `Answer: ${question.correct.english}`
+                        className: `mt-3 text-xs font-semibold ${selected === question.correct.id ? "text-[#08758d]" : "text-[#7a3038]"}`,
+                        children: selected === question.correct.id ? "Correct" : "Incorrect"
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 67,
+                        lineNumber: 84,
                         columnNumber: 22
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                lineNumber: 60,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2167,57 +2217,57 @@ function MultipleChoiceMode({ words, onCorrect, onNextBatch }) {
                     const showState = selected !== null;
                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>handleSelect(opt.id),
-                        className: `flex min-h-[58px] items-center justify-between rounded-2xl border px-5 py-3 text-left text-sm transition-all ${showState && isCorrect ? "border-[#08758d] bg-[#e4f2f3] text-[#075a70]" : showState && opt.id === selected ? "border-[#e76548] bg-[#fff0df] text-[#a63d2d]" : showState ? "border-[#d5ddd7] bg-[#f0eee7] text-[#7a8789]" : "border-[#9bb8bc] bg-[#fffaf0] text-[#172b35] hover:-translate-y-0.5 hover:border-[#08758d]"}`,
+                        className: `flex min-h-[46px] items-center justify-between rounded-xl border px-4 py-3 text-left text-sm transition-all ${showState && isCorrect ? "border-[#6f9f70] bg-[#78ae79]/25 text-[#315500]" : showState && opt.id === selected ? "border-[#b84b55] bg-[#b84b55]/20 text-[#7a3038]" : showState ? "border-[#d5ddd7] bg-[#f0eee7] text-[#7a8789]" : "border-[#b8c8c9] bg-white text-[#172b35] hover:-translate-y-0.5 hover:border-[#263fd6]"}`,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: opt.english
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                                lineNumber: 82,
+                                lineNumber: 99,
                                 columnNumber: 15
                             }, this),
                             showState && isCorrect && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CheckIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                                lineNumber: 83,
+                                lineNumber: 100,
                                 columnNumber: 42
                             }, this),
                             showState && opt.id === selected && !isCorrect && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["XIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                                lineNumber: 84,
+                                lineNumber: 101,
                                 columnNumber: 66
                             }, this)
                         ]
                     }, opt.id, true, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 75,
+                        lineNumber: 92,
                         columnNumber: 13
                     }, this);
                 })
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                lineNumber: 70,
+                lineNumber: 87,
                 columnNumber: 7
             }, this),
             selected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: next,
-                className: "mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]",
+                className: "mt-5 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]",
                 children: [
                     "Next word ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
                         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                        lineNumber: 95,
+                        lineNumber: 112,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-                lineNumber: 91,
+                lineNumber: 108,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/modes/MultipleChoiceMode.tsx",
-        lineNumber: 52,
+        lineNumber: 69,
         columnNumber: 5
     }, this);
 }
@@ -2239,28 +2289,76 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2
 function normalize(text) {
     return text.trim().toLowerCase().replace(/^(the|der|die|das)\s+/, "");
 }
-function TypingMode({ words, onCorrect, onNextBatch }) {
+function TypingMode({ words, onCorrect, onNextBatch, previousCorrect, totalWords }) {
     const [index, setIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [input, setInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [result, setResult] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [score, setScore] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [finished, setFinished] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const word = words[index];
     const check = ()=>{
         if (!input.trim()) return;
         const isCorrect = normalize(input) === normalize(word.german);
         setResult(isCorrect ? "correct" : "incorrect");
-        if (isCorrect) onCorrect(word.id);
+        if (isCorrect) {
+            setScore((current)=>current + 1);
+            onCorrect(word.id);
+        }
     };
     const next = ()=>{
         if (index === words.length - 1 && onNextBatch) {
             onNextBatch();
             return;
         }
+        if (index === words.length - 1) {
+            setFinished(true);
+            return;
+        }
         setInput("");
         setResult(null);
         setIndex((i)=>(i + 1) % words.length);
     };
+    if (finished) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex w-full flex-col items-center gap-3 pt-5 text-center",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex min-h-[158px] w-full flex-col items-center justify-center border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-body text-xs uppercase tracking-[2px] text-[#5d6f74]",
+                        children: "Write complete"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/modes/TypingMode.tsx",
+                        lineNumber: 58,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-heading mt-2 text-3xl font-semibold text-[#172b35]",
+                        children: [
+                            previousCorrect + score,
+                            " out of ",
+                            totalWords,
+                            " correct"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/modes/TypingMode.tsx",
+                        lineNumber: 59,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/modes/TypingMode.tsx",
+                lineNumber: 57,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/modes/TypingMode.tsx",
+            lineNumber: 56,
+            columnNumber: 7
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col items-start pt-8",
+        className: "flex flex-col items-start pt-0",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex w-full justify-between text-xs text-[#9da5b5]",
@@ -2270,7 +2368,7 @@ function TypingMode({ words, onCorrect, onNextBatch }) {
                         children: "Write"
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 45,
+                        lineNumber: 67,
                         columnNumber: 75
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2281,55 +2379,55 @@ function TypingMode({ words, onCorrect, onNextBatch }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 45,
+                        lineNumber: 67,
                         columnNumber: 130
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 45,
+                lineNumber: 67,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-3 h-1.5 w-full overflow-hidden bg-[#d5ddd7]",
+                className: "h-1.5 w-full overflow-hidden bg-[#d5ddd7]",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "h-full bg-[#08758d]",
+                    className: "h-full bg-[#263fd6]",
                     style: {
                         width: `${(index + (result ? 1 : 0)) / words.length * 100}%`
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/components/modes/TypingMode.tsx",
-                    lineNumber: 46,
-                    columnNumber: 71
+                    lineNumber: 68,
+                    columnNumber: 66
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 46,
+                lineNumber: 68,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-6 flex min-h-[224px] w-full flex-col items-center justify-center border border-[#c7d1ca] bg-[#fffaf0] px-6 py-12 text-center shadow-[6px_6px_0_rgba(8,117,141,0.1)]",
+                className: "mt-4 flex min-h-[158px] w-full flex-col items-center justify-center gap-2 border border-[#dce4bd] bg-[#f8fbdc] px-6 py-8 text-center shadow-none",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-[#5d6f74]",
                         children: "Type the German word"
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 48,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "font-heading mt-3 text-4xl text-[#172b35]",
+                        className: "font-heading mt-1 text-2xl tracking-[-0.4px] text-black",
                         children: word.english
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 51,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 47,
+                lineNumber: 69,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2338,7 +2436,7 @@ function TypingMode({ words, onCorrect, onNextBatch }) {
                 children: "Your answer"
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 55,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2348,10 +2446,10 @@ function TypingMode({ words, onCorrect, onNextBatch }) {
                 onKeyDown: (e)=>e.key === "Enter" && (result ? next() : check()),
                 placeholder: "Type the German word",
                 disabled: result !== null,
-                className: "mt-2 h-12 w-full rounded-none border border-[#9bb8bc] bg-white px-5 text-base text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]"
+                className: "mt-2 h-10 w-full rounded-xl border border-[#b8c8c9] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]"
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 56,
+                lineNumber: 78,
                 columnNumber: 7
             }, this),
             result && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2359,52 +2457,52 @@ function TypingMode({ words, onCorrect, onNextBatch }) {
                 children: [
                     result === "correct" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CheckIcon"], {}, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 67,
+                        lineNumber: 89,
                         columnNumber: 262
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["XIcon"], {}, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 67,
+                        lineNumber: 89,
                         columnNumber: 278
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: result === "correct" ? "Correct!" : `Correct answer: ${word.german}`
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/TypingMode.tsx",
-                        lineNumber: 67,
+                        lineNumber: 89,
                         columnNumber: 288
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 67,
+                lineNumber: 89,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: result ? next : check,
-                className: "mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]",
+                className: "mt-4 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]",
                 children: result ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                     children: [
                         "Next word ",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
                             fileName: "[project]/src/components/modes/TypingMode.tsx",
-                            lineNumber: 77,
+                            lineNumber: 99,
                             columnNumber: 31
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/modes/TypingMode.tsx",
-                    lineNumber: 77,
+                    lineNumber: 99,
                     columnNumber: 19
                 }, this) : "Check answer"
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/TypingMode.tsx",
-                lineNumber: 73,
+                lineNumber: 95,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/modes/TypingMode.tsx",
-        lineNumber: 44,
+        lineNumber: 66,
         columnNumber: 5
     }, this);
 }

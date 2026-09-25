@@ -7,10 +7,21 @@ import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
 import { AUSDRUECKE_SET_ID } from "@/lib/ausdrueckeData";
 
 export function generateStaticParams() {
-  return [{ id: ARBEITSRAEUME_SET_ID }, { id: UMZUG_SET_ID }, { id: ADILS_JOB_SET_ID }, { id: PROBLEM_SET_ID }, { id: EMAIL_HAUSVERWALTUNG_SET_ID }, { id: AUSDRUECKE_SET_ID }];
+  return [
+    { id: ARBEITSRAEUME_SET_ID },
+    { id: UMZUG_SET_ID },
+    { id: ADILS_JOB_SET_ID },
+    { id: PROBLEM_SET_ID },
+    { id: EMAIL_HAUSVERWALTUNG_SET_ID },
+    { id: AUSDRUECKE_SET_ID },
+  ];
 }
 
-export default async function StudySetPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function StudySetPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   return <StudySetClient id={id} />;
 }

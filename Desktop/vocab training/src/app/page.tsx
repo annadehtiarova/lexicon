@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import UploadCard from "@/components/UploadCard";
 import SetsList from "@/components/SetsList";
-import { addSet, deleteSet, loadBuiltInProgress, loadSets, updateSetName } from "@/lib/storage";
+import { addSet, deleteSet, loadSets, updateSetName } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
 import { StudySet } from "@/lib/types";
+import { loadBuiltInProgress } from "@/lib/storage";
 import { CameraIcon } from "@/components/icons";
 import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
 import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
@@ -19,6 +20,7 @@ const BUILT_IN_SETS = [getArbeitsraeumeSet(), getUmzugSet(), getAdilsJobSet(), g
 export default function Home() {
   const [sets, setSets] = useState<StudySet[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
+  const [showUpload, setShowUpload] = useState(false);
 
   useEffect(() => {
     const builtInIds = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID, AUSDRUECKE_SET_ID]);
@@ -30,17 +32,17 @@ export default function Home() {
   }, []);
 
   const handleCreateSet = async (files: File[], name: string) => {
-    try {
-      const { words } = await extractVocabFromImages(files);
-      const newSet: StudySet = {
-        id: crypto.randomUUID(), name, createdAt: Date.now(), sourceImageCount: files.length,
-        words: words.map((w) => ({ id: crypto.randomUUID(), ...w })), masteredWordIds: [],
-      };
-      setSets(addSet(newSet));
-      setNotice(null);
-    } catch (error) {
-      setNotice(error instanceof Error ? error.message : "Extraction failed");
-    }
+    const { words } = await extractVocabFromImages(files);
+    const newSet: StudySet = {
+      id: crypto.randomUUID(),
+      name,
+      createdAt: Date.now(),
+      sourceImageCount: files.length,
+      words: words.map((w) => ({ id: crypto.randomUUID(), ...w })),
+      masteredWordIds: [],
+    };
+    setSets(addSet(newSet));
+    setNotice(null);
   };
 
   const handleDelete = (id: string) => {
@@ -53,37 +55,27 @@ export default function Home() {
 
   return (
     <main
-      className="relative flex flex-1 flex-col items-center px-4 pb-24 pt-12"
-      style={{
-        backgroundImage:
-          "linear-gradient(180deg, rgba(8,117,141,0.13), transparent 38%), linear-gradient(90deg, rgba(231,101,72,0.06), transparent 50%)",
-      }}
+      className="relative flex flex-1 flex-col items-center bg-white px-4 pb-16 pt-8"
     >
-      <div className="flex flex-col items-center gap-6 text-center">
-        <span className="flex items-center gap-2 rounded-none border-l-4 border-[#e76548] bg-[#fffaf0] px-4 py-1.5 text-xs font-semibold tracking-[2.4px] text-[#08758d] shadow-[4px_4px_0_rgba(231,101,72,0.16)]">
-          <CameraIcon className="h-3.5 w-3.5" /> PHOTO TO FLASHCARDS
-        </span>
-        <h1 className="font-heading max-w-4xl text-5xl leading-[1.05] tracking-[-1.2px] text-[#172b35] sm:text-6xl">
-          Learn German words{" "}
-          <span className="text-[#e76548]">
-            straight off the page
-          </span>
-        </h1>
-        <p className="font-body max-w-xl text-base text-[#5d6f74]">
-          Photograph a textbook page, a menu or a street sign. Lexikon pulls out
-          the German vocabulary, adds English translations, and builds four ways
-          to practise it.
-        </p>
+      <div className="flex flex-col items-center gap-4 text-center">
+        <h1 className="font-heading text-4xl leading-tight tracking-[-1px] text-[#172b35]">Learn B2 Beruf Deutsch Vocabulary</h1>
+        <p className="font-body max-w-[460px] text-[13px] leading-5 text-[#60747a]">Practice German with flashcards, quizzes, and interactive exercises. Build your vocabulary and reinforce what you learn through different ways to practise.</p>
       </div>
 
-      <div className="mt-10 flex w-full flex-col items-center gap-10">
-        <UploadCard onCreateSet={handleCreateSet} />
-        {notice && (
-          <p className="max-w-lg rounded-2xl border border-[#3a2f1a] bg-[#241c0f] px-4 py-3 text-center text-sm text-amber-300">
-            {notice}
-          </p>
+      <div className="mt-7 flex w-full flex-col items-center gap-4">
+        {process.env.NODE_ENV !== "production" && showUpload && (
+          <div className="w-full max-w-[568px]">
+            <UploadCard onCreateSet={handleCreateSet} />
+            {notice && <p className="mt-3 rounded-xl border border-[#b9c9eb] bg-[#eef1ff] px-4 py-3 text-center text-sm text-[#172b35]">{notice}</p>}
+          </div>
         )}
-        <SetsList sets={sets} onDelete={handleDelete} onRename={handleRename} />
+        <SetsList
+          sets={sets}
+          onDelete={handleDelete}
+          onRename={handleRename}
+          onToggleUpload={process.env.NODE_ENV !== "production" ? () => setShowUpload((current) => !current) : undefined}
+          uploadOpen={showUpload}
+        />
       </div>
     </main>
   );

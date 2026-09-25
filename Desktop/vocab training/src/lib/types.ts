@@ -3,7 +3,6 @@ export interface VocabWord {
   german: string;
   english: string;
   example: string;
-  exampleEnglish?: string;
   pos: string;
 }
 

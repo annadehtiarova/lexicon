@@ -112,7 +112,7 @@ async function StudySetPage({ params }) {
         id: id
     }, void 0, false, {
         fileName: "[project]/src/app/sets/[id]/page.tsx",
-        lineNumber: 15,
+        lineNumber: 26,
         columnNumber: 10
     }, this);
 }

@@ -6,13 +6,13 @@ __turbopack_context__.s([
     "default",
     ()=>Home
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UploadCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/UploadCard.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SetsList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/SetsList.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/storage.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/extractVocab.ts [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/icons.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$arbeitsraeumeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/arbeitsraeumeData.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$umzugData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/umzugData.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$adilsJobData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/adilsJobData.ts [app-client] (ecmascript)");
@@ -46,6 +46,7 @@ function Home() {
     _s();
     const [sets, setSets] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [notice, setNotice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [showUpload, setShowUpload] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
             const builtInIds = new Set([
@@ -71,24 +72,20 @@ function Home() {
         }
     }["Home.useEffect"], []);
     const handleCreateSet = async (files, name)=>{
-        try {
-            const { words } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
-            const newSet = {
-                id: crypto.randomUUID(),
-                name,
-                createdAt: Date.now(),
-                sourceImageCount: files.length,
-                words: words.map((w)=>({
-                        id: crypto.randomUUID(),
-                        ...w
-                    })),
-                masteredWordIds: []
-            };
-            setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet));
-            setNotice(null);
-        } catch (error) {
-            setNotice(error instanceof Error ? error.message : "Extraction failed");
-        }
+        const { words } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
+        const newSet = {
+            id: crypto.randomUUID(),
+            name,
+            createdAt: Date.now(),
+            sourceImageCount: files.length,
+            words: words.map((w)=>({
+                    id: crypto.randomUUID(),
+                    ...w
+                })),
+            masteredWordIds: []
+        };
+        setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet));
+        setNotice(null);
     };
     const handleDelete = (id)=>{
         setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteSet"])(id));
@@ -97,53 +94,66 @@ function Home() {
         setSets((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateSetName"])(id, name));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "relative flex flex-1 flex-col items-center px-4 pb-24 pt-12",
-        style: {
-            backgroundImage: "linear-gradient(180deg, rgba(8,117,141,0.13), transparent 38%), linear-gradient(90deg, rgba(231,101,72,0.06), transparent 50%)"
-        },
+        className: "relative flex flex-1 flex-col items-center bg-white px-4 pb-16 pt-8",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex flex-col items-center gap-6 text-center",
+                className: "flex flex-col items-center gap-4 text-center",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: "flex items-center gap-2 rounded-none border-l-4 border-[#e76548] bg-[#fffaf0] px-4 py-1.5 text-xs font-semibold tracking-[2.4px] text-[#08758d] shadow-[4px_4px_0_rgba(231,101,72,0.16)]",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CameraIcon"], {
-                                className: "h-3.5 w-3.5"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 64,
-                                columnNumber: 11
-                            }, this),
-                            " PHOTO TO FLASHCARDS"
-                        ]
-                    }, void 0, true, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        className: "font-heading text-4xl leading-tight tracking-[-1px] text-[#172b35]",
+                        children: "Learn B2 Beruf Deutsch Vocabulary"
+                    }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 63,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "font-heading max-w-4xl text-5xl leading-[1.05] tracking-[-1.2px] text-[#172b35] sm:text-6xl",
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-body max-w-[460px] text-[13px] leading-5 text-[#60747a]",
+                        children: "Practice German with flashcards, quizzes, and interactive exercises. Build your vocabulary and reinforce what you learn through different ways to practise."
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/page.tsx",
+                        lineNumber: 62,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/page.tsx",
+                lineNumber: 60,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "mt-7 flex w-full flex-col items-center gap-4",
+                children: [
+                    ("TURBOPACK compile-time value", "development") !== "production" && showUpload && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "w-full max-w-[568px]",
                         children: [
-                            "Learn German words",
-                            " ",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-[#e76548]",
-                                children: "straight off the page"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UploadCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                onCreateSet: handleCreateSet
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
                                 lineNumber: 68,
-                                columnNumber: 11
+                                columnNumber: 13
+                            }, this),
+                            notice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "mt-3 rounded-xl border border-[#b9c9eb] bg-[#eef1ff] px-4 py-3 text-center text-sm text-[#172b35]",
+                                children: notice
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/page.tsx",
+                                lineNumber: 69,
+                                columnNumber: 24
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 66,
-                        columnNumber: 9
+                        lineNumber: 67,
+                        columnNumber: 11
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "font-body max-w-xl text-base text-[#5d6f74]",
-                        children: "Photograph a textbook page, a menu or a street sign. Lexikon pulls out the German vocabulary, adds English translations, and builds four ways to practise it."
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SetsList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        sets: sets,
+                        onDelete: handleDelete,
+                        onRename: handleRename,
+                        onToggleUpload: ("TURBOPACK compile-time truthy", 1) ? ()=>setShowUpload((current)=>!current) : "TURBOPACK unreachable",
+                        uploadOpen: showUpload
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
                         lineNumber: 72,
@@ -152,50 +162,17 @@ function Home() {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 62,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-10 flex w-full flex-col items-center gap-10",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UploadCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        onCreateSet: handleCreateSet
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 80,
-                        columnNumber: 9
-                    }, this),
-                    notice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "max-w-lg rounded-2xl border border-[#3a2f1a] bg-[#241c0f] px-4 py-3 text-center text-sm text-amber-300",
-                        children: notice
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 82,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SetsList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        sets: sets,
-                        onDelete: handleDelete,
-                        onRename: handleRename
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 86,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/page.tsx",
-                lineNumber: 79,
+                lineNumber: 65,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 55,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 }
-_s(Home, "6jrDXgDucWoGK7r1QTq/PW+FxwA=");
+_s(Home, "n9r4RHpwa0jWxVjaiVeujna2tHw=");
 _c = Home;
 var _c;
 __turbopack_context__.k.register(_c, "Home");
@@ -241,7 +218,7 @@ const BUILT_IN_SET_IDS = new Set([
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$emailHausverwaltungData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EMAIL_HAUSVERWALTUNG_SET_ID"],
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$ausdrueckeData$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AUSDRUECKE_SET_ID"]
 ]);
-function SetsList({ sets, onDelete, onRename }) {
+function SetsList({ sets, onDelete, onRename, onToggleUpload, uploadOpen = false }) {
     _s();
     const [editingId, setEditingId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [draftName, setDraftName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -258,7 +235,7 @@ function SetsList({ sets, onDelete, onRename }) {
         setEditingId(null);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "w-full max-w-3xl border-t-4 border-[#e76548] pt-5",
+        className: "w-full max-w-[568px] border-t-[3px] border-[#c7c7c7] pt-3.5",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex items-center justify-between",
@@ -267,38 +244,56 @@ function SetsList({ sets, onDelete, onRename }) {
                         className: "flex items-center gap-2",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LayersIcon"], {
-                                className: "h-5 w-5 text-[#08758d]"
+                                className: "h-3.5 w-3.5 text-[#d8f56d]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 46,
+                                lineNumber: 54,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "font-heading text-xl text-[#172b35]",
+                                className: "font-heading text-[15px] text-[#172b35]",
                                 children: "Your sets"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 47,
+                                lineNumber: 55,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 45,
+                        lineNumber: 53,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center gap-3",
                         children: [
+                            onToggleUpload && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button",
+                                onClick: onToggleUpload,
+                                "aria-label": uploadOpen ? "Close upload" : "Upload a set",
+                                title: uploadOpen ? "Close upload" : "Upload a set",
+                                className: "flex h-7 w-7 items-center justify-center rounded-full text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CameraIcon"], {
+                                    className: "h-4 w-4"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/SetsList.tsx",
+                                    lineNumber: 58,
+                                    columnNumber: 309
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SetsList.tsx",
+                                lineNumber: 58,
+                                columnNumber: 30
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-body text-sm text-[#5d6f74]",
+                                className: "font-body text-[11px] text-[#5d6f74]",
                                 children: [
                                     visibleSets.length,
                                     " sets"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 50,
+                                lineNumber: 59,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -309,7 +304,7 @@ function SetsList({ sets, onDelete, onRename }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             value: selectedChapter,
                                             onChange: (event)=>setSelectedChapter(event.target.value),
-                                            className: "h-9 w-[120px] appearance-none rounded-full border border-[#08758d] bg-white px-4 pr-7 text-sm text-[#075a70] outline-none focus:border-[#e76548]",
+                                            className: "h-9 w-[120px] appearance-none rounded-full border border-[#172b35] bg-white pl-4 pr-9 text-sm text-[#172b35] outline-none",
                                             "aria-label": "Filter by chapter",
                                             children: Array.from({
                                                 length: 16
@@ -324,81 +319,81 @@ function SetsList({ sets, onDelete, onRename }) {
                                                     ]
                                                 }, chapter, true, {
                                                     fileName: "[project]/src/components/SetsList.tsx",
-                                                    lineNumber: 61,
+                                                    lineNumber: 65,
                                                     columnNumber: 26
                                                 }, this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 53,
+                                            lineNumber: 62,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChevronDownIcon"], {
-                                            className: "pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#075a70]"
+                                            className: "pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#172b35]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 64,
+                                            lineNumber: 68,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 52,
+                                    lineNumber: 61,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 51,
+                                lineNumber: 60,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 49,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 44,
+                lineNumber: 52,
                 columnNumber: 7
             }, this),
             visibleSets.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-5 border border-dashed border-[#9bb8bc] bg-[#fffaf0] py-10 text-center text-[#5d6f74]",
+                className: "mt-5 border border-dashed border-[#9bb8bc] bg-white py-10 text-center text-[#5d6f74]",
                 children: "No sets in this chapter yet."
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 71,
+                lineNumber: 75,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                className: "mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2",
+                className: "mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2",
                 children: visibleSets.map((set)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                        className: "border border-[#c7d1ca] bg-[#fffaf0] p-5 shadow-[5px_5px_0_rgba(8,117,141,0.1)]",
+                        className: "min-h-[150px] border border-[#dce4bd] bg-[#F7FAE7] p-5 shadow-[4px_4px_0_#e5ecec]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-start justify-between gap-2",
                                 children: BUILT_IN_SET_IDS.has(set.id) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "font-heading text-lg text-[#172b35]",
+                                            className: "font-heading text-lg font-semibold text-[#172b35]",
                                             children: set.name
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 81,
+                                            lineNumber: 85,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "pt-1 text-xs font-semibold uppercase tracking-[1px] text-[#08758d]",
+                                            className: "pt-1 text-[9px] font-semibold uppercase tracking-[0.7px] text-[#172b35]",
                                             children: "Built-in set"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 82,
+                                            lineNumber: 86,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 80,
+                                    lineNumber: 84,
                                     columnNumber: 19
                                 }, this) : editingId === set.id ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex min-w-0 flex-1 gap-2",
@@ -411,27 +406,27 @@ function SetsList({ sets, onDelete, onRename }) {
                                                 if (event.key === "Enter") saveName(set.id);
                                                 if (event.key === "Escape") setEditingId(null);
                                             },
-                                            className: "h-9 min-w-0 flex-1 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]",
+                                            className: "h-9 min-w-0 flex-1 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]",
                                             "aria-label": "Study set name"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 86,
+                                            lineNumber: 90,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: ()=>saveName(set.id),
-                                            className: "bg-[#e76548] px-3 text-xs font-semibold text-white",
+                                            className: "bg-[#263fd6] px-3 text-xs font-semibold text-white",
                                             children: "Save"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 87,
+                                            lineNumber: 91,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 85,
+                                    lineNumber: 89,
                                     columnNumber: 19
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
@@ -440,32 +435,32 @@ function SetsList({ sets, onDelete, onRename }) {
                                     children: set.name
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 90,
+                                    lineNumber: 94,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 78,
+                                lineNumber: 82,
                                 columnNumber: 15
                             }, this),
                             !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>onDelete(set.id),
-                                className: "shrink-0 p-1.5 text-[#5d6f74] hover:text-[#e76548]",
+                                className: "shrink-0 p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]",
                                 "aria-label": "Delete set",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TrashIcon"], {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 93,
-                                    columnNumber: 179
+                                    lineNumber: 97,
+                                    columnNumber: 200
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 93,
-                                columnNumber: 51
+                                lineNumber: 97,
+                                columnNumber: 53
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-body pt-2 text-sm text-[#5d6f74]",
+                                className: "font-body pt-1.5 text-[11px] text-[#5d6f74]",
                                 children: [
                                     set.words.length,
                                     " words · ",
@@ -474,42 +469,42 @@ function SetsList({ sets, onDelete, onRename }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 94,
-                                columnNumber: 15
+                                lineNumber: 98,
+                                columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 href: BUILT_IN_SET_IDS.has(set.id) ? `/sets/${set.id}/` : `${__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_BASE_PATH ?? ""}/study/?set=${encodeURIComponent(set.id)}`,
-                                className: "mt-4 inline-flex h-9 items-center gap-2 rounded-full border border-[#08758d] bg-[#08758d] px-4 text-sm font-medium text-white hover:bg-[#075a70]",
+                                className: "mt-3 inline-flex h-7 items-center gap-1.5 rounded-full bg-[#d8f56d] px-3 text-[11px] font-medium text-[#172b35]",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BookOpenIcon"], {
-                                        className: "h-4 w-4"
+                                        className: "h-3 w-3"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 95,
-                                        columnNumber: 323
+                                        lineNumber: 99,
+                                        columnNumber: 292
                                     }, this),
                                     " Study"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 95,
-                                columnNumber: 15
+                                lineNumber: 99,
+                                columnNumber: 17
                             }, this)
                         ]
                     }, set.id, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 77,
+                        lineNumber: 81,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 75,
+                lineNumber: 79,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/SetsList.tsx",
-        lineNumber: 43,
+        lineNumber: 51,
         columnNumber: 5
     }, this);
 }
@@ -3062,237 +3057,31 @@ __turbopack_context__.s([
     "extractVocabFromImages",
     ()=>extractVocabFromImages
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tesseract$2e$js$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/tesseract.js/src/index.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$huggingface$2f$transformers$2f$dist$2f$transformers$2e$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@huggingface/transformers/dist/transformers.web.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/wordBank.ts [app-client] (ecmascript)");
 ;
-;
-;
-async function prepareImage(file) {
-    const bitmap = await createImageBitmap(file);
-    const maxDimension = 2400;
-    const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
-    if (scale === 1) {
-        bitmap.close();
-        return file;
-    }
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(bitmap.width * scale);
-    canvas.height = Math.round(bitmap.height * scale);
-    const context = canvas.getContext("2d");
-    if (!context) {
-        bitmap.close();
-        return file;
-    }
-    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    bitmap.close();
-    const blob = await new Promise((resolve)=>canvas.toBlob(resolve, "image/jpeg", 0.85));
-    return blob ? new File([
-        blob
-    ], `${file.name}.jpg`, {
-        type: "image/jpeg"
-    }) : file;
-}
-function normalizeWord(word) {
-    return word.toLowerCase().trim().replace(/[.,;:!?()[\]{}"„“”]/g, "").replace(/\s+/g, " ");
-}
-function normalizeGermanForm(word) {
-    return normalizeWord(word).replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
-}
-function b2Candidates(word) {
-    const normalized = normalizeGermanForm(word);
-    const candidates = new Set([
-        normalized
-    ]);
-    const endings = [
-        "ern",
-        "eln",
-        "ieren",
-        "est",
-        "en",
-        "er",
-        "es",
-        "em",
-        "et",
-        "st",
-        "te",
-        "ten",
-        "test",
-        "t",
-        "e",
-        "n",
-        "s"
-    ];
-    for (const ending of endings){
-        if (normalized.endsWith(ending) && normalized.length - ending.length >= 3) {
-            candidates.add(normalized.slice(0, -ending.length) + "en");
-            candidates.add(normalized.slice(0, -ending.length));
-        }
-    }
-    if (normalized.endsWith("ungen")) candidates.add(`${normalized.slice(0, -5)}ung`);
-    if (normalized.endsWith("en")) candidates.add(normalized.slice(0, -2));
-    return [
-        ...candidates
-    ];
-}
-function removeArticle(word) {
-    return word.replace(/^(der|die|das|den|dem|des|ein|eine|einer|einem|einen)\s+/i, "").trim();
-}
-function wordStem(word) {
-    return removeArticle(word).toLowerCase();
-}
-function buildKnownForms() {
-    const forms = new Map();
-    for (const entry of __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WORD_BANK"]){
-        const base = wordStem(entry.german);
-        forms.set(base, entry);
-        if (entry.pos === "verb") {
-            const stem = base.replace(/(en|ern|eln|ieren)$/, "");
-            [
-                "e",
-                "st",
-                "t",
-                "en",
-                "te",
-                "test",
-                "ten",
-                "end",
-                "endest",
-                "endete",
-                "iert",
-                "ierte"
-            ].forEach((ending)=>{
-                forms.set(`${stem}${ending}`, entry);
-            });
-        }
-        if (entry.pos === "noun") {
-            const pluralForms = [
-                `${base}e`,
-                `${base}en`,
-                `${base}er`,
-                `${base}s`,
-                base.replace(/e$/, "en"),
-                base.replace(/ung$/, "ungen")
-            ];
-            pluralForms.forEach((form)=>forms.set(form, entry));
-        }
-    }
-    return forms;
-}
-const GERMAN_FUNCTION_WORDS = new Set("aber als am an auch auf aus bei bin bis das dass dein dem den der des die du ein eine einem einen einer eines er es für gegen haben hat ich im in ist ja kein mit nach nicht nur oder sie sind und vom von war was wir zu zum zur".split(" "));
-const COMMON_PERSON_NAMES = new Set("anna andreas anton ben benjamin carla carmen christian christina daniel david denise dieter dirk dominik elena elias emil emma eric erika felix finn florian franz friedrich gabriel georg gregor hans hannah heike helena henrik henriette holger ines ingrid jan jana jasmin johann johanna jonas josef julia julian justin karl karla katharina katja klaus konrad laura lea lena leon leonard lia linda lisa lorenz lukas lukas marc marcel maria marie mario markus martin matthias max maximilian maya michael miriam monika nadine niklas nico nina noah norbert oliver oskar otto paul paula peter philipp sabine sara sarah simon sofia sophie stefan stefanie susanne theo theresa thomas tim tina tobias tom ulrich ursula viktor walter wilhelm wilma wolfgang yvonne zara zoe");
-const EXERCISE_NOISE_WORDS = new Set("aufgabe aufgaben übung übungen frage fragen antwort antworten lösung lösungen beispiel beispiele text texte satz sätze lücke lücken wort wörter wortsatz ordne ordnen markiere markieren ergänze ergänzen vervollständige vervollständigen verbinde verbinden kreuze kreuzen wähle wählen schreibe schreiben lies lesen höre hören sprich sprechen wiederhole wiederholen diskutiert diskutieren arbeitsblatt nummer nummern punkt punkte teil teile abschnitt abschnitte erklärung erklärungen information informationen hinweis hinweise richtig falsch möglich möglichkeiten singular plural singularform pluralform einzahl mehrzahl männlich weiblich sächlich maskulin feminin neutrum genitiv dativ akkusativ nominativ artikel artikeln pronomen präposition präpositionen verb verben nomen substantiv substantive adjektiv adjektive adverb adverbien grammatik grammatische grammatikalisch konjugation konjugiere deklination beispielsatz bedeutung bedeutungen übersetzung übersetzungen wortart wortarten vokabel vokabeln".split(" "));
-function classifyUnknownWord(word) {
-    const lower = word.toLowerCase();
-    if (GERMAN_FUNCTION_WORDS.has(lower) || lower.length < 3) return null;
-    if (COMMON_PERSON_NAMES.has(lower)) return null;
-    if (EXERCISE_NOISE_WORDS.has(lower)) return null;
-    // German infinitives are safest to recognize by their infinitive endings.
-    if (/(en|ern|eln|ieren)$/.test(lower)) return "verb";
-    // Common productive adjective/adverb endings.
-    if (/(ig|lich|isch|bar|sam|los|voll|weise)$/.test(lower)) return "adjective";
-    if (/(weise|wärts|her|hin|mal|so|sehr|heute|morgen|gestern)$/.test(lower)) {
-        return "adverb";
-    }
-    // Capitalized words in German text are noun candidates. Sentence-initial
-    // words remain excluded unless the OCR word has a recognizable noun ending.
-    if (/^[A-ZÄÖÜ]/.test(word) || /(ung|heit|keit|schaft|tion|tät|ik|ei)$/.test(lower)) {
-        return "noun";
-    }
-    return null;
-}
-let translatorPromise = null;
-function getTranslator() {
-    translatorPromise ??= (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$huggingface$2f$transformers$2f$dist$2f$transformers$2e$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pipeline"])("translation", "Xenova/opus-mt-de-en");
-    return translatorPromise;
-}
-async function findVocabulary(text) {
-    const knownTranslations = new Map();
-    for (const entry of __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WORD_BANK"]){
-        knownTranslations.set(normalizeWord(entry.german), entry);
-        knownTranslations.set(normalizeWord(removeArticle(entry.german)), entry);
-    }
-    const matches = [];
-    const seen = new Set();
-    const knownForms = buildKnownForms();
-    for (const rawWord of text.match(/[\p{L}]+(?:['’.-][\p{L}]+)*/gu) ?? []){
-        const key = normalizeWord(rawWord);
-        if (seen.has(key)) continue;
-        seen.add(key);
-        const entry = knownTranslations.get(key) ?? knownForms.get(key);
-        if (EXERCISE_NOISE_WORDS.has(key)) continue;
-        const knownPos = entry?.pos;
-        const pos = knownPos === "noun" ? "noun" : knownPos === "verb" ? "verb" : knownPos === "adjective" ? "adjective" : knownPos === "adverb" ? "adverb" : classifyUnknownWord(rawWord);
-        if (!pos) continue;
-        matches.push({
-            german: entry?.german ?? rawWord,
-            english: entry?.english ?? "",
-            pos,
-            example: entry?.example ?? ""
-        });
-    }
-    const unknownWords = matches.filter((word)=>!word.english);
-    if (unknownWords.length === 0) return matches;
-    const translator = await getTranslator();
-    const translations = await translator(unknownWords.map((word)=>word.german), {
-        max_new_tokens: 32,
-        num_beams: 4,
-        do_sample: false
-    });
-    const output = Array.isArray(translations) ? translations : [
-        translations
-    ];
-    let translationIndex = 0;
-    return matches.map((word)=>{
-        if (word.english) return word;
-        const translation = output[translationIndex++]?.translation_text;
-        return {
-            ...word,
-            english: typeof translation === "string" ? translation.toLowerCase() : ""
-        };
-    });
-}
 async function extractVocabFromImages(files) {
-    if (files.length === 0) {
-        throw new Error("No images selected");
-    }
-    const worker = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tesseract$2e$js$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createWorker"])("deu");
     try {
-        await worker.setParameters({
-            preserve_interword_spaces: "1"
+        const formData = new FormData();
+        files.forEach((file)=>formData.append("images", file));
+        const res = await fetch("/api/extract", {
+            method: "POST",
+            body: formData
         });
-        const preparedFiles = await Promise.all(files.map(prepareImage));
-        const recognizedText = [];
-        for (const file of preparedFiles){
-            const result = await worker.recognize(file);
-            const pageData = result.data;
-            const confidentWords = pageData.words?.filter((word)=>word.confidence >= 25).map((word)=>word.text).filter(Boolean);
-            recognizedText.push(confidentWords?.length ? confidentWords.join(" ") : result.data.text);
-            await worker.setParameters({
-                tessedit_pageseg_mode: 11
-            });
-            const sparseResult = await worker.recognize(file);
-            await worker.setParameters({
-                tessedit_pageseg_mode: 6
-            });
-            if (sparseResult.data.text.trim()) {
-                recognizedText.push(sparseResult.data.text);
-            }
-        }
-        const text = recognizedText.join("\n");
-        if (!text.trim()) {
-            throw new Error("No text could be detected in the image");
-        }
-        const words = await findVocabulary(text);
-        if (words.length === 0) {
-            throw new Error("No vocabulary words from the image could be recognized");
+        const data = await res.json();
+        if (!res.ok || !Array.isArray(data.words) || data.words.length === 0) {
+            throw new Error(data.error ?? "Extraction failed");
         }
         return {
-            topic: "Extracted vocabulary",
-            words
+            topic: data.topic ?? "",
+            words: data.words,
+            usedFallback: false
         };
-    } finally{
-        await worker.terminate();
+    } catch  {
+        return {
+            topic: "",
+            words: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mockExtractVocab"])(),
+            usedFallback: true
+        };
     }
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {

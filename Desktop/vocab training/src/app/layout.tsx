@@ -23,7 +23,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Lexikon — Photo to Flashcards",
+  title: "Lenn — Learn B2 Beruf Deutsch",
   description:
     "Photograph a textbook page, a menu or a street sign. Lexikon pulls out the German vocabulary, adds English translations, and builds ways to practise it.",
 };
@@ -32,12 +32,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} h-full dark antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#dbe4df] text-[#172b35]">
-        <header className="flex h-12 items-center justify-between bg-[#08758d] px-5 text-white shadow-[0_4px_0_rgba(7,90,112,0.18)]">
-          <span className="font-heading text-sm font-semibold tracking-[1.6px]">LEXIKON</span>
-          <span className="font-body text-xs uppercase tracking-[1.8px] text-[#b8e1e6]">Deutsch · B2</span>
+      <body className="flex min-h-full flex-col bg-white text-[#172b35]">
+        <header className="flex h-10 items-center justify-between bg-[#263fd6] px-4 text-white">
+          <span className="font-heading text-[11px] font-semibold tracking-[1.5px]">Lenn</span>
+          <span className="font-body text-[10px] uppercase tracking-[1.8px] text-[#dbeaec]">Deutsch · B2</span>
         </header>
         {children}
       </body>
