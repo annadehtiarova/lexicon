@@ -73,7 +73,7 @@ export default function MatchingMode({ words }: MatchingModeProps) {
 
   return (
     <div className="flex flex-col items-start pt-8">
-      <div className="flex w-full justify-between text-sm text-[#9da5b5]"><span>◷ {seconds}s</span><span>{matched.size / 2} / {tiles.length / 2} pairs</span></div>
+      <div className="flex w-full justify-between text-sm text-[#5d6f74]"><span>◷ {seconds}s</span><span>{matched.size / 2} / {tiles.length / 2} pairs</span></div>
 
       <div className="mt-4 grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
         {tiles.map((tile) => {
@@ -92,7 +92,7 @@ export default function MatchingMode({ words }: MatchingModeProps) {
                     ? "border-red-500 bg-red-500/10 text-red-200"
                     : isSelected
                       ? "border-[#c6e940] bg-[rgba(198,233,64,0.1)] text-[#e8f9a8]"
-                      : "border-[#2b3342] bg-[rgba(17,24,39,0.78)] text-[#e5e9f0] hover:-translate-y-0.5 hover:border-[#596477]"
+                      : "border-[#9bb8bc] bg-[#fffaf0] text-[#172b35] hover:-translate-y-0.5 hover:border-[#08758d]"
               }`}
             >
               {tile.label}
@@ -106,7 +106,7 @@ export default function MatchingMode({ words }: MatchingModeProps) {
           <p className="flex items-center gap-2 text-sm text-[#dff58a]"><CheckIcon /> All pairs matched in {seconds}s</p>
           <button
             onClick={reshuffle}
-            className="flex items-center gap-2 rounded-full bg-[#c6e940] px-5 py-2 text-sm font-semibold text-[#0e1a01]"
+            className="flex items-center gap-2 rounded-full bg-[#08758d] px-5 py-2 text-sm font-semibold text-white hover:bg-[#075a70]"
           >
             <ArrowRightIcon /> Play again
           </button>

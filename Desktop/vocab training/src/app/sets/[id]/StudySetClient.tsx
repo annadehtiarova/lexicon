@@ -278,11 +278,11 @@ export default function StudySetClient({ id }: { id: string }) {
 
   return (
     <main className="flex flex-1 justify-center px-4 pb-24">
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-3xl border-x border-[#d0d9d2] bg-[#fffaf0] px-5 pb-10 shadow-[0_0_30px_rgba(8,117,141,0.08)] sm:px-8">
         <div className="pt-10">
           <Link
             href="/"
-            className="flex w-fit items-center gap-1.5 text-sm text-[#9da5b5] hover:text-[#f3f5f9]"
+            className="flex w-fit items-center gap-1.5 text-sm text-[#08758d] hover:text-[#e76548]"
           >
             <ChevronLeftIcon />
             All sets
@@ -290,17 +290,17 @@ export default function StudySetClient({ id }: { id: string }) {
         </div>
 
         <div className="pt-5">
-          <h1 className="font-heading text-4xl tracking-[-0.72px] text-[#f3f5f9]">
+          <h1 className="font-heading text-4xl tracking-[-0.72px] text-[#172b35]">
             {set.name}
           </h1>
 
-          <p className="font-body pt-2 text-sm text-[#9da5b5]">
+          <p className="font-body pt-2 text-sm text-[#5d6f74]">
             {words.length} words · {masteredIds.size} mastered
           </p>
         </div>
 
         <div className="pt-8">
-          <div className="flex h-9 w-full items-center rounded-full bg-[#1d2433] p-1">
+          <div className="flex h-10 w-full items-center rounded-none border-y-2 border-[#08758d] bg-[#dbeaec] p-1">
             {MODES.map(({ key, label, Icon }) => {
               const active = mode === key;
 
@@ -310,8 +310,8 @@ export default function StudySetClient({ id }: { id: string }) {
                   onClick={() => setMode(key)}
                   className={`flex h-full flex-1 items-center justify-center gap-2 rounded-full text-sm font-medium transition-colors ${
                     active
-                      ? "bg-[#090f1c] text-[#f3f5f9] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)]"
-                      : "text-[#9da5b5] hover:text-[#f3f5f9]"
+                      ? "bg-[#08758d] text-white"
+                      : "text-[#075a70] hover:bg-[#fffaf0]"
                   }`}
                 >
                   <Icon />
@@ -322,7 +322,7 @@ export default function StudySetClient({ id }: { id: string }) {
           </div>
 
           {words.length > 30 && (
-            <div className="mt-4 flex items-center justify-between rounded-xl border border-[#2b3342] bg-[#111827] px-4 py-2 text-sm text-[#9da5b5]">
+            <div className="mt-4 flex items-center justify-between border-y border-[#e76548] bg-[#fff0df] px-4 py-2 text-sm text-[#075a70]">
               <button
                 type="button"
                 disabled={practiceBatch === 0}
@@ -343,7 +343,7 @@ export default function StudySetClient({ id }: { id: string }) {
             </div>
           )}
 
-          <div className="pb-6">
+          <div className="border-t-2 border-[#e76548] pb-6 pt-1">
             {mode === "cards" && (
               <CardsMode
                 key={`cards-${practiceBatch}`}
@@ -380,12 +380,12 @@ export default function StudySetClient({ id }: { id: string }) {
 
         <section className="pt-6">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="font-heading text-2xl text-[#f3f5f9]">All words</h2>
+            <h2 className="font-heading text-2xl text-[#172b35]">Vocabulary notes</h2>
             {set.isPersisted && (
               <button
                 type="button"
                 onClick={() => setIsAddingWord(true)}
-                className="rounded-full bg-[#c6e940] px-4 py-2 text-sm font-semibold text-[#0e1a01]"
+                className="rounded-none border border-[#08758d] bg-[#08758d] px-4 py-2 text-sm font-semibold text-white"
               >
                 Add word
               </button>
@@ -393,15 +393,15 @@ export default function StudySetClient({ id }: { id: string }) {
           </div>
 
           {isAddingWord && (
-            <div className="mt-4 grid gap-3 rounded-2xl border border-[#2b3342] bg-[#111827] p-4 sm:grid-cols-2">
-              <input value={newGerman} onChange={(event) => setNewGerman(event.target.value)} placeholder="German word" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
-              <input value={newEnglish} onChange={(event) => setNewEnglish(event.target.value)} placeholder="English translation" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
-              <select value={newPos} onChange={(event) => setNewPos(event.target.value)} className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white">
+            <div className="mt-4 grid gap-3 border border-[#c7d1ca] bg-[#fff0df] p-4 sm:grid-cols-2">
+              <input value={newGerman} onChange={(event) => setNewGerman(event.target.value)} placeholder="German word" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
+              <input value={newEnglish} onChange={(event) => setNewEnglish(event.target.value)} placeholder="English translation" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
+              <select value={newPos} onChange={(event) => setNewPos(event.target.value)} className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]">
                 <option value="noun">Noun</option><option value="verb">Verb</option><option value="adjective">Adjective</option><option value="adverb">Adverb</option>
               </select>
-              <input value={newExample} onChange={(event) => setNewExample(event.target.value)} placeholder="German example (optional)" className="rounded-lg border border-[#3a4457] bg-[#0d141f] px-3 py-2 text-sm text-white" />
+              <input value={newExample} onChange={(event) => setNewExample(event.target.value)} placeholder="German example (optional)" className="rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]" />
               <div className="flex gap-2 sm:col-span-2">
-                <button type="button" onClick={saveNewWord} className="rounded-full bg-[#c6e940] px-4 py-2 text-sm font-semibold text-[#0e1a01]">Save word</button>
+                <button type="button" onClick={saveNewWord} className="rounded-full bg-[#08758d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#075a70]">Save word</button>
                 <button type="button" onClick={() => setIsAddingWord(false)} className="rounded-full bg-[#20293a] px-4 py-2 text-sm text-white">Cancel</button>
               </div>
             </div>
@@ -412,17 +412,17 @@ export default function StudySetClient({ id }: { id: string }) {
             value={wordSearch}
             onChange={(event) => setWordSearch(event.target.value)}
             placeholder="Search words, translations, or types"
-            className="mt-4 h-11 w-full rounded-xl border border-[#2b3342] bg-[#0d141f] px-4 text-sm text-[#f3f5f9] outline-none placeholder:text-[#596477] focus:border-[#c6e940]"
+            className="mt-4 h-11 w-full rounded-none border border-[#9bb8bc] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]"
             aria-label="Search all words"
           />
 
-          <div className="mt-4 overflow-hidden rounded-2xl border-[0.556px] border-[#2b3342]">
+          <div className="mt-4 overflow-hidden border border-[#c7d1ca] bg-[#fffaf0]">
             {visibleWords.map((word, i) => (
               <div
                 key={word.id}
                 className={`flex items-center justify-between gap-4 px-5 py-3.5 ${
-                  i !== words.length - 1
-                    ? "border-b-[0.556px] border-[#2b3342]"
+                    i !== visibleWords.length - 1
+                      ? "border-b border-[#d5ddd7]"
                     : ""
                 }`}
               >
@@ -433,7 +433,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       onChange={(event) =>
                         setDraftGerman(event.target.value)
                       }
-                      className="h-9 rounded-lg border border-[#3a4457] bg-[#0f1521] px-3 text-sm text-[#f3f5f9] outline-none focus:border-[#c6e940]"
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
                       aria-label="German word"
                     />
 
@@ -442,7 +442,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       onChange={(event) =>
                         setDraftEnglish(event.target.value)
                       }
-                      className="h-9 rounded-lg border border-[#3a4457] bg-[#0f1521] px-3 text-sm text-[#f3f5f9] outline-none focus:border-[#c6e940]"
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#08758d]"
                       aria-label="English translation"
                     />
 
@@ -458,7 +458,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       <button
                         type="button"
                         onClick={cancelEditing}
-                        className="rounded-full bg-[#20293a] px-4 py-1.5 text-xs text-[#f3f5f9]"
+                        className="rounded-full bg-[#dbeaec] px-4 py-1.5 text-xs text-[#075a70]"
                       >
                         Cancel
                       </button>
@@ -470,12 +470,12 @@ export default function StudySetClient({ id }: { id: string }) {
                       <button
                         type="button"
                         onClick={() => startEditing(word)}
-                        className="text-left font-heading text-base tracking-[-0.32px] text-[#f3f5f9]"
+                        className="text-left font-heading text-base tracking-[-0.32px] text-[#172b35]"
                       >
                         {displayGerman(word)}
                       </button>
 
-                      <p className="font-body pt-1 text-xs italic text-[#9da5b5]">
+                      <p className="font-body pt-1 text-xs italic text-[#5d6f74]">
                         {word.example}
                       </p>
                     </div>
@@ -485,12 +485,12 @@ export default function StudySetClient({ id }: { id: string }) {
                         <button
                           type="button"
                           onClick={() => startEditing(word)}
-                          className="font-body text-right text-sm text-[#9da5b5]"
+                          className="font-body text-right text-sm text-[#075a70]"
                         >
                           {word.english}
                         </button>
 
-                        <p className="font-body pt-0.5 text-[11px] uppercase tracking-[0.55px] text-[rgba(157,165,181,0.7)]">
+                        <p className="font-body pt-0.5 text-[11px] uppercase tracking-[0.55px] text-[#5d6f74]">
                           {word.pos}
                         </p>
                       </div>
@@ -498,7 +498,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       {set.isPersisted && (
                         <button
                           onClick={() => handleDeleteWord(word.id)}
-                          className="rounded-full p-1.5 text-[#9da5b5] hover:bg-[#20293a] hover:text-red-400"
+                          className="rounded-full p-1.5 text-[#5d6f74] hover:bg-[#fff0df] hover:text-[#e76548]"
                           aria-label={`Delete ${word.german}`}
                         >
                           <TrashIcon className="h-4 w-4" />

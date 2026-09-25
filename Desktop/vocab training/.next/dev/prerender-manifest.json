@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "a8f084b30f769b0ef4a01ba4531272d0",
-    "previewModeSigningKey": "7d9ecc9e94cd4802546af778538219aeda33e2a7ec294c57cd045f1bdf9d6b22",
-    "previewModeEncryptionKey": "44cfb311f0260063a9544572a2bff8f88fb3b98c2926b87a17f38d3ca1640df0"
-  }
-}
+{"version":4,"routes":{"/sets/demo-workspaces-moving-renting":{}},"dynamicRoutes":{"/sets/[id]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/sets/[id]","routeRegex":"^\\/sets\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"fc615586dbe25e2c83428e85f3720f2b","previewModeSigningKey":"ba9d0e89aec9aac04451244cf5f1bcdc6f37ba3d51a2c4cc40a3e12612c08148","previewModeEncryptionKey":"d7d2bf2683542399d3b0d20895f07df930f7b811f64f6050c1f1745bed96ff0a"}}

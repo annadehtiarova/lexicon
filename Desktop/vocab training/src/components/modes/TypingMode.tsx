@@ -36,12 +36,12 @@ export default function TypingMode({ words }: TypingModeProps) {
   return (
     <div className="flex flex-col items-start pt-8">
       <div className="flex w-full justify-between text-xs text-[#9da5b5]"><span className="uppercase tracking-[2px]">Write</span><span>{index + 1} of {words.length}</span></div>
-      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(198,233,64,0.16)]"><div className="h-full rounded-full bg-[#c6e940]" style={{ width: `${((index + (result ? 1 : 0)) / words.length) * 100}%` }} /></div>
-      <div className="mt-6 flex min-h-[224px] w-full flex-col items-center justify-center rounded-[28px] border border-[#2b3342] bg-[linear-gradient(172.7deg,rgba(24,31,47,0.96),rgba(16,22,35,0.88))] px-6 py-12 text-center shadow-[0_24px_70px_rgba(0,0,5,0.9)]">
-        <p className="text-xs uppercase tracking-widest text-slate-500">
+      <div className="mt-3 h-1.5 w-full overflow-hidden bg-[#d5ddd7]"><div className="h-full bg-[#08758d]" style={{ width: `${((index + (result ? 1 : 0)) / words.length) * 100}%` }} /></div>
+      <div className="mt-6 flex min-h-[224px] w-full flex-col items-center justify-center border border-[#c7d1ca] bg-[#fffaf0] px-6 py-12 text-center shadow-[6px_6px_0_rgba(8,117,141,0.1)]">
+        <p className="text-xs uppercase tracking-widest text-[#5d6f74]">
           Type the German word
         </p>
-        <p className="font-heading mt-3 text-4xl text-[#f3f5f9]">
+        <p className="font-heading mt-3 text-4xl text-[#172b35]">
           {word.english}
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function TypingMode({ words }: TypingModeProps) {
         onKeyDown={(e) => e.key === "Enter" && (result ? next() : check())}
         placeholder="Type the German word"
         disabled={result !== null}
-        className="mt-2 h-12 w-full rounded-2xl border border-[#2b3342] bg-[#0d141f] px-5 text-base text-[#f3f5f9] outline-none placeholder:text-[#596477] focus:border-[#c6e940]"
+        className="mt-2 h-12 w-full rounded-none border border-[#9bb8bc] bg-white px-5 text-base text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#08758d]"
       />
 
       {result && (
@@ -65,7 +65,7 @@ export default function TypingMode({ words }: TypingModeProps) {
 
       <button
         onClick={result ? next : check}
-        className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#c6e940] text-sm font-semibold text-[#0e1a01]"
+        className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]"
       >
         {result ? <>Next word <ArrowRightIcon /></> : "Check answer"}
       </button>

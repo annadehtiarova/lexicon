@@ -41,21 +41,21 @@ export default function MultipleChoiceMode({ words }: MultipleChoiceModeProps) {
 
   return (
     <div className="flex flex-col items-start pt-8">
-      <div className="flex w-full items-center justify-between text-xs text-[#9da5b5]">
+      <div className="flex w-full items-center justify-between text-xs text-[#5d6f74]">
         <span className="font-body uppercase tracking-[2px]">Question {index + 1}</span>
         <span>{score} correct / {answeredCount} answered</span>
       </div>
-      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(198,233,64,0.16)]">
-        <div className="h-full rounded-full bg-[#c6e940] transition-all" style={{ width: `${(answeredCount / words.length) * 100}%` }} />
+      <div className="mt-3 h-1.5 w-full overflow-hidden bg-[#d5ddd7]">
+        <div className="h-full bg-[#08758d] transition-all" style={{ width: `${(answeredCount / words.length) * 100}%` }} />
       </div>
-      <div className="mt-6 flex min-h-[224px] w-full flex-col items-center justify-center rounded-[28px] border border-[#2b3342] bg-[linear-gradient(172.7deg,rgba(24,31,47,0.96),rgba(16,22,35,0.88))] px-6 py-12 text-center shadow-[0_24px_70px_rgba(0,0,5,0.9)]">
-        <p className="font-body text-xs uppercase tracking-[2.4px] text-[#9da5b5]">
+      <div className="mt-6 flex min-h-[224px] w-full flex-col items-center justify-center border border-[#c7d1ca] bg-[#fffaf0] px-6 py-12 text-center shadow-[6px_6px_0_rgba(8,117,141,0.1)]">
+        <p className="font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]">
           What does this mean?
         </p>
-        <p className="font-heading mt-3 text-4xl text-[#f3f5f9]">
+        <p className="font-heading mt-3 text-4xl text-[#172b35]">
           {question.correct.german}
         </p>
-        {answered && <p className={`mt-3 text-xs ${selected === question.correct.id ? "text-[#c6e940]" : "text-[#ff8b7b]"}`}>{selected === question.correct.id ? "Correct" : `Answer: ${question.correct.english}`}</p>}
+        {answered && <p className={`mt-3 text-xs ${selected === question.correct.id ? "text-[#08758d]" : "text-[#b44735]"}`}>{selected === question.correct.id ? "Correct" : `Answer: ${question.correct.english}`}</p>}
       </div>
 
       <div className="mt-5 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
@@ -67,7 +67,7 @@ export default function MultipleChoiceMode({ words }: MultipleChoiceModeProps) {
               key={opt.id}
               onClick={() => handleSelect(opt.id)}
               className={`flex min-h-[58px] items-center justify-between rounded-2xl border px-5 py-3 text-left text-sm transition-all ${
-                showState && isCorrect ? "border-[#c6e940] bg-[rgba(198,233,64,0.12)] text-[#e8f9a8]" : showState && opt.id === selected ? "border-[#ff6657] bg-[rgba(255,102,87,0.12)] text-[#ffb0a6]" : showState ? "border-[#2b3342] bg-[#111827] text-[#69758a]" : "border-[#2b3342] bg-[rgba(17,24,39,0.72)] text-[#e5e9f0] hover:-translate-y-0.5 hover:border-[#596477]"
+                showState && isCorrect ? "border-[#08758d] bg-[#e4f2f3] text-[#075a70]" : showState && opt.id === selected ? "border-[#e76548] bg-[#fff0df] text-[#a63d2d]" : showState ? "border-[#d5ddd7] bg-[#f0eee7] text-[#7a8789]" : "border-[#9bb8bc] bg-[#fffaf0] text-[#172b35] hover:-translate-y-0.5 hover:border-[#08758d]"
               }`}
             >
               <span>{opt.english}</span>
@@ -81,7 +81,7 @@ export default function MultipleChoiceMode({ words }: MultipleChoiceModeProps) {
       {selected && (
         <button
           onClick={next}
-          className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#c6e940] text-sm font-semibold text-[#0e1a01]"
+          className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]"
         >
           Next word <ArrowRightIcon />
         </button>

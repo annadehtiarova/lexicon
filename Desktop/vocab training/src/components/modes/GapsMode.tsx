@@ -88,7 +88,7 @@ export default function GapsMode({ words }: GapsModeProps) {
 
       <button
         onClick={result ? next : check}
-        className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#c6e940] text-sm font-semibold text-[#0e1a01]"
+        className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#08758d] text-sm font-semibold text-white hover:bg-[#075a70]"
       >
         {result ? <>Next sentence <ArrowRightIcon /></> : "Check answer"}
       </button>

@@ -34,7 +34,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} h-full dark antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0e14] text-slate-100">
+      <body className="min-h-full flex flex-col bg-[#dbe4df] text-[#172b35]">
+        <header className="flex h-12 items-center justify-between bg-[#08758d] px-5 text-white shadow-[0_4px_0_rgba(7,90,112,0.18)]">
+          <span className="font-heading text-sm font-semibold tracking-[1.6px]">LEXIKON</span>
+          <span className="font-body text-xs uppercase tracking-[1.8px] text-[#b8e1e6]">Deutsch · B2</span>
+        </header>
         {children}
       </body>
     </html>
