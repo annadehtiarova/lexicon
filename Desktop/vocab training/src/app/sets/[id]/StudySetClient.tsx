@@ -385,7 +385,7 @@ export default function StudySetClient({ id }: { id: string }) {
               <button
                 type="button"
                 onClick={() => setIsAddingWord(true)}
-                className="rounded-none border border-[#08758d] bg-[#08758d] px-4 py-2 text-sm font-semibold text-white"
+                className="rounded-full border border-[#08758d] bg-[#08758d] px-4 py-2 text-sm font-semibold text-white"
               >
                 Add word
               </button>
