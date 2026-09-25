@@ -5,7 +5,9 @@ import Link from "next/link";
 import {
   addWord,
   deleteWord,
+  deleteBuiltInWord,
   getSet,
+  loadBuiltInDeletedWords,
   ExerciseKey,
   ExerciseProgress,
   loadExerciseProgress,
@@ -20,6 +22,7 @@ import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
 import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
 import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
 import { EMAIL_HAUSVERWALTUNG_SET_ID, getEmailHausverwaltungSet } from "@/lib/emailHausverwaltungData";
+import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -152,6 +155,16 @@ function resolveSet(id: string): ResolvedSet | null {
     };
   }
 
+  if (id === AUSDRUECKE_SET_ID) {
+    const builtInSet = getAusdrueckeSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
   const stored = getSet(id);
 
   if (!stored) return null;
@@ -186,7 +199,8 @@ export default function StudySetClient({ id }: { id: string }) {
   useEffect(() => {
     const resolved = resolveSet(id);
 
-    setSet(resolved);
+    const deletedIds = loadBuiltInDeletedWords(id);
+    setSet(resolved ? { ...resolved, words: resolved.words.filter((word) => !deletedIds.includes(word.id)) } : resolved);
     const progress = loadExerciseProgress(id);
     setExerciseProgress(progress);
     setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
@@ -253,9 +267,11 @@ export default function StudySetClient({ id }: { id: string }) {
   };
 
   const handleDeleteWord = (wordId: string) => {
-    if (!set.isPersisted) return;
-
-    deleteWord(id, wordId);
+    if (!set.isPersisted) {
+      deleteBuiltInWord(id, wordId);
+    } else {
+      deleteWord(id, wordId);
+    }
 
     setSet((current) =>
       current
@@ -597,15 +613,13 @@ export default function StudySetClient({ id }: { id: string }) {
                         </p>
                       </div>
 
-                      {set.isPersisted && (
-                        <button
-                          onClick={() => handleDeleteWord(word.id)}
-                          className="rounded-full p-1.5 text-[#5d6f74] hover:bg-[#fff0df] hover:text-[#e76548]"
-                          aria-label={`Delete ${word.german}`}
-                        >
-                          <TrashIcon className="h-4 w-4" />
-                        </button>
-                      )}
+                      <button
+                        onClick={() => handleDeleteWord(word.id)}
+                        className="rounded-full p-1.5 text-[#5d6f74] hover:bg-[#fff0df] hover:text-[#e76548]"
+                        aria-label={`Delete ${word.german}`}
+                      >
+                        <TrashIcon className="h-4 w-4" />
+                      </button>
                     </div>
                   </>
                 )}

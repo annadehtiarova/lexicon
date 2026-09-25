@@ -1357,16 +1357,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "der Job",
-        "job",
-        "noun"
-    ],
-    [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "stellen",
         "to place / put",
         "verb"
@@ -1377,49 +1367,14 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "das Hallo",
-        "hello",
-        "noun"
-    ],
-    [
-        "beide",
-        "both",
-        "other"
-    ],
-    [
-        "herzlich",
-        "cordial / heartfelt",
-        "adjective"
-    ],
-    [
         "der Glückwunsch",
         "congratulation",
         "noun"
     ],
     [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "das Büro",
-        "office",
-        "noun"
-    ],
-    [
-        "mutig",
-        "courageous",
-        "adjective"
-    ],
-    [
         "die Power",
         "power",
         "noun"
-    ],
-    [
-        "übrigens",
-        "by the way",
-        "adverb"
     ],
     [
         "die Neuigkeit",
@@ -1497,11 +1452,6 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "ständig",
         "constant / constantly",
         "other"
@@ -1552,11 +1502,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "finden",
-        "to find",
-        "verb"
-    ],
-    [
         "das Glück",
         "happiness / luck",
         "noun"
@@ -1565,11 +1510,6 @@ const RAW_WORDS = [
         "die Einweihungsparty",
         "housewarming party",
         "noun"
-    ],
-    [
-        "viel",
-        "many / much",
-        "other"
     ],
     [
         "der Dank",
@@ -1647,48 +1587,13 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Wann-warum-wie-wo-Regel",
-        "when-why-how-where rule",
-        "noun"
-    ],
-    [
-        "zen",
-        "Zen",
-        "noun"
-    ],
-    [
-        "wohin",
-        "where to",
-        "adverb"
-    ],
-    [
-        "die Ich-habe",
-        "the I have",
-        "noun"
-    ],
-    [
         "erst",
         "first",
         "other"
     ],
     [
-        "der Satz",
-        "sentence / rate",
-        "noun"
-    ],
-    [
         "das Kärtchen",
         "small card",
-        "noun"
-    ],
-    [
-        "spielen",
-        "to play",
-        "verb"
-    ],
-    [
-        "der Pen",
-        "pen",
         "noun"
     ],
     [
@@ -1707,64 +1612,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "der März",
-        "March",
-        "noun"
-    ],
-    [
         "der Ausdruck",
         "expression",
         "noun"
-    ],
-    [
-        "die Tabelle",
-        "table",
-        "noun"
-    ],
-    [
-        "der Monat",
-        "month",
-        "noun"
-    ],
-    [
-        "spät",
-        "late",
-        "adjective"
-    ],
-    [
-        "der Nachmittag",
-        "afternoon",
-        "noun"
-    ],
-    [
-        "draußen",
-        "outside",
-        "adverb"
-    ],
-    [
-        "wegen",
-        "because of / due to",
-        "other"
-    ],
-    [
-        "die Ausbildung",
-        "training / education",
-        "noun"
-    ],
-    [
-        "das Problem",
-        "problem",
-        "noun"
-    ],
-    [
-        "das Zentrum",
-        "centre",
-        "noun"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
     ],
     [
         "die Verkehrsanbindung",
@@ -1792,11 +1642,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "machen",
-        "to make / do",
-        "verb"
-    ],
-    [
         "das Kettenspiel",
         "chain game",
         "noun"
@@ -1814,16 +1659,6 @@ const RAW_WORDS = [
     [
         "umziehen",
         "to move",
-        "verb"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
         "verb"
     ],
     [
@@ -1864,7 +1699,7 @@ function getAdilsJobSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Job", "job", "noun"],\n  ["die E-Mail", "e-mail", "noun"],\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["das Hallo", "hello", "noun"],\n  ["beide", "both", "other"],\n  ["herzlich", "cordial / heartfelt", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["neu", "new", "adjective"],\n  ["das Büro", "office", "noun"],\n  ["mutig", "courageous", "adjective"],\n  ["die Power", "power", "noun"],\n  ["übrigens", "by the way", "adverb"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["sehr", "very", "adverb"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["finden", "to find", "verb"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["viel", "many / much", "other"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["zweit", "second", "adjective"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["weise", "wise", "adjective"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["die Wann-warum-wie-wo-Regel", "when-why-how-where rule", "noun"],\n  ["zen", "Zen", "noun"],\n  ["wohin", "where to", "adverb"],\n  ["die Ich-habe", "the I have", "noun"],\n  ["erst", "first", "other"],\n  ["der Satz", "sentence / rate", "noun"],\n  ["das Kärtchen", "small card", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Pen", "pen", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der März", "March", "noun"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Tabelle", "table", "noun"],\n  ["der Monat", "month", "noun"],\n  ["spät", "late", "adjective"],\n  ["der Nachmittag", "afternoon", "noun"],\n  ["draußen", "outside", "adverb"],\n  ["wegen", "because of / due to", "other"],\n  ["die Ausbildung", "training / education", "noun"],\n  ["das Problem", "problem", "noun"],\n  ["das Zentrum", "centre", "noun"],\n  ["gut", "good", "adjective"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["gestern", "yesterday", "adverb"],\n  ["der Vorort", "suburb", "noun"],\n  ["machen", "to make / do", "verb"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["viel", "much / many", "other"],\n  ["kommen", "to come", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["zuerst", "first", "adverb"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["die Power", "power", "noun"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["zweit", "second", "adjective"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["weise", "wise", "adjective"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["erst", "first", "other"],\n  ["das Kärtchen", "small card", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["gestern", "yesterday", "adverb"],\n  ["der Vorort", "suburb", "noun"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["zuerst", "first", "adverb"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -2549,11 +2384,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "die Hausverwaltung",
         "building management",
         "noun"
@@ -2567,21 +2397,6 @@ const RAW_WORDS = [
         "der Einleitungssatz",
         "introduction",
         "noun"
-    ],
-    [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
-        "der Herr",
-        "sir",
-        "noun"
-    ],
-    [
-        "deshalb",
-        "therefore",
-        "adverb"
     ],
     [
         "bitten",
@@ -2619,26 +2434,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Montag",
-        "monday",
-        "noun"
-    ],
-    [
-        "der Freitag",
-        "friday",
-        "noun"
-    ],
-    [
-        "zwischen",
-        "between",
-        "other"
-    ],
-    [
-        "die Uhr",
-        "clock / o'clock",
-        "noun"
-    ],
-    [
         "das Büro",
         "office",
         "noun"
@@ -2649,23 +2444,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to",
-        "verb"
-    ],
-    [
         "die Schilderung",
         "description",
-        "noun"
-    ],
-    [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
-        "der Termin",
-        "date / appointment",
         "noun"
     ],
     [
@@ -2679,11 +2459,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "vor",
-        "before",
-        "other"
-    ],
-    [
         "der Einzug",
         "move-in / collection",
         "noun"
@@ -2692,11 +2467,6 @@ const RAW_WORDS = [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
     ],
     [
         "der Boden",
@@ -2712,11 +2482,6 @@ const RAW_WORDS = [
         "die Küche",
         "kitchen",
         "noun"
-    ],
-    [
-        "benutzen",
-        "to use",
-        "verb"
     ],
     [
         "die Bitte",
@@ -2739,11 +2504,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "ihnen",
-        "to you",
-        "other"
-    ],
-    [
         "schriftlich",
         "in writing",
         "other"
@@ -2762,11 +2522,6 @@ const RAW_WORDS = [
         "das Telefongespräch",
         "telephone call",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -2809,11 +2564,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Punkt",
-        "point",
-        "noun"
-    ],
-    [
         "erfinden",
         "to invent",
         "verb"
@@ -2827,11 +2577,6 @@ const RAW_WORDS = [
         "der Zweitschlüssel",
         "second key",
         "noun"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
     ],
     [
         "der Werkstattraum",
@@ -2899,19 +2644,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "haben",
-        "to have",
-        "verb"
-    ],
-    [
         "klären",
         "to clarify",
         "verb"
-    ],
-    [
-        "falls",
-        "if",
-        "other"
     ],
     [
         "die Rückfrage",
@@ -2942,16 +2677,6 @@ const RAW_WORDS = [
         "gut",
         "good",
         "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Frau",
-        "woman / Ms.",
-        "noun"
     ],
     [
         "die Situation",
@@ -2996,7 +2721,7 @@ function getEmailHausverwaltungSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["die E-Mail", "e-mail", "noun"],\n  ["die Hausverwaltung", "building management", "noun"],\n  ["der Gliederungspunkt", "breakdown point", "noun"],\n  ["der Einleitungssatz", "introduction", "noun"],\n  ["sehr", "very", "adverb"],\n  ["der Herr", "sir", "noun"],\n  ["deshalb", "therefore", "adverb"],\n  ["bitten", "to ask", "verb"],\n  ["der Grund", "reason", "noun"],\n  ["die Beanstandung", "complaint / objection", "noun"],\n  ["die Firma", "company", "noun"],\n  ["verständigen", "to communicate / notify", "verb"],\n  ["schaden", "to damage", "verb"],\n  ["das Schreiben", "letter", "noun"],\n  ["der Montag", "monday", "noun"],\n  ["der Freitag", "friday", "noun"],\n  ["zwischen", "between", "other"],\n  ["die Uhr", "clock / o\'clock", "noun"],\n  ["das Büro", "office", "noun"],\n  ["der Bedarf", "need", "noun"],\n  ["können", "to be able to", "verb"],\n  ["die Schilderung", "description", "noun"],\n  ["ander", "other", "adjective"],\n  ["der Termin", "date / appointment", "noun"],\n  ["vereinbaren", "to arrange / agree upon", "verb"],\n  ["das Problem", "problem", "noun"],\n  ["vor", "before", "other"],\n  ["der Einzug", "move-in / collection", "noun"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["leider", "unfortunately", "adverb"],\n  ["der Boden", "ground / floor", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["die Bitte", "request / please", "noun"],\n  ["die Erledigung", "completion / handling", "noun"],\n  ["soeben", "just now", "adverb"],\n  ["besprechen", "to discuss", "verb"],\n  ["ihnen", "to you", "other"],\n  ["schriftlich", "in writing", "other"],\n  ["schildern", "to describe", "verb"],\n  ["die Erreichbarkeit", "accessibility", "noun"],\n  ["das Telefongespräch", "telephone call", "noun"],\n  ["viel", "much / many", "other"],\n  ["der Dank", "thanks", "noun"],\n  ["im Voraus", "in advance", "other"],\n  ["die Anrede", "salutation", "noun"],\n  ["freundlich", "friendly", "adjective"],\n  ["grüßen", "to greet", "verb"],\n  ["der Geschäftsführer", "managing director", "noun"],\n  ["der Schluss", "conclusion", "noun"],\n  ["der Gruß", "greetings", "noun"],\n  ["der Punkt", "point", "noun"],\n  ["erfinden", "to invent", "verb"],\n  ["brauchen", "to need", "verb"],\n  ["der Zweitschlüssel", "second key", "noun"],\n  ["neu", "new", "adjective"],\n  ["der Werkstattraum", "workshop room", "noun"],\n  ["der Malerbetrieb", "painting business", "noun"],\n  ["der Büroraum", "office space", "noun"],\n  ["streichen", "to paint / delete", "verb"],\n  ["möchten", "to want / would like", "verb"],\n  ["die Nachbesserung", "improvement / rectification", "noun"],\n  ["der Anruf", "call", "noun"],\n  ["der Boiler", "boiler", "noun"],\n  ["ausfallen", "to fail / be canceled", "verb"],\n  ["die Nachricht", "message", "noun"],\n  ["telefonisch", "by phone", "other"],\n  ["einmal", "once", "adverb"],\n  ["erinnern", "to remind / remember", "verb"],\n  ["haben", "to have", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["falls", "if", "other"],\n  ["die Rückfrage", "query / follow-up question", "noun"],\n  ["anrufen", "to call", "verb"],\n  ["täglich", "daily", "other"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Vorhang", "curtain", "noun"],\n  ["gut", "good", "adjective"],\n  ["der Tag", "day", "noun"],\n  ["die Frau", "woman / Ms.", "noun"],\n  ["die Situation", "situation", "noun"],\n  ["planen", "to plan", "verb"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["die Hausverwaltung", "building management", "noun"],\n  ["der Gliederungspunkt", "breakdown point", "noun"],\n  ["der Einleitungssatz", "introduction", "noun"],\n  ["bitten", "to ask", "verb"],\n  ["der Grund", "reason", "noun"],\n  ["die Beanstandung", "complaint / objection", "noun"],\n  ["die Firma", "company", "noun"],\n  ["verständigen", "to communicate / notify", "verb"],\n  ["schaden", "to damage", "verb"],\n  ["das Schreiben", "letter", "noun"],\n  ["das Büro", "office", "noun"],\n  ["der Bedarf", "need", "noun"],\n  ["die Schilderung", "description", "noun"],\n  ["vereinbaren", "to arrange / agree upon", "verb"],\n  ["das Problem", "problem", "noun"],\n  ["der Einzug", "move-in / collection", "noun"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["der Boden", "ground / floor", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["die Bitte", "request / please", "noun"],\n  ["die Erledigung", "completion / handling", "noun"],\n  ["soeben", "just now", "adverb"],\n  ["besprechen", "to discuss", "verb"],\n  ["schriftlich", "in writing", "other"],\n  ["schildern", "to describe", "verb"],\n  ["die Erreichbarkeit", "accessibility", "noun"],\n  ["das Telefongespräch", "telephone call", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["im Voraus", "in advance", "other"],\n  ["die Anrede", "salutation", "noun"],\n  ["freundlich", "friendly", "adjective"],\n  ["grüßen", "to greet", "verb"],\n  ["der Geschäftsführer", "managing director", "noun"],\n  ["der Schluss", "conclusion", "noun"],\n  ["der Gruß", "greetings", "noun"],\n  ["erfinden", "to invent", "verb"],\n  ["brauchen", "to need", "verb"],\n  ["der Zweitschlüssel", "second key", "noun"],\n  ["der Werkstattraum", "workshop room", "noun"],\n  ["der Malerbetrieb", "painting business", "noun"],\n  ["der Büroraum", "office space", "noun"],\n  ["streichen", "to paint / delete", "verb"],\n  ["möchten", "to want / would like", "verb"],\n  ["die Nachbesserung", "improvement / rectification", "noun"],\n  ["der Anruf", "call", "noun"],\n  ["der Boiler", "boiler", "noun"],\n  ["ausfallen", "to fail / be canceled", "verb"],\n  ["die Nachricht", "message", "noun"],\n  ["telefonisch", "by phone", "other"],\n  ["einmal", "once", "adverb"],\n  ["erinnern", "to remind / remember", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["die Rückfrage", "query / follow-up question", "noun"],\n  ["anrufen", "to call", "verb"],\n  ["täglich", "daily", "other"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Vorhang", "curtain", "noun"],\n  ["gut", "good", "adjective"],\n  ["die Situation", "situation", "noun"],\n  ["planen", "to plan", "verb"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -3304,11 +3029,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
@@ -3334,11 +3054,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
         "die Küche",
         "kitchen",
         "noun"
@@ -3352,11 +3067,6 @@ const RAW_WORDS = [
         "schildern",
         "to describe / depict",
         "verb"
-    ],
-    [
-        "mal",
-        "times / once",
-        "adverb"
     ],
     [
         "vorbeikommen",
@@ -3389,19 +3099,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
         "der Arbeitsraum",
         "workspace",
         "noun"
-    ],
-    [
-        "geben",
-        "to give",
-        "verb"
     ],
     [
         "die Türklinke",
@@ -3442,11 +3142,6 @@ const RAW_WORDS = [
         "der Bescheid",
         "notice / information",
         "noun"
-    ],
-    [
-        "sagen",
-        "to say",
-        "verb"
     ],
     [
         "hochziehen",
@@ -3569,39 +3264,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Firma",
-        "company",
-        "noun"
-    ],
-    [
-        "genau",
-        "precise / more precisely",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
-        "verb"
-    ],
-    [
-        "die Danke",
+        "der Dank",
         "thanks",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -3631,7 +3296,7 @@ function getProblemSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["das Problem", "problem", "noun"],\n  ["die Hausverwaltung", "property management / house management", "noun"],\n  ["die Zeichnung", "drawing", "noun"],\n  ["einmal", "once", "adverb"],\n  ["das Büro", "office", "noun"],\n  ["lassen", "to let / leave", "verb"],\n  ["der Boden", "floor / ground", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["fühlen", "to feel", "verb"],\n  ["sehr", "very", "adverb"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["renovieren", "to renovate", "verb"],\n  ["die Angst", "fear", "noun"],\n  ["wirklich", "really", "other"],\n  ["die Ordnung", "order", "noun"],\n  ["können", "to be able to / can", "verb"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["schildern", "to describe / depict", "verb"],\n  ["mal", "times / once", "adverb"],\n  ["vorbeikommen", "to come by", "verb"],\n  ["das Folgende", "the following", "noun"],\n  ["bitten", "to ask / request", "verb"],\n  ["natürlich", "of course / natural", "other"],\n  ["das Problem", "problem", "noun"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["ander", "other", "adjective"],\n  ["der Arbeitsraum", "workspace", "noun"],\n  ["geben", "to give", "verb"],\n  ["die Türklinke", "door handle", "noun"],\n  ["reparieren", "to repair", "verb"],\n  ["lösen", "to solve / dissolve", "verb"],\n  ["unten", "below / downstairs", "adverb"],\n  ["abgehen", "to come off / detach", "verb"],\n  ["anrufen", "to call", "verb"],\n  ["die Zentralheizung", "central heating", "noun"],\n  ["der Bescheid", "notice / information", "noun"],\n  ["sagen", "to say", "verb"],\n  ["hochziehen", "to pull up", "verb"],\n  ["werden", "to become / will", "verb"],\n  ["der Abfluss", "drain", "noun"],\n  ["das Spülbecken", "sink", "noun"],\n  ["kümmern", "to care / look after", "verb"],\n  ["der Rollladen", "roll-out shutter / roller blind", "noun"],\n  ["der Aufzug", "elevator", "noun"],\n  ["der Topf", "pot", "noun"],\n  ["der Abflussreiniger", "drain cleaner", "noun"],\n  ["verwenden", "to use", "verb"],\n  ["die Tür", "door", "noun"],\n  ["der Aktenschrank", "file cabinet", "noun"],\n  ["anschrauben", "to screw on", "verb"],\n  ["der Wasserhahn", "faucet / tap", "noun"],\n  ["die Toilette", "toilet", "noun"],\n  ["der Handwerker", "craftsman", "noun"],\n  ["das Türschloss", "door lock", "noun"],\n  ["abbrechen", "to break off / cancel", "verb"],\n  ["der Hausmeister", "caretaker / janitor", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n  ["der Vermieter", "landlord / owner", "noun"],\n  ["der Mieter", "tenant", "noun"],\n  ["der Apparat", "apparatus / phone", "noun"],\n  ["gut", "good", "adjective"],\n  ["der Tag", "day", "noun"],\n  ["die Firma", "company", "noun"],\n  ["genau", "precise / more precisely", "other"],\n  ["kommen", "to come", "verb"],\n  ["die Danke", "thanks", "noun"],\n  ["viel", "much / many", "other"],\n  ["der Dank", "thanks", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["das Problem", "problem", "noun"],\n  ["die Hausverwaltung", "property management / house management", "noun"],\n  ["die Zeichnung", "drawing", "noun"],\n  ["einmal", "once", "adverb"],\n  ["das Büro", "office", "noun"],\n  ["lassen", "to let / leave", "verb"],\n  ["der Boden", "floor / ground", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["fühlen", "to feel", "verb"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["renovieren", "to renovate", "verb"],\n  ["die Angst", "fear", "noun"],\n  ["wirklich", "really", "other"],\n  ["die Ordnung", "order", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["schildern", "to describe / depict", "verb"],\n  ["vorbeikommen", "to come by", "verb"],\n  ["das Folgende", "the following", "noun"],\n  ["bitten", "to ask / request", "verb"],\n  ["natürlich", "of course / natural", "other"],\n  ["das Problem", "problem", "noun"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Arbeitsraum", "workspace", "noun"],\n  ["die Türklinke", "door handle", "noun"],\n  ["reparieren", "to repair", "verb"],\n  ["lösen", "to solve / dissolve", "verb"],\n  ["unten", "below / downstairs", "adverb"],\n  ["abgehen", "to come off / detach", "verb"],\n  ["anrufen", "to call", "verb"],\n  ["die Zentralheizung", "central heating", "noun"],\n  ["der Bescheid", "notice / information", "noun"],\n  ["hochziehen", "to pull up", "verb"],\n  ["werden", "to become / will", "verb"],\n  ["der Abfluss", "drain", "noun"],\n  ["das Spülbecken", "sink", "noun"],\n  ["kümmern", "to care / look after", "verb"],\n  ["der Rollladen", "roll-out shutter / roller blind", "noun"],\n  ["der Aufzug", "elevator", "noun"],\n  ["der Topf", "pot", "noun"],\n  ["der Abflussreiniger", "drain cleaner", "noun"],\n  ["verwenden", "to use", "verb"],\n  ["die Tür", "door", "noun"],\n  ["der Aktenschrank", "file cabinet", "noun"],\n  ["anschrauben", "to screw on", "verb"],\n  ["der Wasserhahn", "faucet / tap", "noun"],\n  ["die Toilette", "toilet", "noun"],\n  ["der Handwerker", "craftsman", "noun"],\n  ["das Türschloss", "door lock", "noun"],\n  ["abbrechen", "to break off / cancel", "verb"],\n  ["der Hausmeister", "caretaker / janitor", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n  ["der Vermieter", "landlord / owner", "noun"],\n  ["der Mieter", "tenant", "noun"],\n  ["der Apparat", "apparatus / phone", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["der Dank", "thanks", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -3645,12 +3310,16 @@ __turbopack_context__.s([
     ()=>addSet,
     "addWord",
     ()=>addWord,
+    "deleteBuiltInWord",
+    ()=>deleteBuiltInWord,
     "deleteSet",
     ()=>deleteSet,
     "deleteWord",
     ()=>deleteWord,
     "getSet",
     ()=>getSet,
+    "loadBuiltInDeletedWords",
+    ()=>loadBuiltInDeletedWords,
     "loadBuiltInProgress",
     ()=>loadBuiltInProgress,
     "loadExerciseProgress",
@@ -3672,6 +3341,7 @@ __turbopack_context__.s([
 ]);
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
+const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
@@ -3703,6 +3373,32 @@ function saveExerciseProgress(setId, progress) {
         const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}");
         allProgress[setId] = progress;
         window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
+    } catch  {
+    // Ignore unavailable browser storage.
+    }
+}
+function loadBuiltInDeletedWords(setId) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}");
+        return Array.isArray(deleted[setId]) ? deleted[setId] : [];
+    } catch  {
+        return [];
+    }
+}
+function deleteBuiltInWord(setId, wordId) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}");
+        deleted[setId] = [
+            ...new Set([
+                ...deleted[setId] ?? [],
+                wordId
+            ])
+        ];
+        window.localStorage.setItem(BUILT_IN_DELETED_WORDS_KEY, JSON.stringify(deleted));
     } catch  {
     // Ignore unavailable browser storage.
     }
@@ -3888,18 +3584,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "das Büro",
-        "the office",
-        "noun"
-    ],
-    [
         "das Stockwerk",
         "the floor / storey",
-        "noun"
-    ],
-    [
-        "der Termin",
-        "the appointment / date",
         "noun"
     ],
     [
@@ -3920,11 +3606,6 @@ const RAW_WORDS = [
     [
         "der Fixpreis",
         "the fixed price",
-        "noun"
-    ],
-    [
-        "der Samstagvormittag",
-        "the Saturday morning",
         "noun"
     ],
     [
@@ -3953,11 +3634,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Dezember",
-        "December",
-        "noun"
-    ],
-    [
         "der Besichtigungstermin",
         "the viewing appointment",
         "noun"
@@ -3968,18 +3644,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Woche",
-        "the week",
-        "noun"
-    ],
-    [
         "der Aufzug",
         "the elevator / lift",
-        "noun"
-    ],
-    [
-        "die Situation",
-        "the situation",
         "noun"
     ],
     [
@@ -3990,16 +3656,6 @@ const RAW_WORDS = [
     [
         "der Imbiss",
         "the snack bar / eatery",
-        "noun"
-    ],
-    [
-        "der Name",
-        "the name",
-        "noun"
-    ],
-    [
-        "der Tag",
-        "the day",
         "noun"
     ],
     [
@@ -4038,38 +3694,13 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
-        "wollen",
-        "to want",
-        "verb"
-    ],
-    [
-        "müssen",
-        "to have to / must",
-        "verb"
-    ],
-    [
         "parken",
         "to park",
         "verb"
     ],
     [
-        "möchten",
-        "would like",
-        "verb"
-    ],
-    [
         "abbauen",
         "to dismantle",
-        "verb"
-    ],
-    [
-        "sollen",
-        "should / ought to",
         "verb"
     ],
     [
@@ -4090,16 +3721,6 @@ const RAW_WORDS = [
     [
         "entgegenkommen",
         "to meet halfway / accommodate",
-        "verb"
-    ],
-    [
-        "machen",
-        "to do / make",
-        "verb"
-    ],
-    [
-        "haben",
-        "to have",
         "verb"
     ],
     [
@@ -4128,104 +3749,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "tun",
-        "to do",
-        "verb"
-    ],
-    [
-        "sein",
-        "to be",
-        "verb"
-    ],
-    [
-        "gehen",
-        "to go / work out",
-        "verb"
-    ],
-    [
         "austauschen",
         "to exchange / discuss",
         "verb"
-    ],
-    [
-        "arbeiten",
-        "to work",
-        "verb"
-    ],
-    [
-        "genau",
-        "exactly / precise",
-        "other"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "alt",
-        "old",
-        "adjective"
-    ],
-    [
-        "groß",
-        "big / large",
-        "adjective"
-    ],
-    [
-        "jetzig",
-        "current",
-        "adjective"
-    ],
-    [
-        "selbst",
-        "self / personally",
-        "adverb"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
-    ],
-    [
-        "früh",
-        "early",
-        "adjective"
-    ],
-    [
-        "möglich",
-        "possible",
-        "adjective"
-    ],
-    [
-        "nächst",
-        "next",
-        "adjective"
-    ],
-    [
-        "übrig",
-        "remaining / other",
-        "adjective"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "dann",
-        "then",
-        "adverb"
-    ],
-    [
-        "mal",
-        "sometimes / once",
-        "adverb"
-    ],
-    [
-        "bitte",
-        "please",
-        "adverb"
     ]
 ].map(_c = ([german, english, pos])=>({
         german,
@@ -4250,7 +3776,7 @@ function getUmzugSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Umzug", "the move / relocation", "noun"],\n  ["die Umzugsfirma", "the moving company", "noun"],\n  ["der Umzugstag", "the moving day", "noun"],\n  ["das Angebot", "the offer / quote", "noun"],\n  ["die Nachfrage", "the inquiry / demand", "noun"],\n  ["das Detail", "the detail", "noun"],\n  ["der Kunde", "the customer (male)", "noun"],\n  ["die Kundin", "the customer (female)", "noun"],\n  ["die Spülmaschine", "the dishwasher", "noun"],\n  ["der Kaffeeautomat", "the coffee machine", "noun"],\n  ["das Regal", "the shelf", "noun"],\n  ["der Mitarbeiter", "the employee (male)", "noun"],\n  ["die Mitarbeiterin", "the employee (female)", "noun"],\n  ["das Büro", "the office", "noun"],\n  ["das Stockwerk", "the floor / storey", "noun"],\n  ["der Termin", "the appointment / date", "noun"],\n  ["der Schreibtisch", "the desk", "noun"],\n  ["das Möbel", "the piece of furniture", "noun"],\n  ["der Karton", "the box / carton", "noun"],\n  ["der Fixpreis", "the fixed price", "noun"],\n  ["der Samstagvormittag", "the Saturday morning", "noun"],\n  ["der Hof", "the courtyard", "noun"],\n  ["die Einbauküche", "the fitted kitchen", "noun"],\n  ["der Stock", "the floor / storey", "noun"],\n  ["die Parkmöglichkeit", "the parking option", "noun"],\n  ["der Anfang", "the beginning", "noun"],\n  ["der Dezember", "December", "noun"],\n  ["der Besichtigungstermin", "the viewing appointment", "noun"],\n  ["die Besichtigung", "the inspection / viewing", "noun"],\n  ["die Woche", "the week", "noun"],\n  ["der Aufzug", "the elevator / lift", "noun"],\n  ["die Situation", "the situation", "noun"],\n  ["die Notiz", "the note", "noun"],\n  ["der Imbiss", "the snack bar / eatery", "noun"],\n  ["der Name", "the name", "noun"],\n  ["der Tag", "the day", "noun"],\n  ["einholen", "to obtain / get", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["verhandeln", "to negotiate", "verb"],\n  ["schicken", "to send", "verb"],\n  ["umziehen", "to move (house/office)", "verb"],\n  ["mitnehmen", "to take along", "verb"],\n  ["entsorgen", "to dispose of", "verb"],\n  ["können", "to be able to / can", "verb"],\n  ["wollen", "to want", "verb"],\n  ["müssen", "to have to / must", "verb"],\n  ["parken", "to park", "verb"],\n  ["möchten", "would like", "verb"],\n  ["abbauen", "to dismantle", "verb"],\n  ["sollen", "should / ought to", "verb"],\n  ["erledigen", "to handle / complete", "verb"],\n  ["packen", "to pack", "verb"],\n  ["ausbuchen", "to fully book / be booked out", "verb"],\n  ["entgegenkommen", "to meet halfway / accommodate", "verb"],\n  ["machen", "to do / make", "verb"],\n  ["haben", "to have", "verb"],\n  ["beauftragen", "to commission / hire", "verb"],\n  ["anbieten", "to offer", "verb"],\n  ["bleiben", "to stay / remain", "verb"],\n  ["mitkommen", "to come along", "verb"],\n  ["aufbauen", "to assemble / set up", "verb"],\n  ["tun", "to do", "verb"],\n  ["sein", "to be", "verb"],\n  ["gehen", "to go / work out", "verb"],\n  ["austauschen", "to exchange / discuss", "verb"],\n  ["arbeiten", "to work", "verb"],\n  ["genau", "exactly / precise", "other"],\n  ["neu", "new", "adjective"],\n  ["alt", "old", "adjective"],\n  ["groß", "big / large", "adjective"],\n  ["jetzig", "current", "adjective"],\n  ["selbst", "self / personally", "adverb"],\n  ["leider", "unfortunately", "adverb"],\n  ["früh", "early", "adjective"],\n  ["möglich", "possible", "adjective"],\n  ["nächst", "next", "adjective"],\n  ["übrig", "remaining / other", "adjective"],\n  ["gut", "good", "adjective"],\n  ["dann", "then", "adverb"],\n  ["mal", "sometimes / once", "adverb"],\n  ["bitte", "please", "adverb"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Umzug", "the move / relocation", "noun"],\n  ["die Umzugsfirma", "the moving company", "noun"],\n  ["der Umzugstag", "the moving day", "noun"],\n  ["das Angebot", "the offer / quote", "noun"],\n  ["die Nachfrage", "the inquiry / demand", "noun"],\n  ["das Detail", "the detail", "noun"],\n  ["der Kunde", "the customer (male)", "noun"],\n  ["die Kundin", "the customer (female)", "noun"],\n  ["die Spülmaschine", "the dishwasher", "noun"],\n  ["der Kaffeeautomat", "the coffee machine", "noun"],\n  ["das Regal", "the shelf", "noun"],\n  ["der Mitarbeiter", "the employee (male)", "noun"],\n  ["die Mitarbeiterin", "the employee (female)", "noun"],\n  ["das Stockwerk", "the floor / storey", "noun"],\n  ["der Schreibtisch", "the desk", "noun"],\n  ["das Möbel", "the piece of furniture", "noun"],\n  ["der Karton", "the box / carton", "noun"],\n  ["der Fixpreis", "the fixed price", "noun"],\n  ["der Hof", "the courtyard", "noun"],\n  ["die Einbauküche", "the fitted kitchen", "noun"],\n  ["der Stock", "the floor / storey", "noun"],\n  ["die Parkmöglichkeit", "the parking option", "noun"],\n  ["der Anfang", "the beginning", "noun"],\n  ["der Besichtigungstermin", "the viewing appointment", "noun"],\n  ["die Besichtigung", "the inspection / viewing", "noun"],\n  ["der Aufzug", "the elevator / lift", "noun"],\n  ["die Notiz", "the note", "noun"],\n  ["der Imbiss", "the snack bar / eatery", "noun"],\n  ["einholen", "to obtain / get", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["verhandeln", "to negotiate", "verb"],\n  ["schicken", "to send", "verb"],\n  ["umziehen", "to move (house/office)", "verb"],\n  ["mitnehmen", "to take along", "verb"],\n  ["entsorgen", "to dispose of", "verb"],\n  ["parken", "to park", "verb"],\n  ["abbauen", "to dismantle", "verb"],\n  ["erledigen", "to handle / complete", "verb"],\n  ["packen", "to pack", "verb"],\n  ["ausbuchen", "to fully book / be booked out", "verb"],\n  ["entgegenkommen", "to meet halfway / accommodate", "verb"],\n  ["beauftragen", "to commission / hire", "verb"],\n  ["anbieten", "to offer", "verb"],\n  ["bleiben", "to stay / remain", "verb"],\n  ["mitkommen", "to come along", "verb"],\n  ["aufbauen", "to assemble / set up", "verb"],\n  ["austauschen", "to exchange / discuss", "verb"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

@@ -12,15 +12,16 @@ import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
 import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
 import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
 import { EMAIL_HAUSVERWALTUNG_SET_ID, getEmailHausverwaltungSet } from "@/lib/emailHausverwaltungData";
+import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
 
-const BUILT_IN_SETS = [getArbeitsraeumeSet(), getUmzugSet(), getAdilsJobSet(), getProblemSet(), getEmailHausverwaltungSet()];
+const BUILT_IN_SETS = [getArbeitsraeumeSet(), getUmzugSet(), getAdilsJobSet(), getProblemSet(), getEmailHausverwaltungSet(), getAusdrueckeSet()];
 
 export default function Home() {
   const [sets, setSets] = useState<StudySet[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    const builtInIds = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID]);
+    const builtInIds = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID, AUSDRUECKE_SET_ID]);
     const builtInSets = BUILT_IN_SETS.map((set) => ({
       ...set,
       masteredWordIds: loadBuiltInProgress(set.id),

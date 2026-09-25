@@ -1347,16 +1347,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "der Job",
-        "job",
-        "noun"
-    ],
-    [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "stellen",
         "to place / put",
         "verb"
@@ -1367,49 +1357,14 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "das Hallo",
-        "hello",
-        "noun"
-    ],
-    [
-        "beide",
-        "both",
-        "other"
-    ],
-    [
-        "herzlich",
-        "cordial / heartfelt",
-        "adjective"
-    ],
-    [
         "der Glückwunsch",
         "congratulation",
         "noun"
     ],
     [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "das Büro",
-        "office",
-        "noun"
-    ],
-    [
-        "mutig",
-        "courageous",
-        "adjective"
-    ],
-    [
         "die Power",
         "power",
         "noun"
-    ],
-    [
-        "übrigens",
-        "by the way",
-        "adverb"
     ],
     [
         "die Neuigkeit",
@@ -1487,11 +1442,6 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "ständig",
         "constant / constantly",
         "other"
@@ -1542,11 +1492,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "finden",
-        "to find",
-        "verb"
-    ],
-    [
         "das Glück",
         "happiness / luck",
         "noun"
@@ -1555,11 +1500,6 @@ const RAW_WORDS = [
         "die Einweihungsparty",
         "housewarming party",
         "noun"
-    ],
-    [
-        "viel",
-        "many / much",
-        "other"
     ],
     [
         "der Dank",
@@ -1637,48 +1577,13 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Wann-warum-wie-wo-Regel",
-        "when-why-how-where rule",
-        "noun"
-    ],
-    [
-        "zen",
-        "Zen",
-        "noun"
-    ],
-    [
-        "wohin",
-        "where to",
-        "adverb"
-    ],
-    [
-        "die Ich-habe",
-        "the I have",
-        "noun"
-    ],
-    [
         "erst",
         "first",
         "other"
     ],
     [
-        "der Satz",
-        "sentence / rate",
-        "noun"
-    ],
-    [
         "das Kärtchen",
         "small card",
-        "noun"
-    ],
-    [
-        "spielen",
-        "to play",
-        "verb"
-    ],
-    [
-        "der Pen",
-        "pen",
         "noun"
     ],
     [
@@ -1697,64 +1602,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "der März",
-        "March",
-        "noun"
-    ],
-    [
         "der Ausdruck",
         "expression",
         "noun"
-    ],
-    [
-        "die Tabelle",
-        "table",
-        "noun"
-    ],
-    [
-        "der Monat",
-        "month",
-        "noun"
-    ],
-    [
-        "spät",
-        "late",
-        "adjective"
-    ],
-    [
-        "der Nachmittag",
-        "afternoon",
-        "noun"
-    ],
-    [
-        "draußen",
-        "outside",
-        "adverb"
-    ],
-    [
-        "wegen",
-        "because of / due to",
-        "other"
-    ],
-    [
-        "die Ausbildung",
-        "training / education",
-        "noun"
-    ],
-    [
-        "das Problem",
-        "problem",
-        "noun"
-    ],
-    [
-        "das Zentrum",
-        "centre",
-        "noun"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
     ],
     [
         "die Verkehrsanbindung",
@@ -1782,11 +1632,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "machen",
-        "to make / do",
-        "verb"
-    ],
-    [
         "das Kettenspiel",
         "chain game",
         "noun"
@@ -1804,16 +1649,6 @@ const RAW_WORDS = [
     [
         "umziehen",
         "to move",
-        "verb"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
         "verb"
     ],
     [
@@ -2525,11 +2360,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "die Hausverwaltung",
         "building management",
         "noun"
@@ -2543,21 +2373,6 @@ const RAW_WORDS = [
         "der Einleitungssatz",
         "introduction",
         "noun"
-    ],
-    [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
-        "der Herr",
-        "sir",
-        "noun"
-    ],
-    [
-        "deshalb",
-        "therefore",
-        "adverb"
     ],
     [
         "bitten",
@@ -2595,26 +2410,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Montag",
-        "monday",
-        "noun"
-    ],
-    [
-        "der Freitag",
-        "friday",
-        "noun"
-    ],
-    [
-        "zwischen",
-        "between",
-        "other"
-    ],
-    [
-        "die Uhr",
-        "clock / o'clock",
-        "noun"
-    ],
-    [
         "das Büro",
         "office",
         "noun"
@@ -2625,23 +2420,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to",
-        "verb"
-    ],
-    [
         "die Schilderung",
         "description",
-        "noun"
-    ],
-    [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
-        "der Termin",
-        "date / appointment",
         "noun"
     ],
     [
@@ -2655,11 +2435,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "vor",
-        "before",
-        "other"
-    ],
-    [
         "der Einzug",
         "move-in / collection",
         "noun"
@@ -2668,11 +2443,6 @@ const RAW_WORDS = [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
     ],
     [
         "der Boden",
@@ -2688,11 +2458,6 @@ const RAW_WORDS = [
         "die Küche",
         "kitchen",
         "noun"
-    ],
-    [
-        "benutzen",
-        "to use",
-        "verb"
     ],
     [
         "die Bitte",
@@ -2715,11 +2480,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "ihnen",
-        "to you",
-        "other"
-    ],
-    [
         "schriftlich",
         "in writing",
         "other"
@@ -2738,11 +2498,6 @@ const RAW_WORDS = [
         "das Telefongespräch",
         "telephone call",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -2785,11 +2540,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Punkt",
-        "point",
-        "noun"
-    ],
-    [
         "erfinden",
         "to invent",
         "verb"
@@ -2803,11 +2553,6 @@ const RAW_WORDS = [
         "der Zweitschlüssel",
         "second key",
         "noun"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
     ],
     [
         "der Werkstattraum",
@@ -2875,19 +2620,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "haben",
-        "to have",
-        "verb"
-    ],
-    [
         "klären",
         "to clarify",
         "verb"
-    ],
-    [
-        "falls",
-        "if",
-        "other"
     ],
     [
         "die Rückfrage",
@@ -2918,16 +2653,6 @@ const RAW_WORDS = [
         "gut",
         "good",
         "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Frau",
-        "woman / Ms.",
-        "noun"
     ],
     [
         "die Situation",
@@ -3276,11 +3001,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
@@ -3306,11 +3026,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
         "die Küche",
         "kitchen",
         "noun"
@@ -3324,11 +3039,6 @@ const RAW_WORDS = [
         "schildern",
         "to describe / depict",
         "verb"
-    ],
-    [
-        "mal",
-        "times / once",
-        "adverb"
     ],
     [
         "vorbeikommen",
@@ -3361,19 +3071,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
         "der Arbeitsraum",
         "workspace",
         "noun"
-    ],
-    [
-        "geben",
-        "to give",
-        "verb"
     ],
     [
         "die Türklinke",
@@ -3414,11 +3114,6 @@ const RAW_WORDS = [
         "der Bescheid",
         "notice / information",
         "noun"
-    ],
-    [
-        "sagen",
-        "to say",
-        "verb"
     ],
     [
         "hochziehen",
@@ -3541,39 +3236,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Firma",
-        "company",
-        "noun"
-    ],
-    [
-        "genau",
-        "precise / more precisely",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
-        "verb"
-    ],
-    [
-        "die Danke",
+        "der Dank",
         "thanks",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -3610,12 +3275,16 @@ __turbopack_context__.s([
     ()=>addSet,
     "addWord",
     ()=>addWord,
+    "deleteBuiltInWord",
+    ()=>deleteBuiltInWord,
     "deleteSet",
     ()=>deleteSet,
     "deleteWord",
     ()=>deleteWord,
     "getSet",
     ()=>getSet,
+    "loadBuiltInDeletedWords",
+    ()=>loadBuiltInDeletedWords,
     "loadBuiltInProgress",
     ()=>loadBuiltInProgress,
     "loadExerciseProgress",
@@ -3637,6 +3306,7 @@ __turbopack_context__.s([
 ]);
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
+const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
@@ -3651,6 +3321,16 @@ function loadExerciseProgress(setId) {
     ;
 }
 function saveExerciseProgress(setId, progress) {
+    if ("TURBOPACK compile-time truthy", 1) return;
+    //TURBOPACK unreachable
+    ;
+}
+function loadBuiltInDeletedWords(setId) {
+    if ("TURBOPACK compile-time truthy", 1) return [];
+    //TURBOPACK unreachable
+    ;
+}
+function deleteBuiltInWord(setId, wordId) {
     if ("TURBOPACK compile-time truthy", 1) return;
     //TURBOPACK unreachable
     ;
@@ -3816,18 +3496,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "das Büro",
-        "the office",
-        "noun"
-    ],
-    [
         "das Stockwerk",
         "the floor / storey",
-        "noun"
-    ],
-    [
-        "der Termin",
-        "the appointment / date",
         "noun"
     ],
     [
@@ -3848,11 +3518,6 @@ const RAW_WORDS = [
     [
         "der Fixpreis",
         "the fixed price",
-        "noun"
-    ],
-    [
-        "der Samstagvormittag",
-        "the Saturday morning",
         "noun"
     ],
     [
@@ -3881,11 +3546,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Dezember",
-        "December",
-        "noun"
-    ],
-    [
         "der Besichtigungstermin",
         "the viewing appointment",
         "noun"
@@ -3896,18 +3556,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Woche",
-        "the week",
-        "noun"
-    ],
-    [
         "der Aufzug",
         "the elevator / lift",
-        "noun"
-    ],
-    [
-        "die Situation",
-        "the situation",
         "noun"
     ],
     [
@@ -3918,16 +3568,6 @@ const RAW_WORDS = [
     [
         "der Imbiss",
         "the snack bar / eatery",
-        "noun"
-    ],
-    [
-        "der Name",
-        "the name",
-        "noun"
-    ],
-    [
-        "der Tag",
-        "the day",
         "noun"
     ],
     [
@@ -3966,38 +3606,13 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
-        "wollen",
-        "to want",
-        "verb"
-    ],
-    [
-        "müssen",
-        "to have to / must",
-        "verb"
-    ],
-    [
         "parken",
         "to park",
         "verb"
     ],
     [
-        "möchten",
-        "would like",
-        "verb"
-    ],
-    [
         "abbauen",
         "to dismantle",
-        "verb"
-    ],
-    [
-        "sollen",
-        "should / ought to",
         "verb"
     ],
     [
@@ -4018,16 +3633,6 @@ const RAW_WORDS = [
     [
         "entgegenkommen",
         "to meet halfway / accommodate",
-        "verb"
-    ],
-    [
-        "machen",
-        "to do / make",
-        "verb"
-    ],
-    [
-        "haben",
-        "to have",
         "verb"
     ],
     [
@@ -4056,104 +3661,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "tun",
-        "to do",
-        "verb"
-    ],
-    [
-        "sein",
-        "to be",
-        "verb"
-    ],
-    [
-        "gehen",
-        "to go / work out",
-        "verb"
-    ],
-    [
         "austauschen",
         "to exchange / discuss",
         "verb"
-    ],
-    [
-        "arbeiten",
-        "to work",
-        "verb"
-    ],
-    [
-        "genau",
-        "exactly / precise",
-        "other"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "alt",
-        "old",
-        "adjective"
-    ],
-    [
-        "groß",
-        "big / large",
-        "adjective"
-    ],
-    [
-        "jetzig",
-        "current",
-        "adjective"
-    ],
-    [
-        "selbst",
-        "self / personally",
-        "adverb"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
-    ],
-    [
-        "früh",
-        "early",
-        "adjective"
-    ],
-    [
-        "möglich",
-        "possible",
-        "adjective"
-    ],
-    [
-        "nächst",
-        "next",
-        "adjective"
-    ],
-    [
-        "übrig",
-        "remaining / other",
-        "adjective"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "dann",
-        "then",
-        "adverb"
-    ],
-    [
-        "mal",
-        "sometimes / once",
-        "adverb"
-    ],
-    [
-        "bitte",
-        "please",
-        "adverb"
     ]
 ].map(([german, english, pos])=>({
         german,

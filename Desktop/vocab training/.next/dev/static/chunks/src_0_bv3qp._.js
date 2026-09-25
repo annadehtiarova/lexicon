@@ -240,7 +240,13 @@ function StudySetClient({ id }) {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "StudySetClient.useEffect": ()=>{
             const resolved = resolveSet(id);
-            setSet(resolved);
+            const deletedIds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadBuiltInDeletedWords"])(id);
+            setSet(resolved ? {
+                ...resolved,
+                words: resolved.words.filter({
+                    "StudySetClient.useEffect": (word)=>!deletedIds.includes(word.id)
+                }["StudySetClient.useEffect"])
+            } : resolved);
             const progress = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadExerciseProgress"])(id);
             setExerciseProgress(progress);
             setMasteredIds(new Set(resolved?.masteredWordIds ?? []));
@@ -297,7 +303,7 @@ function StudySetClient({ id }) {
                     children: "This study set couldn't be found."
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 237,
+                    lineNumber: 240,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -306,13 +312,13 @@ function StudySetClient({ id }) {
                     children: "Back home"
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 241,
+                    lineNumber: 244,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-            lineNumber: 236,
+            lineNumber: 239,
             columnNumber: 7
         }, this);
     }
@@ -320,8 +326,11 @@ function StudySetClient({ id }) {
         markCorrect("cards", wordId);
     };
     const handleDeleteWord = (wordId)=>{
-        if (!set.isPersisted) return;
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteWord"])(id, wordId);
+        if (!set.isPersisted) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteBuiltInWord"])(id, wordId);
+        } else {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteWord"])(id, wordId);
+        }
         setSet((current)=>current ? {
                 ...current,
                 words: current.words.filter((word)=>word.id !== wordId)
@@ -404,19 +413,19 @@ function StudySetClient({ id }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChevronLeftIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                lineNumber: 345,
+                                lineNumber: 350,
                                 columnNumber: 13
                             }, this),
                             "All sets"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                        lineNumber: 341,
+                        lineNumber: 346,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 340,
+                    lineNumber: 345,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -427,7 +436,7 @@ function StudySetClient({ id }) {
                             children: set.name
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 351,
+                            lineNumber: 356,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -440,13 +449,13 @@ function StudySetClient({ id }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 355,
+                            lineNumber: 360,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 350,
+                    lineNumber: 355,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -462,20 +471,20 @@ function StudySetClient({ id }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {}, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 375,
+                                            lineNumber: 380,
                                             columnNumber: 19
                                         }, this),
                                         label
                                     ]
                                 }, key, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 366,
+                                    lineNumber: 371,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 361,
+                            lineNumber: 366,
                             columnNumber: 11
                         }, this),
                         words.length > 30 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -489,7 +498,7 @@ function StudySetClient({ id }) {
                                     children: "Previous batch"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 384,
+                                    lineNumber: 389,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -504,7 +513,7 @@ function StudySetClient({ id }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 392,
+                                    lineNumber: 397,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -515,13 +524,13 @@ function StudySetClient({ id }) {
                                     children: "Next batch"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 393,
+                                    lineNumber: 398,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 383,
+                            lineNumber: 388,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -534,7 +543,7 @@ function StudySetClient({ id }) {
                                     onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                 }, `cards-${practiceBatch}`, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 406,
+                                    lineNumber: 411,
                                     columnNumber: 15
                                 }, this),
                                 mode === "quiz" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -545,12 +554,12 @@ function StudySetClient({ id }) {
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `quiz-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 421,
+                                        lineNumber: 426,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 420,
+                                    lineNumber: 425,
                                     columnNumber: 15
                                 }, this),
                                 mode === "write" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -561,12 +570,12 @@ function StudySetClient({ id }) {
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `write-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 432,
+                                        lineNumber: 437,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 431,
+                                    lineNumber: 436,
                                     columnNumber: 15
                                 }, this),
                                 mode === "match" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -577,24 +586,24 @@ function StudySetClient({ id }) {
                                         onNextBatch: practiceBatch < batchCount - 1 ? ()=>setPracticeBatch((current)=>current + 1) : undefined
                                     }, `match-${practiceBatch}`, false, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 443,
+                                        lineNumber: 448,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 442,
+                                    lineNumber: 447,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 404,
+                            lineNumber: 409,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 360,
+                    lineNumber: 365,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -608,7 +617,7 @@ function StudySetClient({ id }) {
                                     children: "Vocabulary notes"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 456,
+                                    lineNumber: 461,
                                     columnNumber: 13
                                 }, this),
                                 set.isPersisted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -618,13 +627,13 @@ function StudySetClient({ id }) {
                                     children: "Add word"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 458,
+                                    lineNumber: 463,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 455,
+                            lineNumber: 460,
                             columnNumber: 11
                         }, this),
                         isAddingWord && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -637,7 +646,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 470,
+                                    lineNumber: 475,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -647,7 +656,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 471,
+                                    lineNumber: 476,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -660,7 +669,7 @@ function StudySetClient({ id }) {
                                             children: "Noun"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 478,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -668,7 +677,7 @@ function StudySetClient({ id }) {
                                             children: "Verb"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 478,
                                             columnNumber: 51
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -676,7 +685,7 @@ function StudySetClient({ id }) {
                                             children: "Adjective"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 478,
                                             columnNumber: 85
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -684,7 +693,7 @@ function StudySetClient({ id }) {
                                             children: "Adverb"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 478,
                                             columnNumber: 129
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -692,13 +701,13 @@ function StudySetClient({ id }) {
                                             children: "Other"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 478,
                                             columnNumber: 167
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 472,
+                                    lineNumber: 477,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -708,7 +717,7 @@ function StudySetClient({ id }) {
                                     className: "rounded-lg border border-[#9bb8bc] bg-white px-3 py-2 text-sm text-[#172b35]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 475,
+                                    lineNumber: 480,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -721,7 +730,7 @@ function StudySetClient({ id }) {
                                             children: "Save word"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 477,
+                                            lineNumber: 482,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -731,19 +740,19 @@ function StudySetClient({ id }) {
                                             children: "Cancel"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                            lineNumber: 478,
+                                            lineNumber: 483,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 476,
+                                    lineNumber: 481,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 469,
+                            lineNumber: 474,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -755,7 +764,7 @@ function StudySetClient({ id }) {
                             "aria-label": "Search all words"
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 483,
+                            lineNumber: 488,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -772,7 +781,7 @@ function StudySetClient({ id }) {
                                                 "aria-label": "German word"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 504,
+                                                lineNumber: 509,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -782,7 +791,7 @@ function StudySetClient({ id }) {
                                                 "aria-label": "English translation"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 513,
+                                                lineNumber: 518,
                                                 columnNumber: 21
                                             }, this),
                                             draftPos === "noun" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -796,7 +805,7 @@ function StudySetClient({ id }) {
                                                         children: "der"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 529,
+                                                        lineNumber: 534,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -804,7 +813,7 @@ function StudySetClient({ id }) {
                                                         children: "die"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 530,
+                                                        lineNumber: 535,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -812,13 +821,13 @@ function StudySetClient({ id }) {
                                                         children: "das"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 531,
+                                                        lineNumber: 536,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 523,
+                                                lineNumber: 528,
                                                 columnNumber: 23
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -832,7 +841,7 @@ function StudySetClient({ id }) {
                                                         children: "Noun"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 541,
+                                                        lineNumber: 546,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -840,7 +849,7 @@ function StudySetClient({ id }) {
                                                         children: "Verb"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 542,
+                                                        lineNumber: 547,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -848,7 +857,7 @@ function StudySetClient({ id }) {
                                                         children: "Adjective"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 543,
+                                                        lineNumber: 548,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -856,7 +865,7 @@ function StudySetClient({ id }) {
                                                         children: "Adverb"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 544,
+                                                        lineNumber: 549,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -864,13 +873,13 @@ function StudySetClient({ id }) {
                                                         children: "Other"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 545,
+                                                        lineNumber: 550,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 535,
+                                                lineNumber: 540,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -883,7 +892,7 @@ function StudySetClient({ id }) {
                                                         children: "Save"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 549,
+                                                        lineNumber: 554,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -893,19 +902,19 @@ function StudySetClient({ id }) {
                                                         children: "Cancel"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 557,
+                                                        lineNumber: 562,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 548,
+                                                lineNumber: 553,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 503,
+                                        lineNumber: 508,
                                         columnNumber: 19
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: [
@@ -917,7 +926,7 @@ function StudySetClient({ id }) {
                                                         "aria-label": "Mastered"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 569,
+                                                        lineNumber: 574,
                                                         columnNumber: 52
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -929,7 +938,7 @@ function StudySetClient({ id }) {
                                                                 children: displayGerman(word)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 571,
+                                                                lineNumber: 576,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -937,19 +946,19 @@ function StudySetClient({ id }) {
                                                                 children: word.example
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 579,
+                                                                lineNumber: 584,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 570,
+                                                        lineNumber: 575,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 568,
+                                                lineNumber: 573,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -965,7 +974,7 @@ function StudySetClient({ id }) {
                                                                 children: word.english
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 587,
+                                                                lineNumber: 592,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -973,16 +982,16 @@ function StudySetClient({ id }) {
                                                                 children: word.pos
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                                lineNumber: 595,
+                                                                lineNumber: 600,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 586,
+                                                        lineNumber: 591,
                                                         columnNumber: 23
                                                     }, this),
-                                                    set.isPersisted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         onClick: ()=>handleDeleteWord(word.id),
                                                         className: "rounded-full p-1.5 text-[#5d6f74] hover:bg-[#fff0df] hover:text-[#e76548]",
                                                         "aria-label": `Delete ${word.german}`,
@@ -990,51 +999,51 @@ function StudySetClient({ id }) {
                                                             className: "h-4 w-4"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                            lineNumber: 606,
-                                                            columnNumber: 27
+                                                            lineNumber: 610,
+                                                            columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                        lineNumber: 601,
-                                                        columnNumber: 25
+                                                        lineNumber: 605,
+                                                        columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                                lineNumber: 585,
+                                                lineNumber: 590,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                        lineNumber: 567,
+                                        lineNumber: 572,
                                         columnNumber: 19
                                     }, this)
                                 }, word.id, false, {
                                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                                    lineNumber: 494,
+                                    lineNumber: 499,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                            lineNumber: 492,
+                            lineNumber: 497,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-                    lineNumber: 454,
+                    lineNumber: 459,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-            lineNumber: 339,
+            lineNumber: 344,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/sets/[id]/StudySetClient.tsx",
-        lineNumber: 338,
+        lineNumber: 343,
         columnNumber: 5
     }, this);
 }
@@ -1777,14 +1786,24 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: goBack,
                         disabled: index === 0,
-                        className: "flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] disabled:opacity-45",
+                        className: "flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] disabled:opacity-45 sm:w-auto sm:px-4",
+                        "aria-label": "Back",
+                        title: "Back",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChevronLeftIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 87,
+                                lineNumber: 89,
                                 columnNumber: 11
                             }, this),
-                            " Back"
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "hidden sm:inline",
+                                children: "Back"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/modes/CardsMode.tsx",
+                                lineNumber: 89,
+                                columnNumber: 31
+                            }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
@@ -1800,14 +1819,14 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CheckIcon"], {}, void 0, false, {
                                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                        lineNumber: 95,
+                                        lineNumber: 97,
                                         columnNumber: 13
                                     }, this),
                                     " Again"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 91,
+                                lineNumber: 93,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1819,37 +1838,49 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["XIcon"], {}, void 0, false, {
                                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                        lineNumber: 104,
+                                        lineNumber: 106,
                                         columnNumber: 13
                                     }, this),
                                     " I know it"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 97,
+                                lineNumber: 99,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 90,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         type: "button",
                         onClick: advance,
-                        className: "flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d]",
+                        className: "flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d] sm:w-auto sm:px-4",
+                        "aria-label": "Next",
+                        title: "Next",
                         children: [
-                            "Next ",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "hidden sm:inline",
+                                children: "Next"
+                            }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 113,
-                                columnNumber: 16
+                                lineNumber: 117,
+                                columnNumber: 11
+                            }, this),
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChevronLeftIcon"], {
+                                className: "h-4 w-4 shrink-0 rotate-180"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/modes/CardsMode.tsx",
+                                lineNumber: 117,
+                                columnNumber: 58
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 108,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, this)
                 ]
@@ -1871,7 +1902,7 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 117,
+                lineNumber: 121,
                 columnNumber: 7
             }, this),
             index === total - 1 && onNextBatch && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1882,13 +1913,13 @@ function CardsMode({ words, masteredIds, onCorrect, onNextBatch }) {
                     "Next batch ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 126,
+                        lineNumber: 130,
                         columnNumber: 22
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 121,
+                lineNumber: 125,
                 columnNumber: 9
             }, this)
         ]
@@ -2554,16 +2585,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "der Job",
-        "job",
-        "noun"
-    ],
-    [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "stellen",
         "to place / put",
         "verb"
@@ -2574,49 +2595,14 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "das Hallo",
-        "hello",
-        "noun"
-    ],
-    [
-        "beide",
-        "both",
-        "other"
-    ],
-    [
-        "herzlich",
-        "cordial / heartfelt",
-        "adjective"
-    ],
-    [
         "der Glückwunsch",
         "congratulation",
         "noun"
     ],
     [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "das Büro",
-        "office",
-        "noun"
-    ],
-    [
-        "mutig",
-        "courageous",
-        "adjective"
-    ],
-    [
         "die Power",
         "power",
         "noun"
-    ],
-    [
-        "übrigens",
-        "by the way",
-        "adverb"
     ],
     [
         "die Neuigkeit",
@@ -2694,11 +2680,6 @@ const RAW_WORDS = [
         "adjective"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "ständig",
         "constant / constantly",
         "other"
@@ -2749,11 +2730,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "finden",
-        "to find",
-        "verb"
-    ],
-    [
         "das Glück",
         "happiness / luck",
         "noun"
@@ -2762,11 +2738,6 @@ const RAW_WORDS = [
         "die Einweihungsparty",
         "housewarming party",
         "noun"
-    ],
-    [
-        "viel",
-        "many / much",
-        "other"
     ],
     [
         "der Dank",
@@ -2844,48 +2815,13 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Wann-warum-wie-wo-Regel",
-        "when-why-how-where rule",
-        "noun"
-    ],
-    [
-        "zen",
-        "Zen",
-        "noun"
-    ],
-    [
-        "wohin",
-        "where to",
-        "adverb"
-    ],
-    [
-        "die Ich-habe",
-        "the I have",
-        "noun"
-    ],
-    [
         "erst",
         "first",
         "other"
     ],
     [
-        "der Satz",
-        "sentence / rate",
-        "noun"
-    ],
-    [
         "das Kärtchen",
         "small card",
-        "noun"
-    ],
-    [
-        "spielen",
-        "to play",
-        "verb"
-    ],
-    [
-        "der Pen",
-        "pen",
         "noun"
     ],
     [
@@ -2904,64 +2840,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "der März",
-        "March",
-        "noun"
-    ],
-    [
         "der Ausdruck",
         "expression",
         "noun"
-    ],
-    [
-        "die Tabelle",
-        "table",
-        "noun"
-    ],
-    [
-        "der Monat",
-        "month",
-        "noun"
-    ],
-    [
-        "spät",
-        "late",
-        "adjective"
-    ],
-    [
-        "der Nachmittag",
-        "afternoon",
-        "noun"
-    ],
-    [
-        "draußen",
-        "outside",
-        "adverb"
-    ],
-    [
-        "wegen",
-        "because of / due to",
-        "other"
-    ],
-    [
-        "die Ausbildung",
-        "training / education",
-        "noun"
-    ],
-    [
-        "das Problem",
-        "problem",
-        "noun"
-    ],
-    [
-        "das Zentrum",
-        "centre",
-        "noun"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
     ],
     [
         "die Verkehrsanbindung",
@@ -2989,11 +2870,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "machen",
-        "to make / do",
-        "verb"
-    ],
-    [
         "das Kettenspiel",
         "chain game",
         "noun"
@@ -3011,16 +2887,6 @@ const RAW_WORDS = [
     [
         "umziehen",
         "to move",
-        "verb"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
         "verb"
     ],
     [
@@ -3061,7 +2927,7 @@ function getAdilsJobSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Job", "job", "noun"],\n  ["die E-Mail", "e-mail", "noun"],\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["das Hallo", "hello", "noun"],\n  ["beide", "both", "other"],\n  ["herzlich", "cordial / heartfelt", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["neu", "new", "adjective"],\n  ["das Büro", "office", "noun"],\n  ["mutig", "courageous", "adjective"],\n  ["die Power", "power", "noun"],\n  ["übrigens", "by the way", "adverb"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["sehr", "very", "adverb"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["finden", "to find", "verb"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["viel", "many / much", "other"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["zweit", "second", "adjective"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["weise", "wise", "adjective"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["die Wann-warum-wie-wo-Regel", "when-why-how-where rule", "noun"],\n  ["zen", "Zen", "noun"],\n  ["wohin", "where to", "adverb"],\n  ["die Ich-habe", "the I have", "noun"],\n  ["erst", "first", "other"],\n  ["der Satz", "sentence / rate", "noun"],\n  ["das Kärtchen", "small card", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Pen", "pen", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der März", "March", "noun"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Tabelle", "table", "noun"],\n  ["der Monat", "month", "noun"],\n  ["spät", "late", "adjective"],\n  ["der Nachmittag", "afternoon", "noun"],\n  ["draußen", "outside", "adverb"],\n  ["wegen", "because of / due to", "other"],\n  ["die Ausbildung", "training / education", "noun"],\n  ["das Problem", "problem", "noun"],\n  ["das Zentrum", "centre", "noun"],\n  ["gut", "good", "adjective"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["gestern", "yesterday", "adverb"],\n  ["der Vorort", "suburb", "noun"],\n  ["machen", "to make / do", "verb"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["viel", "much / many", "other"],\n  ["kommen", "to come", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["zuerst", "first", "adverb"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["die Power", "power", "noun"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["zweit", "second", "adjective"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["weise", "wise", "adjective"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["erst", "first", "other"],\n  ["das Kärtchen", "small card", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["gestern", "yesterday", "adverb"],\n  ["der Vorort", "suburb", "noun"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["zuerst", "first", "adverb"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -3746,11 +3612,6 @@ __turbopack_context__.s([
 ]);
 const RAW_WORDS = [
     [
-        "die E-Mail",
-        "e-mail",
-        "noun"
-    ],
-    [
         "die Hausverwaltung",
         "building management",
         "noun"
@@ -3764,21 +3625,6 @@ const RAW_WORDS = [
         "der Einleitungssatz",
         "introduction",
         "noun"
-    ],
-    [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
-        "der Herr",
-        "sir",
-        "noun"
-    ],
-    [
-        "deshalb",
-        "therefore",
-        "adverb"
     ],
     [
         "bitten",
@@ -3816,26 +3662,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Montag",
-        "monday",
-        "noun"
-    ],
-    [
-        "der Freitag",
-        "friday",
-        "noun"
-    ],
-    [
-        "zwischen",
-        "between",
-        "other"
-    ],
-    [
-        "die Uhr",
-        "clock / o'clock",
-        "noun"
-    ],
-    [
         "das Büro",
         "office",
         "noun"
@@ -3846,23 +3672,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to",
-        "verb"
-    ],
-    [
         "die Schilderung",
         "description",
-        "noun"
-    ],
-    [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
-        "der Termin",
-        "date / appointment",
         "noun"
     ],
     [
@@ -3876,11 +3687,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "vor",
-        "before",
-        "other"
-    ],
-    [
         "der Einzug",
         "move-in / collection",
         "noun"
@@ -3889,11 +3695,6 @@ const RAW_WORDS = [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
     ],
     [
         "der Boden",
@@ -3909,11 +3710,6 @@ const RAW_WORDS = [
         "die Küche",
         "kitchen",
         "noun"
-    ],
-    [
-        "benutzen",
-        "to use",
-        "verb"
     ],
     [
         "die Bitte",
@@ -3936,11 +3732,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "ihnen",
-        "to you",
-        "other"
-    ],
-    [
         "schriftlich",
         "in writing",
         "other"
@@ -3959,11 +3750,6 @@ const RAW_WORDS = [
         "das Telefongespräch",
         "telephone call",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -4006,11 +3792,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Punkt",
-        "point",
-        "noun"
-    ],
-    [
         "erfinden",
         "to invent",
         "verb"
@@ -4024,11 +3805,6 @@ const RAW_WORDS = [
         "der Zweitschlüssel",
         "second key",
         "noun"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
     ],
     [
         "der Werkstattraum",
@@ -4096,19 +3872,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "haben",
-        "to have",
-        "verb"
-    ],
-    [
         "klären",
         "to clarify",
         "verb"
-    ],
-    [
-        "falls",
-        "if",
-        "other"
     ],
     [
         "die Rückfrage",
@@ -4139,16 +3905,6 @@ const RAW_WORDS = [
         "gut",
         "good",
         "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Frau",
-        "woman / Ms.",
-        "noun"
     ],
     [
         "die Situation",
@@ -4193,7 +3949,7 @@ function getEmailHausverwaltungSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["die E-Mail", "e-mail", "noun"],\n  ["die Hausverwaltung", "building management", "noun"],\n  ["der Gliederungspunkt", "breakdown point", "noun"],\n  ["der Einleitungssatz", "introduction", "noun"],\n  ["sehr", "very", "adverb"],\n  ["der Herr", "sir", "noun"],\n  ["deshalb", "therefore", "adverb"],\n  ["bitten", "to ask", "verb"],\n  ["der Grund", "reason", "noun"],\n  ["die Beanstandung", "complaint / objection", "noun"],\n  ["die Firma", "company", "noun"],\n  ["verständigen", "to communicate / notify", "verb"],\n  ["schaden", "to damage", "verb"],\n  ["das Schreiben", "letter", "noun"],\n  ["der Montag", "monday", "noun"],\n  ["der Freitag", "friday", "noun"],\n  ["zwischen", "between", "other"],\n  ["die Uhr", "clock / o\'clock", "noun"],\n  ["das Büro", "office", "noun"],\n  ["der Bedarf", "need", "noun"],\n  ["können", "to be able to", "verb"],\n  ["die Schilderung", "description", "noun"],\n  ["ander", "other", "adjective"],\n  ["der Termin", "date / appointment", "noun"],\n  ["vereinbaren", "to arrange / agree upon", "verb"],\n  ["das Problem", "problem", "noun"],\n  ["vor", "before", "other"],\n  ["der Einzug", "move-in / collection", "noun"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["leider", "unfortunately", "adverb"],\n  ["der Boden", "ground / floor", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["die Bitte", "request / please", "noun"],\n  ["die Erledigung", "completion / handling", "noun"],\n  ["soeben", "just now", "adverb"],\n  ["besprechen", "to discuss", "verb"],\n  ["ihnen", "to you", "other"],\n  ["schriftlich", "in writing", "other"],\n  ["schildern", "to describe", "verb"],\n  ["die Erreichbarkeit", "accessibility", "noun"],\n  ["das Telefongespräch", "telephone call", "noun"],\n  ["viel", "much / many", "other"],\n  ["der Dank", "thanks", "noun"],\n  ["im Voraus", "in advance", "other"],\n  ["die Anrede", "salutation", "noun"],\n  ["freundlich", "friendly", "adjective"],\n  ["grüßen", "to greet", "verb"],\n  ["der Geschäftsführer", "managing director", "noun"],\n  ["der Schluss", "conclusion", "noun"],\n  ["der Gruß", "greetings", "noun"],\n  ["der Punkt", "point", "noun"],\n  ["erfinden", "to invent", "verb"],\n  ["brauchen", "to need", "verb"],\n  ["der Zweitschlüssel", "second key", "noun"],\n  ["neu", "new", "adjective"],\n  ["der Werkstattraum", "workshop room", "noun"],\n  ["der Malerbetrieb", "painting business", "noun"],\n  ["der Büroraum", "office space", "noun"],\n  ["streichen", "to paint / delete", "verb"],\n  ["möchten", "to want / would like", "verb"],\n  ["die Nachbesserung", "improvement / rectification", "noun"],\n  ["der Anruf", "call", "noun"],\n  ["der Boiler", "boiler", "noun"],\n  ["ausfallen", "to fail / be canceled", "verb"],\n  ["die Nachricht", "message", "noun"],\n  ["telefonisch", "by phone", "other"],\n  ["einmal", "once", "adverb"],\n  ["erinnern", "to remind / remember", "verb"],\n  ["haben", "to have", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["falls", "if", "other"],\n  ["die Rückfrage", "query / follow-up question", "noun"],\n  ["anrufen", "to call", "verb"],\n  ["täglich", "daily", "other"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Vorhang", "curtain", "noun"],\n  ["gut", "good", "adjective"],\n  ["der Tag", "day", "noun"],\n  ["die Frau", "woman / Ms.", "noun"],\n  ["die Situation", "situation", "noun"],\n  ["planen", "to plan", "verb"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["die Hausverwaltung", "building management", "noun"],\n  ["der Gliederungspunkt", "breakdown point", "noun"],\n  ["der Einleitungssatz", "introduction", "noun"],\n  ["bitten", "to ask", "verb"],\n  ["der Grund", "reason", "noun"],\n  ["die Beanstandung", "complaint / objection", "noun"],\n  ["die Firma", "company", "noun"],\n  ["verständigen", "to communicate / notify", "verb"],\n  ["schaden", "to damage", "verb"],\n  ["das Schreiben", "letter", "noun"],\n  ["das Büro", "office", "noun"],\n  ["der Bedarf", "need", "noun"],\n  ["die Schilderung", "description", "noun"],\n  ["vereinbaren", "to arrange / agree upon", "verb"],\n  ["das Problem", "problem", "noun"],\n  ["der Einzug", "move-in / collection", "noun"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["der Boden", "ground / floor", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["die Bitte", "request / please", "noun"],\n  ["die Erledigung", "completion / handling", "noun"],\n  ["soeben", "just now", "adverb"],\n  ["besprechen", "to discuss", "verb"],\n  ["schriftlich", "in writing", "other"],\n  ["schildern", "to describe", "verb"],\n  ["die Erreichbarkeit", "accessibility", "noun"],\n  ["das Telefongespräch", "telephone call", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["im Voraus", "in advance", "other"],\n  ["die Anrede", "salutation", "noun"],\n  ["freundlich", "friendly", "adjective"],\n  ["grüßen", "to greet", "verb"],\n  ["der Geschäftsführer", "managing director", "noun"],\n  ["der Schluss", "conclusion", "noun"],\n  ["der Gruß", "greetings", "noun"],\n  ["erfinden", "to invent", "verb"],\n  ["brauchen", "to need", "verb"],\n  ["der Zweitschlüssel", "second key", "noun"],\n  ["der Werkstattraum", "workshop room", "noun"],\n  ["der Malerbetrieb", "painting business", "noun"],\n  ["der Büroraum", "office space", "noun"],\n  ["streichen", "to paint / delete", "verb"],\n  ["möchten", "to want / would like", "verb"],\n  ["die Nachbesserung", "improvement / rectification", "noun"],\n  ["der Anruf", "call", "noun"],\n  ["der Boiler", "boiler", "noun"],\n  ["ausfallen", "to fail / be canceled", "verb"],\n  ["die Nachricht", "message", "noun"],\n  ["telefonisch", "by phone", "other"],\n  ["einmal", "once", "adverb"],\n  ["erinnern", "to remind / remember", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["die Rückfrage", "query / follow-up question", "noun"],\n  ["anrufen", "to call", "verb"],\n  ["täglich", "daily", "other"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Vorhang", "curtain", "noun"],\n  ["gut", "good", "adjective"],\n  ["die Situation", "situation", "noun"],\n  ["planen", "to plan", "verb"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -4257,11 +4013,6 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "sehr",
-        "very",
-        "adverb"
-    ],
-    [
         "die Kaffeeküche",
         "coffee kitchen",
         "noun"
@@ -4287,11 +4038,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
         "die Küche",
         "kitchen",
         "noun"
@@ -4305,11 +4051,6 @@ const RAW_WORDS = [
         "schildern",
         "to describe / depict",
         "verb"
-    ],
-    [
-        "mal",
-        "times / once",
-        "adverb"
     ],
     [
         "vorbeikommen",
@@ -4342,19 +4083,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "ander",
-        "other",
-        "adjective"
-    ],
-    [
         "der Arbeitsraum",
         "workspace",
         "noun"
-    ],
-    [
-        "geben",
-        "to give",
-        "verb"
     ],
     [
         "die Türklinke",
@@ -4395,11 +4126,6 @@ const RAW_WORDS = [
         "der Bescheid",
         "notice / information",
         "noun"
-    ],
-    [
-        "sagen",
-        "to say",
-        "verb"
     ],
     [
         "hochziehen",
@@ -4522,39 +4248,9 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "der Tag",
-        "day",
-        "noun"
-    ],
-    [
-        "die Firma",
-        "company",
-        "noun"
-    ],
-    [
-        "genau",
-        "precise / more precisely",
-        "other"
-    ],
-    [
-        "kommen",
-        "to come",
-        "verb"
-    ],
-    [
-        "die Danke",
+        "der Dank",
         "thanks",
         "noun"
-    ],
-    [
-        "viel",
-        "much / many",
-        "other"
     ],
     [
         "der Dank",
@@ -4584,7 +4280,7 @@ function getProblemSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["das Problem", "problem", "noun"],\n  ["die Hausverwaltung", "property management / house management", "noun"],\n  ["die Zeichnung", "drawing", "noun"],\n  ["einmal", "once", "adverb"],\n  ["das Büro", "office", "noun"],\n  ["lassen", "to let / leave", "verb"],\n  ["der Boden", "floor / ground", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["fühlen", "to feel", "verb"],\n  ["sehr", "very", "adverb"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["renovieren", "to renovate", "verb"],\n  ["die Angst", "fear", "noun"],\n  ["wirklich", "really", "other"],\n  ["die Ordnung", "order", "noun"],\n  ["können", "to be able to / can", "verb"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["schildern", "to describe / depict", "verb"],\n  ["mal", "times / once", "adverb"],\n  ["vorbeikommen", "to come by", "verb"],\n  ["das Folgende", "the following", "noun"],\n  ["bitten", "to ask / request", "verb"],\n  ["natürlich", "of course / natural", "other"],\n  ["das Problem", "problem", "noun"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["ander", "other", "adjective"],\n  ["der Arbeitsraum", "workspace", "noun"],\n  ["geben", "to give", "verb"],\n  ["die Türklinke", "door handle", "noun"],\n  ["reparieren", "to repair", "verb"],\n  ["lösen", "to solve / dissolve", "verb"],\n  ["unten", "below / downstairs", "adverb"],\n  ["abgehen", "to come off / detach", "verb"],\n  ["anrufen", "to call", "verb"],\n  ["die Zentralheizung", "central heating", "noun"],\n  ["der Bescheid", "notice / information", "noun"],\n  ["sagen", "to say", "verb"],\n  ["hochziehen", "to pull up", "verb"],\n  ["werden", "to become / will", "verb"],\n  ["der Abfluss", "drain", "noun"],\n  ["das Spülbecken", "sink", "noun"],\n  ["kümmern", "to care / look after", "verb"],\n  ["der Rollladen", "roll-out shutter / roller blind", "noun"],\n  ["der Aufzug", "elevator", "noun"],\n  ["der Topf", "pot", "noun"],\n  ["der Abflussreiniger", "drain cleaner", "noun"],\n  ["verwenden", "to use", "verb"],\n  ["die Tür", "door", "noun"],\n  ["der Aktenschrank", "file cabinet", "noun"],\n  ["anschrauben", "to screw on", "verb"],\n  ["der Wasserhahn", "faucet / tap", "noun"],\n  ["die Toilette", "toilet", "noun"],\n  ["der Handwerker", "craftsman", "noun"],\n  ["das Türschloss", "door lock", "noun"],\n  ["abbrechen", "to break off / cancel", "verb"],\n  ["der Hausmeister", "caretaker / janitor", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n  ["der Vermieter", "landlord / owner", "noun"],\n  ["der Mieter", "tenant", "noun"],\n  ["der Apparat", "apparatus / phone", "noun"],\n  ["gut", "good", "adjective"],\n  ["der Tag", "day", "noun"],\n  ["die Firma", "company", "noun"],\n  ["genau", "precise / more precisely", "other"],\n  ["kommen", "to come", "verb"],\n  ["die Danke", "thanks", "noun"],\n  ["viel", "much / many", "other"],\n  ["der Dank", "thanks", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["das Problem", "problem", "noun"],\n  ["die Hausverwaltung", "property management / house management", "noun"],\n  ["die Zeichnung", "drawing", "noun"],\n  ["einmal", "once", "adverb"],\n  ["das Büro", "office", "noun"],\n  ["lassen", "to let / leave", "verb"],\n  ["der Boden", "floor / ground", "noun"],\n  ["der Riss", "crack", "noun"],\n  ["fühlen", "to feel", "verb"],\n  ["die Kaffeeküche", "coffee kitchen", "noun"],\n  ["renovieren", "to renovate", "verb"],\n  ["die Angst", "fear", "noun"],\n  ["wirklich", "really", "other"],\n  ["die Ordnung", "order", "noun"],\n  ["die Küche", "kitchen", "noun"],\n  ["benutzen", "to use", "verb"],\n  ["schildern", "to describe / depict", "verb"],\n  ["vorbeikommen", "to come by", "verb"],\n  ["das Folgende", "the following", "noun"],\n  ["bitten", "to ask / request", "verb"],\n  ["natürlich", "of course / natural", "other"],\n  ["das Problem", "problem", "noun"],\n  ["die Werkstatt", "workshop", "noun"],\n  ["der Arbeitsraum", "workspace", "noun"],\n  ["die Türklinke", "door handle", "noun"],\n  ["reparieren", "to repair", "verb"],\n  ["lösen", "to solve / dissolve", "verb"],\n  ["unten", "below / downstairs", "adverb"],\n  ["abgehen", "to come off / detach", "verb"],\n  ["anrufen", "to call", "verb"],\n  ["die Zentralheizung", "central heating", "noun"],\n  ["der Bescheid", "notice / information", "noun"],\n  ["hochziehen", "to pull up", "verb"],\n  ["werden", "to become / will", "verb"],\n  ["der Abfluss", "drain", "noun"],\n  ["das Spülbecken", "sink", "noun"],\n  ["kümmern", "to care / look after", "verb"],\n  ["der Rollladen", "roll-out shutter / roller blind", "noun"],\n  ["der Aufzug", "elevator", "noun"],\n  ["der Topf", "pot", "noun"],\n  ["der Abflussreiniger", "drain cleaner", "noun"],\n  ["verwenden", "to use", "verb"],\n  ["die Tür", "door", "noun"],\n  ["der Aktenschrank", "file cabinet", "noun"],\n  ["anschrauben", "to screw on", "verb"],\n  ["der Wasserhahn", "faucet / tap", "noun"],\n  ["die Toilette", "toilet", "noun"],\n  ["der Handwerker", "craftsman", "noun"],\n  ["das Türschloss", "door lock", "noun"],\n  ["abbrechen", "to break off / cancel", "verb"],\n  ["der Hausmeister", "caretaker / janitor", "noun"],\n  ["spielen", "to play", "verb"],\n  ["der Dialog", "dialogue", "noun"],\n  ["der Vermieter", "landlord / owner", "noun"],\n  ["der Mieter", "tenant", "noun"],\n  ["der Apparat", "apparatus / phone", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["der Dank", "thanks", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -4598,12 +4294,16 @@ __turbopack_context__.s([
     ()=>addSet,
     "addWord",
     ()=>addWord,
+    "deleteBuiltInWord",
+    ()=>deleteBuiltInWord,
     "deleteSet",
     ()=>deleteSet,
     "deleteWord",
     ()=>deleteWord,
     "getSet",
     ()=>getSet,
+    "loadBuiltInDeletedWords",
+    ()=>loadBuiltInDeletedWords,
     "loadBuiltInProgress",
     ()=>loadBuiltInProgress,
     "loadExerciseProgress",
@@ -4625,6 +4325,7 @@ __turbopack_context__.s([
 ]);
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
+const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
@@ -4656,6 +4357,32 @@ function saveExerciseProgress(setId, progress) {
         const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}");
         allProgress[setId] = progress;
         window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
+    } catch  {
+    // Ignore unavailable browser storage.
+    }
+}
+function loadBuiltInDeletedWords(setId) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}");
+        return Array.isArray(deleted[setId]) ? deleted[setId] : [];
+    } catch  {
+        return [];
+    }
+}
+function deleteBuiltInWord(setId, wordId) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}");
+        deleted[setId] = [
+            ...new Set([
+                ...deleted[setId] ?? [],
+                wordId
+            ])
+        ];
+        window.localStorage.setItem(BUILT_IN_DELETED_WORDS_KEY, JSON.stringify(deleted));
     } catch  {
     // Ignore unavailable browser storage.
     }
@@ -4841,18 +4568,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "das Büro",
-        "the office",
-        "noun"
-    ],
-    [
         "das Stockwerk",
         "the floor / storey",
-        "noun"
-    ],
-    [
-        "der Termin",
-        "the appointment / date",
         "noun"
     ],
     [
@@ -4873,11 +4590,6 @@ const RAW_WORDS = [
     [
         "der Fixpreis",
         "the fixed price",
-        "noun"
-    ],
-    [
-        "der Samstagvormittag",
-        "the Saturday morning",
         "noun"
     ],
     [
@@ -4906,11 +4618,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "der Dezember",
-        "December",
-        "noun"
-    ],
-    [
         "der Besichtigungstermin",
         "the viewing appointment",
         "noun"
@@ -4921,18 +4628,8 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "die Woche",
-        "the week",
-        "noun"
-    ],
-    [
         "der Aufzug",
         "the elevator / lift",
-        "noun"
-    ],
-    [
-        "die Situation",
-        "the situation",
         "noun"
     ],
     [
@@ -4943,16 +4640,6 @@ const RAW_WORDS = [
     [
         "der Imbiss",
         "the snack bar / eatery",
-        "noun"
-    ],
-    [
-        "der Name",
-        "the name",
-        "noun"
-    ],
-    [
-        "der Tag",
-        "the day",
         "noun"
     ],
     [
@@ -4991,38 +4678,13 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "können",
-        "to be able to / can",
-        "verb"
-    ],
-    [
-        "wollen",
-        "to want",
-        "verb"
-    ],
-    [
-        "müssen",
-        "to have to / must",
-        "verb"
-    ],
-    [
         "parken",
         "to park",
         "verb"
     ],
     [
-        "möchten",
-        "would like",
-        "verb"
-    ],
-    [
         "abbauen",
         "to dismantle",
-        "verb"
-    ],
-    [
-        "sollen",
-        "should / ought to",
         "verb"
     ],
     [
@@ -5043,16 +4705,6 @@ const RAW_WORDS = [
     [
         "entgegenkommen",
         "to meet halfway / accommodate",
-        "verb"
-    ],
-    [
-        "machen",
-        "to do / make",
-        "verb"
-    ],
-    [
-        "haben",
-        "to have",
         "verb"
     ],
     [
@@ -5081,104 +4733,9 @@ const RAW_WORDS = [
         "verb"
     ],
     [
-        "tun",
-        "to do",
-        "verb"
-    ],
-    [
-        "sein",
-        "to be",
-        "verb"
-    ],
-    [
-        "gehen",
-        "to go / work out",
-        "verb"
-    ],
-    [
         "austauschen",
         "to exchange / discuss",
         "verb"
-    ],
-    [
-        "arbeiten",
-        "to work",
-        "verb"
-    ],
-    [
-        "genau",
-        "exactly / precise",
-        "other"
-    ],
-    [
-        "neu",
-        "new",
-        "adjective"
-    ],
-    [
-        "alt",
-        "old",
-        "adjective"
-    ],
-    [
-        "groß",
-        "big / large",
-        "adjective"
-    ],
-    [
-        "jetzig",
-        "current",
-        "adjective"
-    ],
-    [
-        "selbst",
-        "self / personally",
-        "adverb"
-    ],
-    [
-        "leider",
-        "unfortunately",
-        "adverb"
-    ],
-    [
-        "früh",
-        "early",
-        "adjective"
-    ],
-    [
-        "möglich",
-        "possible",
-        "adjective"
-    ],
-    [
-        "nächst",
-        "next",
-        "adjective"
-    ],
-    [
-        "übrig",
-        "remaining / other",
-        "adjective"
-    ],
-    [
-        "gut",
-        "good",
-        "adjective"
-    ],
-    [
-        "dann",
-        "then",
-        "adverb"
-    ],
-    [
-        "mal",
-        "sometimes / once",
-        "adverb"
-    ],
-    [
-        "bitte",
-        "please",
-        "adverb"
     ]
 ].map(_c = ([german, english, pos])=>({
         german,
@@ -5203,7 +4760,7 @@ function getUmzugSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Umzug", "the move / relocation", "noun"],\n  ["die Umzugsfirma", "the moving company", "noun"],\n  ["der Umzugstag", "the moving day", "noun"],\n  ["das Angebot", "the offer / quote", "noun"],\n  ["die Nachfrage", "the inquiry / demand", "noun"],\n  ["das Detail", "the detail", "noun"],\n  ["der Kunde", "the customer (male)", "noun"],\n  ["die Kundin", "the customer (female)", "noun"],\n  ["die Spülmaschine", "the dishwasher", "noun"],\n  ["der Kaffeeautomat", "the coffee machine", "noun"],\n  ["das Regal", "the shelf", "noun"],\n  ["der Mitarbeiter", "the employee (male)", "noun"],\n  ["die Mitarbeiterin", "the employee (female)", "noun"],\n  ["das Büro", "the office", "noun"],\n  ["das Stockwerk", "the floor / storey", "noun"],\n  ["der Termin", "the appointment / date", "noun"],\n  ["der Schreibtisch", "the desk", "noun"],\n  ["das Möbel", "the piece of furniture", "noun"],\n  ["der Karton", "the box / carton", "noun"],\n  ["der Fixpreis", "the fixed price", "noun"],\n  ["der Samstagvormittag", "the Saturday morning", "noun"],\n  ["der Hof", "the courtyard", "noun"],\n  ["die Einbauküche", "the fitted kitchen", "noun"],\n  ["der Stock", "the floor / storey", "noun"],\n  ["die Parkmöglichkeit", "the parking option", "noun"],\n  ["der Anfang", "the beginning", "noun"],\n  ["der Dezember", "December", "noun"],\n  ["der Besichtigungstermin", "the viewing appointment", "noun"],\n  ["die Besichtigung", "the inspection / viewing", "noun"],\n  ["die Woche", "the week", "noun"],\n  ["der Aufzug", "the elevator / lift", "noun"],\n  ["die Situation", "the situation", "noun"],\n  ["die Notiz", "the note", "noun"],\n  ["der Imbiss", "the snack bar / eatery", "noun"],\n  ["der Name", "the name", "noun"],\n  ["der Tag", "the day", "noun"],\n  ["einholen", "to obtain / get", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["verhandeln", "to negotiate", "verb"],\n  ["schicken", "to send", "verb"],\n  ["umziehen", "to move (house/office)", "verb"],\n  ["mitnehmen", "to take along", "verb"],\n  ["entsorgen", "to dispose of", "verb"],\n  ["können", "to be able to / can", "verb"],\n  ["wollen", "to want", "verb"],\n  ["müssen", "to have to / must", "verb"],\n  ["parken", "to park", "verb"],\n  ["möchten", "would like", "verb"],\n  ["abbauen", "to dismantle", "verb"],\n  ["sollen", "should / ought to", "verb"],\n  ["erledigen", "to handle / complete", "verb"],\n  ["packen", "to pack", "verb"],\n  ["ausbuchen", "to fully book / be booked out", "verb"],\n  ["entgegenkommen", "to meet halfway / accommodate", "verb"],\n  ["machen", "to do / make", "verb"],\n  ["haben", "to have", "verb"],\n  ["beauftragen", "to commission / hire", "verb"],\n  ["anbieten", "to offer", "verb"],\n  ["bleiben", "to stay / remain", "verb"],\n  ["mitkommen", "to come along", "verb"],\n  ["aufbauen", "to assemble / set up", "verb"],\n  ["tun", "to do", "verb"],\n  ["sein", "to be", "verb"],\n  ["gehen", "to go / work out", "verb"],\n  ["austauschen", "to exchange / discuss", "verb"],\n  ["arbeiten", "to work", "verb"],\n  ["genau", "exactly / precise", "other"],\n  ["neu", "new", "adjective"],\n  ["alt", "old", "adjective"],\n  ["groß", "big / large", "adjective"],\n  ["jetzig", "current", "adjective"],\n  ["selbst", "self / personally", "adverb"],\n  ["leider", "unfortunately", "adverb"],\n  ["früh", "early", "adjective"],\n  ["möglich", "possible", "adjective"],\n  ["nächst", "next", "adjective"],\n  ["übrig", "remaining / other", "adjective"],\n  ["gut", "good", "adjective"],\n  ["dann", "then", "adverb"],\n  ["mal", "sometimes / once", "adverb"],\n  ["bitte", "please", "adverb"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["der Umzug", "the move / relocation", "noun"],\n  ["die Umzugsfirma", "the moving company", "noun"],\n  ["der Umzugstag", "the moving day", "noun"],\n  ["das Angebot", "the offer / quote", "noun"],\n  ["die Nachfrage", "the inquiry / demand", "noun"],\n  ["das Detail", "the detail", "noun"],\n  ["der Kunde", "the customer (male)", "noun"],\n  ["die Kundin", "the customer (female)", "noun"],\n  ["die Spülmaschine", "the dishwasher", "noun"],\n  ["der Kaffeeautomat", "the coffee machine", "noun"],\n  ["das Regal", "the shelf", "noun"],\n  ["der Mitarbeiter", "the employee (male)", "noun"],\n  ["die Mitarbeiterin", "the employee (female)", "noun"],\n  ["das Stockwerk", "the floor / storey", "noun"],\n  ["der Schreibtisch", "the desk", "noun"],\n  ["das Möbel", "the piece of furniture", "noun"],\n  ["der Karton", "the box / carton", "noun"],\n  ["der Fixpreis", "the fixed price", "noun"],\n  ["der Hof", "the courtyard", "noun"],\n  ["die Einbauküche", "the fitted kitchen", "noun"],\n  ["der Stock", "the floor / storey", "noun"],\n  ["die Parkmöglichkeit", "the parking option", "noun"],\n  ["der Anfang", "the beginning", "noun"],\n  ["der Besichtigungstermin", "the viewing appointment", "noun"],\n  ["die Besichtigung", "the inspection / viewing", "noun"],\n  ["der Aufzug", "the elevator / lift", "noun"],\n  ["die Notiz", "the note", "noun"],\n  ["der Imbiss", "the snack bar / eatery", "noun"],\n  ["einholen", "to obtain / get", "verb"],\n  ["klären", "to clarify", "verb"],\n  ["verhandeln", "to negotiate", "verb"],\n  ["schicken", "to send", "verb"],\n  ["umziehen", "to move (house/office)", "verb"],\n  ["mitnehmen", "to take along", "verb"],\n  ["entsorgen", "to dispose of", "verb"],\n  ["parken", "to park", "verb"],\n  ["abbauen", "to dismantle", "verb"],\n  ["erledigen", "to handle / complete", "verb"],\n  ["packen", "to pack", "verb"],\n  ["ausbuchen", "to fully book / be booked out", "verb"],\n  ["entgegenkommen", "to meet halfway / accommodate", "verb"],\n  ["beauftragen", "to commission / hire", "verb"],\n  ["anbieten", "to offer", "verb"],\n  ["bleiben", "to stay / remain", "verb"],\n  ["mitkommen", "to come along", "verb"],\n  ["aufbauen", "to assemble / set up", "verb"],\n  ["austauschen", "to exchange / discuss", "verb"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

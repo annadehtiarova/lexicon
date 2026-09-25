@@ -82,9 +82,11 @@ export default function CardsMode({
         <button
           onClick={goBack}
           disabled={index === 0}
-          className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] disabled:opacity-45"
+          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] disabled:opacity-45 sm:w-auto sm:px-4"
+          aria-label="Back"
+          title="Back"
         >
-          <ChevronLeftIcon /> Back
+          <ChevronLeftIcon /> <span className="hidden sm:inline">Back</span>
         </button>
 
         <div className="flex items-start gap-2">
@@ -108,9 +110,11 @@ export default function CardsMode({
         <button
           type="button"
           onClick={advance}
-          className="flex h-9 items-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] px-4 py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d]"
+          className="flex h-9 w-9 items-center justify-center gap-2 rounded-full border border-[#9bb8bc] bg-[#fffaf0] py-2 text-sm font-medium text-[#5d6f74] shadow-[2px_2px_0_rgba(8,117,141,0.08)] hover:border-[#08758d] hover:text-[#08758d] sm:w-auto sm:px-4"
+          aria-label="Next"
+          title="Next"
         >
-          Next <ArrowRightIcon />
+          <span className="hidden sm:inline">Next</span> <ChevronLeftIcon className="h-4 w-4 shrink-0 rotate-180" />
         </button>
       </div>
 

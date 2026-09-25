@@ -2,6 +2,7 @@ import { StudySet } from "./types";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
+const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 export type ExerciseKey = "cards" | "quiz" | "write" | "match";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
 
@@ -29,6 +30,27 @@ export function saveExerciseProgress(setId: string, progress: ExerciseProgress) 
     const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}") as Record<string, ExerciseProgress>;
     allProgress[setId] = progress;
     window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
+
+export function loadBuiltInDeletedWords(setId: string): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}") as Record<string, string[]>;
+    return Array.isArray(deleted[setId]) ? deleted[setId] : [];
+  } catch {
+    return [];
+  }
+}
+
+export function deleteBuiltInWord(setId: string, wordId: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}") as Record<string, string[]>;
+    deleted[setId] = [...new Set([...(deleted[setId] ?? []), wordId])];
+    window.localStorage.setItem(BUILT_IN_DELETED_WORDS_KEY, JSON.stringify(deleted));
   } catch {
     // Ignore unavailable browser storage.
   }

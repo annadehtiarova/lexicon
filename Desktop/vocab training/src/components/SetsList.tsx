@@ -16,8 +16,9 @@ import { UMZUG_SET_ID } from "@/lib/umzugData";
 import { ADILS_JOB_SET_ID } from "@/lib/adilsJobData";
 import { PROBLEM_SET_ID } from "@/lib/problemData";
 import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
+import { AUSDRUECKE_SET_ID } from "@/lib/ausdrueckeData";
 
-const BUILT_IN_SET_IDS = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID]);
+const BUILT_IN_SET_IDS = new Set([ARBEITSRAEUME_SET_ID, UMZUG_SET_ID, ADILS_JOB_SET_ID, PROBLEM_SET_ID, EMAIL_HAUSVERWALTUNG_SET_ID, AUSDRUECKE_SET_ID]);
 
 export default function SetsList({ sets, onDelete, onRename }: SetsListProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
