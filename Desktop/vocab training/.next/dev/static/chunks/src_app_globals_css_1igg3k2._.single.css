@@ -594,6 +594,10 @@
     width: calc(var(--spacing) * 12);
   }
 
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+
   .w-28 {
     width: calc(var(--spacing) * 28);
   }
@@ -932,6 +936,10 @@
 
   .bg-\[rgba\(198\,233\,64\,0\.16\)\] {
     background-color: #c6e94029;
+  }
+
+  .bg-\[rgba\(255\,102\,87\,0\.08\)\] {
+    background-color: #ff665714;
   }
 
   .bg-\[rgba\(255\,102\,87\,0\.12\)\] {
@@ -1464,12 +1472,24 @@
       border-color: #596477;
     }
 
+    .hover\:border-\[\#ff6657\]:hover {
+      border-color: #ff6657;
+    }
+
+    .hover\:bg-\[\#151e2d\]:hover {
+      background-color: #151e2d;
+    }
+
     .hover\:bg-\[\#20293a\]:hover {
       background-color: #20293a;
     }
 
     .hover\:bg-\[\#263144\]:hover {
       background-color: #263144;
+    }
+
+    .hover\:bg-\[rgba\(255\,102\,87\,0\.14\)\]:hover {
+      background-color: #ff665724;
     }
 
     .hover\:bg-slate-800:hover {
@@ -1504,6 +1524,10 @@
 
   .disabled\:cursor-not-allowed:disabled {
     cursor: not-allowed;
+  }
+
+  .disabled\:opacity-30:disabled {
+    opacity: .3;
   }
 
   .disabled\:opacity-40:disabled {

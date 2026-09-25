@@ -123,6 +123,7 @@ export default function StudySetClient({ id }: { id: string }) {
 
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
+  const [practiceBatch, setPracticeBatch] = useState(0);
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
@@ -132,6 +133,7 @@ export default function StudySetClient({ id }: { id: string }) {
   const [newEnglish, setNewEnglish] = useState("");
   const [newPos, setNewPos] = useState("noun");
   const [newExample, setNewExample] = useState("");
+  const [wordSearch, setWordSearch] = useState("");
 
   useEffect(() => {
     const resolved = resolveSet(id);
@@ -153,6 +155,16 @@ export default function StudySetClient({ id }: { id: string }) {
       })),
     [set],
   );
+  const batchCount = Math.max(1, Math.ceil(words.length / 30));
+  const practiceWords = words.slice(practiceBatch * 30, practiceBatch * 30 + 30);
+  const visibleWords = words.filter((word) => {
+    const query = wordSearch.trim().toLowerCase();
+    if (!query) return true;
+    return [word.german, word.english, word.pos, word.example]
+      .join(" ")
+      .toLowerCase()
+      .includes(query);
+  });
 
   if (set === undefined) return null;
 
@@ -309,30 +321,58 @@ export default function StudySetClient({ id }: { id: string }) {
             })}
           </div>
 
+          {words.length > 30 && (
+            <div className="mt-4 flex items-center justify-between rounded-xl border border-[#2b3342] bg-[#111827] px-4 py-2 text-sm text-[#9da5b5]">
+              <button
+                type="button"
+                disabled={practiceBatch === 0}
+                onClick={() => setPracticeBatch((current) => current - 1)}
+                className="disabled:opacity-30"
+              >
+                Previous batch
+              </button>
+              <span>Batch {practiceBatch + 1} of {batchCount} · {practiceWords.length} words</span>
+              <button
+                type="button"
+                disabled={practiceBatch === batchCount - 1}
+                onClick={() => setPracticeBatch((current) => current + 1)}
+                className="disabled:opacity-30"
+              >
+                Next batch
+              </button>
+            </div>
+          )}
+
           <div className="pb-6">
             {mode === "cards" && (
               <CardsMode
-                words={words}
+                key={`cards-${practiceBatch}`}
+                words={practiceWords}
                 masteredIds={masteredIds}
                 onKnewIt={handleKnewIt}
+                onNextBatch={
+                  practiceBatch < batchCount - 1
+                    ? () => setPracticeBatch((current) => current + 1)
+                    : undefined
+                }
               />
             )}
 
             {mode === "quiz" && (
               <div className="pt-8">
-                <MultipleChoiceMode words={words} />
+                <MultipleChoiceMode key={`quiz-${practiceBatch}`} words={practiceWords} />
               </div>
             )}
 
             {mode === "write" && (
               <div className="pt-8">
-                <TypingMode words={words} />
+                <TypingMode key={`write-${practiceBatch}`} words={practiceWords} />
               </div>
             )}
 
             {mode === "match" && (
               <div className="pt-8">
-                <MatchingMode words={words} />
+                <MatchingMode key={`match-${practiceBatch}`} words={practiceWords} />
               </div>
             )}
           </div>
@@ -367,8 +407,17 @@ export default function StudySetClient({ id }: { id: string }) {
             </div>
           )}
 
+          <input
+            type="search"
+            value={wordSearch}
+            onChange={(event) => setWordSearch(event.target.value)}
+            placeholder="Search words, translations, or types"
+            className="mt-4 h-11 w-full rounded-xl border border-[#2b3342] bg-[#0d141f] px-4 text-sm text-[#f3f5f9] outline-none placeholder:text-[#596477] focus:border-[#c6e940]"
+            aria-label="Search all words"
+          />
+
           <div className="mt-4 overflow-hidden rounded-2xl border-[0.556px] border-[#2b3342]">
-            {words.map((word, i) => (
+            {visibleWords.map((word, i) => (
               <div
                 key={word.id}
                 className={`flex items-center justify-between gap-4 px-5 py-3.5 ${

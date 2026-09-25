@@ -13,12 +13,14 @@ interface CardsModeProps {
   words: VocabWord[];
   masteredIds: Set<string>;
   onKnewIt: (id: string) => void;
+  onNextBatch?: () => void;
 }
 
 export default function CardsMode({
   words,
   masteredIds,
   onKnewIt,
+  onNextBatch,
 }: CardsModeProps) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -76,37 +78,47 @@ export default function CardsMode({
         <button
           onClick={goBack}
           disabled={index === 0}
-          className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#f3f5f9] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] disabled:opacity-50"
+          className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#9da5b5] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] disabled:opacity-50"
         >
           <ChevronLeftIcon /> Back
         </button>
 
         <div className="flex items-start gap-2">
           <button
-            onClick={advance}
-            className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#f3f5f9] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)]"
+            onClick={handleKnewIt}
+            className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#9da5b5] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] hover:bg-[#151e2d]"
           >
-            <XIcon /> Learn
+            <CheckIcon /> Delete
           </button>
           <button
-            onClick={handleKnewIt}
-            className="flex h-9 items-center gap-2 rounded-full bg-[#c6e940] px-4 py-2 text-sm font-medium text-[#0e1a01] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)]"
+            onClick={advance}
+            className="flex h-9 items-center gap-2 rounded-full bg-[#c6e940] px-4 py-2 text-sm font-semibold text-[#0e1a01] hover:opacity-90"
           >
-            <CheckIcon /> I knew it
+            <XIcon /> Learn
           </button>
         </div>
 
         <button
+          type="button"
           onClick={advance}
-          className="flex h-9 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#f3f5f9]"
+          className="flex h-9 items-center gap-2 rounded-full border-[0.556px] border-[#2b3342] bg-[#090f1c] px-4 py-2 text-sm font-medium text-[#9da5b5] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] hover:bg-[#151e2d]"
         >
-          Skip <ArrowRightIcon />
+          Next <ArrowRightIcon />
         </button>
       </div>
 
       <p className="font-body w-full pt-4 text-center text-xs text-[#9da5b5]">
         Card {index + 1} of {total} · {masteredIds.size} mastered
       </p>
+      {index === total - 1 && onNextBatch && (
+        <button
+          type="button"
+          onClick={onNextBatch}
+          className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#c6e940] text-sm font-semibold text-[#0e1a01] hover:opacity-90"
+        >
+          Next batch <ArrowRightIcon />
+        </button>
+      )}
     </div>
   );
 }

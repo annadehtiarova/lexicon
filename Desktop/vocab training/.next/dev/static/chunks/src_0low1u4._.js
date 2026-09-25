@@ -1762,9 +1762,8 @@ async function findVocabulary(text) {
             example: entry?.example ?? ""
         });
     }
-    const selectedMatches = matches.slice(0, 60);
-    const unknownWords = selectedMatches.filter((word)=>!word.english);
-    if (unknownWords.length === 0) return selectedMatches;
+    const unknownWords = matches.filter((word)=>!word.english);
+    if (unknownWords.length === 0) return matches;
     const translator = await getTranslator();
     const translations = await translator(unknownWords.map((word)=>word.german), {
         max_new_tokens: 32,
@@ -1775,7 +1774,7 @@ async function findVocabulary(text) {
         translations
     ];
     let translationIndex = 0;
-    return selectedMatches.map((word)=>{
+    return matches.map((word)=>{
         if (word.english) return word;
         const translation = output[translationIndex++]?.translation_text;
         return {
