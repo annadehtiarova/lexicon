@@ -1,0 +1,31 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/sets/layout,_N_T_/sets/[id]/layout,_N_T_/sets/[id]/page,_N_T_/sets/58f9f2b4-c4ca-4d67-ba44-941d194d2e16"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/sets/$d$id/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

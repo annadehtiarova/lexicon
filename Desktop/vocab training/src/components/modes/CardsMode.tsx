@@ -130,7 +130,7 @@ export default function CardsMode({
           onClick={onBatchComplete}
           className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
         >
-          Next batch <ArrowRightIcon />
+          Next exercise <ArrowRightIcon />
         </button>
       )}
     </div>

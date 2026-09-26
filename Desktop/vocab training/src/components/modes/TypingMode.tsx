@@ -74,7 +74,11 @@ export default function TypingMode({ words, onCorrect, onBatchComplete }: Typing
         onClick={result ? next : check}
         className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
       >
-        {result ? <>Next word <ArrowRightIcon /></> : "Check answer"}
+        {result ? (
+          <>{index === words.length - 1 ? "Next exercise" : "Next word"} <ArrowRightIcon /></>
+        ) : (
+          "Check answer"
+        )}
       </button>
     </div>
   );

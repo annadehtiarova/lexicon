@@ -7,7 +7,8 @@ import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 interface MatchingModeProps {
   words: VocabWord[];
   onCorrect: (id: string) => void;
-  onBatchComplete: () => void;
+  onExerciseComplete: () => void;
+  onBatchContinue: () => void;
 }
 
 interface Tile {
@@ -31,7 +32,7 @@ function buildTiles(words: VocabWord[]): Tile[] {
   return tiles.sort(() => Math.random() - 0.5);
 }
 
-export default function MatchingMode({ words, onCorrect, onBatchComplete }: MatchingModeProps) {
+export default function MatchingMode({ words, onCorrect, onExerciseComplete, onBatchContinue }: MatchingModeProps) {
   const [queue, setQueue] = useState(() => shuffleWords(words));
   const [tiles, setTiles] = useState<Tile[]>(() => buildTiles(words));
   const [selected, setSelected] = useState<Tile | null>(null);
@@ -60,8 +61,8 @@ export default function MatchingMode({ words, onCorrect, onBatchComplete }: Matc
       return;
     }
 
-    onBatchComplete();
-  }, [isDone, onBatchComplete, queue]);
+    onExerciseComplete();
+  }, [isDone, onExerciseComplete, queue]);
 
   const reshuffle = () => {
     const nextQueue = shuffleWords(words);
@@ -129,12 +130,21 @@ export default function MatchingMode({ words, onCorrect, onBatchComplete }: Matc
       {isDone && (
         <div className="mt-5 flex w-full flex-col items-center gap-3 rounded-2xl border border-[rgba(198,233,64,0.3)] px-5 py-4">
           <p className="flex items-center gap-2 text-sm font-semibold text-[#315500]"><CheckIcon /> {queue.length > ROUND_SIZE ? "Round complete" : "All words matched"}</p>
-          <button
-            onClick={reshuffle}
-            className="flex h-9 items-center gap-2 rounded-full bg-[#d8f56d] px-4 text-sm font-semibold text-[#172b35]"
-          >
-            <ArrowRightIcon /> Play again
-          </button>
+          {queue.length > ROUND_SIZE ? (
+            <button
+              onClick={reshuffle}
+              className="flex h-9 items-center gap-2 rounded-full bg-[#d8f56d] px-4 text-sm font-semibold text-[#172b35]"
+            >
+              <ArrowRightIcon /> Play again
+            </button>
+          ) : (
+            <button
+              onClick={onBatchContinue}
+              className="flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
+            >
+              Next batch <ArrowRightIcon />
+            </button>
+          )}
         </div>
       )}
     </div>

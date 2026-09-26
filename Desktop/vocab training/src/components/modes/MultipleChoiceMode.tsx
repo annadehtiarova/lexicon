@@ -65,7 +65,6 @@ export default function MultipleChoiceMode({ words, onCorrect, onBatchComplete }
         <p className="font-heading mt-1 text-2xl text-black">
           {question.correct.german}
         </p>
-        {answered && <p className={`mt-2 text-xs ${selected === question.correct.id ? "text-[#315500]" : "text-[#a63d2d]"}`}>{selected === question.correct.id ? "Correct" : "Incorrect"}</p>}
       </div>
 
       <div className="mt-5 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
@@ -93,7 +92,7 @@ export default function MultipleChoiceMode({ words, onCorrect, onBatchComplete }
           onClick={next}
           className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#d8f56d] text-sm font-semibold text-[#172b35]"
         >
-          Next word <ArrowRightIcon />
+          {index === words.length - 1 ? "Next exercise" : "Next word"} <ArrowRightIcon />
         </button>
       )}
     </div>

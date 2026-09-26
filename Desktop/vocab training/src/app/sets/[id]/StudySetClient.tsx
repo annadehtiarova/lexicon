@@ -258,6 +258,7 @@ export default function StudySetClient({ id }: { id: string }) {
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
   const [practiceWordIds, setPracticeWordIds] = useState<string[] | null>(null);
+  const [deferredWordIds, setDeferredWordIds] = useState<string[]>([]);
   const [completedModes, setCompletedModes] = useState<Set<ModeKey>>(new Set());
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
   const [lastBatchResult, setLastBatchResult] = useState<LastBatchResult | null>(null);
@@ -321,6 +322,7 @@ export default function StudySetClient({ id }: { id: string }) {
         .filter((word) => !mastered.includes(word.id))
         .map((word) => word.id),
     );
+    setDeferredWordIds([]);
     setPracticeBatch(0);
     setCompletedModes(new Set());
     setMode("cards");
@@ -372,13 +374,22 @@ export default function StudySetClient({ id }: { id: string }) {
       )
     const masteredWordIds = new Set(masteredWords.map((word) => word.id));
     setMasteredIds(masteredWordIds);
-    const nextPracticeWordIds = [
+    const readyWordIds = [
       ...queuedWords
         .slice(practiceWords.length)
         .filter((word) => !masteredWordIds.has(word.id)),
-      ...practiceWords.filter((word) => !masteredWordIds.has(word.id)),
+      ...words
+        .filter((word) => deferredWordIds.includes(word.id))
+        .filter((word) => !masteredWordIds.has(word.id)),
     ].map((word) => word.id);
+    const nextDeferredWordIds = practiceWords
+      .filter((word) => !masteredWordIds.has(word.id))
+      .map((word) => word.id);
+    const nextPracticeWordIds = readyWordIds.length
+      ? readyWordIds
+      : nextDeferredWordIds;
     setPracticeWordIds(nextPracticeWordIds);
+    setDeferredWordIds(readyWordIds.length ? nextDeferredWordIds : []);
     const result = {
       batch: practiceBatch + 1,
       mastered: practiceWords.filter((word) =>
@@ -387,11 +398,10 @@ export default function StudySetClient({ id }: { id: string }) {
       total: practiceWords.length,
     };
     saveLastBatchResult(id, result);
-    setPracticeBatch(result.batch);
     return result;
   };
 
-  const completeModeBatch = (completedMode: ModeKey) => {
+  const completeModeBatch = (completedMode: ModeKey, waitForBatchAdvance = false) => {
     if (completedModes.has(completedMode)) return;
     const nextCompleted = new Set(completedModes);
     nextCompleted.add(completedMode);
@@ -405,6 +415,13 @@ export default function StudySetClient({ id }: { id: string }) {
     }
 
     setLastBatchResult(commitProgress());
+    if (waitForBatchAdvance) return;
+    setMode("cards");
+    setCompletedModes(new Set());
+  };
+
+  const continueToNextBatch = () => {
+    setPracticeBatch((current) => current + 1);
     setMode("cards");
     setCompletedModes(new Set());
   };
@@ -624,7 +641,8 @@ export default function StudySetClient({ id }: { id: string }) {
                   key={`match-${practiceBatch}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("match", wordId)}
-                  onBatchComplete={() => completeModeBatch("match")}
+                  onExerciseComplete={() => completeModeBatch("match", true)}
+                  onBatchContinue={continueToNextBatch}
                 />
               </div>
             )}
