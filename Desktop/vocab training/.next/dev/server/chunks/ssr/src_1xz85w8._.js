@@ -345,7 +345,7 @@ function StudySetClient({ id }) {
             "write",
             "match"
         ];
-        const nextMode = sequence.find((key)=>!nextCompleted.has(key));
+        const nextMode = sequence[sequence.indexOf(completedMode) + 1];
         if (nextMode) {
             setMode(nextMode);
             return;

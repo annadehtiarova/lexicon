@@ -408,7 +408,7 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(nextCompleted);
 
     const sequence: ModeKey[] = ["cards", "quiz", "write", "match"];
-    const nextMode = sequence.find((key) => !nextCompleted.has(key));
+    const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
       return;
