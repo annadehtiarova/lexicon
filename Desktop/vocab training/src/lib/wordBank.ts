@@ -1,5 +1,4 @@
-// Placeholder vocabulary used to simulate photo-to-flashcard extraction.
-// A real implementation would send images to a vision/OCR model here.
+// Local German vocabulary reference used to enrich browser-based image extraction.
 export interface BankEntry {
   german: string;
   english: string;
@@ -305,7 +304,3 @@ export const WORD_BANK: BankEntry[] = [
   },
 ];
 
-/** Simulates extracting German vocabulary from uploaded photos. */
-export function mockExtractVocab(): BankEntry[] {
-  return [...WORD_BANK].sort(() => Math.random() - 0.5);
-}

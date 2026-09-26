@@ -32,6 +32,13 @@ import {
   getEmailHausverwaltungSet,
 } from "@/lib/emailHausverwaltungData";
 import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
+import { SPAETI_SET_ID, getSpaetiSet } from "@/lib/spaetiData";
+import {
+  GESPRAECH_MEHMET_SET_ID,
+  getGespraechMehmetSet,
+} from "@/lib/gespraechMitMehmetData";
+import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
+import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -140,12 +147,17 @@ const IRREGULAR_NOUN_ARTICLES = new Map(
 );
 
 function displayGerman(word: VocabWord): string {
+  if (word.pos === "phrase") return word.german;
   if (word.pos !== "noun") return word.german.toLowerCase();
 
   const existingArticle = word.german.match(/^(der|die|das)\s+(.+)$/i);
 
   if (existingArticle) {
-    return `${existingArticle[1].toLowerCase()} ${existingArticle[2].charAt(0).toUpperCase()}${existingArticle[2].slice(1)}`;
+    const nounPhrase = existingArticle[2];
+    const displayedNoun = nounPhrase.includes(" ")
+      ? nounPhrase
+      : `${nounPhrase.charAt(0).toUpperCase()}${nounPhrase.slice(1)}`;
+    return `${existingArticle[1].toLowerCase()} ${displayedNoun}`;
   }
 
   const noun = word.german.toLowerCase();
@@ -233,6 +245,46 @@ function resolveSet(id: string): ResolvedSet | null {
 
   if (id === AUSDRUECKE_SET_ID) {
     const builtInSet = getAusdrueckeSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === SPAETI_SET_ID) {
+    const builtInSet = getSpaetiSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === GESPRAECH_MEHMET_SET_ID) {
+    const builtInSet = getGespraechMehmetSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === BEITRAEGE_SET_ID) {
+    const builtInSet = getBeitraegeSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === DIENSTPLAN_SET_ID) {
+    const builtInSet = getDienstplanSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,

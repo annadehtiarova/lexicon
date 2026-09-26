@@ -63,7 +63,7 @@ function Home() {
         ]);
     }, []);
     const handleCreateSet = async (files, name)=>{
-        const { topic, words, usedFallback } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
+        const { topic, words, usedFallback, fallbackReason } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
         const newSet = {
             id: crypto.randomUUID(),
             name: name.trim() || topic || "New study set",
@@ -82,7 +82,7 @@ function Home() {
                 })),
             ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addSet"])(newSet).filter((set)=>!BUILT_IN_SET_IDS.has(set.id))
         ]);
-        setNotice(usedFallback ? "Couldn't reach the Ollama vision model, so this set uses placeholder vocabulary. Make sure `ollama serve` is running with the llava model pulled." : null);
+        setNotice(usedFallback ? `Text extraction failed${fallbackReason ? `: ${fallbackReason}` : "."} This set uses placeholder vocabulary.` : null);
     };
     const handleDelete = (id)=>{
         if (BUILT_IN_SET_IDS.has(id)) return;
@@ -2932,11 +2932,12 @@ async function extractVocabFromImages(files) {
             words: data.words,
             usedFallback: false
         };
-    } catch  {
+    } catch (error) {
         return {
             topic: "",
             words: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["mockExtractVocab"])(),
-            usedFallback: true
+            usedFallback: true,
+            fallbackReason: error instanceof Error ? error.message : "Unknown extraction error"
         };
     }
 }

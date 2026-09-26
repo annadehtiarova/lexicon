@@ -80,16 +80,16 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
-      "page": "/api/extract",
-      "regex": "^/api/extract(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/api/extract(?:/)?$"
-    },
-    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/study",
+      "regex": "^/study(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/study(?:/)?$"
     }
   ],
   "dataRoutes": [],

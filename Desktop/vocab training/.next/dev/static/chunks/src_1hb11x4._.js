@@ -71,26 +71,30 @@ function Home() {
         }
     }["Home.useEffect"], []);
     const handleCreateSet = async (files, name)=>{
-        const { topic, words, usedFallback } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
-        const newSet = {
-            id: crypto.randomUUID(),
-            name: name.trim() || topic || "New study set",
-            createdAt: Date.now(),
-            sourceImageCount: files.length,
-            words: words.map((w)=>({
-                    id: crypto.randomUUID(),
-                    ...w
-                })),
-            masteredWordIds: []
-        };
-        setSets([
-            ...BUILT_IN_SETS.map((set)=>({
-                    ...set,
-                    masteredWordIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadBuiltInProgress"])(set.id)
-                })),
-            ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet).filter((set)=>!BUILT_IN_SET_IDS.has(set.id))
-        ]);
-        setNotice(usedFallback ? "Couldn't reach the Ollama vision model, so this set uses placeholder vocabulary. Make sure `ollama serve` is running with the llava model pulled." : null);
+        try {
+            const { topic, words } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$extractVocab$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["extractVocabFromImages"])(files);
+            const newSet = {
+                id: crypto.randomUUID(),
+                name: name.trim() || topic || "New study set",
+                createdAt: Date.now(),
+                sourceImageCount: files.length,
+                words: words.map((w)=>({
+                        id: crypto.randomUUID(),
+                        ...w
+                    })),
+                masteredWordIds: []
+            };
+            setSets([
+                ...BUILT_IN_SETS.map((set)=>({
+                        ...set,
+                        masteredWordIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loadBuiltInProgress"])(set.id)
+                    })),
+                ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addSet"])(newSet).filter((set)=>!BUILT_IN_SET_IDS.has(set.id))
+            ]);
+            setNotice(null);
+        } catch (error) {
+            setNotice(error instanceof Error ? error.message : "Text extraction failed");
+        }
     };
     const handleDelete = (id)=>{
         if (BUILT_IN_SET_IDS.has(id)) return;
@@ -222,7 +226,11 @@ const BUILT_IN_SET_IDS = new Set([
 function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
     _s();
     const [selectedChapter, setSelectedChapter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("1");
-    const visibleSets = sets.filter((set)=>!BUILT_IN_SET_IDS.has(set.id) || set.name.startsWith(`Kapitel ${selectedChapter} -`));
+    const visibleSets = sets.filter((set)=>{
+        const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
+        if (chapter) return chapter === selectedChapter;
+        return !BUILT_IN_SET_IDS.has(set.id);
+    });
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "w-full max-w-[760px] border-t-[3px] border-[#263fd6] pt-3.5",
         children: [
@@ -359,7 +367,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                         className: "relative",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                href: `/sets/${set.id}`,
+                                href: BUILT_IN_SET_IDS.has(set.id) ? `/sets/${set.id}` : `/study/?id=${encodeURIComponent(set.id)}`,
                                 "aria-label": `Study ${set.name}`,
                                 className: "group block min-h-[176px] border border-[#dce4bd] bg-[#F7FAE7] p-6 text-[#172b35] shadow-[4px_4px_0_#e5ecec] transition-colors hover:border-[#263fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#263fd6]",
                                 children: [
@@ -371,7 +379,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 children: set.name
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 113,
+                                                lineNumber: 117,
                                                 columnNumber: 19
                                             }, this),
                                             !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -379,13 +387,13 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 "aria-hidden": "true"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 116,
+                                                lineNumber: 120,
                                                 columnNumber: 53
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 112,
+                                        lineNumber: 116,
                                         columnNumber: 17
                                     }, this),
                                     BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -393,7 +401,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                         children: "Built-in set"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 123,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -406,7 +414,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 123,
+                                        lineNumber: 127,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -416,14 +424,14 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 127,
+                                                lineNumber: 131,
                                                 columnNumber: 19
                                             }, this),
                                             " Study"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 126,
+                                        lineNumber: 130,
                                         columnNumber: 17
                                     }, this)
                                 ]
@@ -441,12 +449,12 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 141,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 131,
+                                lineNumber: 135,
                                 columnNumber: 17
                             }, this)
                         ]
@@ -3016,31 +3024,135 @@ __turbopack_context__.s([
     "extractVocabFromImages",
     ()=>extractVocabFromImages
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tesseract$2e$js$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/tesseract.js/src/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$huggingface$2f$transformers$2f$dist$2f$transformers$2e$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@huggingface/transformers/dist/transformers.web.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/wordBank.ts [app-client] (ecmascript)");
 ;
-async function extractVocabFromImages(files) {
-    try {
-        const formData = new FormData();
-        files.forEach((file)=>formData.append("images", file));
-        const res = await fetch("/api/extract", {
-            method: "POST",
-            body: formData
+;
+;
+async function prepareImage(file) {
+    const bitmap = await createImageBitmap(file);
+    const maxDimension = 2400;
+    const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
+    if (scale === 1) {
+        bitmap.close();
+        return file;
+    }
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    const context = canvas.getContext("2d");
+    if (!context) {
+        bitmap.close();
+        return file;
+    }
+    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+    const blob = await new Promise((resolve)=>canvas.toBlob(resolve, "image/jpeg", 0.85));
+    return blob ? new File([
+        blob
+    ], `${file.name}.jpg`, {
+        type: "image/jpeg"
+    }) : file;
+}
+function normalizeWord(word) {
+    return word.toLowerCase().trim().replace(/[.,;:!?()[\]{}"„“”]/g, "").replace(/\s+/g, " ");
+}
+function removeArticle(word) {
+    return word.replace(/^(der|die|das|den|dem|des|ein|eine|einer|einem|einen)\s+/i, "").trim();
+}
+const GERMAN_FUNCTION_WORDS = new Set("aber als am an auch auf aus bei bin bis das dass dein dem den der des die du ein eine einem einen einer eines er es für gegen haben hat ich im in ist ja kein mit nach nicht nur oder sie sind und vom von war was wir zu zum zur".split(" "));
+const COMMON_PERSON_NAMES = new Set("anna andreas anton ben benjamin carla carmen christian christina daniel david denise dieter dirk dominik elena elias emil emma eric erika felix finn florian franz friedrich gabriel georg gregor hans hannah heike helena henrik henriette holger ines ingrid jan jana jasmin johann johanna jonas josef julia julian justin karl karla katharina katja klaus konrad laura lea lena leon leonard lia linda lisa lorenz lukas marc marcel maria marie mario markus martin matthias max maximilian maya michael miriam monika nadine niklas nico nina noah norbert oliver oskar otto paul paula peter philipp sabine sara sarah simon sofia sophie stefan stefanie susanne theo theresa thomas tim tina tobias tom ulrich ursula viktor walter wilhelm wilma wolfgang yvonne zara zoe".split(" "));
+function classifyUnknownWord(word) {
+    const lower = word.toLowerCase();
+    if (GERMAN_FUNCTION_WORDS.has(lower) || lower.length < 3) return null;
+    if (COMMON_PERSON_NAMES.has(lower)) return null;
+    if (/(en|ern|eln|ieren)$/.test(lower)) return "verb";
+    if (/(ig|lich|isch|bar|sam|los|voll|weise)$/.test(lower)) return "adjective";
+    if (/(weise|wärts|her|hin|mal|so|sehr|heute|morgen|gestern)$/.test(lower)) {
+        return "adverb";
+    }
+    if (/^[A-ZÄÖÜ]/.test(word) || /(ung|heit|keit|schaft|tion|tät|ik|ei)$/.test(lower)) {
+        return "noun";
+    }
+    return null;
+}
+let translatorPromise = null;
+function getTranslator() {
+    translatorPromise ??= (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$huggingface$2f$transformers$2f$dist$2f$transformers$2e$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pipeline"])("translation", "Xenova/opus-mt-de-en");
+    return translatorPromise;
+}
+async function findVocabulary(text) {
+    const knownTranslations = new Map();
+    for (const entry of __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WORD_BANK"]){
+        knownTranslations.set(normalizeWord(entry.german), entry);
+        knownTranslations.set(normalizeWord(removeArticle(entry.german)), entry);
+    }
+    const matches = [];
+    const seen = new Set();
+    for (const rawWord of text.match(/[\p{L}]+(?:['’.-][\p{L}]+)*/gu) ?? []){
+        const key = normalizeWord(rawWord);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const entry = knownTranslations.get(key);
+        const knownPos = entry?.pos;
+        const pos = knownPos === "noun" ? "noun" : knownPos === "verb" ? "verb" : knownPos === "adjective" ? "adjective" : knownPos === "adverb" ? "adverb" : classifyUnknownWord(rawWord);
+        if (!pos) continue;
+        matches.push({
+            german: entry?.german ?? rawWord,
+            english: entry?.english ?? "",
+            pos,
+            example: entry?.example ?? ""
         });
-        const data = await res.json();
-        if (!res.ok || !Array.isArray(data.words) || data.words.length === 0) {
-            throw new Error(data.error ?? "Extraction failed");
+    }
+    const unknownWords = matches.filter((word)=>!word.english);
+    if (unknownWords.length === 0) return matches;
+    const translator = await getTranslator();
+    const translations = await translator(unknownWords.map((word)=>word.german), {
+        max_new_tokens: 32,
+        num_beams: 4,
+        do_sample: false
+    });
+    const output = Array.isArray(translations) ? translations : [
+        translations
+    ];
+    let translationIndex = 0;
+    return matches.map((word)=>{
+        if (word.english) return word;
+        const translation = output[translationIndex++]?.translation_text;
+        return {
+            ...word,
+            english: typeof translation === "string" ? translation.toLowerCase() : ""
+        };
+    });
+}
+async function extractVocabFromImages(files) {
+    if (files.length === 0) throw new Error("No images selected");
+    const worker = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tesseract$2e$js$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createWorker"])("deu");
+    try {
+        await worker.setParameters({
+            preserve_interword_spaces: "1"
+        });
+        const preparedFiles = await Promise.all(files.map(prepareImage));
+        const recognizedText = [];
+        for (const file of preparedFiles){
+            const result = await worker.recognize(file);
+            const pageData = result.data;
+            const confidentWords = pageData.words?.filter((word)=>word.confidence >= 45).map((word)=>word.text).filter(Boolean);
+            recognizedText.push(confidentWords?.length ? confidentWords.join(" ") : result.data.text);
+        }
+        const text = recognizedText.join("\n");
+        if (!text.trim()) throw new Error("No text could be detected in the image");
+        const words = await findVocabulary(text);
+        if (words.length === 0) {
+            throw new Error("No vocabulary words from the image could be recognized");
         }
         return {
-            topic: data.topic ?? "",
-            words: data.words,
-            usedFallback: false
+            topic: "Extracted vocabulary",
+            words
         };
-    } catch  {
-        return {
-            topic: "",
-            words: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordBank$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mockExtractVocab"])(),
-            usedFallback: true
-        };
+    } finally{
+        await worker.terminate();
     }
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -3891,13 +4003,10 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/src/lib/wordBank.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// Placeholder vocabulary used to simulate photo-to-flashcard extraction.
-// A real implementation would send images to a vision/OCR model here.
+// Local German vocabulary reference used to enrich browser-based image extraction.
 __turbopack_context__.s([
     "WORD_BANK",
-    ()=>WORD_BANK,
-    "mockExtractVocab",
-    ()=>mockExtractVocab
+    ()=>WORD_BANK
 ]);
 const WORD_BANK = [
     {
@@ -4195,11 +4304,6 @@ const WORD_BANK = [
         example: "Obwohl es spät war, blieben wir noch."
     }
 ];
-function mockExtractVocab() {
-    return [
-        ...WORD_BANK
-    ].sort(()=>Math.random() - 0.5);
-}
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

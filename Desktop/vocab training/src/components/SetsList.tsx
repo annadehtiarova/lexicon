@@ -16,6 +16,10 @@ import { ADILS_JOB_SET_ID } from "@/lib/adilsJobData";
 import { PROBLEM_SET_ID } from "@/lib/problemData";
 import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
 import { AUSDRUECKE_SET_ID } from "@/lib/ausdrueckeData";
+import { SPAETI_SET_ID } from "@/lib/spaetiData";
+import { GESPRAECH_MEHMET_SET_ID } from "@/lib/gespraechMitMehmetData";
+import { BEITRAEGE_SET_ID } from "@/lib/beitraegeData";
+import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -24,6 +28,10 @@ const BUILT_IN_SET_IDS = new Set([
   PROBLEM_SET_ID,
   EMAIL_HAUSVERWALTUNG_SET_ID,
   AUSDRUECKE_SET_ID,
+  SPAETI_SET_ID,
+  GESPRAECH_MEHMET_SET_ID,
+  BEITRAEGE_SET_ID,
+  DIENSTPLAN_SET_ID,
 ]);
 
 interface SetsListProps {
@@ -40,11 +48,11 @@ export default function SetsList({
   uploadOpen,
 }: SetsListProps) {
   const [selectedChapter, setSelectedChapter] = useState("1");
-  const visibleSets = sets.filter(
-    (set) =>
-      !BUILT_IN_SET_IDS.has(set.id) ||
-      set.name.startsWith(`Kapitel ${selectedChapter} -`),
-  );
+  const visibleSets = sets.filter((set) => {
+    const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
+    if (chapter) return chapter === selectedChapter;
+    return !BUILT_IN_SET_IDS.has(set.id);
+  });
 
   return (
     <div className="w-full max-w-[760px] border-t-[3px] border-[#263fd6] pt-3.5">
@@ -105,7 +113,11 @@ export default function SetsList({
               className="relative"
             >
               <Link
-                href={`/sets/${set.id}`}
+                href={
+                  BUILT_IN_SET_IDS.has(set.id)
+                    ? `/sets/${set.id}`
+                    : `/study/?id=${encodeURIComponent(set.id)}`
+                }
                 aria-label={`Study ${set.name}`}
                 className="group block min-h-[176px] border border-[#dce4bd] bg-[#F7FAE7] p-6 text-[#172b35] shadow-[4px_4px_0_#e5ecec] transition-colors hover:border-[#263fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#263fd6]"
               >

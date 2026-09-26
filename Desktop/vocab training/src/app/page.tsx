@@ -20,6 +20,13 @@ import {
   getEmailHausverwaltungSet,
 } from "@/lib/emailHausverwaltungData";
 import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
+import { SPAETI_SET_ID, getSpaetiSet } from "@/lib/spaetiData";
+import {
+  GESPRAECH_MEHMET_SET_ID,
+  getGespraechMehmetSet,
+} from "@/lib/gespraechMitMehmetData";
+import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
+import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -28,6 +35,10 @@ const BUILT_IN_SET_IDS = new Set([
   PROBLEM_SET_ID,
   EMAIL_HAUSVERWALTUNG_SET_ID,
   AUSDRUECKE_SET_ID,
+  SPAETI_SET_ID,
+  GESPRAECH_MEHMET_SET_ID,
+  BEITRAEGE_SET_ID,
+  DIENSTPLAN_SET_ID,
 ]);
 
 const BUILT_IN_SETS = [
@@ -37,6 +48,10 @@ const BUILT_IN_SETS = [
   getProblemSet(),
   getEmailHausverwaltungSet(),
   getAusdrueckeSet(),
+  getSpaetiSet(),
+  getGespraechMehmetSet(),
+  getBeitraegeSet(),
+  getDienstplanSet(),
 ];
 
 export default function Home() {
@@ -54,27 +69,27 @@ export default function Home() {
   }, []);
 
   const handleCreateSet = async (files: File[], name: string) => {
-    const { topic, words, usedFallback } = await extractVocabFromImages(files);
-    const newSet: StudySet = {
-      id: crypto.randomUUID(),
-      name: name.trim() || topic || "New study set",
-      createdAt: Date.now(),
-      sourceImageCount: files.length,
-      words: words.map((w) => ({ id: crypto.randomUUID(), ...w })),
-      masteredWordIds: [],
-    };
-    setSets([
-      ...BUILT_IN_SETS.map((set) => ({
-        ...set,
-        masteredWordIds: loadBuiltInProgress(set.id),
-      })),
-      ...addSet(newSet).filter((set) => !BUILT_IN_SET_IDS.has(set.id)),
-    ]);
-    setNotice(
-      usedFallback
-        ? "Couldn't reach the Ollama vision model, so this set uses placeholder vocabulary. Make sure `ollama serve` is running with the llava model pulled."
-        : null
-    );
+    try {
+      const { topic, words } = await extractVocabFromImages(files);
+      const newSet: StudySet = {
+        id: crypto.randomUUID(),
+        name: name.trim() || topic || "New study set",
+        createdAt: Date.now(),
+        sourceImageCount: files.length,
+        words: words.map((w) => ({ id: crypto.randomUUID(), ...w })),
+        masteredWordIds: [],
+      };
+      setSets([
+        ...BUILT_IN_SETS.map((set) => ({
+          ...set,
+          masteredWordIds: loadBuiltInProgress(set.id),
+        })),
+        ...addSet(newSet).filter((set) => !BUILT_IN_SET_IDS.has(set.id)),
+      ]);
+      setNotice(null);
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Text extraction failed");
+    }
   };
 
   const handleDelete = (id: string) => {
