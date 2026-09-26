@@ -2885,11 +2885,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "zweit",
-        "second",
-        "adjective"
-    ],
-    [
         "der Ort",
         "place",
         "noun"
@@ -2898,11 +2893,6 @@ const RAW_WORDS = [
         "die Art",
         "species / kind / type",
         "noun"
-    ],
-    [
-        "weise",
-        "wise",
-        "adjective"
     ],
     [
         "der Grund",
@@ -2923,11 +2913,6 @@ const RAW_WORDS = [
         "die Angabe",
         "information / detail",
         "noun"
-    ],
-    [
-        "erst",
-        "first",
-        "other"
     ],
     [
         "das Kärtchen",
@@ -2970,11 +2955,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "gestern",
-        "yesterday",
-        "adverb"
-    ],
-    [
         "der Vorort",
         "suburb",
         "noun"
@@ -3005,11 +2985,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "zuerst",
-        "first",
-        "adverb"
-    ],
-    [
         "der Umzug",
         "move / relocation",
         "noun"
@@ -3037,7 +3012,7 @@ function getAdilsJobSet() {
     };
 }
 var _c, _c1;
-__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["die Power", "power", "noun"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["zweit", "second", "adjective"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["weise", "wise", "adjective"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["erst", "first", "other"],\n  ["das Kärtchen", "small card", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["gestern", "yesterday", "adverb"],\n  ["der Vorort", "suburb", "noun"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["zuerst", "first", "adverb"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
+__turbopack_context__.k.register(_c, 'RAW_WORDS$[\n  ["stellen", "to place / put", "verb"],\n  ["gegenseitig", "each other", "adjective"],\n  ["der Glückwunsch", "congratulation", "noun"],\n  ["die Power", "power", "noun"],\n  ["die Neuigkeit", "news", "noun"],\n  ["der Monat", "month", "noun"],\n  ["beruflich", "professional", "adjective"],\n  ["gründen", "to found / establish", "verb"],\n  ["ziehen", "to move / pull", "verb"],\n  ["mittelgroß", "medium-sized", "adjective"],\n  ["die Firma", "company", "noun"],\n  ["bekommen", "to get / receive", "verb"],\n  ["der Mitarbeiter", "employee / staff member", "noun"],\n  ["die Mitarbeiterin", "female employee", "noun"],\n  ["das Badmöbel", "bathroom furniture", "noun"],\n  ["der Mensch", "person / human", "noun"],\n  ["die Behinderung", "disability", "noun"],\n  ["der Einkauf", "purchase / shopping", "noun"],\n  ["verantwortlich", "responsible", "adjective"],\n  ["ständig", "constant / constantly", "other"],\n  ["arbeiten", "to work", "verb"],\n  ["der Kollege", "male colleague", "noun"],\n  ["die Kollegin", "female colleague", "noun"],\n  ["der Kontakt", "contact", "noun"],\n  ["die Fortbildung", "training / further education", "noun"],\n  ["hoch", "high", "adjective"],\n  ["die Mietpreis", "rental price", "noun"],\n  ["die Wohnung", "apartment / housing", "noun"],\n  ["die Altstadt", "old town", "noun"],\n  ["das Glück", "happiness / luck", "noun"],\n  ["die Einweihungsparty", "housewarming party", "noun"],\n  ["der Dank", "thanks", "noun"],\n  ["die Einladung", "invitation", "noun"],\n  ["die Liebe", "love", "noun"],\n  ["der Gruß", "greeting", "noun"],\n  ["das Warum", "the why", "noun"],\n  ["umziehen", "to move house", "verb"],\n  ["der Begriff", "term / concept", "noun"],\n  ["der Ort", "place", "noun"],\n  ["die Art", "species / kind / type", "noun"],\n  ["der Grund", "reason", "noun"],\n  ["der Widerspruch", "contradiction", "noun"],\n  ["der Fokus", "focus", "noun"],\n  ["die Angabe", "information / detail", "noun"],\n  ["das Kärtchen", "small card", "noun"],\n  ["probieren", "to try", "verb"],\n  ["die Position", "position", "noun"],\n  ["stehen", "to stand", "verb"],\n  ["der Ausdruck", "expression", "noun"],\n  ["die Verkehrsanbindung", "transport connection", "noun"],\n  ["das Land", "country", "noun"],\n  ["die Entspannung", "relaxation", "noun"],\n  ["der Vorort", "suburb", "noun"],\n  ["das Kettenspiel", "chain game", "noun"],\n  ["bilden", "to form", "verb"],\n  ["ausdrücken", "to express", "verb"],\n  ["umziehen", "to move", "verb"],\n  ["die Pflegerin", "nurse / caretaker", "noun"],\n  ["der Umzug", "move / relocation", "noun"],\n].map');
 __turbopack_context__.k.register(_c1, "RAW_WORDS");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

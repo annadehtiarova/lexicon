@@ -1535,11 +1535,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "zweit",
-        "second",
-        "adjective"
-    ],
-    [
         "der Ort",
         "place",
         "noun"
@@ -1548,11 +1543,6 @@ const RAW_WORDS = [
         "die Art",
         "species / kind / type",
         "noun"
-    ],
-    [
-        "weise",
-        "wise",
-        "adjective"
     ],
     [
         "der Grund",
@@ -1573,11 +1563,6 @@ const RAW_WORDS = [
         "die Angabe",
         "information / detail",
         "noun"
-    ],
-    [
-        "erst",
-        "first",
-        "other"
     ],
     [
         "das Kärtchen",
@@ -1620,11 +1605,6 @@ const RAW_WORDS = [
         "noun"
     ],
     [
-        "gestern",
-        "yesterday",
-        "adverb"
-    ],
-    [
         "der Vorort",
         "suburb",
         "noun"
@@ -1653,11 +1633,6 @@ const RAW_WORDS = [
         "die Pflegerin",
         "nurse / caretaker",
         "noun"
-    ],
-    [
-        "zuerst",
-        "first",
-        "adverb"
     ],
     [
         "der Umzug",
