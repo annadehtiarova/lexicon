@@ -6400,7 +6400,29 @@ __turbopack_context__.s([
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
-const LAST_BATCH_RESULTS_KEY = "lexikon.lastBatchResults";
+const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
+function loadLastBatchResult(setId) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULT_KEY) ?? "{}");
+        const result = results[setId];
+        return result && typeof result.batch === "number" && typeof result.mastered === "number" && typeof result.total === "number" ? result : null;
+    } catch  {
+        return null;
+    }
+}
+function saveLastBatchResult(setId, result) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULT_KEY) ?? "{}");
+        results[setId] = result;
+        window.localStorage.setItem(LAST_BATCH_RESULT_KEY, JSON.stringify(results));
+    } catch  {
+    // Ignore unavailable browser storage.
+    }
+}
 const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
@@ -6432,31 +6454,6 @@ function saveExerciseProgress(setId, progress) {
         const allProgress = JSON.parse(window.localStorage.getItem(BUILT_IN_PROGRESS_KEY) ?? "{}");
         allProgress[setId] = progress;
         window.localStorage.setItem(BUILT_IN_PROGRESS_KEY, JSON.stringify(allProgress));
-    } catch  {
-    // Ignore unavailable browser storage.
-    }
-}
-function loadLastBatchResult(setId) {
-    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-    ;
-    try {
-        const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULTS_KEY) ?? "{}");
-        const result = results[setId];
-        if (!result || !Number.isFinite(result.batch) || !Number.isFinite(result.mastered) || !Number.isFinite(result.total)) {
-            return null;
-        }
-        return result;
-    } catch  {
-        return null;
-    }
-}
-function saveLastBatchResult(setId, result) {
-    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-    ;
-    try {
-        const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULTS_KEY) ?? "{}");
-        results[setId] = result;
-        window.localStorage.setItem(LAST_BATCH_RESULTS_KEY, JSON.stringify(results));
     } catch  {
     // Ignore unavailable browser storage.
     }

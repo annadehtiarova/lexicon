@@ -39,6 +39,9 @@ import {
 } from "@/lib/gespraechMitMehmetData";
 import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
 import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
+import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
+import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
+import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -285,6 +288,36 @@ function resolveSet(id: string): ResolvedSet | null {
 
   if (id === DIENSTPLAN_SET_ID) {
     const builtInSet = getDienstplanSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === TEAMARBEIT_SET_ID) {
+    const builtInSet = getTeamarbeitSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === PROTOKOLL_SET_ID) {
+    const builtInSet = getProtokollSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === TEAMGESPRÄCH_SET_ID) {
+    const builtInSet = getTeamgesprächSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,

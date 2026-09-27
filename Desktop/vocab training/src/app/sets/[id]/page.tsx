@@ -9,6 +9,9 @@ import { SPAETI_SET_ID } from "@/lib/spaetiData";
 import { GESPRAECH_MEHMET_SET_ID } from "@/lib/gespraechMitMehmetData";
 import { BEITRAEGE_SET_ID } from "@/lib/beitraegeData";
 import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
+import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
+import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
+import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
 
 export function generateStaticParams() {
   return [
@@ -22,6 +25,9 @@ export function generateStaticParams() {
     { id: GESPRAECH_MEHMET_SET_ID },
     { id: BEITRAEGE_SET_ID },
     { id: DIENSTPLAN_SET_ID },
+    { id: TEAMARBEIT_SET_ID },
+    { id: PROTOKOLL_SET_ID },
+    { id: TEAMGESPRÄCH_SET_ID },
   ];
 }
 

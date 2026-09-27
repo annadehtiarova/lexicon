@@ -1,0 +1,68 @@
+import { StudySet, VocabWord } from "./types";
+
+const RAW_WORDS: Omit<VocabWord, "id">[] = [
+  ["das Protokoll", "protocol / minutes", "noun"],
+  ["das Teamgespräch", "team talk / meeting", "noun"],
+  ["der Tagesordnungspunkt", "agenda item", "noun"],
+  ["die Reihenfolge", "order / sequence", "noun"],
+  ["der Termin", "date / appointment", "noun"],
+  ["die Werbung", "advertising", "noun"],
+  ["das Hochzeitsbuffet", "wedding buffet", "noun"],
+  ["die Begrüßung", "welcome / greeting", "noun"],
+  ["die Urlaubsplanung", "vacation planning", "noun"],
+  ["die Einkaufsliste", "shopping list", "noun"],
+  ["zusammenstellen", "to compile / put together", "verb"],
+  ["der Wächter", "guard / guardian", "noun"],
+  ["die Werbeagentur", "advertising agency", "noun"],
+  ["die Bestellung", "order", "noun"],
+  ["rausschicken", "to send out", "verb"],
+  ["die Servicekraft", "service staff member", "noun"],
+  ["organisieren", "to organize", "verb"],
+  ["die Anleitung", "instructions", "noun"],
+  ["die Lücke", "gap", "noun"],
+  ["notieren", "to note down", "verb"],
+  ["der Chef", "boss / chief", "noun"],
+  ["die Dauer", "duration", "noun"],
+  ["die Sitzung", "session / meeting", "noun"],
+  ["die teilnehmende Person", "participating person", "noun"],
+  ["die Sitzungsleitung", "head of session / chair", "noun"],
+  ["der Protokollant", "minute-taker / recorder", "noun"],
+  ["die Protokollantin", "female minute-taker", "noun"],
+  ["der Hauptteil", "main part", "noun"],
+  ["das Ergebnis", "result", "noun"],
+  ["die Diskussion", "discussion", "noun"],
+  ["sachlich", "objective / matter-of-fact", "adjective"],
+  ["ausschließlich", "exclusively", "other"],
+  ["das Präsens", "present tense", "noun"],
+  ["der Schluss", "conclusion / end", "noun"],
+  ["der Dank", "thanks", "noun"],
+  ["das Gespräch", "conversation", "noun"],
+  ["anwesend", "present", "adjective"],
+  ["der Partyservice", "party service", "noun"],
+  ["die Leitung", "line / management", "noun"],
+  ["die Firma", "company", "noun"],
+  ["geschlossen", "closed", "adjective"],
+  ["die Urlaubszeit", "vacation period", "noun"],
+  ["besprechen", "to discuss", "verb"],
+  ["zusammen", "together", "adverb"],
+  ["morgen", "tomorrow", "adverb"],
+  ["schicken", "to send", "verb"],
+  ["der Entwurf", "draft", "noun"],
+  ["der Webauftritt", "website / web presence", "noun"],
+  ["die Besprechung", "meeting", "noun"],
+  ["das Werbemittel", "advertising medium", "noun"],
+].map(([german, english, pos]) => ({ german, english, pos, example: "" }));
+
+export const PROTOKOLL_SET_ID = "52813812-73c7-4c26-86b3-13fafc4f0a81";
+export const PROTOKOLL_SET_NAME = "Kapitel 3 - Protokol";
+
+export function getProtokollSet(): StudySet {
+  return {
+    id: PROTOKOLL_SET_ID,
+    name: PROTOKOLL_SET_NAME,
+    createdAt: 0,
+    sourceImageCount: 1,
+    words: RAW_WORDS.map((word, index) => ({ id: `${PROTOKOLL_SET_ID}-${index}`, ...word })),
+    masteredWordIds: [],
+  };
+}

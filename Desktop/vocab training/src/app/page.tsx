@@ -27,6 +27,9 @@ import {
 } from "@/lib/gespraechMitMehmetData";
 import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
 import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
+import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
+import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
+import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -39,6 +42,9 @@ const BUILT_IN_SET_IDS = new Set([
   GESPRAECH_MEHMET_SET_ID,
   BEITRAEGE_SET_ID,
   DIENSTPLAN_SET_ID,
+  TEAMARBEIT_SET_ID,
+  PROTOKOLL_SET_ID,
+  TEAMGESPRÄCH_SET_ID,
 ]);
 
 const BUILT_IN_SETS = [
@@ -52,6 +58,9 @@ const BUILT_IN_SETS = [
   getGespraechMehmetSet(),
   getBeitraegeSet(),
   getDienstplanSet(),
+  getTeamarbeitSet(),
+  getProtokollSet(),
+  getTeamgesprächSet(),
 ];
 
 export default function Home() {

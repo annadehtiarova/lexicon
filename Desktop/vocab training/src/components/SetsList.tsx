@@ -20,6 +20,9 @@ import { SPAETI_SET_ID } from "@/lib/spaetiData";
 import { GESPRAECH_MEHMET_SET_ID } from "@/lib/gespraechMitMehmetData";
 import { BEITRAEGE_SET_ID } from "@/lib/beitraegeData";
 import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
+import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
+import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
+import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -32,6 +35,9 @@ const BUILT_IN_SET_IDS = new Set([
   GESPRAECH_MEHMET_SET_ID,
   BEITRAEGE_SET_ID,
   DIENSTPLAN_SET_ID,
+  TEAMARBEIT_SET_ID,
+  PROTOKOLL_SET_ID,
+  TEAMGESPRÄCH_SET_ID,
 ]);
 
 interface SetsListProps {
