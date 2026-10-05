@@ -5,7 +5,7 @@
       "routeType": "page",
       "response": "complete",
       "compute": "static",
-      "htmlSize": 10514,
+      "htmlSize": 10774,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -454,6 +454,34 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/sets/f59c7fc1-cf10-4cd9-8c2c-3255bcdc49f6": {
+      "routeType": "page",
+      "response": "complete",
+      "compute": "static",
+      "htmlSize": 10122,
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sets/[id]",
+      "dataRoute": "/sets/f59c7fc1-cf10-4cd9-8c2c-3255bcdc49f6.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/sets/faeeb4c0-21bd-4219-9b81-ad877466e128": {
       "routeType": "page",
       "response": "complete",
@@ -486,7 +514,7 @@
       "routeType": "page",
       "response": "complete",
       "compute": "static",
-      "htmlSize": 9901,
+      "htmlSize": 10161,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -546,8 +574,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "6c26b0de7952c7db989ec969ff3dee67",
-    "previewModeSigningKey": "f001824364b8355a36da84f242508a808a81d74b3d615649b9ddfc7b5cfe6d0b",
-    "previewModeEncryptionKey": "63d2d129e50076a83ea46793b182ab4e1f1969bc896530848ba97f58fcbc4089"
+    "previewModeId": "49049691f32a2c6afacd6dadce4a6cbb",
+    "previewModeSigningKey": "eb01ba13c598825023737c30761e86f82cf794e981d528d694768e588256c7be",
+    "previewModeEncryptionKey": "a0f216811fc41335965886799dcfb517847164d04ee3d7172332284fe830356c"
   }
 }

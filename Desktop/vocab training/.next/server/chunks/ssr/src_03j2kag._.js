@@ -1,0 +1,3 @@
+module.exports=[37660,a=>{"use strict";var b=a.i(87924),c=a.i(72131),d=a.i(4978);a.s(["default",0,function(){let[a,e]=(0,c.useState)(null);return((0,c.useEffect)(()=>{e(new URLSearchParams(window.location.search).get("id")??"")},[]),null===a)?(0,b.jsx)("main",{className:"flex flex-1 items-center justify-center px-4 text-sm text-[#5d6f74]",children:"Opening study set..."}):(0,b.jsx)(d.default,{id:a})}])},78132,a=>{a.v("/lexicon/_next/static/media/piper.worker.31gk3572ml9x2.ts"+(globalThis.NEXT_CLIENT_ASSET_SUFFIX||""))}];
+
+//# sourceMappingURL=src_03j2kag._.js.map

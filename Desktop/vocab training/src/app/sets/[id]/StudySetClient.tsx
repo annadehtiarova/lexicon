@@ -3,11 +3,12 @@
 import { use, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
+  addBuiltInWord,
   addWord,
   deleteWord,
   deleteBuiltInWord,
   getSet,
-  loadBuiltInDeletedWords,
+  loadBuiltInWords,
   ExerciseKey,
   ExerciseProgress,
   LastBatchResult,
@@ -19,7 +20,8 @@ import {
   updateWord,
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
-import { WORD_BANK } from "@/lib/wordBank";
+import { displayGerman } from "@/lib/wordDisplay";
+import { prefetchPronunciations } from "@/lib/piperClient";
 import {
   ARBEITSRAEUME_SET_ID,
   getArbeitsraeumeSet,
@@ -42,6 +44,7 @@ import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
 import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
 import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
 import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
+import { TEAMROLLE_SET_ID, getTeamrolleSet } from "@/lib/teamrolleData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -64,129 +67,6 @@ const MODES = [
 
 type ModeKey = (typeof MODES)[number]["key"];
 const BATCH_SIZE = 15;
-
-const KNOWN_NOUN_ARTICLES = new Map(
-  WORD_BANK.filter((word) => word.pos === "noun").map((word) => {
-    const match = word.german.match(/^(der|die|das)\s+(.+)$/i);
-
-    return match
-      ? [match[2].toLowerCase(), match[1].toLowerCase()]
-      : [word.german.toLowerCase(), "die"];
-  }),
-);
-
-const IRREGULAR_NOUN_ARTICLES = new Map(
-  Object.entries({
-    apfel: "der",
-    baum: "der",
-    berg: "der",
-    brief: "der",
-    computer: "der",
-    film: "der",
-    freund: "der",
-    garten: "der",
-    gedanke: "der",
-    hafen: "der",
-    kaffee: "der",
-    kuchen: "der",
-    monat: "der",
-    name: "der",
-    schlüssel: "der",
-    schnee: "der",
-    sommer: "der",
-    staat: "der",
-    stuhl: "der",
-    tisch: "der",
-    vater: "der",
-    winter: "der",
-    zeitpunkt: "der",
-    zug: "der",
-    arbeit: "die",
-    blume: "die",
-    farbe: "die",
-    frage: "die",
-    freundschaft: "die",
-    geschichte: "die",
-    hand: "die",
-    idee: "die",
-    karte: "die",
-    katze: "die",
-    kirche: "die",
-    küche: "die",
-    luft: "die",
-    miete: "die",
-    musik: "die",
-    nacht: "die",
-    reise: "die",
-    schule: "die",
-    sprache: "die",
-    stadt: "die",
-    straße: "die",
-    sonne: "die",
-    tür: "die",
-    wohnung: "die",
-    zeit: "die",
-    auto: "das",
-    auge: "das",
-    bild: "das",
-    buch: "das",
-    essen: "das",
-    fenster: "das",
-    haus: "das",
-    jahr: "das",
-    kind: "das",
-    land: "das",
-    leben: "das",
-    licht: "das",
-    mädchen: "das",
-    meer: "das",
-    problem: "das",
-    spiel: "das",
-    wasser: "das",
-    wetter: "das",
-    wort: "das",
-    zimmer: "das",
-  }),
-);
-
-function displayGerman(word: VocabWord): string {
-  if (word.pos === "phrase") return word.german;
-  if (word.pos !== "noun") return word.german.toLowerCase();
-
-  const existingArticle = word.german.match(/^(der|die|das)\s+(.+)$/i);
-
-  if (existingArticle) {
-    const nounPhrase = existingArticle[2];
-    const displayedNoun = nounPhrase.includes(" ")
-      ? nounPhrase
-      : `${nounPhrase.charAt(0).toUpperCase()}${nounPhrase.slice(1)}`;
-    return `${existingArticle[1].toLowerCase()} ${displayedNoun}`;
-  }
-
-  const noun = word.german.toLowerCase();
-
-  const article =
-    KNOWN_NOUN_ARTICLES.get(noun) ??
-    IRREGULAR_NOUN_ARTICLES.get(noun) ??
-    inferNounArticle(noun);
-
-  return `${article} ${word.german.charAt(0).toUpperCase()}${word.german.slice(1)}`;
-}
-
-function inferNounArticle(noun: string): string {
-  if (/(schaft|tum|werk|zeug|haus|zimmer|buch|land|recht|wesen)$/.test(noun))
-    return "das";
-  if (/(chen|lein|ment|um|ma|zeug)$/.test(noun)) return "das";
-  if (
-    /(ung|heit|keit|schaft|tion|tät|ik|ei|ie|ur|enz|anz|age|ade|ette|elle|ose|sis|itis)$/.test(
-      noun,
-    )
-  )
-    return "die";
-  if (/(ismus|ling|or|us|ist|ant|ent|eur|är)$/.test(noun)) return "der";
-  if (/e$/.test(noun)) return "die";
-  return "der";
-}
 
 interface ResolvedSet {
   name: string;
@@ -326,6 +206,16 @@ function resolveSet(id: string): ResolvedSet | null {
     };
   }
 
+  if (id === TEAMROLLE_SET_ID) {
+    const builtInSet = getTeamrolleSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
   const stored = getSet(id);
 
   if (!stored) return null;
@@ -370,18 +260,20 @@ export default function StudySetClient({ id }: { id: string }) {
   const [newPos, setNewPos] = useState("noun");
   const [newExample, setNewExample] = useState("");
   const [wordSearch, setWordSearch] = useState("");
+  const [exerciseRevision, setExerciseRevision] = useState(0);
 
   useEffect(() => {
     const resolved = resolveSet(id);
-
-    const deletedIds = loadBuiltInDeletedWords(id);
+    const resolvedWords = resolved
+      ? resolved.isPersisted
+        ? resolved.words
+        : loadBuiltInWords(id, resolved.words)
+      : [];
     setSet(
       resolved
         ? {
             ...resolved,
-            words: resolved.words.filter(
-              (word) => !deletedIds.includes(word.id),
-            ),
+            words: resolvedWords,
           }
         : resolved,
     );
@@ -391,9 +283,7 @@ export default function StudySetClient({ id }: { id: string }) {
     const savedBatchResult = loadLastBatchResult(id);
     setLastBatchResult(savedBatchResult);
     setPracticeBatch(savedBatchResult?.batch ?? 0);
-    const remainingWords = resolved?.words.filter(
-      (word) => !deletedIds.includes(word.id),
-    ) ?? [];
+    const remainingWords = resolvedWords;
     const mastered = remainingWords
       .filter((word) =>
         (Object.keys(progress) as ExerciseKey[]).every((exercise) =>
@@ -412,6 +302,11 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(new Set());
     setMode("cards");
   }, [id]);
+
+  useEffect(() => {
+    if (!set) return;
+    return prefetchPronunciations(set.words.map(displayGerman));
+  }, [set]);
 
   const words: VocabWord[] = useMemo(
     () =>
@@ -560,6 +455,19 @@ export default function StudySetClient({ id }: { id: string }) {
       next.delete(wordId);
       return next;
     });
+    const nextProgress = Object.fromEntries(
+      (Object.keys(pendingProgressRef.current) as ExerciseKey[]).map((exercise) => [
+        exercise,
+        pendingProgressRef.current[exercise].filter((savedId) => savedId !== wordId),
+      ]),
+    ) as ExerciseProgress;
+    pendingProgressRef.current = nextProgress;
+    saveExerciseProgress(id, nextProgress);
+    setExerciseProgress(nextProgress);
+    setPracticeWordIds((current) => current?.filter((queuedId) => queuedId !== wordId) ?? []);
+    setDeferredWordIds((current) => current.filter((queuedId) => queuedId !== wordId));
+    setCompletedModes(new Set());
+    setExerciseRevision((revision) => revision + 1);
   };
 
   const startEditing = (word: VocabWord) => {
@@ -590,6 +498,9 @@ export default function StudySetClient({ id }: { id: string }) {
     if (!german || !english) return;
 
     updateWord(id, wordId, { german, english, pos: draftPos });
+    prefetchPronunciations([
+      displayGerman({ id: wordId, german, english, pos: draftPos, example: "" }),
+    ]);
 
     setSet((current) =>
       current
@@ -608,7 +519,7 @@ export default function StudySetClient({ id }: { id: string }) {
   };
 
   const saveNewWord = () => {
-    if (!set.isPersisted || !newGerman.trim() || !newEnglish.trim()) return;
+    if (!newGerman.trim() || !newEnglish.trim()) return;
     const word: VocabWord = {
       id: crypto.randomUUID(),
       german: newGerman.trim(),
@@ -616,7 +527,9 @@ export default function StudySetClient({ id }: { id: string }) {
       pos: newPos,
       example: newExample.trim(),
     };
-    addWord(id, word);
+    prefetchPronunciations([displayGerman(word)]);
+    if (set.isPersisted) addWord(id, word);
+    else addBuiltInWord(id, word);
     setSet((current) =>
       current ? { ...current, words: [...current.words, word] } : current,
     );
@@ -691,7 +604,7 @@ export default function StudySetClient({ id }: { id: string }) {
           <div className="pb-5 pt-2">
             {mode === "cards" && (
               <CardsMode
-                key={`cards-${practiceBatch}`}
+                key={`cards-${practiceBatch}-${exerciseRevision}`}
                 words={practiceWords}
                 onCorrect={handleKnewIt}
                 onBatchComplete={() => completeModeBatch("cards")}
@@ -701,7 +614,7 @@ export default function StudySetClient({ id }: { id: string }) {
             {mode === "quiz" && (
               <div>
                 <MultipleChoiceMode
-                  key={`quiz-${practiceBatch}`}
+                  key={`quiz-${practiceBatch}-${exerciseRevision}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("quiz", wordId)}
                   onBatchComplete={() => completeModeBatch("quiz")}
@@ -712,7 +625,7 @@ export default function StudySetClient({ id }: { id: string }) {
             {mode === "write" && (
               <div>
                 <TypingMode
-                  key={`write-${practiceBatch}`}
+                  key={`write-${practiceBatch}-${exerciseRevision}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("write", wordId)}
                   onBatchComplete={() => completeModeBatch("write")}
@@ -723,7 +636,7 @@ export default function StudySetClient({ id }: { id: string }) {
             {mode === "match" && (
               <div>
                 <MatchingMode
-                  key={`match-${practiceBatch}`}
+                  key={`match-${practiceBatch}-${exerciseRevision}`}
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("match", wordId)}
                   onExerciseComplete={() => completeModeBatch("match", true)}
@@ -740,15 +653,13 @@ export default function StudySetClient({ id }: { id: string }) {
             <h2 className="font-heading text-xl font-semibold text-[#172b35]">
               Vocabulary notes
             </h2>
-            {set.isPersisted && (
-              <button
-                type="button"
-                onClick={() => setIsAddingWord(true)}
-                className="rounded-full bg-[#d8f56d] px-4 py-2 text-sm font-semibold text-[#172b35]"
-              >
-                Add word
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setIsAddingWord(true)}
+              className="rounded-full bg-[#d8f56d] px-4 py-2 text-sm font-semibold text-[#172b35]"
+            >
+              Add word
+            </button>
           </div>
 
           {isAddingWord && (

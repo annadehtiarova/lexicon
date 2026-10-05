@@ -23,6 +23,7 @@ import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
 import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
 import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
 import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
+import { TEAMROLLE_SET_ID } from "@/lib/teamrolleData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -38,7 +39,22 @@ const BUILT_IN_SET_IDS = new Set([
   TEAMARBEIT_SET_ID,
   PROTOKOLL_SET_ID,
   TEAMGESPRÄCH_SET_ID,
+  TEAMROLLE_SET_ID,
 ]);
+
+const SELECTED_CHAPTER_KEY = "lexikon.selectedChapter";
+
+function loadSelectedChapter() {
+  if (typeof window === "undefined") return "1";
+  try {
+    const savedChapter = window.localStorage.getItem(SELECTED_CHAPTER_KEY);
+    return savedChapter && Number(savedChapter) >= 1 && Number(savedChapter) <= 16
+      ? savedChapter
+      : "1";
+  } catch {
+    return "1";
+  }
+}
 
 interface SetsListProps {
   sets: StudySet[];
@@ -53,7 +69,15 @@ export default function SetsList({
   onToggleUpload,
   uploadOpen,
 }: SetsListProps) {
-  const [selectedChapter, setSelectedChapter] = useState("1");
+  const [selectedChapter, setSelectedChapter] = useState(loadSelectedChapter);
+  const changeChapter = (chapter: string) => {
+    setSelectedChapter(chapter);
+    try {
+      window.localStorage.setItem(SELECTED_CHAPTER_KEY, chapter);
+    } catch {
+      // Keep the selection for this page even when storage is unavailable.
+    }
+  };
   const visibleSets = sets.filter((set) => {
     const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
     if (chapter) return chapter === selectedChapter;
@@ -87,7 +111,7 @@ export default function SetsList({
               <span className="relative block">
                 <select
                   value={selectedChapter}
-                  onChange={(event) => setSelectedChapter(event.target.value)}
+                  onChange={(event) => changeChapter(event.target.value)}
                   className="h-9 w-[120px] appearance-none rounded-full border border-[#263fd6] bg-white pl-4 pr-7 text-sm text-[#172b35] outline-none focus:border-[#1d2fb5]"
                   aria-label="Filter by chapter"
                 >

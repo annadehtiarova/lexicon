@@ -225,6 +225,11 @@
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
@@ -627,6 +632,14 @@
     top: calc(var(--spacing) * 4);
   }
 
+  .top-7 {
+    top: calc(var(--spacing) * 7);
+  }
+
+  .right-3 {
+    right: calc(var(--spacing) * 3);
+  }
+
   .right-4 {
     right: calc(var(--spacing) * 4);
   }
@@ -715,6 +728,10 @@
 
   .block {
     display: block;
+  }
+
+  .contents {
+    display: contents;
   }
 
   .flex {
@@ -896,6 +913,10 @@
 
   .rotate-180 {
     rotate: 180deg;
+  }
+
+  .transform {
+    transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
   }
 
   .animate-spin {
@@ -1093,6 +1114,10 @@
     border-color: #c6e9404d;
   }
 
+  .border-current {
+    border-color: currentColor;
+  }
+
   .border-red-400 {
     border-color: var(--color-red-400);
   }
@@ -1103,6 +1128,10 @@
 
   .border-t-\[\#0e1a01\] {
     border-top-color: #0e1a01;
+  }
+
+  .border-r-transparent {
+    border-right-color: #0000;
   }
 
   .bg-\[\#263fd6\] {
@@ -1757,12 +1786,20 @@
     cursor: not-allowed;
   }
 
+  .disabled\:cursor-wait:disabled {
+    cursor: wait;
+  }
+
   .disabled\:opacity-40:disabled {
     opacity: .4;
   }
 
   .disabled\:opacity-45:disabled {
     opacity: .45;
+  }
+
+  .disabled\:opacity-70:disabled {
+    opacity: .7;
   }
 
   @media (min-width: 40rem) {
@@ -1839,6 +1876,31 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: 0;
+}
+
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-border-style {

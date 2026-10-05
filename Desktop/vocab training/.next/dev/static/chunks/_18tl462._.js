@@ -1,0 +1,784 @@
+(globalThis["TURBOPACK"] || (globalThis["TURBOPACK"] = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/node_modules/@jtsage/piper-tts-web/dist/piper-tts-web.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "CachedFileReader",
+    ()=>CachedFileReader,
+    "CachedFileReaderOptionsDefault",
+    ()=>CachedFileReaderOptionsDefault,
+    "HF_BASE",
+    ()=>HF_BASE,
+    "ONNX_BASE",
+    ()=>ONNX_BASE,
+    "PATH_MAP",
+    ()=>PATH_MAP,
+    "TtsSession",
+    ()=>TtsSession,
+    "WASM_BASE",
+    ()=>WASM_BASE,
+    "predict",
+    ()=>predict,
+    "voices",
+    ()=>voices
+]);
+//#region src/fixtures.ts
+/** cSpell:disable */ /**
+* Location of the ml models
+*/ var HF_BASE = "https://huggingface.co/diffusionstudio/piper-voices/resolve/main";
+/**
+* Inference runtime libary base path
+*/ var ONNX_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
+/**
+* Path to wasm related files
+*/ var WASM_BASE = "https://cdn.jsdelivr.net/npm/@diffusionstudio/piper-wasm@1.0.0/build/piper_phonemize";
+/**
+* Path to ml models on huggingface
+*/ var PATH_MAP = {
+    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
+    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
+    "ca_ES-upc_ona-medium": "ca/ca_ES/upc_ona/medium/ca_ES-upc_ona-medium.onnx",
+    "ca_ES-upc_ona-x_low": "ca/ca_ES/upc_ona/x_low/ca_ES-upc_ona-x_low.onnx",
+    "ca_ES-upc_pau-x_low": "ca/ca_ES/upc_pau/x_low/ca_ES-upc_pau-x_low.onnx",
+    "cs_CZ-jirka-low": "cs/cs_CZ/jirka/low/cs_CZ-jirka-low.onnx",
+    "cs_CZ-jirka-medium": "cs/cs_CZ/jirka/medium/cs_CZ-jirka-medium.onnx",
+    "cy_GB-gwryw_gogleddol-medium": "cy/cy_GB/gwryw_gogleddol/medium/cy_GB-gwryw_gogleddol-medium.onnx",
+    "da_DK-talesyntese-medium": "da/da_DK/talesyntese/medium/da_DK-talesyntese-medium.onnx",
+    "de_DE-eva_k-x_low": "de/de_DE/eva_k/x_low/de_DE-eva_k-x_low.onnx",
+    "de_DE-karlsson-low": "de/de_DE/karlsson/low/de_DE-karlsson-low.onnx",
+    "de_DE-kerstin-low": "de/de_DE/kerstin/low/de_DE-kerstin-low.onnx",
+    "de_DE-mls-medium": "de/de_DE/mls/medium/de_DE-mls-medium.onnx",
+    "de_DE-pavoque-low": "de/de_DE/pavoque/low/de_DE-pavoque-low.onnx",
+    "de_DE-ramona-low": "de/de_DE/ramona/low/de_DE-ramona-low.onnx",
+    "de_DE-thorsten_emotional-medium": "de/de_DE/thorsten_emotional/medium/de_DE-thorsten_emotional-medium.onnx",
+    "de_DE-thorsten-high": "de/de_DE/thorsten/high/de_DE-thorsten-high.onnx",
+    "de_DE-thorsten-low": "de/de_DE/thorsten/low/de_DE-thorsten-low.onnx",
+    "de_DE-thorsten-medium": "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx",
+    "el_GR-rapunzelina-low": "el/el_GR/rapunzelina/low/el_GR-rapunzelina-low.onnx",
+    "en_GB-alan-low": "en/en_GB/alan/low/en_GB-alan-low.onnx",
+    "en_GB-alan-medium": "en/en_GB/alan/medium/en_GB-alan-medium.onnx",
+    "en_GB-alba-medium": "en/en_GB/alba/medium/en_GB-alba-medium.onnx",
+    "en_GB-aru-medium": "en/en_GB/aru/medium/en_GB-aru-medium.onnx",
+    "en_GB-cori-high": "en/en_GB/cori/high/en_GB-cori-high.onnx",
+    "en_GB-cori-medium": "en/en_GB/cori/medium/en_GB-cori-medium.onnx",
+    "en_GB-jenny_dioco-medium": "en/en_GB/jenny_dioco/medium/en_GB-jenny_dioco-medium.onnx",
+    "en_GB-northern_english_male-medium": "en/en_GB/northern_english_male/medium/en_GB-northern_english_male-medium.onnx",
+    "en_GB-semaine-medium": "en/en_GB/semaine/medium/en_GB-semaine-medium.onnx",
+    "en_GB-southern_english_female-low": "en/en_GB/southern_english_female/low/en_GB-southern_english_female-low.onnx",
+    "en_GB-vctk-medium": "en/en_GB/vctk/medium/en_GB-vctk-medium.onnx",
+    "en_US-amy-low": "en/en_US/amy/low/en_US-amy-low.onnx",
+    "en_US-amy-medium": "en/en_US/amy/medium/en_US-amy-medium.onnx",
+    "en_US-arctic-medium": "en/en_US/arctic/medium/en_US-arctic-medium.onnx",
+    "en_US-bryce-medium": "en/en_US/bryce/medium/en_US-bryce-medium.onnx",
+    "en_US-danny-low": "en/en_US/danny/low/en_US-danny-low.onnx",
+    "en_US-hfc_female-medium": "en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx",
+    "en_US-hfc_male-medium": "en/en_US/hfc_male/medium/en_US-hfc_male-medium.onnx",
+    "en_US-joe-medium": "en/en_US/joe/medium/en_US-joe-medium.onnx",
+    "en_US-john-medium": "en/en_US/john/medium/en_US-john-medium.onnx",
+    "en_US-kathleen-low": "en/en_US/kathleen/low/en_US-kathleen-low.onnx",
+    "en_US-kristin-medium": "en/en_US/kristin/medium/en_US-kristin-medium.onnx",
+    "en_US-kusal-medium": "en/en_US/kusal/medium/en_US-kusal-medium.onnx",
+    "en_US-l2arctic-medium": "en/en_US/l2arctic/medium/en_US-l2arctic-medium.onnx",
+    "en_US-lessac-high": "en/en_US/lessac/high/en_US-lessac-high.onnx",
+    "en_US-lessac-low": "en/en_US/lessac/low/en_US-lessac-low.onnx",
+    "en_US-lessac-medium": "en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+    "en_US-libritts_r-medium": "en/en_US/libritts_r/medium/en_US-libritts_r-medium.onnx",
+    "en_US-libritts-high": "en/en_US/libritts/high/en_US-libritts-high.onnx",
+    "en_US-ljspeech-high": "en/en_US/ljspeech/high/en_US-ljspeech-high.onnx",
+    "en_US-ljspeech-medium": "en/en_US/ljspeech/medium/en_US-ljspeech-medium.onnx",
+    "en_US-norman-medium": "en/en_US/norman/medium/en_US-norman-medium.onnx",
+    "en_US-ryan-high": "en/en_US/ryan/high/en_US-ryan-high.onnx",
+    "en_US-ryan-low": "en/en_US/ryan/low/en_US-ryan-low.onnx",
+    "en_US-ryan-medium": "en/en_US/ryan/medium/en_US-ryan-medium.onnx",
+    "es_ES-carlfm-x_low": "es/es_ES/carlfm/x_low/es_ES-carlfm-x_low.onnx",
+    "es_ES-davefx-medium": "es/es_ES/davefx/medium/es_ES-davefx-medium.onnx",
+    "es_ES-mls_9972-low": "es/es_ES/mls_9972/low/es_ES-mls_9972-low.onnx",
+    "es_ES-mls_10246-low": "es/es_ES/mls_10246/low/es_ES-mls_10246-low.onnx",
+    "es_ES-sharvard-medium": "es/es_ES/sharvard/medium/es_ES-sharvard-medium.onnx",
+    "es_MX-ald-medium": "es/es_MX/ald/medium/es_MX-ald-medium.onnx",
+    "es_MX-claude-high": "es/es_MX/claude/high/es_MX-claude-high.onnx",
+    "fa_IR-amir-medium": "fa/fa_IR/amir/medium/fa_IR-amir-medium.onnx",
+    "fa_IR-gyro-medium": "fa/fa_IR/gyro/medium/fa_IR-gyro-medium.onnx",
+    "fi_FI-harri-low": "fi/fi_FI/harri/low/fi_FI-harri-low.onnx",
+    "fi_FI-harri-medium": "fi/fi_FI/harri/medium/fi_FI-harri-medium.onnx",
+    "fr_FR-gilles-low": "fr/fr_FR/gilles/low/fr_FR-gilles-low.onnx",
+    "fr_FR-mls_1840-low": "fr/fr_FR/mls_1840/low/fr_FR-mls_1840-low.onnx",
+    "fr_FR-mls-medium": "fr/fr_FR/mls/medium/fr_FR-mls-medium.onnx",
+    "fr_FR-siwis-low": "fr/fr_FR/siwis/low/fr_FR-siwis-low.onnx",
+    "fr_FR-siwis-medium": "fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx",
+    "fr_FR-tom-medium": "fr/fr_FR/tom/medium/fr_FR-tom-medium.onnx",
+    "fr_FR-upmc-medium": "fr/fr_FR/upmc/medium/fr_FR-upmc-medium.onnx",
+    "hu_HU-anna-medium": "hu/hu_HU/anna/medium/hu_HU-anna-medium.onnx",
+    "hu_HU-berta-medium": "hu/hu_HU/berta/medium/hu_HU-berta-medium.onnx",
+    "hu_HU-imre-medium": "hu/hu_HU/imre/medium/hu_HU-imre-medium.onnx",
+    "is_IS-bui-medium": "is/is_IS/bui/medium/is_IS-bui-medium.onnx",
+    "is_IS-salka-medium": "is/is_IS/salka/medium/is_IS-salka-medium.onnx",
+    "is_IS-steinn-medium": "is/is_IS/steinn/medium/is_IS-steinn-medium.onnx",
+    "is_IS-ugla-medium": "is/is_IS/ugla/medium/is_IS-ugla-medium.onnx",
+    "it_IT-paola-medium": "it/it_IT/paola/medium/it_IT-paola-medium.onnx",
+    "it_IT-riccardo-x_low": "it/it_IT/riccardo/x_low/it_IT-riccardo-x_low.onnx",
+    "ka_GE-natia-medium": "ka/ka_GE/natia/medium/ka_GE-natia-medium.onnx",
+    "kk_KZ-iseke-x_low": "kk/kk_KZ/iseke/x_low/kk_KZ-iseke-x_low.onnx",
+    "kk_KZ-issai-high": "kk/kk_KZ/issai/high/kk_KZ-issai-high.onnx",
+    "kk_KZ-raya-x_low": "kk/kk_KZ/raya/x_low/kk_KZ-raya-x_low.onnx",
+    "lb_LU-marylux-medium": "lb/lb_LU/marylux/medium/lb_LU-marylux-medium.onnx",
+    "ne_NP-google-medium": "ne/ne_NP/google/medium/ne_NP-google-medium.onnx",
+    "ne_NP-google-x_low": "ne/ne_NP/google/x_low/ne_NP-google-x_low.onnx",
+    "nl_BE-nathalie-medium": "nl/nl_BE/nathalie/medium/nl_BE-nathalie-medium.onnx",
+    "nl_BE-nathalie-x_low": "nl/nl_BE/nathalie/x_low/nl_BE-nathalie-x_low.onnx",
+    "nl_BE-rdh-medium": "nl/nl_BE/rdh/medium/nl_BE-rdh-medium.onnx",
+    "nl_BE-rdh-x_low": "nl/nl_BE/rdh/x_low/nl_BE-rdh-x_low.onnx",
+    "nl_NL-mls_5809-low": "nl/nl_NL/mls_5809/low/nl_NL-mls_5809-low.onnx",
+    "nl_NL-mls_7432-low": "nl/nl_NL/mls_7432/low/nl_NL-mls_7432-low.onnx",
+    "nl_NL-mls-medium": "nl/nl_NL/mls/medium/nl_NL-mls-medium.onnx",
+    "no_NO-talesyntese-medium": "no/no_NO/talesyntese/medium/no_NO-talesyntese-medium.onnx",
+    "pl_PL-darkman-medium": "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx",
+    "pl_PL-gosia-medium": "pl/pl_PL/gosia/medium/pl_PL-gosia-medium.onnx",
+    "pl_PL-mc_speech-medium": "pl/pl_PL/mc_speech/medium/pl_PL-mc_speech-medium.onnx",
+    "pl_PL-mls_6892-low": "pl/pl_PL/mls_6892/low/pl_PL-mls_6892-low.onnx",
+    "pt_BR-edresson-low": "pt/pt_BR/edresson/low/pt_BR-edresson-low.onnx",
+    "pt_BR-faber-medium": "pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx",
+    "pt_PT-tugão-medium": "pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx",
+    "ro_RO-mihai-medium": "ro/ro_RO/mihai/medium/ro_RO-mihai-medium.onnx",
+    "ru_RU-denis-medium": "ru/ru_RU/denis/medium/ru_RU-denis-medium.onnx",
+    "ru_RU-dmitri-medium": "ru/ru_RU/dmitri/medium/ru_RU-dmitri-medium.onnx",
+    "ru_RU-irina-medium": "ru/ru_RU/irina/medium/ru_RU-irina-medium.onnx",
+    "ru_RU-ruslan-medium": "ru/ru_RU/ruslan/medium/ru_RU-ruslan-medium.onnx",
+    "sk_SK-lili-medium": "sk/sk_SK/lili/medium/sk_SK-lili-medium.onnx",
+    "sl_SI-artur-medium": "sl/sl_SI/artur/medium/sl_SI-artur-medium.onnx",
+    "sr_RS-serbski_institut-medium": "sr/sr_RS/serbski_institut/medium/sr_RS-serbski_institut-medium.onnx",
+    "sv_SE-nst-medium": "sv/sv_SE/nst/medium/sv_SE-nst-medium.onnx",
+    "sw_CD-lanfrica-medium": "sw/sw_CD/lanfrica/medium/sw_CD-lanfrica-medium.onnx",
+    "tr_TR-dfki-medium": "tr/tr_TR/dfki/medium/tr_TR-dfki-medium.onnx",
+    "tr_TR-fahrettin-medium": "tr/tr_TR/fahrettin/medium/tr_TR-fahrettin-medium.onnx",
+    "tr_TR-fettah-medium": "tr/tr_TR/fettah/medium/tr_TR-fettah-medium.onnx",
+    "uk_UA-lada-x_low": "uk/uk_UA/lada/x_low/uk_UA-lada-x_low.onnx",
+    "uk_UA-ukrainian_tts-medium": "uk/uk_UA/ukrainian_tts/medium/uk_UA-ukrainian_tts-medium.onnx",
+    "vi_VN-25hours_single-low": "vi/vi_VN/25hours_single/low/vi_VN-25hours_single-low.onnx",
+    "vi_VN-vais1000-medium": "vi/vi_VN/vais1000/medium/vi_VN-vais1000-medium.onnx",
+    "vi_VN-vivos-x_low": "vi/vi_VN/vivos/x_low/vi_VN-vivos-x_low.onnx",
+    "zh_CN-huayan-medium": "zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx",
+    "zh_CN-huayan-x_low": "zh/zh_CN/huayan/x_low/zh_CN-huayan-x_low.onnx"
+};
+/** cSpell:enable */ //#endregion
+//#region src/audio.ts
+/**
+* Convert a Float32Array (PCM) to an ArrayBuffer (WAV)
+*/ function pcm2wav(buffer, numChannels, audioSampleRate) {
+    if (!(buffer instanceof Float32Array)) throw new Error("incorrect buffer type");
+    const bufferLength = buffer.length;
+    const headerLength = 44;
+    const view = /* @__PURE__ */ new DataView(/* @__PURE__ */ new ArrayBuffer(bufferLength * numChannels * 2 + headerLength));
+    view.setUint32(0, 1179011410, true);
+    view.setUint32(4, view.buffer.byteLength - 8, true);
+    view.setUint32(8, 1163280727, true);
+    view.setUint32(12, 544501094, true);
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, numChannels, true);
+    view.setUint32(24, audioSampleRate, true);
+    view.setUint32(28, numChannels * 2 * audioSampleRate, true);
+    view.setUint16(32, numChannels * 2, true);
+    view.setUint16(34, 16, true);
+    view.setUint32(36, 1635017060, true);
+    view.setUint32(40, 2 * bufferLength, true);
+    let p = headerLength;
+    for(let i = 0; i < bufferLength; i++){
+        const v = buffer[i];
+        if (v >= 1) view.setInt16(p, 32767, true);
+        else if (v <= -1) view.setInt16(p, -32768, true);
+        else view.setInt16(p, v * 32768 | 0, true);
+        p += 2;
+    }
+    return view.buffer;
+}
+//#endregion
+//#region src/fileReader.ts
+var CachedFileReaderOptionsDefault = {
+    cacheFolder: "piper",
+    customLoader: null,
+    maxRetry: 3,
+    modelHost: "https://huggingface.co/",
+    modelPathPrefix: "diffusionstudio/piper-voices/resolve/main",
+    pathMap: PATH_MAP,
+    progress: null,
+    useLocalCache: true
+};
+var CachedFileReader = class {
+    #logger;
+    #cacheFolder = "piper";
+    #customLoader;
+    #maxRetry;
+    #modelHost;
+    #modelPathPrefix;
+    #pathMap;
+    #progress;
+    #useLocalCache = true;
+    constructor(options, logger){
+        const mergedOptions = {
+            ...CachedFileReaderOptionsDefault,
+            ...options
+        };
+        this.#logger = logger;
+        this.#cacheFolder = mergedOptions.cacheFolder;
+        this.#customLoader = mergedOptions.customLoader;
+        this.#maxRetry = mergedOptions.maxRetry;
+        this.#modelHost = mergedOptions.modelHost;
+        this.#modelPathPrefix = mergedOptions.modelPathPrefix;
+        this.#pathMap = mergedOptions.pathMap;
+        this.#progress = mergedOptions.progress;
+        this.#useLocalCache = mergedOptions.useLocalCache;
+    }
+    async loadVoice(voiceId, json = false) {
+        const path = this.#pathMap[voiceId];
+        if (!path) throw new Error(`Voice ID '${voiceId}' not found in PATH_MAP`);
+        const urls = [
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}`,
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}.json`
+        ];
+        return this.load(json ? urls[1] : urls[0]);
+    }
+    async load(url) {
+        let blob = null;
+        if (typeof this.#customLoader === "function") {
+            const result = await this.#customLoader(url);
+            if (result === false) throw new Error(`Failed to fetch ${url} using custom loader, not trying fallback`);
+            blob = result;
+        }
+        if (blob === null) blob = await this.#loadFromCache(url);
+        if (blob === null) {
+            let lastError = null;
+            for(let attempt = 1; attempt <= this.#maxRetry; attempt++)try {
+                blob = await this.httpFetch(url);
+                await this.#saveToCache(url, blob);
+                break;
+            } catch (err) {
+                if (err instanceof Error) {
+                    lastError = err;
+                    this.#logger?.(`Attempt ${attempt}/${this.#maxRetry} failed for ${url}: ${err.message}`);
+                }
+                if (attempt < this.#maxRetry) {
+                    const delay = Math.pow(2, attempt - 1) * 1e3;
+                    await new Promise((resolve)=>setTimeout(resolve, delay));
+                }
+            }
+            if (!blob && lastError) throw new Error(`Failed to fetch ${url} after ${this.#maxRetry} attempts: ${lastError.message}`);
+        }
+        return blob;
+    }
+    async #saveToCache(url, blob) {
+        if (this.#useLocalCache === false) return;
+        try {
+            const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle(this.#cacheFolder, {
+                create: true
+            });
+            const path = url.split("/").at(-1);
+            const writable = await (await dir.getFileHandle(path, {
+                create: true
+            })).createWritable();
+            await writable.write(blob);
+            await writable.close();
+        } catch (err) {
+            if (err instanceof Error) this.#logger?.(`Unable to cache file ${url} :: ${err.message}`);
+        }
+    }
+    async #loadFromCache(url) {
+        if (this.#useLocalCache === false) return null;
+        try {
+            const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle(this.#cacheFolder, {
+                create: true
+            });
+            const path = url.split("/").at(-1);
+            return await (await dir.getFileHandle(path)).getFile();
+        } catch (err) {
+            return null;
+        }
+    }
+    async #removeFromCache(url) {
+        try {
+            const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle(this.#cacheFolder);
+            const path = url.split("/").at(-1);
+            await dir.removeEntry(path);
+        } catch (err) {
+            if (err instanceof Error) this.#logger?.(`Unable to remove cache file ${url} :: ${err.message}`);
+        }
+    }
+    async httpFetch(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        const reader = res.body?.getReader();
+        const contentLength = Number(res.headers.get("Content-Length") ?? 0);
+        let receivedLength = 0;
+        const chunks = [];
+        while(reader && true){
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            receivedLength += value.length;
+            if (contentLength >= 1500 && typeof this.#progress === "function") this.#progress({
+                url,
+                total: contentLength,
+                loaded: receivedLength
+            });
+        }
+        return new Blob(chunks, {
+            type: res.headers.get("Content-Type") ?? void 0
+        });
+    }
+    async preFetch(voiceId) {
+        const path = this.#pathMap[voiceId];
+        const urls = [
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}`,
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}.json`
+        ];
+        await Promise.all(urls.map(async (url)=>{
+            this.#saveToCache(url, await this.httpFetch(url));
+        }));
+    }
+    async remove(voiceId) {
+        const path = this.#pathMap[voiceId];
+        const urls = [
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}`,
+            `${this.#modelHost}${this.#modelPathPrefix}/${path}.json`
+        ];
+        await Promise.all(urls.map((url)=>this.#removeFromCache(url)));
+    }
+    async list() {
+        const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle(this.#cacheFolder, {
+            create: true
+        });
+        const result = [];
+        for await (const fileName of dir.keys()){
+            const key = fileName.split(".")[0];
+            if (fileName.endsWith(".onnx") && key in this.#pathMap) result.push(key);
+        }
+        return result;
+    }
+    async flush() {
+        try {
+            await (await navigator.storage.getDirectory()).removeEntry(this.#cacheFolder, {
+                recursive: true
+            });
+        } catch (err) {
+            if (err instanceof Error) this.#logger?.(`Unable to remove cache files :: ${err.message}`);
+        }
+    }
+};
+//#endregion
+//#region src/inference.ts
+var DEFAULT_WASM_PATHS = {
+    onnxWasm: ONNX_BASE,
+    piperData: `${WASM_BASE}.data`,
+    piperWasm: `${WASM_BASE}.wasm`
+};
+var TtsSession = class TtsSession {
+    static WASM_LOCATIONS = DEFAULT_WASM_PATHS;
+    static _instance = null;
+    ready = false;
+    voiceId = "en_US-hfc_female-medium";
+    waitReady = false;
+    #createPiperPhonemize;
+    #modelConfig;
+    #ort;
+    #ortSession;
+    #wasmPaths = DEFAULT_WASM_PATHS;
+    #logger;
+    #fileReader;
+    constructor({ voiceId, logger, wasmPaths, allowLocalModels, fallbackStrategy, fileReader }){
+        if (TtsSession._instance) {
+            logger?.("Reusing session for TTS!");
+            TtsSession._instance.voiceId = voiceId ?? TtsSession._instance.voiceId;
+            return TtsSession._instance;
+        }
+        logger?.("New session");
+        this.#logger = logger;
+        this.voiceId = voiceId;
+        this.waitReady = this.init(allowLocalModels, fallbackStrategy);
+        this.#wasmPaths = wasmPaths ?? DEFAULT_WASM_PATHS;
+        this.#logger?.(`Loaded WASMPaths at: ${JSON.stringify(this.#wasmPaths)}`);
+        this.#fileReader = fileReader instanceof CachedFileReader ? fileReader : new CachedFileReader();
+        TtsSession._instance = this;
+        return this;
+    }
+    static async create(options) {
+        const session = new TtsSession(options);
+        await session.waitReady;
+        return session;
+    }
+    async init(allowLocalModels, fallbackStrategy) {
+        try {
+            const { createPiperPhonemize } = await __turbopack_context__.A("[project]/node_modules/@jtsage/piper-tts-web/dist/piper-CLXk3wTk.js [app-client] (ecmascript, async loader)");
+            this.#createPiperPhonemize = createPiperPhonemize;
+            const ortModule = await __turbopack_context__.A("[project]/node_modules/onnxruntime-web/dist/ort.bundle.min.mjs [app-client] (ecmascript, async loader)");
+            this.#ort = ortModule.default || ortModule;
+            this.#ort.env.allowLocalModels = allowLocalModels ?? true;
+            this.#ort.env.wasm.numThreads = navigator.hardwareConcurrency;
+            await this.#setupWasmPaths(fallbackStrategy);
+            this.#logger?.(`Loading model config for voice: ${this.voiceId}`);
+            const modelConfigBlob = await this.#fileReader.loadVoice(this.voiceId, true);
+            this.#modelConfig = JSON.parse(await modelConfigBlob.text());
+            this.#logger?.(`Loading model for voice: ${this.voiceId}`);
+            const modelBlob = await this.#fileReader.loadVoice(this.voiceId);
+            this.#ortSession = await this.#ort.InferenceSession.create(await modelBlob.arrayBuffer());
+            this.#logger?.(`Successfully initialized TTS session for voice: ${this.voiceId}`);
+            this.ready = true;
+        } catch (err) {
+            if (err instanceof Error) {
+                this.#logger?.(`Failed to initialize TTS session: ${err.message}`);
+                throw new Error(`TTS Session initialization failed: ${err.message}`, {
+                    cause: err
+                });
+            } else throw err;
+        }
+    }
+    async #setupWasmPaths(fallbackStrategy) {
+        const strategy = fallbackStrategy ?? "cdn";
+        try {
+            if (strategy === "local") {
+                this.#ort.env.wasm.wasmPaths = this.#wasmPaths.onnxWasm;
+                this.#logger?.("Using local WASM paths");
+                return;
+            }
+            if (strategy === "cdn") {
+                this.#ort.env.wasm.wasmPaths = ONNX_BASE;
+                this.#logger?.("Using CDN WASM paths");
+                return;
+            }
+            if (strategy === "auto") {
+                try {
+                    if ((await fetch(`https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm.wasm`, {
+                        method: "HEAD"
+                    })).ok) {
+                        this.#ort.env.wasm.wasmPaths = ONNX_BASE;
+                        this.#logger?.("CDN available, using CDN WASM paths");
+                    } else throw new Error("CDN not available");
+                } catch (err) {
+                    this.#logger?.(`CDN failed (${err}), falling back to local WASM paths`);
+                    this.#ort.env.wasm.wasmPaths = this.#wasmPaths.onnxWasm;
+                }
+                return;
+            }
+        } catch (err) {
+            this.#logger?.(`WASM path setup failed: ${err}`);
+            this.#ort.env.wasm.wasmPaths = this.#wasmPaths.onnxWasm;
+        }
+    }
+    async predict(text) {
+        await this.waitReady;
+        const input = JSON.stringify([
+            {
+                text: text.trim()
+            }
+        ]);
+        const phonemeIds = await new Promise(async (resolve)=>{
+            (await this.#createPiperPhonemize({
+                print: (data)=>{
+                    resolve(JSON.parse(data).phoneme_ids);
+                },
+                printErr: (message)=>{
+                    throw new Error(message);
+                },
+                locateFile: (url)=>{
+                    if (url.endsWith(".wasm")) return this.#wasmPaths.piperWasm;
+                    if (url.endsWith(".data")) return this.#wasmPaths.piperData;
+                    return url;
+                }
+            })).callMain([
+                "-l",
+                this.#modelConfig.espeak.voice,
+                "--input",
+                input,
+                "--espeak_data",
+                "/espeak-ng-data"
+            ]);
+        });
+        const speakerId = 0;
+        const audioSampleRate = this.#modelConfig.audio.sample_rate;
+        const noiseScale = this.#modelConfig.inference.noise_scale;
+        const lengthScale = this.#modelConfig.inference.length_scale;
+        const noiseW = this.#modelConfig.inference.noise_w;
+        const session = this.#ortSession;
+        const feeds = {
+            input: new this.#ort.Tensor("int64", phonemeIds, [
+                1,
+                phonemeIds.length
+            ]),
+            input_lengths: new this.#ort.Tensor("int64", [
+                phonemeIds.length
+            ]),
+            scales: new this.#ort.Tensor("float32", [
+                noiseScale,
+                lengthScale,
+                noiseW
+            ])
+        };
+        if (Object.keys(this.#modelConfig.speaker_id_map).length !== 0) Object.assign(feeds, {
+            sid: new this.#ort.Tensor("int64", [
+                speakerId
+            ])
+        });
+        const { output: { data: pcm } } = await session.run(feeds);
+        if (pcm instanceof Float32Array) return new Blob([
+            pcm2wav(pcm, 1, audioSampleRate)
+        ], {
+            type: "audio/x-wav"
+        });
+        throw new Error("unable to encode audio");
+    }
+};
+/**
+* Run text to speech inference in new worker thread. Fetches the model
+* first, if it has not yet been saved to cache yet.
+*/ async function predict(config, callback) {
+    return new TtsSession({
+        fileReader: new CachedFileReader({
+            progress: callback
+        }),
+        voiceId: config.voiceId
+    }).predict(config.text);
+}
+//#endregion
+//#region src/voices.ts
+/**
+* Retrieves all available voices from huggingface and falls back to local cache.
+* @returns 
+*/ async function voices() {
+    try {
+        const res = await fetch(`${HF_BASE}/voices.json`);
+        if (!res.ok) throw new Error("Could not retrieve voices file from huggingface");
+        return Object.values(await res.json());
+    } catch  {
+        const LOCAL_VOICES_JSON = await __turbopack_context__.A("[project]/node_modules/@jtsage/piper-tts-web/dist/voices_static-CnfMKgT5.js [app-client] (ecmascript, async loader)");
+        console.log(`Could not fetch voices.json remote ${HF_BASE}. Fetching local`);
+        return Object.values(LOCAL_VOICES_JSON.default);
+    }
+}
+;
+}),
+"[project]/src/components/modes/piper.worker.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$jtsage$2f$piper$2d$tts$2d$web$2f$dist$2f$piper$2d$tts$2d$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@jtsage/piper-tts-web/dist/piper-tts-web.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$speechAudioCache$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/speechAudioCache.ts [app-client] (ecmascript)");
+;
+;
+const VOICE_ID = "de_DE-thorsten-high";
+let activeSpeechRequestId = null;
+let pendingRequest = null;
+const prefetchQueue = [];
+const prefetchJobs = new Map();
+let isProcessing = false;
+let sessionPromise = null;
+const fileReader = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$jtsage$2f$piper$2d$tts$2d$web$2f$dist$2f$piper$2d$tts$2d$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CachedFileReader"]({
+    progress: ({ loaded, total })=>{
+        if (activeSpeechRequestId !== null) {
+            self.postMessage({
+                type: "progress",
+                id: activeSpeechRequestId,
+                loaded,
+                total
+            });
+        }
+    }
+});
+function getSession() {
+    sessionPromise ??= __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$jtsage$2f$piper$2d$tts$2d$web$2f$dist$2f$piper$2d$tts$2d$web$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TtsSession"].create({
+        voiceId: VOICE_ID,
+        fileReader
+    });
+    return sessionPromise;
+}
+async function processRequests() {
+    if (isProcessing) return;
+    isProcessing = true;
+    while(pendingRequest || prefetchQueue.length > 0){
+        const request = pendingRequest;
+        if (request) pendingRequest = null;
+        try {
+            if (request) {
+                let audio = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$speechAudioCache$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCachedPronunciation"])(request.text);
+                if (!audio) {
+                    const session = await getSession();
+                    audio = await session.predict(request.text);
+                    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$speechAudioCache$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cachePronunciation"])(request.text, audio);
+                }
+                if (request.id === activeSpeechRequestId) {
+                    self.postMessage({
+                        type: "result",
+                        id: request.id,
+                        audio
+                    });
+                    activeSpeechRequestId = null;
+                }
+            } else {
+                const task = prefetchQueue.shift();
+                if (!task) continue;
+                const job = prefetchJobs.get(task.id);
+                if (!job) continue;
+                try {
+                    let audio = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$speechAudioCache$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCachedPronunciation"])(task.text);
+                    if (!audio) {
+                        const session = await getSession();
+                        audio = await session.predict(task.text);
+                        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$speechAudioCache$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cachePronunciation"])(task.text, audio);
+                    }
+                } catch  {
+                    job.failed += 1;
+                }
+                job.completed += 1;
+                const done = job.completed >= job.total;
+                self.postMessage({
+                    type: "prefetch-progress",
+                    id: task.id,
+                    completed: job.completed,
+                    total: job.total,
+                    failed: job.failed,
+                    done
+                });
+                if (done) prefetchJobs.delete(task.id);
+            }
+        } catch (error) {
+            if (request && request.id === activeSpeechRequestId) {
+                self.postMessage({
+                    type: "error",
+                    id: request.id,
+                    message: error instanceof Error ? error.message : "German voice could not be loaded."
+                });
+                activeSpeechRequestId = null;
+            }
+        }
+    }
+    isProcessing = false;
+    if (pendingRequest || prefetchQueue.length > 0) void processRequests();
+}
+self.addEventListener("message", (event)=>{
+    if (event.data.type === "cancel") {
+        if (activeSpeechRequestId === event.data.id) {
+            activeSpeechRequestId = null;
+            if (pendingRequest?.id === event.data.id) pendingRequest = null;
+        }
+        return;
+    }
+    if (event.data.type === "prepare") {
+        void getSession().then(()=>self.postMessage({
+                type: "ready",
+                id: event.data.id
+            }), (error)=>self.postMessage({
+                type: "error",
+                id: event.data.id,
+                message: error instanceof Error ? error.message : "German voice could not be loaded."
+            }));
+        return;
+    }
+    if (event.data.type === "cancel-prefetch") {
+        prefetchJobs.delete(event.data.id);
+        for(let index = prefetchQueue.length - 1; index >= 0; index -= 1){
+            if (prefetchQueue[index].id === event.data.id) prefetchQueue.splice(index, 1);
+        }
+        return;
+    }
+    if (event.data.type === "prefetch") {
+        const texts = [
+            ...new Set(event.data.texts.map((text)=>text.trim()).filter(Boolean))
+        ];
+        if (texts.length === 0) {
+            self.postMessage({
+                type: "prefetch-progress",
+                id: event.data.id,
+                completed: 0,
+                total: 0,
+                failed: 0,
+                done: true
+            });
+            return;
+        }
+        prefetchJobs.set(event.data.id, {
+            total: texts.length,
+            completed: 0,
+            failed: 0
+        });
+        prefetchQueue.push(...texts.map((text)=>({
+                id: event.data.id,
+                text
+            })));
+        void processRequests();
+        return;
+    }
+    if (event.data.type !== "speak") return;
+    activeSpeechRequestId = event.data.id;
+    pendingRequest = event.data;
+    void processRequests();
+});
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/src/lib/speechAudioCache.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "cachePronunciation",
+    ()=>cachePronunciation,
+    "getCachedPronunciation",
+    ()=>getCachedPronunciation
+]);
+const DATABASE_NAME = "lexikon-speech-audio";
+const STORE_NAME = "pronunciations";
+let databasePromise = null;
+function openDatabase() {
+    if (typeof indexedDB === "undefined") return Promise.resolve(null);
+    databasePromise ??= new Promise((resolve)=>{
+        const request = indexedDB.open(DATABASE_NAME, 1);
+        request.onupgradeneeded = ()=>{
+            request.result.createObjectStore(STORE_NAME, {
+                keyPath: "text"
+            });
+        };
+        request.onsuccess = ()=>resolve(request.result);
+        request.onerror = ()=>resolve(null);
+        request.onblocked = ()=>resolve(null);
+    });
+    return databasePromise;
+}
+async function getCachedPronunciation(text) {
+    try {
+        const database = await openDatabase();
+        if (!database) return null;
+        return await new Promise((resolve)=>{
+            const request = database.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).get(text);
+            request.onsuccess = ()=>{
+                const entry = request.result;
+                resolve(entry?.audio instanceof Blob ? entry.audio : null);
+            };
+            request.onerror = ()=>resolve(null);
+        });
+    } catch  {
+        return null;
+    }
+}
+async function cachePronunciation(text, audio) {
+    try {
+        const database = await openDatabase();
+        if (!database) return;
+        await new Promise((resolve)=>{
+            const transaction = database.transaction(STORE_NAME, "readwrite");
+            transaction.objectStore(STORE_NAME).put({
+                text,
+                audio
+            });
+            transaction.oncomplete = ()=>resolve();
+            transaction.onerror = ()=>resolve();
+            transaction.onabort = ()=>resolve();
+        });
+    } catch  {
+    // Audio can still play when browser storage is unavailable.
+    }
+}
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+]);
+
+//# sourceMappingURL=_18tl462._.js.map

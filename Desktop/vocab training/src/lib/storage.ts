@@ -3,6 +3,7 @@ import { StudySet } from "./types";
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
+const BUILT_IN_ADDED_WORDS_KEY = "lexikon.builtInAddedWords";
 const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
 export type ExerciseKey = "cards" | "quiz" | "write" | "match";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
@@ -80,9 +81,52 @@ export function deleteBuiltInWord(setId: string, wordId: string) {
     const deleted = JSON.parse(window.localStorage.getItem(BUILT_IN_DELETED_WORDS_KEY) ?? "{}") as Record<string, string[]>;
     deleted[setId] = [...new Set([...(deleted[setId] ?? []), wordId])];
     window.localStorage.setItem(BUILT_IN_DELETED_WORDS_KEY, JSON.stringify(deleted));
+    removeWordProgress(setId, wordId);
   } catch {
     // Ignore unavailable browser storage.
   }
+}
+
+export function loadBuiltInAddedWords(setId: string): StudySet["words"] {
+  if (typeof window === "undefined") return [];
+  try {
+    const added = JSON.parse(window.localStorage.getItem(BUILT_IN_ADDED_WORDS_KEY) ?? "{}") as Record<string, StudySet["words"]>;
+    return Array.isArray(added[setId]) ? added[setId] : [];
+  } catch {
+    return [];
+  }
+}
+
+export function loadBuiltInWords(setId: string, baseWords: StudySet["words"]) {
+  const deletedIds = new Set(loadBuiltInDeletedWords(setId));
+  const base = baseWords.filter((word) => !deletedIds.has(word.id));
+  const baseIds = new Set(base.map((word) => word.id));
+  const added = loadBuiltInAddedWords(setId).filter(
+    (word) => !deletedIds.has(word.id) && !baseIds.has(word.id),
+  );
+  return [...base, ...added];
+}
+
+export function addBuiltInWord(setId: string, word: StudySet["words"][number]) {
+  if (typeof window === "undefined") return;
+  try {
+    const added = JSON.parse(window.localStorage.getItem(BUILT_IN_ADDED_WORDS_KEY) ?? "{}") as Record<string, StudySet["words"]>;
+    added[setId] = [...(added[setId] ?? []), word];
+    window.localStorage.setItem(BUILT_IN_ADDED_WORDS_KEY, JSON.stringify(added));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
+
+function removeWordProgress(setId: string, wordId: string) {
+  const progress = loadExerciseProgress(setId);
+  const nextProgress = Object.fromEntries(
+    (Object.keys(progress) as ExerciseKey[]).map((exercise) => [
+      exercise,
+      progress[exercise].filter((id) => id !== wordId),
+    ]),
+  ) as ExerciseProgress;
+  saveExerciseProgress(setId, nextProgress);
 }
 
 export function loadBuiltInProgress(setId: string): string[] {
@@ -168,6 +212,7 @@ export function deleteWord(setId: string, wordId: string): StudySet[] {
       : set,
   );
   saveSets(sets);
+  removeWordProgress(setId, wordId);
   return sets;
 }
 

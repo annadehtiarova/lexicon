@@ -6,10 +6,13 @@ import SetsList from "@/components/SetsList";
 import {
   addSet,
   deleteSet,
+  loadBuiltInWords,
   loadBuiltInProgress,
   loadSets,
 } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
+import { prefetchPronunciations } from "@/lib/piperClient";
+import { displayGerman } from "@/lib/wordDisplay";
 import { StudySet } from "@/lib/types";
 import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
 import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
@@ -30,6 +33,7 @@ import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
 import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
 import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
 import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
+import { TEAMROLLE_SET_ID, getTeamrolleSet } from "@/lib/teamrolleData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -45,6 +49,7 @@ const BUILT_IN_SET_IDS = new Set([
   TEAMARBEIT_SET_ID,
   PROTOKOLL_SET_ID,
   TEAMGESPRÄCH_SET_ID,
+  TEAMROLLE_SET_ID,
 ]);
 
 const BUILT_IN_SETS = [
@@ -61,6 +66,7 @@ const BUILT_IN_SETS = [
   getTeamarbeitSet(),
   getProtokollSet(),
   getTeamgesprächSet(),
+  getTeamrolleSet(),
 ];
 
 export default function Home() {
@@ -71,7 +77,10 @@ export default function Home() {
   useEffect(() => {
     const builtInSets = BUILT_IN_SETS.map((set) => ({
       ...set,
-      masteredWordIds: loadBuiltInProgress(set.id),
+      words: loadBuiltInWords(set.id, set.words),
+      masteredWordIds: loadBuiltInProgress(set.id).filter((wordId) =>
+        loadBuiltInWords(set.id, set.words).some((word) => word.id === wordId),
+      ),
     }));
     const customSets = loadSets().filter((set) => !BUILT_IN_SET_IDS.has(set.id));
     setSets([...builtInSets, ...customSets]);
@@ -88,14 +97,30 @@ export default function Home() {
         words: words.map((w) => ({ id: crypto.randomUUID(), ...w })),
         masteredWordIds: [],
       };
+      setNotice(null);
       setSets([
         ...BUILT_IN_SETS.map((set) => ({
           ...set,
-          masteredWordIds: loadBuiltInProgress(set.id),
+          words: loadBuiltInWords(set.id, set.words),
+          masteredWordIds: loadBuiltInProgress(set.id).filter((wordId) =>
+            loadBuiltInWords(set.id, set.words).some((word) => word.id === wordId),
+          ),
         })),
         ...addSet(newSet).filter((set) => !BUILT_IN_SET_IDS.has(set.id)),
       ]);
-      setNotice(null);
+      setNotice(`Preparing pronunciation audio: 0/${newSet.words.length}`);
+      prefetchPronunciations(
+        newSet.words.map(displayGerman),
+        ({ completed, total, failed, done }) => {
+          setNotice(
+            done
+              ? failed > 0
+                ? `Audio ready for ${completed - failed}/${total} words; ${failed} will be generated when played.`
+                : `Pronunciation audio ready for all ${total} words.`
+              : `Preparing pronunciation audio: ${completed}/${total}`,
+          );
+        },
+      );
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Text extraction failed");
     }
