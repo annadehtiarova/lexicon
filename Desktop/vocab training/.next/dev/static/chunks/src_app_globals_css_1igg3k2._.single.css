@@ -678,6 +678,10 @@
     max-width: var(--container-md);
   }
 
+  .min-w-0 {
+    min-width: 0;
+  }
+
   .flex-1 {
     flex: 1;
   }
@@ -739,6 +743,10 @@
     align-items: center;
   }
 
+  .items-end {
+    align-items: flex-end;
+  }
+
   .items-start {
     align-items: flex-start;
   }
@@ -753,6 +761,10 @@
 
   .justify-end {
     justify-content: flex-end;
+  }
+
+  .gap-1 {
+    gap: var(--spacing);
   }
 
   .gap-1\.5 {
@@ -1018,6 +1030,10 @@
 
   .p-7 {
     padding: calc(var(--spacing) * 7);
+  }
+
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
   }
 
   .px-3 {

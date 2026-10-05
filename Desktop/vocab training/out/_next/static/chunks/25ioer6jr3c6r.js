@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,78132,e=>{e.q("/lexicon/_next/static/media/piper.worker.31gk3572ml9x2.ts")}]);

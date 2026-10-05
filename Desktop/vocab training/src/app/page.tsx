@@ -11,8 +11,6 @@ import {
   loadSets,
 } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
-import { prefetchPronunciations } from "@/lib/piperClient";
-import { displayGerman } from "@/lib/wordDisplay";
 import { StudySet } from "@/lib/types";
 import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
 import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
@@ -108,19 +106,6 @@ export default function Home() {
         })),
         ...addSet(newSet).filter((set) => !BUILT_IN_SET_IDS.has(set.id)),
       ]);
-      setNotice(`Preparing pronunciation audio: 0/${newSet.words.length}`);
-      prefetchPronunciations(
-        newSet.words.map(displayGerman),
-        ({ completed, total, failed, done }) => {
-          setNotice(
-            done
-              ? failed > 0
-                ? `Audio ready for ${completed - failed}/${total} words; ${failed} will be generated when played.`
-                : `Pronunciation audio ready for all ${total} words.`
-              : `Preparing pronunciation audio: ${completed}/${total}`,
-          );
-        },
-      );
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Text extraction failed");
     }

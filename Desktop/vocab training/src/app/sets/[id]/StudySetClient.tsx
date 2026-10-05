@@ -21,7 +21,6 @@ import {
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
 import { displayGerman } from "@/lib/wordDisplay";
-import { prefetchPronunciations } from "@/lib/piperClient";
 import {
   ARBEITSRAEUME_SET_ID,
   getArbeitsraeumeSet,
@@ -303,11 +302,6 @@ export default function StudySetClient({ id }: { id: string }) {
     setMode("cards");
   }, [id]);
 
-  useEffect(() => {
-    if (!set) return;
-    return prefetchPronunciations(set.words.map(displayGerman));
-  }, [set]);
-
   const words: VocabWord[] = useMemo(
     () =>
       (set?.words ?? []).map((word) => ({
@@ -498,9 +492,6 @@ export default function StudySetClient({ id }: { id: string }) {
     if (!german || !english) return;
 
     updateWord(id, wordId, { german, english, pos: draftPos });
-    prefetchPronunciations([
-      displayGerman({ id: wordId, german, english, pos: draftPos, example: "" }),
-    ]);
 
     setSet((current) =>
       current
@@ -527,7 +518,6 @@ export default function StudySetClient({ id }: { id: string }) {
       pos: newPos,
       example: newExample.trim(),
     };
-    prefetchPronunciations([displayGerman(word)]);
     if (set.isPersisted) addWord(id, word);
     else addBuiltInWord(id, word);
     setSet((current) =>

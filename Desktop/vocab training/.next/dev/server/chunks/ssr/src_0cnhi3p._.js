@@ -274,8 +274,8 @@ function StudySetClient({ id }) {
         id
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (!set?.isPersisted) return;
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["prefetchPronunciations"])(set.words.map(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordDisplay$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["displayGerman"]));
+        if (!set) return;
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["prefetchPronunciations"])(set.words.map(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordDisplay$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["displayGerman"]));
     }, [
         set
     ]);
@@ -1711,7 +1711,6 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/piperClient.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordDisplay$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/wordDisplay.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/icons.tsx [app-ssr] (ecmascript)");
 "use client";
@@ -1719,75 +1718,44 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2
 ;
 ;
 ;
-;
 function CardsMode({ words, onCorrect, onBatchComplete }) {
     const germanVoicesRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
-    const piperWorkerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const speechRequestIdRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(0);
-    const messageListenerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const errorListenerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const audioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const audioUrlRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const cachedAudioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [cardOrder, setCardOrder] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>words);
     const [index, setIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [flipped, setFlipped] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [isLoadingSpeech, setIsLoadingSpeech] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [speechProgress, setSpeechProgress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [speechNotice, setSpeechNotice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [germanVoices, setGermanVoices] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [selectedVoiceURI, setSelectedVoiceURI] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const word = cardOrder[index];
     const total = cardOrder.length;
     const progress = total > 1 ? index / (total - 1) * 100 : 100;
     const resetSpeech = ()=>{
-        const requestId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createPiperRequestId"])();
-        speechRequestIdRef.current = requestId;
-        const worker = piperWorkerRef.current;
-        worker?.postMessage({
-            type: "cancel",
-            id: requestId
-        });
-        if (messageListenerRef.current) {
-            worker?.removeEventListener("message", messageListenerRef.current);
-            messageListenerRef.current = null;
-        }
-        if (errorListenerRef.current) {
-            worker?.removeEventListener("error", errorListenerRef.current);
-            errorListenerRef.current = null;
-        }
-        audioRef.current?.pause();
-        if (audioUrlRef.current) URL.revokeObjectURL(audioUrlRef.current);
-        audioRef.current = null;
-        audioUrlRef.current = null;
-        cachedAudioRef.current = null;
-        setIsLoadingSpeech(false);
-        setSpeechProgress(null);
-        setSpeechNotice(null);
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
     };
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        try {
-            const worker = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getPiperWorker"])();
-            piperWorkerRef.current = worker;
-            worker.postMessage({
-                type: "prepare",
-                id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createPiperRequestId"])()
-            });
-        } catch  {
-        // Speech will fall back to the browser voice if the worker cannot start.
-        }
-    }, []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (!("speechSynthesis" in window)) return;
         const updateVoices = ()=>{
-            germanVoicesRef.current = window.speechSynthesis.getVoices().filter((voice)=>/^de(?:-|$)/i.test(voice.lang));
+            const voices = window.speechSynthesis.getVoices().filter((voice)=>/^de(?:-|$)/i.test(voice.lang));
+            germanVoicesRef.current = voices;
+            setGermanVoices(voices);
+            setSelectedVoiceURI((current)=>{
+                if (voices.some((voice)=>voice.voiceURI === current)) return current;
+                let savedVoiceURI = "";
+                try {
+                    savedVoiceURI = window.localStorage.getItem("lexikon.germanVoice") ?? "";
+                } catch  {
+                // Use the system default when storage is unavailable.
+                }
+                if (voices.some((voice)=>voice.voiceURI === savedVoiceURI)) {
+                    return savedVoiceURI;
+                }
+                return voices.find((voice)=>/^anna\b/i.test(voice.name))?.voiceURI ?? voices.find((voice)=>voice.lang.toLowerCase() === "de-de")?.voiceURI ?? voices[0]?.voiceURI ?? "";
+            });
         };
-        updateVoices();
         window.speechSynthesis.addEventListener("voiceschanged", updateVoices);
+        window.setTimeout(updateVoices, 0);
         return ()=>window.speechSynthesis.removeEventListener("voiceschanged", updateVoices);
     }, []);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>()=>{
-            audioRef.current?.pause();
-            if (audioUrlRef.current) URL.revokeObjectURL(audioUrlRef.current);
-        }, []);
     const advance = ()=>{
         resetSpeech();
         setFlipped(false);
@@ -1811,102 +1779,17 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
         setFlipped(false);
         setIndex(Math.min(index, Math.max(remaining.length - 1, 0)));
     };
-    const speakWithSystemVoice = (text)=>{
+    const speakWithSystemVoice = (text, voiceURI = selectedVoiceURI)=>{
         if ("TURBOPACK compile-time truthy", 1) return;
         //TURBOPACK unreachable
         ;
         const speech = undefined;
         const utterance = undefined;
         const voices = undefined;
-        const exactLocaleVoices = undefined;
-        const candidates = undefined;
-        const preferredName = undefined;
-        const preferredVoice = undefined;
-    };
-    const playPiperAudio = (blob)=>{
-        audioRef.current?.pause();
-        if (audioUrlRef.current) URL.revokeObjectURL(audioUrlRef.current);
-        const audioUrl = URL.createObjectURL(blob);
-        const audio = new Audio(audioUrl);
-        audioRef.current = audio;
-        audioUrlRef.current = audioUrl;
-        audio.onended = ()=>{
-            if (audioUrlRef.current !== audioUrl) return;
-            URL.revokeObjectURL(audioUrl);
-            audioRef.current = null;
-            audioUrlRef.current = null;
-        };
-        void audio.play().then(()=>setSpeechNotice(null), ()=>{
-            setSpeechNotice("Natural voice is ready. Tap the speaker again to play it.");
-        });
+        const voice = undefined;
     };
     const speakGerman = ()=>{
-        const cachedAudio = cachedAudioRef.current;
-        if (cachedAudio?.text === word.german) {
-            playPiperAudio(cachedAudio.blob);
-            return;
-        }
-        let worker = piperWorkerRef.current;
-        if (!worker) {
-            try {
-                worker = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getPiperWorker"])();
-                piperWorkerRef.current = worker;
-            } catch  {
-                setSpeechNotice("Natural voice could not start. Using the browser voice.");
-                speakWithSystemVoice(word.german);
-                return;
-            }
-        }
-        const requestId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$piperClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createPiperRequestId"])();
-        speechRequestIdRef.current = requestId;
-        setIsLoadingSpeech(true);
-        setSpeechProgress(0);
-        setSpeechNotice(null);
-        const handleMessage = (event)=>{
-            const result = event.data;
-            if (result.id !== speechRequestIdRef.current) return;
-            if (result.type === "progress") {
-                setSpeechProgress(result.total > 0 ? Math.min(100, Math.round(result.loaded / result.total * 100)) : null);
-                return;
-            }
-            if (result.type === "ready") return;
-            setIsLoadingSpeech(false);
-            setSpeechProgress(null);
-            worker.removeEventListener("message", handleMessage);
-            worker.removeEventListener("error", handleError);
-            messageListenerRef.current = null;
-            errorListenerRef.current = null;
-            if (result.type === "result") {
-                cachedAudioRef.current = {
-                    text: word.german,
-                    blob: result.audio
-                };
-                playPiperAudio(result.audio);
-                return;
-            }
-            setSpeechNotice("Natural voice unavailable. Using the browser voice.");
-            speakWithSystemVoice(word.german);
-        };
-        const handleError = ()=>{
-            if (requestId !== speechRequestIdRef.current) return;
-            worker.removeEventListener("message", handleMessage);
-            worker.removeEventListener("error", handleError);
-            messageListenerRef.current = null;
-            errorListenerRef.current = null;
-            setIsLoadingSpeech(false);
-            setSpeechProgress(null);
-            setSpeechNotice("Natural voice unavailable. Using the browser voice.");
-            speakWithSystemVoice(word.german);
-        };
-        messageListenerRef.current = handleMessage;
-        errorListenerRef.current = handleError;
-        worker.addEventListener("message", handleMessage);
-        worker.addEventListener("error", handleError);
-        worker.postMessage({
-            type: "speak",
-            id: requestId,
-            text: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordDisplay$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["displayGerman"])(word)
-        });
+        speakWithSystemVoice((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$wordDisplay$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["displayGerman"])(word));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col items-start pt-0",
@@ -1921,7 +1804,7 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 252,
+                        lineNumber: 126,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1932,13 +1815,13 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 253,
+                        lineNumber: 127,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 251,
+                lineNumber: 125,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1950,12 +1833,12 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/components/modes/CardsMode.tsx",
-                    lineNumber: 256,
+                    lineNumber: 130,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 255,
+                lineNumber: 129,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1964,26 +1847,19 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         type: "button",
                         onClick: speakGerman,
-                        disabled: isLoadingSpeech,
-                        "aria-label": isLoadingSpeech ? "Loading natural German pronunciation" : `Hear pronunciation of ${word.german}`,
-                        title: speechNotice ?? "Hear pronunciation",
+                        "aria-label": `Hear pronunciation of ${word.german}`,
+                        title: "Hear pronunciation",
                         className: "absolute right-3 top-7 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[#b8c8c9] bg-white text-[#263fd6] hover:bg-[#eef1ff] disabled:cursor-wait disabled:opacity-70",
-                        children: isLoadingSpeech ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/modes/CardsMode.tsx",
-                            lineNumber: 276,
-                            columnNumber: 13
-                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SpeakerIcon"], {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SpeakerIcon"], {
                             className: "h-4 w-4"
                         }, void 0, false, {
                             fileName: "[project]/src/components/modes/CardsMode.tsx",
-                            lineNumber: 278,
-                            columnNumber: 13
+                            lineNumber: 144,
+                            columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 263,
+                        lineNumber: 137,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1998,7 +1874,7 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: flipped ? "English" : "German"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 289,
+                                lineNumber: 154,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2006,7 +1882,7 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: flipped ? word.english : word.german
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 292,
+                                lineNumber: 157,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2014,28 +1890,74 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: "Tap the card to reveal"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 295,
+                                lineNumber: 160,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 281,
+                        lineNumber: 146,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 262,
+                lineNumber: 136,
                 columnNumber: 7
             }, this),
-            (isLoadingSpeech || speechNotice) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                role: "status",
-                className: "mt-2 text-xs text-[#5d6f74]",
-                children: isLoadingSpeech ? `Preparing natural German voice${speechProgress === null ? "…" : ` · ${speechProgress}%`}` : speechNotice
-            }, void 0, false, {
+            germanVoices.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "mt-3 flex w-full items-end gap-2",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                        className: "flex min-w-0 flex-1 flex-col gap-1 text-xs text-[#5d6f74]",
+                        children: [
+                            "German voice",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                "aria-label": "German voice",
+                                value: selectedVoiceURI,
+                                onChange: (event)=>{
+                                    const voiceURI = event.target.value;
+                                    setSelectedVoiceURI(voiceURI);
+                                    try {
+                                        window.localStorage.setItem("lexikon.germanVoice", voiceURI);
+                                    } catch  {
+                                    // Keep the selection for this session when storage is unavailable.
+                                    }
+                                },
+                                className: "h-9 w-full rounded-lg border border-[#b8c8c9] bg-white px-2 text-sm text-[#172b35]",
+                                children: germanVoices.map((voice)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: voice.voiceURI,
+                                        children: voice.name
+                                    }, voice.voiceURI, false, {
+                                        fileName: "[project]/src/components/modes/CardsMode.tsx",
+                                        lineNumber: 185,
+                                        columnNumber: 17
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/modes/CardsMode.tsx",
+                                lineNumber: 170,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/modes/CardsMode.tsx",
+                        lineNumber: 168,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        type: "button",
+                        onClick: ()=>speakWithSystemVoice("Guten Tag. Wie geht es Ihnen?"),
+                        className: "h-9 shrink-0 rounded-lg border border-[#b8c8c9] bg-white px-3 text-sm text-[#172b35] hover:border-[#263fd6]",
+                        children: "Test voice"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/modes/CardsMode.tsx",
+                        lineNumber: 191,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 302,
+                lineNumber: 167,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2050,7 +1972,7 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ChevronLeftIcon"], {}, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 317,
+                                lineNumber: 209,
                                 columnNumber: 11
                             }, this),
                             " ",
@@ -2059,13 +1981,13 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: "Back"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 317,
+                                lineNumber: 209,
                                 columnNumber: 31
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 310,
+                        lineNumber: 202,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2077,14 +1999,14 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CheckIcon"], {}, void 0, false, {
                                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                        lineNumber: 325,
+                                        lineNumber: 217,
                                         columnNumber: 13
                                     }, this),
                                     " Forgot"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 321,
+                                lineNumber: 213,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2096,20 +2018,20 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["XIcon"], {}, void 0, false, {
                                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                        lineNumber: 334,
+                                        lineNumber: 226,
                                         columnNumber: 13
                                     }, this),
                                     " I know it"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 327,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 320,
+                        lineNumber: 212,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2124,7 +2046,7 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 children: "Next"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 345,
+                                lineNumber: 237,
                                 columnNumber: 11
                             }, this),
                             " ",
@@ -2132,19 +2054,19 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                                 className: "h-4 w-4 shrink-0 rotate-180"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                                lineNumber: 345,
+                                lineNumber: 237,
                                 columnNumber: 58
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 338,
+                        lineNumber: 230,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 309,
+                lineNumber: 201,
                 columnNumber: 7
             }, this),
             index === total - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2155,19 +2077,19 @@ function CardsMode({ words, onCorrect, onBatchComplete }) {
                     "Next exercise ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ArrowRightIcon"], {}, void 0, false, {
                         fileName: "[project]/src/components/modes/CardsMode.tsx",
-                        lineNumber: 355,
+                        lineNumber: 247,
                         columnNumber: 25
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/modes/CardsMode.tsx",
-                lineNumber: 350,
+                lineNumber: 242,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/modes/CardsMode.tsx",
-        lineNumber: 250,
+        lineNumber: 124,
         columnNumber: 5
     }, this);
 }

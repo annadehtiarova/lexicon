@@ -174,6 +174,7 @@ function Home() {
                     })),
                 masteredWordIds: []
             };
+            setNotice(null);
             setSets([
                 ...BUILT_IN_SETS.map((set)=>({
                         ...set,
@@ -182,7 +183,6 @@ function Home() {
                     })),
                 ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$storage$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addSet"])(newSet).filter((set)=>!BUILT_IN_SET_IDS.has(set.id))
             ]);
-            setNotice(null);
         } catch (error) {
             setNotice(error instanceof Error ? error.message : "Text extraction failed");
         }
@@ -331,8 +331,22 @@ const BUILT_IN_SET_IDS = new Set([
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$teamgespraechData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TEAMGESPRÄCH_SET_ID"],
     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$teamrolleData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TEAMROLLE_SET_ID"]
 ]);
+const SELECTED_CHAPTER_KEY = "lexikon.selectedChapter";
+function loadSelectedChapter() {
+    if ("TURBOPACK compile-time truthy", 1) return "1";
+    //TURBOPACK unreachable
+    ;
+}
 function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
-    const [selectedChapter, setSelectedChapter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("1");
+    const [selectedChapter, setSelectedChapter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(loadSelectedChapter);
+    const changeChapter = (chapter)=>{
+        setSelectedChapter(chapter);
+        try {
+            window.localStorage.setItem(SELECTED_CHAPTER_KEY, chapter);
+        } catch  {
+        // Keep the selection for this page even when storage is unavailable.
+        }
+    };
     const visibleSets = sets.filter((set)=>{
         const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
         if (chapter) return chapter === selectedChapter;
@@ -351,7 +365,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                 className: "h-3.5 w-3.5 text-[#d8f56d]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 69,
+                                lineNumber: 91,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -359,13 +373,13 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                 children: "Your sets"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 70,
+                                lineNumber: 92,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 68,
+                        lineNumber: 90,
                         columnNumber: 9
                     }, this),
                     sets.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -381,12 +395,12 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 105,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 76,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -397,7 +411,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 85,
+                                lineNumber: 107,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -407,7 +421,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             value: selectedChapter,
-                                            onChange: (event)=>setSelectedChapter(event.target.value),
+                                            onChange: (event)=>changeChapter(event.target.value),
                                             className: "h-9 w-[120px] appearance-none rounded-full border border-[#263fd6] bg-white pl-4 pr-7 text-sm text-[#172b35] outline-none focus:border-[#1d2fb5]",
                                             "aria-label": "Filter by chapter",
                                             children: Array.from({
@@ -422,43 +436,43 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                     ]
                                                 }, chapter, true, {
                                                     fileName: "[project]/src/components/SetsList.tsx",
-                                                    lineNumber: 99,
+                                                    lineNumber: 121,
                                                     columnNumber: 23
                                                 }, this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 90,
+                                            lineNumber: 112,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ChevronDownIcon"], {
                                             className: "pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#263fd6]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SetsList.tsx",
-                                            lineNumber: 105,
+                                            lineNumber: 127,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 89,
+                                    lineNumber: 111,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 88,
+                                lineNumber: 110,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 75,
+                        lineNumber: 97,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 67,
+                lineNumber: 89,
                 columnNumber: 7
             }, this),
             visibleSets.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -466,7 +480,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                 children: "No sets found in this chapter."
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 113,
+                lineNumber: 135,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                 className: "mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2",
@@ -486,7 +500,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 children: set.name
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 133,
+                                                lineNumber: 155,
                                                 columnNumber: 19
                                             }, this),
                                             !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -494,13 +508,13 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 "aria-hidden": "true"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 136,
+                                                lineNumber: 158,
                                                 columnNumber: 53
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 132,
+                                        lineNumber: 154,
                                         columnNumber: 17
                                     }, this),
                                     BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -508,7 +522,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                         children: "Built-in set"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 139,
+                                        lineNumber: 161,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -521,7 +535,7 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 165,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -531,20 +545,20 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/SetsList.tsx",
-                                                lineNumber: 147,
+                                                lineNumber: 169,
                                                 columnNumber: 19
                                             }, this),
                                             " Study"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/SetsList.tsx",
-                                        lineNumber: 146,
+                                        lineNumber: 168,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 123,
+                                lineNumber: 145,
                                 columnNumber: 15
                             }, this),
                             !BUILT_IN_SET_IDS.has(set.id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -556,29 +570,29 @@ function SetsList({ sets, onDelete, onToggleUpload, uploadOpen }) {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SetsList.tsx",
-                                    lineNumber: 157,
+                                    lineNumber: 179,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SetsList.tsx",
-                                lineNumber: 151,
+                                lineNumber: 173,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, set.id, true, {
                         fileName: "[project]/src/components/SetsList.tsx",
-                        lineNumber: 119,
+                        lineNumber: 141,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/SetsList.tsx",
-                lineNumber: 117,
+                lineNumber: 139,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/SetsList.tsx",
-        lineNumber: 66,
+        lineNumber: 88,
         columnNumber: 5
     }, this);
 }
@@ -877,8 +891,6 @@ __turbopack_context__.s([
     ()=>SparkleIcon,
     "SparklesIcon",
     ()=>SparklesIcon,
-    "SpeakerIcon",
-    ()=>SpeakerIcon,
     "TrashIcon",
     ()=>TrashIcon,
     "XIcon",
@@ -1177,37 +1189,6 @@ function ArrowRightIcon({ className = base }) {
         columnNumber: 5
     }, this);
 }
-function SpeakerIcon({ className = base }) {
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-        viewBox: "0 0 24 24",
-        fill: "none",
-        stroke: "currentColor",
-        strokeWidth: 1.8,
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
-        className: className,
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                d: "M11 5 6 9H3v6h3l5 4V5Z"
-            }, void 0, false, {
-                fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 183,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                d: "M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"
-            }, void 0, false, {
-                fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 184,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 174,
-        columnNumber: 5
-    }, this);
-}
 function CameraIcon({ className = base }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         viewBox: "0 0 24 24",
@@ -1222,7 +1203,7 @@ function CameraIcon({ className = base }) {
                 d: "M4 7h2.5l1.2-2h8.6l1.2 2H20a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 200,
+                lineNumber: 183,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -1231,13 +1212,13 @@ function CameraIcon({ className = base }) {
                 r: "3.2"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 201,
+                lineNumber: 184,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 191,
+        lineNumber: 174,
         columnNumber: 5
     }, this);
 }
@@ -1259,7 +1240,7 @@ function ImagePlusIcon({ className = base }) {
                 rx: "2"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 217,
+                lineNumber: 200,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -1268,20 +1249,20 @@ function ImagePlusIcon({ className = base }) {
                 r: "1.6"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 218,
+                lineNumber: 201,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M3 17l5-5 4 4 3-3 6 6"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 219,
+                lineNumber: 202,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 208,
+        lineNumber: 191,
         columnNumber: 5
     }, this);
 }
@@ -1299,27 +1280,27 @@ function LayersIcon({ className = base }) {
                 d: "M12 3l8 4-8 4-8-4 8-4Z"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 235,
+                lineNumber: 218,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M4 11l8 4 8-4"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 236,
+                lineNumber: 219,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M4 15l8 4 8-4"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 237,
+                lineNumber: 220,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 226,
+        lineNumber: 209,
         columnNumber: 5
     }, this);
 }
@@ -1337,20 +1318,20 @@ function BookOpenIcon({ className = base }) {
                 d: "M12 6.5c-1.6-1.2-3.7-1.7-6-1.7v13c2.3 0 4.4.5 6 1.7 1.6-1.2 3.7-1.7 6-1.7v-13c-2.3 0-4.4.5-6 1.7Z"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 253,
+                lineNumber: 236,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M12 6.5v13"
             }, void 0, false, {
                 fileName: "[project]/src/components/icons.tsx",
-                lineNumber: 254,
+                lineNumber: 237,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 244,
+        lineNumber: 227,
         columnNumber: 5
     }, this);
 }
@@ -1363,12 +1344,12 @@ function SparkleIcon({ className = base }) {
             d: "M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2Z"
         }, void 0, false, {
             fileName: "[project]/src/components/icons.tsx",
-            lineNumber: 262,
+            lineNumber: 245,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 261,
+        lineNumber: 244,
         columnNumber: 5
     }, this);
 }
@@ -1385,12 +1366,12 @@ function TrashIcon({ className = base }) {
             d: "M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"
         }, void 0, false, {
             fileName: "[project]/src/components/icons.tsx",
-            lineNumber: 278,
+            lineNumber: 261,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/icons.tsx",
-        lineNumber: 269,
+        lineNumber: 252,
         columnNumber: 5
     }, this);
 }

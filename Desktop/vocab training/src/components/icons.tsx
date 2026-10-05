@@ -169,23 +169,6 @@ export function ArrowRightIcon({ className = base }: IconProps) {
   );
 }
 
-export function SpeakerIcon({ className = base }: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M11 5 6 9H3v6h3l5 4V5Z" />
-      <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />
-    </svg>
-  );
-}
-
 export function CameraIcon({ className = base }: IconProps) {
   return (
     <svg
