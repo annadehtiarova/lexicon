@@ -13,6 +13,7 @@ import {
   ExerciseKey,
   ExerciseProgress,
   LastBatchResult,
+  clearLastBatchResult,
   loadLastBatchResult,
   loadExerciseProgress,
   saveLastBatchResult,
@@ -408,6 +409,30 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(new Set());
   };
 
+  const resetSet = () => {
+    if (!window.confirm("Reset all progress for this set and start over?")) return;
+
+    const resetProgress: ExerciseProgress = {
+      cards: [],
+      quiz: [],
+      write: [],
+      match: [],
+      gaps: [],
+    };
+    pendingProgressRef.current = resetProgress;
+    saveExerciseProgress(id, resetProgress);
+    clearLastBatchResult(id);
+    setExerciseProgress(resetProgress);
+    setLastBatchResult(null);
+    setMasteredIds(new Set());
+    setPracticeWordIds(words.map((word) => word.id));
+    setDeferredWordIds([]);
+    setPracticeBatch(0);
+    setCompletedModes(new Set());
+    setMode("cards");
+    setExerciseRevision((revision) => revision + 1);
+  };
+
   const modeProgress = MODES.map(({ key, label }) => ({
     key,
     label,
@@ -579,13 +604,20 @@ export default function StudySetClient({ id }: { id: string }) {
                 ? `Last batch ${lastBatchResult.batch}: ${lastBatchResult.mastered}/${lastBatchResult.total} mastered`
                 : "Last batch: none completed yet"}
             </span>
+            <button
+              type="button"
+              onClick={resetSet}
+              className="mt-2 block w-full text-xs text-[#5d6f74] underline decoration-[#9bb8bc] underline-offset-2 hover:text-[#263fd6]"
+            >
+              Reset progress
+            </button>
           </div>
         </div>
 
           {practiceWords.length === 0 ? (
-            <p className="mt-5 border-t-[3px] border-[#d5ddd7] py-5 text-center text-sm text-[#5d6f74]">
-              All words mastered. Set complete.
-            </p>
+            <div className="mt-5 flex flex-col items-center gap-3 border-t-[3px] border-[#d5ddd7] py-5 text-center">
+              <p className="text-sm text-[#5d6f74]">All words mastered. Set complete.</p>
+            </div>
           ) : (
           <div className="pt-5">
           <div className="flex h-9 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0">

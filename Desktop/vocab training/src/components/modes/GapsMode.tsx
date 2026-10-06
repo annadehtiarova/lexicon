@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { VocabWord } from "@/lib/types";
 import { TEAMARBEIT_GAP_TEST } from "@/lib/teamarbeitGapTest";
 import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/icons";
@@ -23,11 +23,51 @@ export default function GapsMode({ words, onCorrect, onBatchComplete }: GapsMode
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
+  const [inputFocused, setInputFocused] = useState(false);
+  const sentenceCardRef = useRef<HTMLDivElement>(null);
   const prompt = prompts[index];
   const sentenceParts = prompt.sentence.split("______");
   const gapAnswers = sentenceParts.length > 2
     ? prompt.answer.split(/\s+/)
     : [prompt.answer];
+
+  useEffect(() => {
+    if (!inputFocused) return;
+
+    let frame = 0;
+    const keepSentenceVisible = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const card = sentenceCardRef.current;
+        if (!card) return;
+
+        const viewport = window.visualViewport;
+        const visibleTop = viewport?.offsetTop ?? 0;
+        const visibleBottom = visibleTop + (viewport?.height ?? window.innerHeight);
+        const bounds = card.getBoundingClientRect();
+        const scrollDelta = bounds.top < visibleTop
+          ? bounds.top - visibleTop
+          : bounds.bottom > visibleBottom
+            ? bounds.bottom - visibleBottom
+            : 0;
+
+        if (scrollDelta !== 0) window.scrollBy({ top: scrollDelta, behavior: "instant" });
+      });
+    };
+
+    const viewport = window.visualViewport;
+    window.addEventListener("scroll", keepSentenceVisible, { passive: true });
+    viewport?.addEventListener("resize", keepSentenceVisible);
+    viewport?.addEventListener("scroll", keepSentenceVisible);
+    keepSentenceVisible();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", keepSentenceVisible);
+      viewport?.removeEventListener("resize", keepSentenceVisible);
+      viewport?.removeEventListener("scroll", keepSentenceVisible);
+    };
+  }, [inputFocused, index]);
 
   const check = () => {
     if (!prompt || !input.trim() || result === "correct") return;
@@ -69,7 +109,7 @@ export default function GapsMode({ words, onCorrect, onBatchComplete }: GapsMode
         <span>{index + 1}/{prompts.length}</span>
       </div>
 
-      <div className="flex min-h-[158px] w-full flex-col items-center justify-center gap-3 border border-[#dce4bd] bg-[#f8fbdc] px-5 py-6 text-center">
+      <div ref={sentenceCardRef} className="flex min-h-[158px] w-full flex-col items-center justify-center gap-3 border border-[#dce4bd] bg-[#f8fbdc] px-5 py-6 text-center">
         <p className="font-heading text-xl text-[#172b35]">
           {sentenceParts.map((part, partIndex) => (
             <Fragment key={partIndex}>
@@ -101,6 +141,8 @@ export default function GapsMode({ words, onCorrect, onBatchComplete }: GapsMode
         <input
           autoComplete="off"
           value={input}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
           onChange={(event) => {
             setInput(event.target.value);
             if (result === "incorrect") setResult(null);

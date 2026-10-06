@@ -1,4 +1,5 @@
 import { StudySet } from "./types";
+import { TEAMARBEIT_SET_ID } from "./teamarbeitData";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -31,6 +32,17 @@ export function saveLastBatchResult(setId: string, result: LastBatchResult) {
   try {
     const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULT_KEY) ?? "{}") as Record<string, LastBatchResult>;
     results[setId] = result;
+    window.localStorage.setItem(LAST_BATCH_RESULT_KEY, JSON.stringify(results));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+}
+
+export function clearLastBatchResult(setId: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const results = JSON.parse(window.localStorage.getItem(LAST_BATCH_RESULT_KEY) ?? "{}") as Record<string, LastBatchResult>;
+    delete results[setId];
     window.localStorage.setItem(LAST_BATCH_RESULT_KEY, JSON.stringify(results));
   } catch {
     // Ignore unavailable browser storage.
@@ -163,7 +175,11 @@ function removeWordProgress(setId: string, wordId: string) {
 
 export function loadBuiltInProgress(setId: string): string[] {
   const progress = loadExerciseProgress(setId);
-  return progress.cards.filter((id) => progress.quiz.includes(id) && progress.write.includes(id) && progress.match.includes(id));
+  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
+  if (setId === TEAMARBEIT_SET_ID) requiredExercises.push("gaps");
+  return progress.cards.filter((id) =>
+    requiredExercises.every((exercise) => progress[exercise].includes(id)),
+  );
 }
 
 export function saveBuiltInProgress(setId: string, masteredWordIds: string[]) {

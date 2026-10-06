@@ -5426,6 +5426,8 @@ __turbopack_context__.s([
     ()=>addSet,
     "addWord",
     ()=>addWord,
+    "clearLastBatchResult",
+    ()=>clearLastBatchResult,
     "deleteBuiltInWord",
     ()=>deleteBuiltInWord,
     "deleteSet",
@@ -5465,6 +5467,8 @@ __turbopack_context__.s([
     "updateWord",
     ()=>updateWord
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$teamarbeitData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/teamarbeitData.ts [app-ssr] (ecmascript)");
+;
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
@@ -5477,6 +5481,11 @@ function loadLastBatchResult(setId) {
     ;
 }
 function saveLastBatchResult(setId, result) {
+    if ("TURBOPACK compile-time truthy", 1) return;
+    //TURBOPACK unreachable
+    ;
+}
+function clearLastBatchResult(setId) {
     if ("TURBOPACK compile-time truthy", 1) return;
     //TURBOPACK unreachable
     ;
@@ -5556,7 +5565,14 @@ function removeWordProgress(setId, wordId) {
 }
 function loadBuiltInProgress(setId) {
     const progress = loadExerciseProgress(setId);
-    return progress.cards.filter((id)=>progress.quiz.includes(id) && progress.write.includes(id) && progress.match.includes(id));
+    const requiredExercises = [
+        "cards",
+        "quiz",
+        "write",
+        "match"
+    ];
+    if (setId === __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$teamarbeitData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TEAMARBEIT_SET_ID"]) requiredExercises.push("gaps");
+    return progress.cards.filter((id)=>requiredExercises.every((exercise)=>progress[exercise].includes(id)));
 }
 function saveBuiltInProgress(setId, masteredWordIds) {
     if ("TURBOPACK compile-time truthy", 1) return;

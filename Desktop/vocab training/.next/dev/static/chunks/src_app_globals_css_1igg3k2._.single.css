@@ -404,6 +404,10 @@
     inset: 0;
   }
 
+  .top-0 {
+    top: 0;
+  }
+
   .top-1\/2 {
     top: 50%;
   }
@@ -1442,9 +1446,25 @@
     font-style: italic;
   }
 
+  .underline {
+    text-decoration-line: underline;
+  }
+
+  .decoration-\[\#9bb8bc\] {
+    text-decoration-color: #9bb8bc;
+  }
+
+  .underline-offset-2 {
+    text-underline-offset: 2px;
+  }
+
   .antialiased {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .accent-\[\#263fd6\] {
+    accent-color: #263fd6;
   }
 
   .opacity-50 {
@@ -1660,6 +1680,10 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:static {
+      position: static;
+    }
+
     .sm\:col-span-2 {
       grid-column: span 2 / span 2;
     }
