@@ -4,6 +4,7 @@ const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const BUILT_IN_ADDED_WORDS_KEY = "lexikon.builtInAddedWords";
+const BUILT_IN_WORD_OVERRIDES_KEY = "lexikon.builtInWordOverrides";
 const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
 export type ExerciseKey = "cards" | "quiz" | "write" | "match";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
@@ -99,12 +100,42 @@ export function loadBuiltInAddedWords(setId: string): StudySet["words"] {
 
 export function loadBuiltInWords(setId: string, baseWords: StudySet["words"]) {
   const deletedIds = new Set(loadBuiltInDeletedWords(setId));
-  const base = baseWords.filter((word) => !deletedIds.has(word.id));
+  let overrides: Record<string, Partial<StudySet["words"][number]>> = {};
+  try {
+    const allOverrides = JSON.parse(window.localStorage.getItem(BUILT_IN_WORD_OVERRIDES_KEY) ?? "{}") as Record<string, Record<string, Partial<StudySet["words"][number]>>>;
+    overrides = allOverrides[setId] ?? {};
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+  const applyOverrides = (word: StudySet["words"][number]) => ({
+    ...word,
+    ...overrides[word.id],
+  });
+  const base = baseWords
+    .filter((word) => !deletedIds.has(word.id))
+    .map(applyOverrides);
   const baseIds = new Set(base.map((word) => word.id));
   const added = loadBuiltInAddedWords(setId).filter(
     (word) => !deletedIds.has(word.id) && !baseIds.has(word.id),
-  );
+  ).map(applyOverrides);
   return [...base, ...added];
+}
+
+export function updateBuiltInWord(
+  setId: string,
+  wordId: string,
+  changes: Partial<StudySet["words"][number]>,
+) {
+  if (typeof window === "undefined") return;
+  try {
+    const allOverrides = JSON.parse(window.localStorage.getItem(BUILT_IN_WORD_OVERRIDES_KEY) ?? "{}") as Record<string, Record<string, Partial<StudySet["words"][number]>>>;
+    const setOverrides = allOverrides[setId] ?? {};
+    setOverrides[wordId] = { ...setOverrides[wordId], ...changes };
+    allOverrides[setId] = setOverrides;
+    window.localStorage.setItem(BUILT_IN_WORD_OVERRIDES_KEY, JSON.stringify(allOverrides));
+  } catch {
+    // Ignore unavailable browser storage.
+  }
 }
 
 export function addBuiltInWord(setId: string, word: StudySet["words"][number]) {

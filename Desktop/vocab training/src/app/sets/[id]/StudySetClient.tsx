@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   addBuiltInWord,
   addWord,
+  updateBuiltInWord,
   deleteWord,
   deleteBuiltInWord,
   getSet,
@@ -55,6 +56,7 @@ import {
   KeyboardIcon,
   GridIcon,
   TrashIcon,
+  XIcon,
 } from "@/components/icons";
 
 const MODES = [
@@ -251,6 +253,7 @@ export default function StudySetClient({ id }: { id: string }) {
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
+  const [draftExample, setDraftExample] = useState("");
   const [draftPos, setDraftPos] = useState("noun");
   const [draftArticle, setDraftArticle] = useState("der");
   const [isAddingWord, setIsAddingWord] = useState(false);
@@ -465,12 +468,11 @@ export default function StudySetClient({ id }: { id: string }) {
   };
 
   const startEditing = (word: VocabWord) => {
-    if (!set.isPersisted) return;
-
     setEditingWordId(word.id);
     const articleMatch = word.german.match(/^(der|die|das)\s+(.+)$/i);
     setDraftGerman(articleMatch ? articleMatch[2] : word.german);
     setDraftEnglish(word.english);
+    setDraftExample(word.example);
     setDraftPos(word.pos);
     setDraftArticle(articleMatch?.[1].toLowerCase() ?? "der");
   };
@@ -479,6 +481,7 @@ export default function StudySetClient({ id }: { id: string }) {
     setEditingWordId(null);
     setDraftGerman("");
     setDraftEnglish("");
+    setDraftExample("");
     setDraftPos("noun");
     setDraftArticle("der");
   };
@@ -491,15 +494,22 @@ export default function StudySetClient({ id }: { id: string }) {
 
     if (!german || !english) return;
 
-    updateWord(id, wordId, { german, english, pos: draftPos });
+    const changes = {
+      german,
+      english,
+      example: draftExample.trim(),
+      pos: draftPos,
+    };
+    if (set.isPersisted) updateWord(id, wordId, changes);
+    else updateBuiltInWord(id, wordId, changes);
 
     setSet((current) =>
       current
         ? {
             ...current,
-            words: current.words.map((word) =>
+                words: current.words.map((word) =>
               word.id === wordId
-                ? { ...word, german, english, pos: draftPos }
+                ? { ...word, ...changes }
                 : word,
             ),
           }
@@ -702,14 +712,28 @@ export default function StudySetClient({ id }: { id: string }) {
             </div>
           )}
 
-          <input
-            type="search"
-            value={wordSearch}
-            onChange={(event) => setWordSearch(event.target.value)}
-            placeholder="Search words, translations, or types"
-            className="mt-4 h-11 w-full rounded-xl border border-[#b8c8c9] bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]"
-            aria-label="Search all words"
-          />
+          <div className="relative mt-4">
+            <input
+              type="text"
+              role="searchbox"
+              value={wordSearch}
+              onChange={(event) => setWordSearch(event.target.value)}
+              placeholder="Search words, translations, or types"
+              className="h-11 w-full rounded-xl border border-[#b8c8c9] bg-white px-4 pr-11 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] focus:border-[#263fd6]"
+              aria-label="Search all words"
+            />
+            {wordSearch && (
+              <button
+                type="button"
+                onClick={() => setWordSearch("")}
+                className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]"
+                aria-label="Clear search"
+                title="Clear search"
+              >
+                <XIcon className="h-5 w-5" />
+              </button>
+            )}
+          </div>
 
           <div className="mt-4 overflow-hidden rounded-xl border border-[#dce4bd] bg-white">
             {visibleWords.map((word, i) => (
@@ -735,6 +759,14 @@ export default function StudySetClient({ id }: { id: string }) {
                       onChange={(event) => setDraftEnglish(event.target.value)}
                       className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
                       aria-label="English translation"
+                    />
+
+                    <input
+                      value={draftExample}
+                      onChange={(event) => setDraftExample(event.target.value)}
+                      className="h-9 rounded-lg border border-[#9bb8bc] bg-white px-3 text-sm text-[#172b35] outline-none focus:border-[#263fd6]"
+                      aria-label="German example"
+                      placeholder="German example (optional)"
                     />
 
                     {draftPos === "noun" && (

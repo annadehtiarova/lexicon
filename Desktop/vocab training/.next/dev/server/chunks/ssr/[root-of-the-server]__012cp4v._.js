@@ -5458,6 +5458,8 @@ __turbopack_context__.s([
     ()=>saveSets,
     "setMasteredWordIds",
     ()=>setMasteredWordIds,
+    "updateBuiltInWord",
+    ()=>updateBuiltInWord,
     "updateSetName",
     ()=>updateSetName,
     "updateWord",
@@ -5467,6 +5469,7 @@ const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
 const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const BUILT_IN_ADDED_WORDS_KEY = "lexikon.builtInAddedWords";
+const BUILT_IN_WORD_OVERRIDES_KEY = "lexikon.builtInWordOverrides";
 const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
 function loadLastBatchResult(setId) {
     if ("TURBOPACK compile-time truthy", 1) return null;
@@ -5513,13 +5516,29 @@ function loadBuiltInAddedWords(setId) {
 }
 function loadBuiltInWords(setId, baseWords) {
     const deletedIds = new Set(loadBuiltInDeletedWords(setId));
-    const base = baseWords.filter((word)=>!deletedIds.has(word.id));
+    let overrides = {};
+    try {
+        const allOverrides = JSON.parse(window.localStorage.getItem(BUILT_IN_WORD_OVERRIDES_KEY) ?? "{}");
+        overrides = allOverrides[setId] ?? {};
+    } catch  {
+    // Ignore unavailable browser storage.
+    }
+    const applyOverrides = (word)=>({
+            ...word,
+            ...overrides[word.id]
+        });
+    const base = baseWords.filter((word)=>!deletedIds.has(word.id)).map(applyOverrides);
     const baseIds = new Set(base.map((word)=>word.id));
-    const added = loadBuiltInAddedWords(setId).filter((word)=>!deletedIds.has(word.id) && !baseIds.has(word.id));
+    const added = loadBuiltInAddedWords(setId).filter((word)=>!deletedIds.has(word.id) && !baseIds.has(word.id)).map(applyOverrides);
     return [
         ...base,
         ...added
     ];
+}
+function updateBuiltInWord(setId, wordId, changes) {
+    if ("TURBOPACK compile-time truthy", 1) return;
+    //TURBOPACK unreachable
+    ;
 }
 function addBuiltInWord(setId, word) {
     if ("TURBOPACK compile-time truthy", 1) return;
@@ -6198,7 +6217,107 @@ const RAW_WORDS = [
         "task",
         "noun"
     ],
-    null
+    null,
+    [
+        "umgekehrt",
+        "vice versa",
+        "other"
+    ],
+    [
+        "zwingen",
+        "force, make smb do smth",
+        "other"
+    ],
+    [
+        "überfordert",
+        "overwhelmed",
+        "other"
+    ],
+    [
+        "überlastet",
+        "overwhelmed with amount of work",
+        "other"
+    ],
+    [
+        "unangenehm",
+        "unpleasant",
+        "other"
+    ],
+    [
+        "zurückhaltend",
+        "cautious",
+        "other"
+    ],
+    [
+        "aufgeregt",
+        "nervös",
+        "other"
+    ],
+    [
+        "loben",
+        "praise",
+        "other"
+    ],
+    [
+        "bisherig",
+        "previous",
+        "other"
+    ],
+    [
+        "mitteilen",
+        "share",
+        "other"
+    ],
+    [
+        "unvoreingenommen",
+        "unbiased",
+        "other"
+    ],
+    [
+        "verlangen",
+        "demand",
+        "other"
+    ],
+    [
+        "sich anstrengen",
+        "make an effort",
+        "verb"
+    ],
+    [
+        "weiterkommen",
+        "get ahead",
+        "verb"
+    ],
+    [
+        "die Entscheidungen treffen",
+        "make decisions",
+        "verb"
+    ],
+    [
+        "überhäufen",
+        "overwhelm",
+        "verb"
+    ],
+    [
+        "Vorurteile",
+        "prejudices",
+        "noun"
+    ],
+    [
+        "gelassen",
+        "relaxed",
+        "adjective"
+    ],
+    [
+        "verhindern",
+        "prevent",
+        "verb"
+    ],
+    [
+        "Auftrag vergeben",
+        "assign a task",
+        "verb"
+    ]
 ];
 const TEAMARBEIT_SET_ID = "faeeb4c0-21bd-4219-9b81-ad877466e128";
 const TEAMARBEIT_SET_NAME = "Kapitel 3 - Teamarbeit";
