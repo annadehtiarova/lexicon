@@ -49,6 +49,8 @@ import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
 import MatchingMode from "@/components/modes/MatchingMode";
+import GapsMode from "@/components/modes/GapsMode";
+import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
@@ -64,10 +66,17 @@ const MODES = [
   { key: "quiz", label: "Quiz", Icon: ListChecksIcon },
   { key: "write", label: "Write", Icon: KeyboardIcon },
   { key: "match", label: "Match", Icon: GridIcon },
+  { key: "gaps", label: "Gaps", Icon: KeyboardIcon },
 ] as const;
 
 type ModeKey = (typeof MODES)[number]["key"];
 const BATCH_SIZE = 15;
+
+function isWordMastered(wordId: string, progress: ExerciseProgress) {
+  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
+  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId)) requiredExercises.push("gaps");
+  return requiredExercises.every((exercise) => progress[exercise].includes(wordId));
+}
 
 interface ResolvedSet {
   name: string;
@@ -243,12 +252,14 @@ export default function StudySetClient({ id }: { id: string }) {
     quiz: [],
     write: [],
     match: [],
+    gaps: [],
   });
   const pendingProgressRef = useRef<ExerciseProgress>({
     cards: [],
     quiz: [],
     write: [],
     match: [],
+    gaps: [],
   });
   const [editingWordId, setEditingWordId] = useState<string | null>(null);
   const [draftGerman, setDraftGerman] = useState("");
@@ -287,11 +298,7 @@ export default function StudySetClient({ id }: { id: string }) {
     setPracticeBatch(savedBatchResult?.batch ?? 0);
     const remainingWords = resolvedWords;
     const mastered = remainingWords
-      .filter((word) =>
-        (Object.keys(progress) as ExerciseKey[]).every((exercise) =>
-          progress[exercise].includes(word.id),
-        ),
-      )
+      .filter((word) => isWordMastered(word.id, progress))
       .map((word) => word.id);
     setMasteredIds(new Set(mastered));
     setPracticeWordIds(
@@ -344,11 +351,7 @@ export default function StudySetClient({ id }: { id: string }) {
     saveExerciseProgress(id, next);
     setExerciseProgress(next);
     const masteredWords = words
-      .filter((word) =>
-        (Object.keys(next) as ExerciseKey[]).every((key) =>
-          next[key].includes(word.id),
-        ),
-      )
+      .filter((word) => isWordMastered(word.id, next));
     const masteredWordIds = new Set(masteredWords.map((word) => word.id));
     setMasteredIds(masteredWordIds);
     const readyWordIds = [
@@ -384,7 +387,9 @@ export default function StudySetClient({ id }: { id: string }) {
     nextCompleted.add(completedMode);
     setCompletedModes(nextCompleted);
 
-    const sequence: ModeKey[] = ["cards", "quiz", "write", "match"];
+    const sequence: ModeKey[] = id === TEAMARBEIT_SET_ID
+      ? ["cards", "quiz", "write", "match", "gaps"]
+      : ["cards", "quiz", "write", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
@@ -409,6 +414,9 @@ export default function StudySetClient({ id }: { id: string }) {
     count: practiceWords.filter((word) => exerciseProgress[key].includes(word.id)).length,
     complete: completedModes.has(key),
   }));
+  const visibleModes = MODES.filter(
+    ({ key }) => key !== "gaps" || id === TEAMARBEIT_SET_ID,
+  );
 
   if (set === undefined || practiceWordIds === null) return null;
 
@@ -581,7 +589,7 @@ export default function StudySetClient({ id }: { id: string }) {
           ) : (
           <div className="pt-5">
           <div className="flex h-9 w-full items-center rounded-full border border-[#d5d7d7] bg-white p-0">
-            {MODES.map(({ key, label, Icon }) => {
+            {visibleModes.map(({ key, label, Icon }) => {
               const active = mode === key;
 
               return (
@@ -594,7 +602,7 @@ export default function StudySetClient({ id }: { id: string }) {
                       : "text-[#172b35] hover:bg-white"
                   }`}
                 >
-                  <Icon />
+                  <Icon className="hidden h-4 w-4 sm:block" />
                   {label}
                 </button>
               );
@@ -643,6 +651,15 @@ export default function StudySetClient({ id }: { id: string }) {
                   onBatchContinue={continueToNextBatch}
                 />
               </div>
+            )}
+
+            {mode === "gaps" && id === TEAMARBEIT_SET_ID && (
+              <GapsMode
+                key={`gaps-${practiceBatch}-${exerciseRevision}`}
+                words={practiceWords}
+                onCorrect={(wordId) => markCorrect("gaps", wordId)}
+                onBatchComplete={() => completeModeBatch("gaps")}
+              />
             )}
           </div>
         </div>

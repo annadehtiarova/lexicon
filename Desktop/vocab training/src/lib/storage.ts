@@ -6,7 +6,7 @@ const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const BUILT_IN_ADDED_WORDS_KEY = "lexikon.builtInAddedWords";
 const BUILT_IN_WORD_OVERRIDES_KEY = "lexikon.builtInWordOverrides";
 const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
-export type ExerciseKey = "cards" | "quiz" | "write" | "match";
+export type ExerciseKey = "cards" | "quiz" | "write" | "match" | "gaps";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
 
 export interface LastBatchResult {
@@ -37,7 +37,7 @@ export function saveLastBatchResult(setId: string, result: LastBatchResult) {
   }
 }
 
-const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], write: [], match: [] };
+const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], write: [], match: [], gaps: [] };
 
 export function loadExerciseProgress(setId: string): ExerciseProgress {
   if (typeof window === "undefined") return { ...EMPTY_PROGRESS };
@@ -49,6 +49,7 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
       quiz: Array.isArray(saved.quiz) ? saved.quiz : [],
       write: Array.isArray(saved.write) ? saved.write : [],
       match: Array.isArray(saved.match) ? saved.match : [],
+      gaps: Array.isArray(saved.gaps) ? saved.gaps : [],
     };
   } catch {
     return { ...EMPTY_PROGRESS };

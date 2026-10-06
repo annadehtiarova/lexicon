@@ -5582,7 +5582,8 @@ const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
     write: [],
-    match: []
+    match: [],
+    gaps: []
 };
 function loadExerciseProgress(setId) {
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
@@ -5594,7 +5595,8 @@ function loadExerciseProgress(setId) {
             cards: Array.isArray(saved.cards) ? saved.cards : [],
             quiz: Array.isArray(saved.quiz) ? saved.quiz : [],
             write: Array.isArray(saved.write) ? saved.write : [],
-            match: Array.isArray(saved.match) ? saved.match : []
+            match: Array.isArray(saved.match) ? saved.match : [],
+            gaps: Array.isArray(saved.gaps) ? saved.gaps : []
         };
     } catch  {
         return {

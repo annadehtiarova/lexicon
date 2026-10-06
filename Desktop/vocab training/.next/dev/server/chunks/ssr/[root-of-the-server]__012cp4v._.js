@@ -5485,7 +5485,8 @@ const EMPTY_PROGRESS = {
     cards: [],
     quiz: [],
     write: [],
-    match: []
+    match: [],
+    gaps: []
 };
 function loadExerciseProgress(setId) {
     if ("TURBOPACK compile-time truthy", 1) return {
