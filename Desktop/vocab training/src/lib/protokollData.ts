@@ -51,6 +51,16 @@ const RAW_WORDS: Omit<VocabWord, "id">[] = [
   ["der Webauftritt", "website / web presence", "noun"],
   ["die Besprechung", "meeting", "noun"],
   ["das Werbemittel", "advertising medium", "noun"],
+  ["das Buffet", "buffet", "noun"],
+  ["präzise", "precise", "adjective"],
+  ["neutral", "neutral", "adjective"],
+  ["das Gerücht", "rumor", "noun"],
+  ["mithilfe", "with the help of", "other"],
+  ["einen Entwurf erstellen", "to create a draft", "verb"],
+  ["der Flyer", "flyer / leaflet", "noun"],
+  ["die Visitenkarte", "business card", "noun"],
+  ["die Aushilfskraft", "temporary worker / assistant", "noun"],
+  ["die Sommersaison", "summer season", "noun"],
 ].map(([german, english, pos]) => ({ german, english, pos, example: "" }));
 
 export const PROTOKOLL_SET_ID = "52813812-73c7-4c26-86b3-13fafc4f0a81";

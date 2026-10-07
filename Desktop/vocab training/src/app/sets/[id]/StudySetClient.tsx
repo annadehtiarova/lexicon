@@ -52,6 +52,7 @@ import TypingMode from "@/components/modes/TypingMode";
 import MatchingMode from "@/components/modes/MatchingMode";
 import GapsMode from "@/components/modes/GapsMode";
 import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGapTest";
+import { PROTOKOLL_GAP_TEST, PROTOKOLL_GAP_WORD_IDS } from "@/lib/protokollGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
@@ -75,7 +76,9 @@ const BATCH_SIZE = 15;
 
 function isWordMastered(wordId: string, progress: ExerciseProgress) {
   const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
-  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId)) requiredExercises.push("gaps");
+  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId) || PROTOKOLL_GAP_WORD_IDS.has(wordId)) {
+    requiredExercises.push("gaps");
+  }
   return requiredExercises.every((exercise) => progress[exercise].includes(wordId));
 }
 
@@ -240,6 +243,7 @@ function resolveSet(id: string): ResolvedSet | null {
 }
 
 export default function StudySetClient({ id }: { id: string }) {
+  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID;
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
@@ -388,7 +392,7 @@ export default function StudySetClient({ id }: { id: string }) {
     nextCompleted.add(completedMode);
     setCompletedModes(nextCompleted);
 
-    const sequence: ModeKey[] = id === TEAMARBEIT_SET_ID
+    const sequence: ModeKey[] = hasGapExercise
       ? ["cards", "quiz", "write", "match", "gaps"]
       : ["cards", "quiz", "write", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
@@ -440,7 +444,7 @@ export default function StudySetClient({ id }: { id: string }) {
     complete: completedModes.has(key),
   }));
   const visibleModes = MODES.filter(
-    ({ key }) => key !== "gaps" || id === TEAMARBEIT_SET_ID,
+    ({ key }) => key !== "gaps" || hasGapExercise,
   );
 
   if (set === undefined || practiceWordIds === null) return null;
@@ -685,9 +689,10 @@ export default function StudySetClient({ id }: { id: string }) {
               </div>
             )}
 
-            {mode === "gaps" && id === TEAMARBEIT_SET_ID && (
+            {mode === "gaps" && hasGapExercise && (
               <GapsMode
                 key={`gaps-${practiceBatch}-${exerciseRevision}`}
+                questions={id === TEAMARBEIT_SET_ID ? TEAMARBEIT_GAP_TEST : PROTOKOLL_GAP_TEST}
                 words={practiceWords}
                 onCorrect={(wordId) => markCorrect("gaps", wordId)}
                 onBatchComplete={() => completeModeBatch("gaps")}

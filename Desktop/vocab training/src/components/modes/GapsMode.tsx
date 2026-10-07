@@ -3,10 +3,17 @@
 import { Fragment } from "react";
 import { useEffect, useRef, useState } from "react";
 import { VocabWord } from "@/lib/types";
-import { TEAMARBEIT_GAP_TEST } from "@/lib/teamarbeitGapTest";
 import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/icons";
 
+interface GapTestQuestion {
+  sentence: string;
+  translation: string;
+  answer: string;
+  wordId: string;
+}
+
 interface GapsModeProps {
+  questions: GapTestQuestion[];
   words: VocabWord[];
   onCorrect: (id: string) => void;
   onBatchComplete: () => void;
@@ -16,8 +23,8 @@ function normalize(text: string) {
   return text.trim().toLowerCase();
 }
 
-export default function GapsMode({ words, onCorrect, onBatchComplete }: GapsModeProps) {
-  const prompts = TEAMARBEIT_GAP_TEST.filter((prompt) =>
+export default function GapsMode({ questions, words, onCorrect, onBatchComplete }: GapsModeProps) {
+  const prompts = questions.filter((prompt) =>
     words.some((word) => word.id === prompt.wordId),
   );
   const [index, setIndex] = useState(0);

@@ -1,5 +1,6 @@
 import { StudySet } from "./types";
 import { TEAMARBEIT_SET_ID } from "./teamarbeitData";
+import { PROTOKOLL_SET_ID } from "./protokollData";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -176,7 +177,9 @@ function removeWordProgress(setId: string, wordId: string) {
 export function loadBuiltInProgress(setId: string): string[] {
   const progress = loadExerciseProgress(setId);
   const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
-  if (setId === TEAMARBEIT_SET_ID) requiredExercises.push("gaps");
+  if (setId === TEAMARBEIT_SET_ID || setId === PROTOKOLL_SET_ID) {
+    requiredExercises.push("gaps");
+  }
   return progress.cards.filter((id) =>
     requiredExercises.every((exercise) => progress[exercise].includes(id)),
   );
