@@ -619,8 +619,22 @@ export default function StudySetClient({ id }: { id: string }) {
         </div>
 
           {practiceWords.length === 0 ? (
-            <div className="mt-5 flex flex-col items-center gap-3 border-t-[3px] border-[#d5ddd7] py-5 text-center">
-              <p className="text-sm text-[#5d6f74]">All words mastered. Set complete.</p>
+            <div className="mt-5 flex flex-col items-center gap-4 rounded-lg border border-[#dce4bd] bg-[#f8fbdc] px-5 py-8 text-center">
+              <div className="flex flex-col gap-2">
+                <h2 className="font-heading text-2xl font-semibold text-[#172b35]">
+                  Well done!
+                </h2>
+                <p className="text-sm text-[#5d6f74]">
+                  You have mastered all the words.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={resetSet}
+                className="flex h-10 items-center justify-center rounded-full bg-[#d8f56d] px-5 text-sm font-semibold text-[#172b35] hover:opacity-90"
+              >
+                Reset progress
+              </button>
             </div>
           ) : (
           <div className="pt-5">
