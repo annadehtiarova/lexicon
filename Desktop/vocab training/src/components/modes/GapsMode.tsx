@@ -33,10 +33,12 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
   const [inputFocused, setInputFocused] = useState(false);
   const sentenceCardRef = useRef<HTMLDivElement>(null);
   const prompt = prompts[index];
-  const sentenceParts = prompt.sentence.split("______");
-  const gapAnswers = sentenceParts.length > 2
+  const sentenceParts = prompt?.sentence.split("______") ?? [];
+  const gapAnswers = prompt && sentenceParts.length > 2
     ? prompt.answer.split(/\s+/)
-    : [prompt.answer];
+    : prompt
+      ? [prompt.answer]
+      : [];
 
   useEffect(() => {
     if (!inputFocused) return;
@@ -94,7 +96,7 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
     setIndex((current) => current + 1);
   };
 
-  if (prompts.length === 0) {
+  if (!prompt) {
     return (
       <div className="flex flex-col items-center gap-4 py-8 text-center">
         <p className="text-sm text-[#5d6f74]">No gap questions for this batch.</p>
