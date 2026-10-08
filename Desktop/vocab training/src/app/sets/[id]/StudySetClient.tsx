@@ -14,6 +14,7 @@ import {
   ExerciseProgress,
   LastBatchResult,
   clearLastBatchResult,
+  isWordMastered,
   loadLastBatchResult,
   loadExerciseProgress,
   saveLastBatchResult,
@@ -73,14 +74,6 @@ const MODES = [
 
 type ModeKey = (typeof MODES)[number]["key"];
 const BATCH_SIZE = 15;
-
-function isWordMastered(wordId: string, progress: ExerciseProgress) {
-  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
-  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId) || PROTOKOLL_GAP_WORD_IDS.has(wordId)) {
-    requiredExercises.push("gaps");
-  }
-  return requiredExercises.every((exercise) => progress[exercise].includes(wordId));
-}
 
 interface ResolvedSet {
   name: string;

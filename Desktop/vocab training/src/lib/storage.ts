@@ -1,6 +1,6 @@
 import { StudySet } from "./types";
-import { TEAMARBEIT_SET_ID } from "./teamarbeitData";
-import { PROTOKOLL_SET_ID } from "./protokollData";
+import { TEAMARBEIT_GAP_WORD_IDS } from "./teamarbeitGapTest";
+import { PROTOKOLL_GAP_WORD_IDS } from "./protokollGapTest";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -67,6 +67,19 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
   } catch {
     return { ...EMPTY_PROGRESS };
   }
+}
+
+export function isWordMastered(wordId: string, progress: ExerciseProgress) {
+  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
+  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId) || PROTOKOLL_GAP_WORD_IDS.has(wordId)) {
+    requiredExercises.push("gaps");
+  }
+  return requiredExercises.every((exercise) => progress[exercise].includes(wordId));
+}
+
+export function loadMasteredWordIds(setId: string, words: StudySet["words"]) {
+  const progress = loadExerciseProgress(setId);
+  return words.filter((word) => isWordMastered(word.id, progress)).map((word) => word.id);
 }
 
 export function saveExerciseProgress(setId: string, progress: ExerciseProgress) {
@@ -176,12 +189,8 @@ function removeWordProgress(setId: string, wordId: string) {
 
 export function loadBuiltInProgress(setId: string): string[] {
   const progress = loadExerciseProgress(setId);
-  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
-  if (setId === TEAMARBEIT_SET_ID || setId === PROTOKOLL_SET_ID) {
-    requiredExercises.push("gaps");
-  }
   return progress.cards.filter((id) =>
-    requiredExercises.every((exercise) => progress[exercise].includes(id)),
+    isWordMastered(id, progress),
   );
 }
 

@@ -6,8 +6,8 @@ import SetsList from "@/components/SetsList";
 import {
   addSet,
   deleteSet,
+  loadMasteredWordIds,
   loadBuiltInWords,
-  loadBuiltInProgress,
   loadSets,
 } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
@@ -67,20 +67,28 @@ const BUILT_IN_SETS = [
   getTeamrolleSet(),
 ];
 
+function withBuiltInProgress(set: StudySet): StudySet {
+  const words = loadBuiltInWords(set.id, set.words);
+  return {
+    ...set,
+    words,
+    masteredWordIds: loadMasteredWordIds(set.id, words),
+  };
+}
+
 export default function Home() {
   const [sets, setSets] = useState<StudySet[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
 
   useEffect(() => {
-    const builtInSets = BUILT_IN_SETS.map((set) => ({
-      ...set,
-      words: loadBuiltInWords(set.id, set.words),
-      masteredWordIds: loadBuiltInProgress(set.id).filter((wordId) =>
-        loadBuiltInWords(set.id, set.words).some((word) => word.id === wordId),
-      ),
-    }));
-    const customSets = loadSets().filter((set) => !BUILT_IN_SET_IDS.has(set.id));
+    const builtInSets = BUILT_IN_SETS.map(withBuiltInProgress);
+    const customSets = loadSets()
+      .filter((set) => !BUILT_IN_SET_IDS.has(set.id))
+      .map((set) => ({
+        ...set,
+        masteredWordIds: loadMasteredWordIds(set.id, set.words),
+      }));
     setSets([...builtInSets, ...customSets]);
   }, []);
 
@@ -97,13 +105,7 @@ export default function Home() {
       };
       setNotice(null);
       setSets([
-        ...BUILT_IN_SETS.map((set) => ({
-          ...set,
-          words: loadBuiltInWords(set.id, set.words),
-          masteredWordIds: loadBuiltInProgress(set.id).filter((wordId) =>
-            loadBuiltInWords(set.id, set.words).some((word) => word.id === wordId),
-          ),
-        })),
+        ...BUILT_IN_SETS.map(withBuiltInProgress),
         ...addSet(newSet).filter((set) => !BUILT_IN_SET_IDS.has(set.id)),
       ]);
     } catch (error) {

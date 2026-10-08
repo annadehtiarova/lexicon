@@ -182,6 +182,8 @@ const RAW_WORDS: ([string, string, string] | null)[] = [
   ["gelassen", "relaxed", "adjective"],
   ["verhindern", "prevent", "verb"],
   ["Auftrag vergeben", "assign a task", "verb"],
+  ["beurteilen", "to assess", "verb"],
+  ["der Arbeitsablauf", "workflow", "noun"],
 ];
 
 export const TEAMARBEIT_SET_ID = "faeeb4c0-21bd-4219-9b81-ad877466e128";

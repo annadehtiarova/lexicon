@@ -618,6 +618,16 @@ const PROMPTS: Omit<GapTestQuestion, "wordId">[] = [
     translation: "The project manager decided to assign the new task to an external company.",
     answer: "Auftrag vergeben",
   },
+  {
+    sentence: "Die Teamleiterin muss die Leistung der Mitarbeitenden fair und objektiv ______.",
+    translation: "The team leader has to assess the employees’ performance fairly and objectively.",
+    answer: "beurteilen",
+  },
+  {
+    sentence: "Durch die neue Software soll der ______ im Büro schneller und effizienter werden.",
+    translation: "The new software is intended to make the workflow in the office faster and more efficient.",
+    answer: "Arbeitsablauf",
+  },
 ];
 
 const sourceWords = getTeamarbeitSet().words;
