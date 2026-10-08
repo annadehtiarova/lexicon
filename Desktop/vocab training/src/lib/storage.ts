@@ -1,6 +1,8 @@
 import { StudySet } from "./types";
 import { TEAMARBEIT_GAP_WORD_IDS } from "./teamarbeitGapTest";
 import { PROTOKOLL_GAP_WORD_IDS } from "./protokollGapTest";
+import { TEAMGESPRÄCH_GAP_WORD_IDS } from "./teamgespraechGapTest";
+import { TEAMROLLE_GAP_WORD_IDS } from "./teamrolleGapTest";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -71,7 +73,12 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
 
 export function isWordMastered(wordId: string, progress: ExerciseProgress) {
   const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
-  if (TEAMARBEIT_GAP_WORD_IDS.has(wordId) || PROTOKOLL_GAP_WORD_IDS.has(wordId)) {
+  if (
+    TEAMARBEIT_GAP_WORD_IDS.has(wordId) ||
+    PROTOKOLL_GAP_WORD_IDS.has(wordId) ||
+    TEAMGESPRÄCH_GAP_WORD_IDS.has(wordId) ||
+    TEAMROLLE_GAP_WORD_IDS.has(wordId)
+  ) {
     requiredExercises.push("gaps");
   }
   return requiredExercises.every((exercise) => progress[exercise].includes(wordId));

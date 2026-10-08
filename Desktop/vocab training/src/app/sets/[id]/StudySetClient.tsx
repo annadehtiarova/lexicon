@@ -54,6 +54,8 @@ import MatchingMode from "@/components/modes/MatchingMode";
 import GapsMode from "@/components/modes/GapsMode";
 import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGapTest";
 import { PROTOKOLL_GAP_TEST, PROTOKOLL_GAP_WORD_IDS } from "@/lib/protokollGapTest";
+import { TEAMGESPRÄCH_GAP_TEST } from "@/lib/teamgespraechGapTest";
+import { TEAMROLLE_GAP_TEST } from "@/lib/teamrolleGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
@@ -236,7 +238,7 @@ function resolveSet(id: string): ResolvedSet | null {
 }
 
 export default function StudySetClient({ id }: { id: string }) {
-  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID;
+  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID;
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
@@ -705,7 +707,15 @@ export default function StudySetClient({ id }: { id: string }) {
             {mode === "gaps" && hasGapExercise && (
               <GapsMode
                 key={`gaps-${practiceBatch}-${exerciseRevision}`}
-                questions={id === TEAMARBEIT_SET_ID ? TEAMARBEIT_GAP_TEST : PROTOKOLL_GAP_TEST}
+                questions={
+                  id === TEAMARBEIT_SET_ID
+                    ? TEAMARBEIT_GAP_TEST
+                    : id === PROTOKOLL_SET_ID
+                      ? PROTOKOLL_GAP_TEST
+                      : id === TEAMGESPRÄCH_SET_ID
+                        ? TEAMGESPRÄCH_GAP_TEST
+                        : TEAMROLLE_GAP_TEST
+                }
                 words={practiceWords}
                 onCorrect={(wordId) => markCorrect("gaps", wordId)}
                 onBatchComplete={() => completeModeBatch("gaps")}
