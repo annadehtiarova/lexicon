@@ -311,15 +311,21 @@ export default function StudySetClient({ id }: { id: string }) {
   }, [id]);
 
   const words: VocabWord[] = useMemo(
-    () =>
-      (set?.words ?? []).map((word) => ({
-        ...word,
-        german: displayGerman(word),
-        english:
-          word.pos === "verb" && !word.english.toLowerCase().startsWith("to ")
-            ? `to ${word.english.toLowerCase()}`
-            : word.english.toLowerCase(),
-      })),
+    () => {
+      const uniqueWords = new Map<string, VocabWord>();
+      for (const word of set?.words ?? []) {
+        if (uniqueWords.has(word.id)) continue;
+        uniqueWords.set(word.id, {
+          ...word,
+          german: displayGerman(word),
+          english:
+            word.pos === "verb" && !word.english.toLowerCase().startsWith("to ")
+              ? `to ${word.english.toLowerCase()}`
+              : word.english.toLowerCase(),
+        });
+      }
+      return [...uniqueWords.values()];
+    },
     [set],
   );
   const queuedWords = words.filter(
