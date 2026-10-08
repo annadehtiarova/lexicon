@@ -1,4 +1,4 @@
-import { getTeamarbeitSet } from "@/lib/teamarbeitData";
+import { getTeamarbeitGapSourceWords } from "@/lib/teamarbeitData";
 
 export interface GapTestQuestion {
   sentence: string;
@@ -630,10 +630,11 @@ const PROMPTS: Omit<GapTestQuestion, "wordId">[] = [
   },
 ];
 
-const sourceWords = getTeamarbeitSet().words;
+const sourceWords = getTeamarbeitGapSourceWords();
 
 export const TEAMARBEIT_GAP_TEST: GapTestQuestion[] = PROMPTS.flatMap((prompt, index) => {
-  const word = sourceWords[index];
+  const sourceIndex = index === 0 ? 1 : index === 1 ? 0 : index;
+  const word = sourceWords[sourceIndex];
   return word ? [{ ...prompt, wordId: word.id }] : [];
 });
 

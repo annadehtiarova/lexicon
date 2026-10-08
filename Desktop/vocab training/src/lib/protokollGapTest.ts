@@ -299,14 +299,44 @@ const PROMPTS: Omit<GapTestQuestion, "wordId">[] = [
     answer: "Visitenkarte",
   },
   {
-    sentence: "Wegen des Personalmangels wurde eine ______ eingestellt.",
-    translation: "Because of the staff shortage, a temporary worker was hired.",
-    answer: "Aushilfskraft",
+    sentence: "Während der Sommersaison brauchen wir zusätzliche ______.",
+    translation: "During the summer season, we need additional temporary staff.",
+    answer: "Aushilfskräfte",
   },
   {
     sentence: "In der ______ hat unser Café besonders viele Gäste.",
     translation: "During the summer season, our café has particularly many customers.",
     answer: "Sommersaison",
+  },
+  {
+    sentence: "Im Teamgespräch möchte ich ein wichtiges Problem direkt ______.",
+    translation: "In the team meeting, I would like to address an important problem directly.",
+    answer: "ansprechen",
+  },
+  {
+    sentence: "Die geplante ______ der Firma wird einige Veränderungen im Arbeitsablauf mit sich bringen.",
+    translation: "The planned restructuring of the company will bring some changes to the workflow.",
+    answer: "Umstrukturierung",
+  },
+  {
+    sentence: "Der Vorschlag klingt interessant, aber wir müssen prüfen, ob er finanziell ______ ist.",
+    translation: "The proposal sounds interesting, but we need to check whether it is financially feasible.",
+    answer: "machbar",
+  },
+  {
+    sentence: "______ an die Besprechung schicken wir das Protokoll an alle Mitarbeitenden.",
+    translation: "Following the meeting, we will send the minutes to all employees.",
+    answer: "Im Anschluss",
+  },
+  {
+    sentence: "Die Umstrukturierung wird große ______ auf unseren Arbeitsablauf ______.",
+    translation: "The restructuring will have a major impact on our workflow.",
+    answer: "Auswirkungen haben",
+  },
+  {
+    sentence: "Die ______ Situation im Unternehmen erfordert eine schnelle Entscheidung.",
+    translation: "The current situation in the company requires a quick decision.",
+    answer: "derzeitige",
   },
 ];
 

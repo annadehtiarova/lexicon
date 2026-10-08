@@ -189,13 +189,53 @@ const RAW_WORDS: ([string, string, string] | null)[] = [
 export const TEAMARBEIT_SET_ID = "faeeb4c0-21bd-4219-9b81-ad877466e128";
 export const TEAMARBEIT_SET_NAME = "Kapitel 3 - Teamarbeit";
 
+export function getTeamarbeitGapSourceWords(): VocabWord[] {
+  return RAW_WORDS.flatMap((word, index) =>
+    word
+      ? [{
+          id: `${TEAMARBEIT_SET_ID}-${index}`,
+          german: word[0],
+          english: word[1],
+          pos: word[2],
+          example: "",
+        }]
+      : [],
+  );
+}
+
 export function getTeamarbeitSet(): StudySet {
+  const removedWords = new Set(["der Partyservice", "hören", "gegeben", "der Tratsch"]);
+  const words = getTeamarbeitGapSourceWords()
+    .filter((word) => !removedWords.has(word.german))
+    .map((word) =>
+      word.german === "der Klatsch"
+        ? { ...word, german: "der Klatsch und Tratsch" }
+        : word,
+    );
+  const addedWords: [string, string, string][] = [
+    ["die Aufgabenverteilung", "division of work", "noun"],
+    ["die Grundlage", "foundation", "noun"],
+    ["gegenüber", "towards", "other"],
+    ["der Bericht", "report", "noun"],
+    ["der Vertraulichen Informationen", "confidential information", "noun"],
+    ["der Aufgabenbereich", "area of work", "noun"],
+  ];
+
   return {
     id: TEAMARBEIT_SET_ID,
     name: TEAMARBEIT_SET_NAME,
     createdAt: 0,
     sourceImageCount: 1,
-    words: RAW_WORDS.flatMap((word, index) => word ? [{ id: `${TEAMARBEIT_SET_ID}-${index}`, german: word[0], english: word[1], pos: word[2], example: "" }] : []),
+    words: [
+      ...words,
+      ...addedWords.map(([german, english, pos], index) => ({
+        id: `${TEAMARBEIT_SET_ID}-added-${index}`,
+        german,
+        english,
+        pos,
+        example: "",
+      })),
+    ],
     masteredWordIds: [],
   };
 }
