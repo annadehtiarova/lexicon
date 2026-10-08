@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,6 +36,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-[#172b35]">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-6FDVQC81DR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6FDVQC81DR');`}
+        </Script>
         <header className="h-12 bg-[#263fd6] px-5 text-white shadow-[0_4px_0_rgba(38,63,214,0.15)]">
           <div className="mx-auto flex h-full w-full max-w-[760px] items-center justify-between">
             <span className="font-heading text-sm font-bold tracking-[1.6px]">
