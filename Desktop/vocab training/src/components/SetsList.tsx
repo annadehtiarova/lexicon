@@ -86,6 +86,9 @@ export default function SetsList({
       // Keep the selection for this page even when storage is unavailable.
     }
   };
+  const populatedChapters = new Set(
+    sets.flatMap((set) => set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1] ?? []),
+  );
   const visibleSets = sets.filter((set) => {
     const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
     if (chapter) return chapter === selectedChapter;
@@ -126,7 +129,11 @@ export default function SetsList({
                   {Array.from({ length: 16 }, (_, index) => {
                     const chapter = String(index + 1);
                     return (
-                      <option key={chapter} value={chapter}>
+                      <option
+                        key={chapter}
+                        value={chapter}
+                        disabled={!populatedChapters.has(chapter)}
+                      >
                         Kapitel {chapter}
                       </option>
                     );
