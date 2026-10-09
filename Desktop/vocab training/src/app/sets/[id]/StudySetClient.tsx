@@ -47,6 +47,16 @@ import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
 import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
 import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
 import { TEAMROLLE_SET_ID, getTeamrolleSet } from "@/lib/teamrolleData";
+import { REISEANGEBOTE_SET_ID, getReiseangeboteSet } from "@/lib/reiseangeboteData";
+import { VERTRAEGE_SET_ID, getVertraegeSet } from "@/lib/vertraegeData";
+import {
+  ANDERE_URLAUB_MACHEN_SET_ID,
+  getAndereUrlaubMachenSet,
+} from "@/lib/andereUrlaubMachenData";
+import {
+  BERUFLICH_WEITERKOMMEN_SET_ID,
+  getBeruflichWeiterkommenSet,
+} from "@/lib/beruflichWeiterkommenData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import TypingMode from "@/components/modes/TypingMode";
@@ -56,6 +66,10 @@ import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGa
 import { PROTOKOLL_GAP_TEST, PROTOKOLL_GAP_WORD_IDS } from "@/lib/protokollGapTest";
 import { TEAMGESPRÄCH_GAP_TEST } from "@/lib/teamgespraechGapTest";
 import { TEAMROLLE_GAP_TEST } from "@/lib/teamrolleGapTest";
+import { REISEANGEBOTE_GAP_TEST } from "@/lib/reiseangeboteGapTest";
+import { VERTRAEGE_GAP_TEST } from "@/lib/vertraegeGapTest";
+import { ANDERE_URLAUB_MACHEN_GAP_TEST } from "@/lib/andereUrlaubMachenGapTest";
+import { BERUFLICH_WEITERKOMMEN_GAP_TEST } from "@/lib/beruflichWeiterkommenGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
@@ -225,6 +239,46 @@ function resolveSet(id: string): ResolvedSet | null {
     };
   }
 
+  if (id === REISEANGEBOTE_SET_ID) {
+    const builtInSet = getReiseangeboteSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === VERTRAEGE_SET_ID) {
+    const builtInSet = getVertraegeSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === ANDERE_URLAUB_MACHEN_SET_ID) {
+    const builtInSet = getAndereUrlaubMachenSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === BERUFLICH_WEITERKOMMEN_SET_ID) {
+    const builtInSet = getBeruflichWeiterkommenSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
   const stored = getSet(id);
 
   if (!stored) return null;
@@ -238,7 +292,7 @@ function resolveSet(id: string): ResolvedSet | null {
 }
 
 export default function StudySetClient({ id }: { id: string }) {
-  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID;
+  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID || id === REISEANGEBOTE_SET_ID || id === VERTRAEGE_SET_ID || id === ANDERE_URLAUB_MACHEN_SET_ID || id === BERUFLICH_WEITERKOMMEN_SET_ID;
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
@@ -714,7 +768,15 @@ export default function StudySetClient({ id }: { id: string }) {
                       ? PROTOKOLL_GAP_TEST
                       : id === TEAMGESPRÄCH_SET_ID
                         ? TEAMGESPRÄCH_GAP_TEST
-                        : TEAMROLLE_GAP_TEST
+                        : id === TEAMROLLE_SET_ID
+                          ? TEAMROLLE_GAP_TEST
+                          : id === VERTRAEGE_SET_ID
+                            ? VERTRAEGE_GAP_TEST
+                            : id === ANDERE_URLAUB_MACHEN_SET_ID
+                              ? ANDERE_URLAUB_MACHEN_GAP_TEST
+                              : id === BERUFLICH_WEITERKOMMEN_SET_ID
+                                ? BERUFLICH_WEITERKOMMEN_GAP_TEST
+                                : REISEANGEBOTE_GAP_TEST
                 }
                 words={practiceWords}
                 onCorrect={(wordId) => markCorrect("gaps", wordId)}

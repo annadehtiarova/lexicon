@@ -13,6 +13,10 @@ import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
 import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
 import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
 import { TEAMROLLE_SET_ID } from "@/lib/teamrolleData";
+import { REISEANGEBOTE_SET_ID } from "@/lib/reiseangeboteData";
+import { VERTRAEGE_SET_ID } from "@/lib/vertraegeData";
+import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
+import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
 
 export function generateStaticParams() {
   return [
@@ -30,6 +34,10 @@ export function generateStaticParams() {
     { id: PROTOKOLL_SET_ID },
     { id: TEAMGESPRÄCH_SET_ID },
     { id: TEAMROLLE_SET_ID },
+    { id: REISEANGEBOTE_SET_ID },
+    { id: VERTRAEGE_SET_ID },
+    { id: ANDERE_URLAUB_MACHEN_SET_ID },
+    { id: BERUFLICH_WEITERKOMMEN_SET_ID },
   ];
 }
 

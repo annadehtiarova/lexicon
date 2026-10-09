@@ -3,6 +3,9 @@ import { TEAMARBEIT_GAP_WORD_IDS } from "./teamarbeitGapTest";
 import { PROTOKOLL_GAP_WORD_IDS } from "./protokollGapTest";
 import { TEAMGESPRÄCH_GAP_WORD_IDS } from "./teamgespraechGapTest";
 import { TEAMROLLE_GAP_WORD_IDS } from "./teamrolleGapTest";
+import { VERTRAEGE_GAP_WORD_IDS } from "./vertraegeGapTest";
+import { ANDERE_URLAUB_MACHEN_GAP_WORD_IDS } from "./andereUrlaubMachenGapTest";
+import { BERUFLICH_WEITERKOMMEN_GAP_WORD_IDS } from "./beruflichWeiterkommenGapTest";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -78,6 +81,9 @@ export function isWordMastered(wordId: string, progress: ExerciseProgress) {
     PROTOKOLL_GAP_WORD_IDS.has(wordId) ||
     TEAMGESPRÄCH_GAP_WORD_IDS.has(wordId) ||
     TEAMROLLE_GAP_WORD_IDS.has(wordId)
+    || VERTRAEGE_GAP_WORD_IDS.has(wordId) ||
+    ANDERE_URLAUB_MACHEN_GAP_WORD_IDS.has(wordId) ||
+    BERUFLICH_WEITERKOMMEN_GAP_WORD_IDS.has(wordId)
   ) {
     requiredExercises.push("gaps");
   }
