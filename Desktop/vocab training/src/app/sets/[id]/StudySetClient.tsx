@@ -73,6 +73,7 @@ import {
   ChevronLeftIcon,
   SparklesIcon,
   ListChecksIcon,
+  KeyboardIcon,
   GridIcon,
   TrashIcon,
   XIcon,
