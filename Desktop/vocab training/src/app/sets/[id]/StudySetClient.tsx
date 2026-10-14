@@ -59,7 +59,6 @@ import {
 } from "@/lib/beruflichWeiterkommenData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
-import TypingMode from "@/components/modes/TypingMode";
 import MatchingMode from "@/components/modes/MatchingMode";
 import GapsMode from "@/components/modes/GapsMode";
 import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGapTest";
@@ -74,7 +73,6 @@ import {
   ChevronLeftIcon,
   SparklesIcon,
   ListChecksIcon,
-  KeyboardIcon,
   GridIcon,
   TrashIcon,
   XIcon,
@@ -83,7 +81,6 @@ import {
 const MODES = [
   { key: "cards", label: "Cards", Icon: SparklesIcon },
   { key: "quiz", label: "Quiz", Icon: ListChecksIcon },
-  { key: "write", label: "Write", Icon: KeyboardIcon },
   { key: "match", label: "Match", Icon: GridIcon },
   { key: "gaps", label: "Gaps", Icon: KeyboardIcon },
 ] as const;
@@ -304,14 +301,12 @@ export default function StudySetClient({ id }: { id: string }) {
   const [exerciseProgress, setExerciseProgress] = useState<ExerciseProgress>({
     cards: [],
     quiz: [],
-    write: [],
     match: [],
     gaps: [],
   });
   const pendingProgressRef = useRef<ExerciseProgress>({
     cards: [],
     quiz: [],
-    write: [],
     match: [],
     gaps: [],
   });
@@ -448,8 +443,8 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(nextCompleted);
 
     const sequence: ModeKey[] = hasGapExercise
-      ? ["cards", "quiz", "write", "match", "gaps"]
-      : ["cards", "quiz", "write", "match"];
+      ? ["cards", "quiz", "match", "gaps"]
+      : ["cards", "quiz", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
@@ -474,7 +469,6 @@ export default function StudySetClient({ id }: { id: string }) {
     const resetProgress: ExerciseProgress = {
       cards: [],
       quiz: [],
-      write: [],
       match: [],
       gaps: [],
     };
@@ -731,17 +725,6 @@ export default function StudySetClient({ id }: { id: string }) {
                   words={practiceWords}
                   onCorrect={(wordId) => markCorrect("quiz", wordId)}
                   onBatchComplete={() => completeModeBatch("quiz")}
-                />
-              </div>
-            )}
-
-            {mode === "write" && (
-              <div>
-                <TypingMode
-                  key={`write-${practiceBatch}-${exerciseRevision}`}
-                  words={practiceWords}
-                  onCorrect={(wordId) => markCorrect("write", wordId)}
-                  onBatchComplete={() => completeModeBatch("write")}
                 />
               </div>
             )}

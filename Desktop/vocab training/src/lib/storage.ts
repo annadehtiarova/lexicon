@@ -13,7 +13,7 @@ const BUILT_IN_DELETED_WORDS_KEY = "lexikon.builtInDeletedWords";
 const BUILT_IN_ADDED_WORDS_KEY = "lexikon.builtInAddedWords";
 const BUILT_IN_WORD_OVERRIDES_KEY = "lexikon.builtInWordOverrides";
 const LAST_BATCH_RESULT_KEY = "lexikon.lastBatchResults";
-export type ExerciseKey = "cards" | "quiz" | "write" | "match" | "gaps";
+export type ExerciseKey = "cards" | "quiz" | "match" | "gaps";
 export type ExerciseProgress = Record<ExerciseKey, string[]>;
 
 export interface LastBatchResult {
@@ -55,7 +55,7 @@ export function clearLastBatchResult(setId: string) {
   }
 }
 
-const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], write: [], match: [], gaps: [] };
+const EMPTY_PROGRESS: ExerciseProgress = { cards: [], quiz: [], match: [], gaps: [] };
 
 export function loadExerciseProgress(setId: string): ExerciseProgress {
   if (typeof window === "undefined") return { ...EMPTY_PROGRESS };
@@ -65,7 +65,6 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
     return {
       cards: Array.isArray(saved.cards) ? saved.cards : [],
       quiz: Array.isArray(saved.quiz) ? saved.quiz : [],
-      write: Array.isArray(saved.write) ? saved.write : [],
       match: Array.isArray(saved.match) ? saved.match : [],
       gaps: Array.isArray(saved.gaps) ? saved.gaps : [],
     };
@@ -75,7 +74,7 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
 }
 
 export function isWordMastered(wordId: string, progress: ExerciseProgress) {
-  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "write", "match"];
+  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "match"];
   if (
     TEAMARBEIT_GAP_WORD_IDS.has(wordId) ||
     PROTOKOLL_GAP_WORD_IDS.has(wordId) ||
