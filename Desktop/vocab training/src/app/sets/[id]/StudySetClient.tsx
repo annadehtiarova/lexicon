@@ -61,6 +61,7 @@ import {
   AKTIV_IM_HANDWERK_SET_ID,
   getAktivImHandwerkSet,
 } from "@/lib/aktivImHandwerkData";
+import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
@@ -283,6 +284,16 @@ function resolveSet(id: string): ResolvedSet | null {
 
   if (id === AKTIV_IM_HANDWERK_SET_ID) {
     const builtInSet = getAktivImHandwerkSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === TOURISMUS_SET_ID) {
+    const builtInSet = getTourismusSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,
