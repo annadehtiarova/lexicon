@@ -57,6 +57,10 @@ import {
   BERUFLICH_WEITERKOMMEN_SET_ID,
   getBeruflichWeiterkommenSet,
 } from "@/lib/beruflichWeiterkommenData";
+import {
+  AKTIV_IM_HANDWERK_SET_ID,
+  getAktivImHandwerkSet,
+} from "@/lib/aktivImHandwerkData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
@@ -269,6 +273,16 @@ function resolveSet(id: string): ResolvedSet | null {
 
   if (id === BERUFLICH_WEITERKOMMEN_SET_ID) {
     const builtInSet = getBeruflichWeiterkommenSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === AKTIV_IM_HANDWERK_SET_ID) {
+    const builtInSet = getAktivImHandwerkSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,

@@ -17,6 +17,7 @@ import { REISEANGEBOTE_SET_ID } from "@/lib/reiseangeboteData";
 import { VERTRAEGE_SET_ID } from "@/lib/vertraegeData";
 import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
 import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
+import { AKTIV_IM_HANDWERK_SET_ID } from "@/lib/aktivImHandwerkData";
 
 export function generateStaticParams() {
   return [
@@ -38,6 +39,7 @@ export function generateStaticParams() {
     { id: VERTRAEGE_SET_ID },
     { id: ANDERE_URLAUB_MACHEN_SET_ID },
     { id: BERUFLICH_WEITERKOMMEN_SET_ID },
+    { id: AKTIV_IM_HANDWERK_SET_ID },
   ];
 }
 

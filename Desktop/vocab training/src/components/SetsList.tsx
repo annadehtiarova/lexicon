@@ -28,6 +28,7 @@ import { REISEANGEBOTE_SET_ID } from "@/lib/reiseangeboteData";
 import { VERTRAEGE_SET_ID } from "@/lib/vertraegeData";
 import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
 import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
+import { AKTIV_IM_HANDWERK_SET_ID } from "@/lib/aktivImHandwerkData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -48,6 +49,7 @@ const BUILT_IN_SET_IDS = new Set([
   VERTRAEGE_SET_ID,
   ANDERE_URLAUB_MACHEN_SET_ID,
   BERUFLICH_WEITERKOMMEN_SET_ID,
+  AKTIV_IM_HANDWERK_SET_ID,
 ]);
 
 const SELECTED_CHAPTER_KEY = "lexikon.selectedChapter";
