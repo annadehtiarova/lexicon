@@ -19,6 +19,9 @@ import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
 import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
 import { AKTIV_IM_HANDWERK_SET_ID } from "@/lib/aktivImHandwerkData";
 import { TOURISMUS_SET_ID } from "@/lib/tourismusData";
+import { KAPITEL3_SET_ID } from "@/lib/kapitel3Data";
+import { MEIN_EIGENER_LADEN_SET_ID } from "@/lib/meinEigenerLadenData";
+import { HIER_ARBEITE_ICH_SET_ID } from "@/lib/hierArbeiteIchData";
 
 export function generateStaticParams() {
   return [
@@ -42,6 +45,9 @@ export function generateStaticParams() {
     { id: BERUFLICH_WEITERKOMMEN_SET_ID },
     { id: AKTIV_IM_HANDWERK_SET_ID },
     { id: TOURISMUS_SET_ID },
+    { id: KAPITEL3_SET_ID },
+    { id: MEIN_EIGENER_LADEN_SET_ID },
+    { id: HIER_ARBEITE_ICH_SET_ID },
   ];
 }
 

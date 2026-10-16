@@ -136,7 +136,7 @@ const RAW_WORDS: [string, string, string, string][] = [
 ];
 
 export const AKTIV_IM_HANDWERK_SET_ID = "4f398b01-253e-495a-827f-29acd1068f08";
-export const AKTIV_IM_HANDWERK_SET_NAME = "Kapitel 5 - Aktiv im Handwerk";
+export const AKTIV_IM_HANDWERK_SET_NAME = "Kapitel 5";
 
 export function getAktivImHandwerkSet(): StudySet {
   return {

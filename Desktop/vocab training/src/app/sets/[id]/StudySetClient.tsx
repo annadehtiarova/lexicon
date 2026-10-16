@@ -62,6 +62,9 @@ import {
   getAktivImHandwerkSet,
 } from "@/lib/aktivImHandwerkData";
 import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
+import { KAPITEL3_SET_ID, getKapitel3Set } from "@/lib/kapitel3Data";
+import { MEIN_EIGENER_LADEN_SET_ID, getMeinEigenerLadenSet } from "@/lib/meinEigenerLadenData";
+import { HIER_ARBEITE_ICH_SET_ID, getHierArbeiteIchSet } from "@/lib/hierArbeiteIchData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
@@ -294,6 +297,36 @@ function resolveSet(id: string): ResolvedSet | null {
 
   if (id === TOURISMUS_SET_ID) {
     const builtInSet = getTourismusSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === KAPITEL3_SET_ID) {
+    const builtInSet = getKapitel3Set();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === MEIN_EIGENER_LADEN_SET_ID) {
+    const builtInSet = getMeinEigenerLadenSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === HIER_ARBEITE_ICH_SET_ID) {
+    const builtInSet = getHierArbeiteIchSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,

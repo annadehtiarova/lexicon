@@ -87,7 +87,7 @@ const RAW_WORDS: [string, string, string][] = [
 ];
 
 export const TOURISMUS_SET_ID = "5c67de64-5d11-4781-b4aa-68e726a0b1b4";
-export const TOURISMUS_SET_NAME = "Kapitel 4 - Tourismus";
+export const TOURISMUS_SET_NAME = "Kapitel 4";
 
 export function getTourismusSet(): StudySet {
   return {
