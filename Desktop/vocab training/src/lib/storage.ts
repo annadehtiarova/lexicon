@@ -8,6 +8,9 @@ import { ANDERE_URLAUB_MACHEN_GAP_WORD_IDS } from "./andereUrlaubMachenGapTest";
 import { BERUFLICH_WEITERKOMMEN_GAP_WORD_IDS } from "./beruflichWeiterkommenGapTest";
 import { TOURISMUS_GAP_WORD_IDS } from "./tourismusGapTest";
 import { AKTIV_IM_HANDWERK_GAP_WORD_IDS } from "./aktivImHandwerkGapTest";
+import { KAPITEL3_GAP_WORD_IDS } from "./kapitel3GapTest";
+import { MEIN_EIGENER_LADEN_GAP_WORD_IDS } from "./meinEigenerLadenGapTest";
+import { HIER_ARBEITE_ICH_GAP_WORD_IDS } from "./hierArbeiteIchGapTest";
 
 const STORAGE_KEY = "lexikon.sets";
 const BUILT_IN_PROGRESS_KEY = "lexikon.builtInProgress";
@@ -86,7 +89,10 @@ export function isWordMastered(wordId: string, progress: ExerciseProgress) {
     ANDERE_URLAUB_MACHEN_GAP_WORD_IDS.has(wordId) ||
     BERUFLICH_WEITERKOMMEN_GAP_WORD_IDS.has(wordId) ||
     TOURISMUS_GAP_WORD_IDS.has(wordId) ||
-    AKTIV_IM_HANDWERK_GAP_WORD_IDS.has(wordId)
+    AKTIV_IM_HANDWERK_GAP_WORD_IDS.has(wordId) ||
+    KAPITEL3_GAP_WORD_IDS.has(wordId) ||
+    MEIN_EIGENER_LADEN_GAP_WORD_IDS.has(wordId) ||
+    HIER_ARBEITE_ICH_GAP_WORD_IDS.has(wordId)
   ) {
     requiredExercises.push("gaps");
   }
