@@ -10,6 +10,7 @@ interface GapTestQuestion {
   translation: string;
   answer: string;
   wordId: string;
+  displayAnswers?: string[];
 }
 
 interface GapsModeProps {
@@ -34,11 +35,11 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
   const sentenceCardRef = useRef<HTMLDivElement>(null);
   const prompt = prompts[index];
   const sentenceParts = prompt?.sentence.split("______") ?? [];
-  const gapAnswers = prompt && sentenceParts.length > 2
+  const gapAnswers = prompt?.displayAnswers ?? (prompt && sentenceParts.length > 2
     ? prompt.answer.split(/\s+/)
     : prompt
       ? [prompt.answer]
-      : [];
+      : []);
 
   useEffect(() => {
     if (!inputFocused) return;
@@ -126,7 +127,7 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
               {partIndex < sentenceParts.length - 1 && (
                 <span
                   className="inline-block border-b-2 border-[#263fd6] px-1 text-center align-baseline"
-                  style={{ minWidth: `${Math.max(5, prompt.answer.length)}ch` }}
+                  style={{ minWidth: `${Math.max(5, (gapAnswers[partIndex] ?? prompt.answer).length)}ch` }}
                 >
                   {result
                     ? gapAnswers[partIndex] ?? prompt.answer

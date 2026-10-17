@@ -1,2 +1,2 @@
-:HL["/lexicon/_next/static/chunks/3-ax4dersnvew.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"K2gpy2Nn7K2D6m3Y9jSiu"}
+:HL["/lexicon/_next/static/chunks/3u49m44zmn2ws.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"CcUNNbayCdf9OYRDuYi7x"}

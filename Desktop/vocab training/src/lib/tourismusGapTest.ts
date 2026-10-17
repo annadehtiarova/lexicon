@@ -1,0 +1,108 @@
+import { getTourismusSet } from "@/lib/tourismusData";
+
+interface GapTestQuestion {
+  sentence: string;
+  translation: string;
+  answer: string;
+  wordId: string;
+}
+
+const PROMPTS: { word: string; sentence: string; translation: string; answer: string }[] = [
+  { word: "die Pauschalreise, -n", sentence: "Wir haben eine ______ nach Spanien gebucht, bei der Flug und Hotel im Preis enthalten sind.", translation: "We booked a package holiday to Spain that includes the flight and hotel.", answer: "Pauschalreise" },
+  { word: "die Vollpension (Sg.)", sentence: "Bei diesem Hotel ist ______ im Preis enthalten, sodass wir Frühstück, Mittag- und Abendessen bekommen.", translation: "This hotel includes full board in the price, so we get breakfast, lunch, and dinner.", answer: "Vollpension" },
+  { word: "alles inklusive", sentence: "Wir haben uns für ein Hotel entschieden, in dem ______ angeboten wird.", translation: "We chose a hotel that offers all-inclusive service.", answer: "alles inklusive" },
+  { word: "die Hotelanlage, -n", sentence: "Die ______ verfügt über mehrere Restaurants, einen Pool und einen Fitnessraum.", translation: "The hotel complex has several restaurants, a swimming pool, and a fitness room.", answer: "Hotelanlage" },
+  { word: "die Reisegruppe, -n", sentence: "Unsere ______ besteht aus 20 Personen, die gemeinsam durch Italien reisen.", translation: "Our tour group consists of 20 people travelling together through Italy.", answer: "Reisegruppe" },
+  { word: "betreuen", sentence: "Die Reiseleiterin muss die Gäste während des gesamten Ausflugs ______.", translation: "The tour guide has to look after the guests throughout the entire excursion.", answer: "betreuen" },
+  { word: "unterwegs sein", sentence: "Da wir den ganzen Tag ______ werden, sollten wir ausreichend Wasser mitnehmen.", translation: "Since we will be travelling all day, we should bring enough water.", answer: "unterwegs sein" },
+  { word: "zur Verfügung stehen", sentence: "Für Fragen zum Hotel wird Ihnen rund um die Uhr ein Ansprechpartner ______.", translation: "A contact person will be available around the clock for questions about the hotel.", answer: "zur Verfügung stehen" },
+  { word: "anspruchsvoll", sentence: "Die Arbeit als Reiseleiterin ist ______, weil man viele Aufgaben gleichzeitig erledigen muss.", translation: "The job of a tour guide is demanding because you have to handle many tasks at the same time.", answer: "anspruchsvoll" },
+  { word: "das feste Einkommen", sentence: "Für die Wohnungssuche ist es oft wichtig, ein ______ nachweisen zu können.", translation: "When looking for an apartment, it is often important to be able to prove that you have a steady income.", answer: "festes Einkommen" },
+  { word: "die Geschäftsleitung, -en", sentence: "Die ______ hat beschlossen, die Arbeitsbedingungen für alle Mitarbeitenden zu verbessern.", translation: "The management has decided to improve working conditions for all employees.", answer: "Geschäftsleitung" },
+  { word: "reibungslos", sentence: "Dank einer guten Planung verlief die Veranstaltung ______.", translation: "Thanks to good planning, the event went smoothly.", answer: "reibungslos" },
+  { word: "das Check-in/out", sentence: "Das Hotel bietet ein digitales ______ an, damit die Gäste nicht an der Rezeption warten müssen.", translation: "The hotel offers digital check-in/check-out so that guests do not have to wait at reception.", answer: "Check-in/out" },
+  { word: "die Koordination (Sg.)", sentence: "Die ______ zwischen den verschiedenen Abteilungen ist für den Erfolg der Veranstaltung entscheidend.", translation: "The coordination between the different departments is crucial to the success of the event.", answer: "Koordination" },
+  { word: "abwechslungsreich", sentence: "Mein neuer Job ist sehr ______, weil ich jeden Tag unterschiedliche Aufgaben erledige.", translation: "My new job is very varied because I perform different tasks every day.", answer: "abwechslungsreich" },
+  { word: "begeistert", sentence: "Die Gäste waren von der Qualität des Hotels völlig ______.", translation: "The guests were absolutely delighted with the quality of the hotel.", answer: "begeistert" },
+  { word: "die Begeisterung (Sg.)", sentence: "Ihre ______ für die Arbeit mit Menschen merkt man sofort.", translation: "Her enthusiasm for working with people is immediately noticeable.", answer: "Begeisterung" },
+  { word: "das Grundgehalt, -er", sentence: "Neben dem ______ erhalten die Mitarbeitenden zusätzliche Zahlungen für Überstunden.", translation: "In addition to the basic salary, employees receive extra payments for overtime.", answer: "Grundgehalt" },
+  { word: "die Aufstiegsmöglichkeit, -en", sentence: "Bei der Wahl eines Arbeitgebers spielen auch die ______ eine wichtige Rolle.", translation: "When choosing an employer, opportunities for advancement also play an important role.", answer: "Aufstiegsmöglichkeiten" },
+  { word: "die Kreativität (Sg.)", sentence: "In diesem Beruf braucht man viel ______, um neue und interessante Reiseangebote zu entwickeln.", translation: "In this profession, you need a lot of creativity to develop new and interesting travel offers.", answer: "Kreativität" },
+  { word: "die Anerkennung (Sg.)", sentence: "Für viele Mitarbeitende ist ______ ihrer Arbeit genauso wichtig wie das Gehalt.", translation: "For many employees, recognition of their work is just as important as their salary.", answer: "Anerkennung" },
+  { word: "todmüde", sentence: "Nach zwölf Stunden Arbeit im Hotel war ich ______ und wollte nur noch schlafen.", translation: "After twelve hours of work at the hotel, I was dead tired and just wanted to sleep.", answer: "todmüde" },
+  { word: "die Bezahlung (Sg.)", sentence: "Vor der Vertragsunterzeichnung sollten Sie sich über die ______ und die Arbeitszeiten informieren.", translation: "Before signing the contract, you should find out about the pay and working hours.", answer: "Bezahlung" },
+  { word: "das Angebot, -e", sentence: "Das Reisebüro hat uns ein günstiges ______ für eine Woche auf Mallorca gemacht.", translation: "The travel agency made us an affordable offer for a week in Mallorca.", answer: "Angebot" },
+  { word: "sich erholen", sentence: "Nach einer stressigen Arbeitswoche möchte ich mich am Wochenende ______.", translation: "After a stressful working week, I want to relax and recover at the weekend.", answer: "erholen" },
+  { word: "der Frühbucherrabatt, -e", sentence: "Wenn Sie Ihre Reise mehrere Monate im Voraus buchen, erhalten Sie einen ______.", translation: "If you book your trip several months in advance, you receive an early-booking discount.", answer: "Frühbucherrabatt" },
+  { word: "sich entscheiden", sentence: "Wir müssen uns bis Freitag ______, ob wir die Reise buchen möchten.", translation: "We have to decide by Friday whether we want to book the trip.", answer: "entscheiden" },
+  { word: "die Halbpension (Sg.)", sentence: "Bei der ______ sind Frühstück und Abendessen im Hotelpreis enthalten.", translation: "With half board, breakfast and dinner are included in the hotel price.", answer: "Halbpension" },
+  { word: "das Erlebnis, -se", sentence: "Die Wanderung durch die Berge war ein unvergessliches ______.", translation: "The hike through the mountains was an unforgettable experience.", answer: "Erlebnis" },
+  { word: "sensationell", sentence: "Die Aussicht vom Hotelzimmer war einfach ______.", translation: "The view from the hotel room was simply sensational.", answer: "sensationell" },
+  { word: "der Haken, -", sentence: "Das Angebot klingt sehr günstig, aber es gibt einen ______: Der Flug ist nicht im Preis enthalten.", translation: "The offer sounds very affordable, but there is a catch: the flight is not included in the price.", answer: "Haken" },
+  { word: "die Gebühr, -en", sentence: "Für die Änderung der Buchung müssen wir eine zusätzliche ______ bezahlen.", translation: "We have to pay an additional fee to change the booking.", answer: "Gebühr" },
+  { word: "versteckte Gebühren", sentence: "Lesen Sie die Vertragsbedingungen sorgfältig, damit Sie keine ______ übersehen.", translation: "Read the terms and conditions carefully so that you do not overlook any hidden fees.", answer: "versteckten Gebühren" },
+  { word: "die Anzahlung, -en", sentence: "Bei der Buchung müssen Sie eine ______ von 20 Prozent des Reisepreises leisten.", translation: "When booking, you have to pay a deposit of 20 percent of the travel price.", answer: "Anzahlung" },
+  { word: "Ich wäre Ihnen dankbar ...", sentence: "______, wenn Sie mir die vollständigen Reiseunterlagen per E-Mail zusenden könnten.", translation: "I would be grateful to you if you could send me the complete travel documents by email.", answer: "Ich wäre Ihnen dankbar" },
+  { word: "erreichbar", sentence: "Während der Reise ist unsere Kundenberatung telefonisch jederzeit ______.", translation: "During the trip, our customer service team is always reachable by phone.", answer: "erreichbar" },
+  { word: "die Reiserücktrittsversicherung, -en", sentence: "Da die Reise teuer ist, empfehle ich Ihnen eine ______.", translation: "Since the trip is expensive, I recommend travel-cancellation insurance.", answer: "Reiserücktrittsversicherung" },
+  { word: "eine Versicherung abschließen", sentence: "Vor einer längeren Auslandsreise sollten Sie ______, die medizinische Kosten abdeckt.", translation: "Before a long trip abroad, you should take out insurance that covers medical expenses.", answer: "eine Versicherung abschließen" },
+  { word: "die Kosten (Pl.)", sentence: "Bevor wir die Reise buchen, sollten wir alle ______ miteinander vergleichen.", translation: "Before booking the trip, we should compare all the costs.", answer: "Kosten" },
+  { word: "für die Kosten aufkommen", sentence: "Wenn der Flug wegen eines Fehlers des Veranstalters ausfällt, muss dieser unter Umständen ______.", translation: "If the flight is cancelled because of the organizer's mistake, the organizer may have to cover the costs.", answer: "für die Kosten aufkommen" },
+  { word: "die allgemeinen Geschäftsbedingungen (AGBs)", sentence: "Bevor Sie die Buchung bestätigen, sollten Sie die ______ sorgfältig lesen.", translation: "Before confirming the booking, you should carefully read the general terms and conditions.", answer: "allgemeinen Geschäftsbedingungen" },
+  { word: "(eine Reise) stornieren", sentence: "Wegen einer schweren Erkrankung musste ich ______.", translation: "I had to cancel a trip because of a serious illness.", answer: "eine Reise stornieren" },
+  { word: "buchen", sentence: "Wir möchten das Hotel möglichst früh ______, um Geld zu sparen.", translation: "We want to book the hotel as early as possible to save money.", answer: "buchen" },
+  { word: "im Krankheitsfall", sentence: "______ sollten Sie sofort den Reiseveranstalter kontaktieren und die Bedingungen Ihrer Versicherung prüfen.", translation: "In case of illness, you should contact the tour operator immediately and check your insurance conditions.", answer: "Im Krankheitsfall" },
+  { word: "aufwachsen (in + D.)", sentence: "Ich bin ______ einem kleinen Dorf aufgewachsen und wollte schon als Kind die Welt entdecken.", translation: "I grew up in a small village and wanted to discover the world even as a child.", answer: "in" },
+  { word: "der Master, -", sentence: "Nach meinem Bachelorabschluss möchte ich einen ______ im Bereich Tourismusmanagement machen.", translation: "After my bachelor's degree, I want to pursue a master's degree in tourism management.", answer: "Master" },
+  { word: "sich spezialisieren (auf + A.)", sentence: "Die Reiseagentur möchte sich ______ nachhaltige Urlaubsreisen ______.", translation: "The travel agency wants to specialize in sustainable holidays.", answer: "auf spezialisieren" },
+  { word: "die Anforderung, -en", sentence: "Gute Sprachkenntnisse sind eine wichtige ______ für diese Stelle.", translation: "Good language skills are an important requirement for this position.", answer: "Anforderung" },
+  { word: "die Team- und Kommunikationsfähigkeit", sentence: "Für die Arbeit an der Hotelrezeption sind ______ besonders wichtig.", translation: "Teamwork and communication skills are particularly important for working at the hotel reception.", answer: "Team- und Kommunikationsfähigkeit" },
+  { word: "die Bewerbungsunterlagen (Pl.)", sentence: "Bitte senden Sie Ihre vollständigen ______ bis Ende der Woche an die Personalabteilung.", translation: "Please send your complete application documents to the HR department by the end of the week.", answer: "Bewerbungsunterlagen" },
+  { word: "vollständig", sentence: "Ihre Bewerbung ist noch nicht ______, da das Arbeitszeugnis fehlt.", translation: "Your application is not yet complete because the employment reference is missing.", answer: "vollständig" },
+  { word: "das Berufsbild, -er", sentence: "Im Vorstellungsgespräch erklärte die Personalberaterin, wie vielseitig das ______ einer Reiseleiterin ist.", translation: "During the interview, the recruitment consultant explained how varied the occupational profile of a tour guide is.", answer: "Berufsbild" },
+  { word: "die Satire, -n", sentence: "Die Fernsehsendung nutzt ______, um gesellschaftliche Probleme humorvoll zu kritisieren.", translation: "The television programme uses satire to criticize social problems humorously.", answer: "Satire" },
+  { word: "die Umbuchung, -en", sentence: "Wegen der Flugänderung war eine kostenlose ______ auf einen späteren Termin möglich.", translation: "Because of the flight change, a free rebooking to a later date was possible.", answer: "Umbuchung" },
+  { word: "selbstverständlich", sentence: "Wenn Sie weitere Fragen haben, helfen wir Ihnen ______ gerne weiter.", translation: "If you have any further questions, we will of course be happy to help.", answer: "selbstverständlich" },
+  { word: "ausgebucht", sentence: "Das Hotel ist in den Sommerferien bereits ______, deshalb müssen wir eine Alternative suchen.", translation: "The hotel is already fully booked during the summer holidays, so we have to look for an alternative.", answer: "ausgebucht" },
+  { word: "hoffnungslos", sentence: "Ohne eine freie Unterkunft schien die Suche nach einem Hotel zunächst ______.", translation: "Without any available accommodation, the search for a hotel initially seemed hopeless.", answer: "hoffnungslos" },
+  { word: "überbucht", sentence: "Obwohl wir eine bestätigte Reservierung hatten, konnten wir nicht einchecken, weil das Hotel ______ war.", translation: "Although we had a confirmed reservation, we could not check in because the hotel was overbooked.", answer: "überbucht" },
+  { word: "zaubern", sentence: "Ein Reiseveranstalter kann nicht einfach ______, wenn ein Flug ausfällt und alle Hotels ausgebucht sind.", translation: "A tour operator cannot simply do magic when a flight is cancelled and all hotels are fully booked.", answer: "zaubern" },
+  { word: "in der Lage sein", sentence: "Auch in stressigen Situationen müssen Reiseleiter ______, ruhig und professionell zu handeln.", translation: "Even in stressful situations, tour guides must be able to act calmly and professionally.", answer: "in der Lage sein" },
+  { word: "die Rückkehr (Sg.)", sentence: "Nach unserer ______ aus dem Urlaub mussten wir uns erst wieder an den Arbeitsalltag gewöhnen.", translation: "After our return from holiday, we first had to get used to everyday working life again.", answer: "Rückkehr" },
+  { word: "die Presse (Sg.)", sentence: "Die ______ berichtete ausführlich über die Eröffnung des neuen Hotels.", translation: "The press reported extensively on the opening of the new hotel.", answer: "Presse" },
+  { word: "körperlich", sentence: "Die Arbeit als Animateur kann ______ anstrengend sein, weil man den ganzen Tag auf den Beinen ist.", translation: "Working as an entertainer can be physically demanding because you are on your feet all day.", answer: "körperlich" },
+  { word: "psychisch", sentence: "Ständiger Zeitdruck kann nicht nur körperlich, sondern auch ______ belastend sein.", translation: "Constant time pressure can be stressful not only physically but also psychologically.", answer: "psychisch" },
+  { word: "therapeutisch", sentence: "Für manche Menschen kann ein Aufenthalt in der Natur eine ______ Wirkung haben.", translation: "For some people, spending time in nature can have a therapeutic effect.", answer: "therapeutische" },
+  { word: "alles im Griff haben", sentence: "Dank einer guten Vorbereitung hatte die Veranstaltungsleiterin auch während der stressigen Phase ______.", translation: "Thanks to good preparation, the event manager had everything under control even during the stressful period.", answer: "alles im Griff" },
+  { word: "der Sinn des Lebens", sentence: "Manche Menschen fragen sich, was ______ ist und welche Ziele sie erreichen möchten.", translation: "Some people wonder about the meaning of life and which goals they want to achieve.", answer: "der Sinn des Lebens" },
+  { word: "dienen", sentence: "Die neue App soll dazu ______, die Urlaubsplanung einfacher zu machen.", translation: "The new app is intended to serve the purpose of making holiday planning easier.", answer: "dienen" },
+  { word: "gut umgehen können (mit + D.)", sentence: "Eine gute Führungskraft muss ______ Kritik und Konflikten ______.", translation: "A good manager must be able to handle criticism and conflicts well.", answer: "mit umgehen können" },
+  { word: "die Präsentation, -en", sentence: "Für die morgige ______ über unsere neuen Reiseangebote müssen wir noch einige Folien vorbereiten.", translation: "For tomorrow's presentation about our new travel offers, we still need to prepare some slides.", answer: "Präsentation" },
+  { word: "der Vortrag, -e", sentence: "Während des ______ erklärte der Experte, wie sich der Tourismus in den letzten Jahren verändert hat.", translation: "During the talk, the expert explained how tourism has changed in recent years.", answer: "Vortrags" },
+  { word: "sicherlich", sentence: "Wenn Sie die Reise früh buchen, können Sie ______ Geld sparen.", translation: "If you book the trip early, you can certainly save money.", answer: "sicherlich" },
+  { word: "abschließend", sentence: "______, möchte ich mich bei allen Mitarbeitenden für ihre Unterstützung bedanken.", translation: "Finally, I would like to thank all employees for their support.", answer: "Abschließend" },
+  { word: "die Aufmerksamkeit (Sg.)", sentence: "Die Reiseleiterin versuchte, die ______ der Gruppe während ihrer Erklärung zu gewinnen.", translation: "The tour guide tried to gain the group's attention during her explanation.", answer: "Aufmerksamkeit" },
+  { word: "sich lohnen", sentence: "Die zusätzliche Vorbereitung wird sich ______, weil die Veranstaltung dadurch reibungsloser abläuft.", translation: "The additional preparation will be worth it because the event will run more smoothly as a result.", answer: "lohnen" },
+  { word: "verzweifelt", sentence: "Als der Flug gestrichen wurde und kein Hotel mehr frei war, suchten die Reisenden ______ nach einer Lösung.", translation: "When the flight was cancelled and no hotels were available, the travellers desperately searched for a solution.", answer: "verzweifelt" },
+  { word: "die Verspätung, -en", sentence: "Wegen einer technischen Störung hatte unser Zug eine erhebliche ______.", translation: "Our train had a considerable delay because of a technical fault.", answer: "Verspätung" },
+  { word: "der Anschlusszug, -¨e", sentence: "Wegen der Verspätung haben wir unseren ______ leider verpasst.", translation: "Unfortunately, we missed our connecting train because of the delay.", answer: "Anschlusszug" },
+  { word: "die Kündigungsfrist, -en", sentence: "Bevor ich meinen Arbeitsvertrag kündige, muss ich prüfen, wie lang die ______ ist.", translation: "Before terminating my employment contract, I have to check how long the notice period is.", answer: "Kündigungsfrist" },
+  { word: "die Arbeitsbedingungen (Pl.)", sentence: "Flexible Arbeitszeiten und ein gutes Betriebsklima sind wichtige ______.", translation: "Flexible working hours and a good working atmosphere are important working conditions.", answer: "Arbeitsbedingungen" },
+  { word: "die Gewerkschaft, -en", sentence: "Die Mitarbeitenden sind einer ______ beigetreten, um sich gemeinsam für bessere Löhne einzusetzen.", translation: "The employees joined a trade union to campaign together for better wages.", answer: "Gewerkschaft" },
+  { word: "beitreten, trat bei, ist beigetreten", sentence: "Wenn Sie die Interessen der Beschäftigten unterstützen möchten, können Sie einer ______.", translation: "If you want to support employees' interests, you can join a trade union.", answer: "Gewerkschaft beitreten" },
+  { word: "jmd. beraten", sentence: "Die Mitarbeiterin im Reisebüro kann Sie bei der Auswahl einer passenden Pauschalreise ______.", translation: "The travel agency employee can advise you on choosing a suitable package holiday.", answer: "beraten" },
+];
+
+const wordsByGerman = new Map(
+  getTourismusSet().words.map((word) => [word.german.toLowerCase(), word]),
+);
+
+export const TOURISMUS_GAP_TEST: GapTestQuestion[] = PROMPTS.map((prompt) => {
+  const word = wordsByGerman.get(prompt.word.toLowerCase());
+  if (!word) throw new Error(`No Tourismus vocabulary word found for: ${prompt.word}`);
+  return { ...prompt, wordId: word.id };
+});
+
+export const TOURISMUS_GAP_WORD_IDS = new Set(
+  TOURISMUS_GAP_TEST.map((question) => question.wordId),
+);

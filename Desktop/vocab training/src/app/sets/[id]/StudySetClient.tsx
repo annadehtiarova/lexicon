@@ -77,6 +77,8 @@ import { REISEANGEBOTE_GAP_TEST } from "@/lib/reiseangeboteGapTest";
 import { VERTRAEGE_GAP_TEST } from "@/lib/vertraegeGapTest";
 import { ANDERE_URLAUB_MACHEN_GAP_TEST } from "@/lib/andereUrlaubMachenGapTest";
 import { BERUFLICH_WEITERKOMMEN_GAP_TEST } from "@/lib/beruflichWeiterkommenGapTest";
+import { TOURISMUS_GAP_TEST } from "@/lib/tourismusGapTest";
+import { AKTIV_IM_HANDWERK_GAP_TEST } from "@/lib/aktivImHandwerkGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
@@ -348,7 +350,7 @@ function resolveSet(id: string): ResolvedSet | null {
 }
 
 export default function StudySetClient({ id }: { id: string }) {
-  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID || id === REISEANGEBOTE_SET_ID || id === VERTRAEGE_SET_ID || id === ANDERE_URLAUB_MACHEN_SET_ID || id === BERUFLICH_WEITERKOMMEN_SET_ID;
+  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID || id === REISEANGEBOTE_SET_ID || id === VERTRAEGE_SET_ID || id === ANDERE_URLAUB_MACHEN_SET_ID || id === BERUFLICH_WEITERKOMMEN_SET_ID || id === TOURISMUS_SET_ID || id === AKTIV_IM_HANDWERK_SET_ID;
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
@@ -818,7 +820,11 @@ export default function StudySetClient({ id }: { id: string }) {
                               ? ANDERE_URLAUB_MACHEN_GAP_TEST
                               : id === BERUFLICH_WEITERKOMMEN_SET_ID
                                 ? BERUFLICH_WEITERKOMMEN_GAP_TEST
-                                : REISEANGEBOTE_GAP_TEST
+                                : id === TOURISMUS_SET_ID
+                                  ? TOURISMUS_GAP_TEST
+                                  : id === AKTIV_IM_HANDWERK_SET_ID
+                                    ? AKTIV_IM_HANDWERK_GAP_TEST
+                                    : REISEANGEBOTE_GAP_TEST
                 }
                 words={practiceWords}
                 onCorrect={(wordId) => markCorrect("gaps", wordId)}
