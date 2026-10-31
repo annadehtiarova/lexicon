@@ -39,7 +39,7 @@ export default function GapsMode({
   const [input, setInput] = useState("");
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
   const [inputFocused, setInputFocused] = useState(false);
-  const sentenceCardRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const prompt = prompts[index];
   const sentenceParts = prompt?.sentence.split("______") ?? [];
   const gapAnswers = prompt?.displayAnswers ?? (prompt && sentenceParts.length > 2
@@ -55,17 +55,18 @@ export default function GapsMode({
     const keepSentenceVisible = () => {
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
-        const card = sentenceCardRef.current;
-        if (!card) return;
+        const field = inputRef.current;
+        if (!field) return;
 
         const viewport = window.visualViewport;
         const visibleTop = viewport?.offsetTop ?? 0;
         const visibleBottom = visibleTop + (viewport?.height ?? window.innerHeight);
-        const bounds = card.getBoundingClientRect();
-        const scrollDelta = bounds.top < visibleTop
-          ? bounds.top - visibleTop
-          : bounds.bottom > visibleBottom
-            ? bounds.bottom - visibleBottom
+        const bounds = field.getBoundingClientRect();
+        const margin = 20;
+        const scrollDelta = bounds.top < visibleTop + margin
+          ? bounds.top - visibleTop - margin
+          : bounds.bottom > visibleBottom - margin
+            ? bounds.bottom - visibleBottom + margin
             : 0;
 
         if (scrollDelta !== 0) window.scrollBy({ top: scrollDelta, behavior: "instant" });
@@ -126,7 +127,7 @@ export default function GapsMode({
         <span>{index + 1}/{prompts.length}</span>
       </div>
 
-      <div ref={sentenceCardRef} className="flex min-h-[158px] w-full flex-col items-center justify-center gap-3 border border-[#dce4bd] bg-[#f8fbdc] px-5 py-6 text-center">
+      <div className="flex min-h-[158px] w-full flex-col items-center justify-center gap-3 border border-[#dce4bd] bg-[#f8fbdc] px-5 py-6 text-center">
         {rewriteMode ? (
           <>
             <p className="font-body text-xs uppercase tracking-[2px] text-[#5d6f74]">
@@ -175,6 +176,7 @@ export default function GapsMode({
         }}
       >
         <input
+          ref={inputRef}
           autoComplete="off"
           value={input}
           onFocus={() => setInputFocused(true)}
