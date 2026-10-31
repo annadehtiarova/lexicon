@@ -31,11 +31,13 @@ import { THEMA1_SENTENCES_SET_ID, getThema1SentencesSet } from "@/lib/thema1Sent
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
+import GapsMode from "@/components/modes/GapsMode";
 import {
   ChevronLeftIcon,
   SparklesIcon,
   ListChecksIcon,
   GridIcon,
+  KeyboardIcon,
   TrashIcon,
   XIcon,
 } from "@/components/icons";
@@ -46,8 +48,9 @@ const MODES = [
   { key: "match", label: "Match", Icon: GridIcon },
 ] as const;
 
-type ModeKey = (typeof MODES)[number]["key"];
+type ModeKey = (typeof MODES)[number]["key"] | "gaps";
 const BATCH_SIZE = 15;
+const GAP_MODE = { key: "gaps", label: "Gap", Icon: KeyboardIcon } as const;
 
 interface ResolvedSet {
   name: string;
@@ -161,7 +164,9 @@ export default function StudySetClient({ id }: { id: string }) {
     );
     const progress = loadExerciseProgress(id);
     const requiredExercises: ExerciseKey[] =
-      id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"];
+      id === THEMA1_SENTENCES_SET_ID
+        ? ["cards", "gaps"]
+        : ["cards", "quiz", "match"];
     pendingProgressRef.current = progress;
     setExerciseProgress(progress);
     const savedBatchResult = loadLastBatchResult(id);
@@ -192,9 +197,11 @@ export default function StudySetClient({ id }: { id: string }) {
           ...word,
           german: displayGerman(word),
           english:
-            word.pos === "verb" && !word.english.toLowerCase().startsWith("to ")
-              ? `to ${word.english.toLowerCase()}`
-              : word.english.toLowerCase(),
+            id === THEMA1_SENTENCES_SET_ID
+              ? word.english
+              : word.pos === "verb" && !word.english.toLowerCase().startsWith("to ")
+                ? `to ${word.english.toLowerCase()}`
+                : word.english.toLowerCase(),
         });
       }
       return [...uniqueWords.values()];
@@ -232,7 +239,9 @@ export default function StudySetClient({ id }: { id: string }) {
         isWordMastered(
           word.id,
           next,
-          id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"],
+          id === THEMA1_SENTENCES_SET_ID
+            ? ["cards", "gaps"]
+            : ["cards", "quiz", "match"],
         ),
       );
     const masteredWordIds = new Set(masteredWords.map((word) => word.id));
@@ -271,7 +280,9 @@ export default function StudySetClient({ id }: { id: string }) {
     setCompletedModes(nextCompleted);
 
     const sequence: ModeKey[] =
-      id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"];
+      id === THEMA1_SENTENCES_SET_ID
+        ? ["cards", "gaps"]
+        : ["cards", "quiz", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
@@ -321,8 +332,9 @@ export default function StudySetClient({ id }: { id: string }) {
   }));
   const visibleModes =
     id === THEMA1_SENTENCES_SET_ID
-      ? MODES.filter(({ key }) => key === "cards")
+      ? [...MODES.filter(({ key }) => key === "cards"), GAP_MODE]
       : MODES;
+  const isSentenceSet = id === THEMA1_SENTENCES_SET_ID;
 
   if (set === undefined || practiceWordIds === null) return null;
 
@@ -571,6 +583,22 @@ export default function StudySetClient({ id }: { id: string }) {
               </div>
             )}
 
+            {mode === "gaps" && id === THEMA1_SENTENCES_SET_ID && (
+              <GapsMode
+                key={`gaps-${practiceBatch}-${exerciseRevision}`}
+                questions={practiceWords.map((word) => ({
+                  sentence: "",
+                  translation: word.german,
+                  answer: word.english,
+                  wordId: word.id,
+                }))}
+                words={practiceWords}
+                onCorrect={(wordId) => markCorrect("gaps", wordId)}
+                onBatchComplete={() => completeModeBatch("gaps")}
+                rewriteMode
+              />
+            )}
+
           </div>
         </div>
         )}
@@ -663,24 +691,24 @@ export default function StudySetClient({ id }: { id: string }) {
           </div>
 
           <div className="mt-4 overflow-x-auto rounded-xl border border-[#dce4bd] bg-white">
-            {words.some((word) => word.b1) && (
-              <div className="grid min-w-130 grid-cols-3 gap-3 border-b border-[#d5ddd7] bg-[#f8fbdc] px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[#5d6f74]">
+            {(isSentenceSet || words.some((word) => word.b1)) && (
+              <div className={`grid min-w-130 ${isSentenceSet ? "grid-cols-2" : "grid-cols-3"} gap-3 border-b border-[#d5ddd7] bg-[#f8fbdc] px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[#5d6f74]`}>
                 <span>B1</span>
                 <span>B2</span>
-                <span>English</span>
+                {!isSentenceSet && <span>English</span>}
               </div>
             )}
             {visibleWords.map((word, i) => (
               <div
                 key={word.id}
-                className={`${word.b1 ? "grid min-w-130 grid-cols-3 items-center gap-3" : "flex items-center justify-between gap-4"} px-3 py-2.5 ${
+                className={`${isSentenceSet ? "grid min-w-130 grid-cols-2 items-center gap-3" : word.b1 ? "grid min-w-130 grid-cols-3 items-center gap-3" : "flex items-center justify-between gap-4"} px-3 py-2.5 ${
                   i !== visibleWords.length - 1
                     ? "border-b border-[#d5ddd7]"
                     : ""
                 }`}
               >
                 {editingWordId === word.id ? (
-                  <div className={`${word.b1 ? "col-span-3 " : ""}flex w-full flex-col gap-3`}>
+                  <div className={`${isSentenceSet ? "col-span-2 " : word.b1 ? "col-span-3 " : ""}flex w-full flex-col gap-3`}>
                     <input
                       value={draftGerman}
                       onChange={(event) => setDraftGerman(event.target.value)}
@@ -751,9 +779,36 @@ export default function StudySetClient({ id }: { id: string }) {
                   </div>
                 ) : (
                   <>
-                    {word.b1 && (
+                    {isSentenceSet ? (
+                      <button
+                        type="button"
+                        onClick={() => startEditing(word)}
+                        className="text-left text-sm text-[#5d6f74]"
+                      >
+                        {word.german}
+                      </button>
+                    ) : word.b1 ? (
                       <p className="text-sm text-[#5d6f74]">{word.b1}</p>
-                    )}
+                    ) : null}
+                    {isSentenceSet ? (
+                      <div className="flex min-w-0 items-start justify-between gap-3">
+                        <button
+                          type="button"
+                          onClick={() => startEditing(word)}
+                          className="font-body min-w-0 text-left text-sm text-black"
+                        >
+                          {word.english}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteWord(word.id)}
+                          className="shrink-0 rounded-full p-1.5 text-[#5d6f74] hover:bg-[#eef1ff] hover:text-[#263fd6]"
+                          aria-label={`Delete ${word.german}`}
+                        >
+                          <TrashIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <>
                     <div className="flex items-start gap-2">
                       {masteredIds.has(word.id) && (
                         <span
@@ -803,6 +858,8 @@ export default function StudySetClient({ id }: { id: string }) {
                         <TrashIcon className="h-4 w-4" />
                       </button>
                     </div>
+                    </>
+                    )}
                   </>
                 )}
               </div>

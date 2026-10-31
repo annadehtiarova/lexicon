@@ -18,13 +18,20 @@ interface GapsModeProps {
   words: VocabWord[];
   onCorrect: (id: string) => void;
   onBatchComplete: () => void;
+  rewriteMode?: boolean;
 }
 
 function normalize(text: string) {
   return text.trim().toLowerCase();
 }
 
-export default function GapsMode({ questions, words, onCorrect, onBatchComplete }: GapsModeProps) {
+export default function GapsMode({
+  questions,
+  words,
+  onCorrect,
+  onBatchComplete,
+  rewriteMode = false,
+}: GapsModeProps) {
   const prompts = questions.filter((prompt) =>
     words.some((word) => word.id === prompt.wordId),
   );
@@ -115,29 +122,48 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
   return (
     <div className="flex flex-col gap-4 pt-3">
       <div className="flex w-full items-center justify-between text-xs text-[#5d6f74]">
-        <span>FILL IN THE GAP</span>
+        <span>{rewriteMode ? "WRITE THE B2 SENTENCE" : "FILL IN THE GAP"}</span>
         <span>{index + 1}/{prompts.length}</span>
       </div>
 
       <div ref={sentenceCardRef} className="flex min-h-[158px] w-full flex-col items-center justify-center gap-3 border border-[#dce4bd] bg-[#f8fbdc] px-5 py-6 text-center">
-        <p className="font-heading text-xl text-[#172b35]">
-          {sentenceParts.map((part, partIndex) => (
-            <Fragment key={partIndex}>
-              {part}
-              {partIndex < sentenceParts.length - 1 && (
-                <span
-                  className="inline-block border-b-2 border-[#263fd6] px-1 text-center align-baseline"
-                  style={{ minWidth: `${Math.max(5, (gapAnswers[partIndex] ?? prompt.answer).length)}ch` }}
-                >
-                  {result
-                    ? gapAnswers[partIndex] ?? prompt.answer
-                    : " "}
-                </span>
-              )}
-            </Fragment>
-          ))}
-        </p>
-        <p className="font-body text-sm text-[#5d6f74]">{prompt.translation}</p>
+        {rewriteMode ? (
+          <>
+            <p className="font-body text-xs uppercase tracking-[2px] text-[#5d6f74]">
+              B1 sentence
+            </p>
+            <p className="font-heading text-lg text-[#172b35]">{prompt.translation}</p>
+            <div className="border-t border-[#dce4bd] pt-3">
+              <p className="font-body text-xs uppercase tracking-[2px] text-[#5d6f74]">
+                B2 sentence
+              </p>
+              <p className="mt-1 text-sm text-[#172b35]">
+                {result ? prompt.answer : "Write the upgraded sentence below"}
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="font-heading text-xl text-[#172b35]">
+              {sentenceParts.map((part, partIndex) => (
+                <Fragment key={partIndex}>
+                  {part}
+                  {partIndex < sentenceParts.length - 1 && (
+                    <span
+                      className="inline-block border-b-2 border-[#263fd6] px-1 text-center align-baseline"
+                      style={{ minWidth: `${Math.max(5, (gapAnswers[partIndex] ?? prompt.answer).length)}ch` }}
+                    >
+                      {result
+                        ? gapAnswers[partIndex] ?? prompt.answer
+                        : " "}
+                    </span>
+                  )}
+                </Fragment>
+              ))}
+            </p>
+            <p className="font-body text-sm text-[#5d6f74]">{prompt.translation}</p>
+          </>
+        )}
       </div>
 
       <form
@@ -157,9 +183,9 @@ export default function GapsMode({ questions, words, onCorrect, onBatchComplete 
             setInput(event.target.value);
             if (result === "incorrect") setResult(null);
           }}
-          placeholder="Type the missing German word or phrase"
+          placeholder={rewriteMode ? "Write the B2 sentence" : "Type the missing German word or phrase"}
           disabled={result === "correct"}
-          aria-label="Missing German word or phrase"
+          aria-label={rewriteMode ? "B2 sentence" : "Missing German word or phrase"}
           className={`h-11 w-full rounded-xl border bg-white px-4 text-sm text-[#172b35] outline-none placeholder:text-[#5d6f74] ${result === "incorrect" ? "border-[#c33d32] focus:border-[#c33d32]" : "border-[#b8c8c9] focus:border-[#263fd6]"}`}
         />
 

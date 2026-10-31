@@ -40,7 +40,7 @@ function withBuiltInProgress(set: StudySet): StudySet {
     masteredWordIds: loadMasteredWordIds(
       set.id,
       words,
-      set.id === THEMA1_SENTENCES_SET_ID ? ["cards"] : undefined,
+      set.id === THEMA1_SENTENCES_SET_ID ? ["cards", "gaps"] : undefined,
     ),
   };
 }
