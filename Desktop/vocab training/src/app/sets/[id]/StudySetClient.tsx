@@ -24,70 +24,14 @@ import {
 } from "@/lib/storage";
 import { VocabWord } from "@/lib/types";
 import { displayGerman } from "@/lib/wordDisplay";
-import {
-  ARBEITSRAEUME_SET_ID,
-  getArbeitsraeumeSet,
-} from "@/lib/arbeitsraeumeData";
-import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
-import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
-import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
-import {
-  EMAIL_HAUSVERWALTUNG_SET_ID,
-  getEmailHausverwaltungSet,
-} from "@/lib/emailHausverwaltungData";
-import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
-import { SPAETI_SET_ID, getSpaetiSet } from "@/lib/spaetiData";
-import {
-  GESPRAECH_MEHMET_SET_ID,
-  getGespraechMehmetSet,
-} from "@/lib/gespraechMitMehmetData";
-import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
-import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
-import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
-import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
-import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
-import { TEAMROLLE_SET_ID, getTeamrolleSet } from "@/lib/teamrolleData";
-import { REISEANGEBOTE_SET_ID, getReiseangeboteSet } from "@/lib/reiseangeboteData";
-import { VERTRAEGE_SET_ID, getVertraegeSet } from "@/lib/vertraegeData";
-import {
-  ANDERE_URLAUB_MACHEN_SET_ID,
-  getAndereUrlaubMachenSet,
-} from "@/lib/andereUrlaubMachenData";
-import {
-  BERUFLICH_WEITERKOMMEN_SET_ID,
-  getBeruflichWeiterkommenSet,
-} from "@/lib/beruflichWeiterkommenData";
-import {
-  AKTIV_IM_HANDWERK_SET_ID,
-  getAktivImHandwerkSet,
-} from "@/lib/aktivImHandwerkData";
-import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
-import { KAPITEL3_SET_ID, getKapitel3Set } from "@/lib/kapitel3Data";
-import { MEIN_EIGENER_LADEN_SET_ID, getMeinEigenerLadenSet } from "@/lib/meinEigenerLadenData";
-import { HIER_ARBEITE_ICH_SET_ID, getHierArbeiteIchSet } from "@/lib/hierArbeiteIchData";
 import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
-import GapsMode from "@/components/modes/GapsMode";
-import { TEAMARBEIT_GAP_TEST, TEAMARBEIT_GAP_WORD_IDS } from "@/lib/teamarbeitGapTest";
-import { PROTOKOLL_GAP_TEST, PROTOKOLL_GAP_WORD_IDS } from "@/lib/protokollGapTest";
-import { TEAMGESPRÄCH_GAP_TEST } from "@/lib/teamgespraechGapTest";
-import { TEAMROLLE_GAP_TEST } from "@/lib/teamrolleGapTest";
-import { REISEANGEBOTE_GAP_TEST } from "@/lib/reiseangeboteGapTest";
-import { VERTRAEGE_GAP_TEST } from "@/lib/vertraegeGapTest";
-import { ANDERE_URLAUB_MACHEN_GAP_TEST } from "@/lib/andereUrlaubMachenGapTest";
-import { BERUFLICH_WEITERKOMMEN_GAP_TEST } from "@/lib/beruflichWeiterkommenGapTest";
-import { TOURISMUS_GAP_TEST } from "@/lib/tourismusGapTest";
-import { AKTIV_IM_HANDWERK_GAP_TEST } from "@/lib/aktivImHandwerkGapTest";
-import { KAPITEL3_GAP_TEST } from "@/lib/kapitel3GapTest";
-import { MEIN_EIGENER_LADEN_GAP_TEST } from "@/lib/meinEigenerLadenGapTest";
-import { HIER_ARBEITE_ICH_GAP_TEST } from "@/lib/hierArbeiteIchGapTest";
 import {
   ChevronLeftIcon,
   SparklesIcon,
   ListChecksIcon,
-  KeyboardIcon,
   GridIcon,
   TrashIcon,
   XIcon,
@@ -97,7 +41,6 @@ const MODES = [
   { key: "cards", label: "Cards", Icon: SparklesIcon },
   { key: "quiz", label: "Quiz", Icon: ListChecksIcon },
   { key: "match", label: "Match", Icon: GridIcon },
-  { key: "gaps", label: "Gaps", Icon: KeyboardIcon },
 ] as const;
 
 type ModeKey = (typeof MODES)[number]["key"];
@@ -111,236 +54,6 @@ interface ResolvedSet {
 }
 
 function resolveSet(id: string): ResolvedSet | null {
-  if (id === ARBEITSRAEUME_SET_ID) {
-    const builtInSet = getArbeitsraeumeSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === UMZUG_SET_ID) {
-    const builtInSet = getUmzugSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === ADILS_JOB_SET_ID) {
-    const builtInSet = getAdilsJobSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === PROBLEM_SET_ID) {
-    const builtInSet = getProblemSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === EMAIL_HAUSVERWALTUNG_SET_ID) {
-    const builtInSet = getEmailHausverwaltungSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === AUSDRUECKE_SET_ID) {
-    const builtInSet = getAusdrueckeSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === SPAETI_SET_ID) {
-    const builtInSet = getSpaetiSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === GESPRAECH_MEHMET_SET_ID) {
-    const builtInSet = getGespraechMehmetSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === BEITRAEGE_SET_ID) {
-    const builtInSet = getBeitraegeSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === DIENSTPLAN_SET_ID) {
-    const builtInSet = getDienstplanSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === TEAMARBEIT_SET_ID) {
-    const builtInSet = getTeamarbeitSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === PROTOKOLL_SET_ID) {
-    const builtInSet = getProtokollSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === TEAMGESPRÄCH_SET_ID) {
-    const builtInSet = getTeamgesprächSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === TEAMROLLE_SET_ID) {
-    const builtInSet = getTeamrolleSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === REISEANGEBOTE_SET_ID) {
-    const builtInSet = getReiseangeboteSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === VERTRAEGE_SET_ID) {
-    const builtInSet = getVertraegeSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === ANDERE_URLAUB_MACHEN_SET_ID) {
-    const builtInSet = getAndereUrlaubMachenSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === BERUFLICH_WEITERKOMMEN_SET_ID) {
-    const builtInSet = getBeruflichWeiterkommenSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === AKTIV_IM_HANDWERK_SET_ID) {
-    const builtInSet = getAktivImHandwerkSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === TOURISMUS_SET_ID) {
-    const builtInSet = getTourismusSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === KAPITEL3_SET_ID) {
-    const builtInSet = getKapitel3Set();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === MEIN_EIGENER_LADEN_SET_ID) {
-    const builtInSet = getMeinEigenerLadenSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
-  if (id === HIER_ARBEITE_ICH_SET_ID) {
-    const builtInSet = getHierArbeiteIchSet();
-    return {
-      name: builtInSet.name,
-      words: builtInSet.words,
-      masteredWordIds: [],
-      isPersisted: false,
-    };
-  }
-
   if (id === THEMA1_VERBS_SET_ID) {
     const builtInSet = getThema1VerbsSet();
     return {
@@ -364,7 +77,6 @@ function resolveSet(id: string): ResolvedSet | null {
 }
 
 export default function StudySetClient({ id }: { id: string }) {
-  const hasGapExercise = id === TEAMARBEIT_SET_ID || id === PROTOKOLL_SET_ID || id === TEAMGESPRÄCH_SET_ID || id === TEAMROLLE_SET_ID || id === REISEANGEBOTE_SET_ID || id === VERTRAEGE_SET_ID || id === ANDERE_URLAUB_MACHEN_SET_ID || id === BERUFLICH_WEITERKOMMEN_SET_ID || id === TOURISMUS_SET_ID || id === AKTIV_IM_HANDWERK_SET_ID || id === KAPITEL3_SET_ID || id === MEIN_EIGENER_LADEN_SET_ID || id === HIER_ARBEITE_ICH_SET_ID;
   const [set, setSet] = useState<ResolvedSet | null | undefined>(undefined);
   const [mode, setMode] = useState<ModeKey>("cards");
   const [practiceBatch, setPracticeBatch] = useState(0);
@@ -517,9 +229,7 @@ export default function StudySetClient({ id }: { id: string }) {
     nextCompleted.add(completedMode);
     setCompletedModes(nextCompleted);
 
-    const sequence: ModeKey[] = hasGapExercise
-      ? ["cards", "quiz", "match", "gaps"]
-      : ["cards", "quiz", "match"];
+    const sequence: ModeKey[] = ["cards", "quiz", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
@@ -567,9 +277,7 @@ export default function StudySetClient({ id }: { id: string }) {
     count: practiceWords.filter((word) => exerciseProgress[key].includes(word.id)).length,
     complete: completedModes.has(key),
   }));
-  const visibleModes = MODES.filter(
-    ({ key }) => key !== "gaps" || hasGapExercise,
-  );
+  const visibleModes = MODES;
 
   if (set === undefined || practiceWordIds === null) return null;
 
@@ -816,41 +524,6 @@ export default function StudySetClient({ id }: { id: string }) {
               </div>
             )}
 
-            {mode === "gaps" && hasGapExercise && (
-              <GapsMode
-                key={`gaps-${practiceBatch}-${exerciseRevision}`}
-                questions={
-                  id === TEAMARBEIT_SET_ID
-                    ? TEAMARBEIT_GAP_TEST
-                    : id === PROTOKOLL_SET_ID
-                      ? PROTOKOLL_GAP_TEST
-                      : id === TEAMGESPRÄCH_SET_ID
-                        ? TEAMGESPRÄCH_GAP_TEST
-                        : id === TEAMROLLE_SET_ID
-                          ? TEAMROLLE_GAP_TEST
-                          : id === VERTRAEGE_SET_ID
-                            ? VERTRAEGE_GAP_TEST
-                            : id === ANDERE_URLAUB_MACHEN_SET_ID
-                              ? ANDERE_URLAUB_MACHEN_GAP_TEST
-                              : id === BERUFLICH_WEITERKOMMEN_SET_ID
-                                ? BERUFLICH_WEITERKOMMEN_GAP_TEST
-                                : id === TOURISMUS_SET_ID
-                                  ? TOURISMUS_GAP_TEST
-                                  : id === AKTIV_IM_HANDWERK_SET_ID
-                                    ? AKTIV_IM_HANDWERK_GAP_TEST
-                                    : id === KAPITEL3_SET_ID
-                                      ? KAPITEL3_GAP_TEST
-                                      : id === MEIN_EIGENER_LADEN_SET_ID
-                                        ? MEIN_EIGENER_LADEN_GAP_TEST
-                                        : id === HIER_ARBEITE_ICH_SET_ID
-                                          ? HIER_ARBEITE_ICH_GAP_TEST
-                                          : REISEANGEBOTE_GAP_TEST
-                }
-                words={practiceWords}
-                onCorrect={(wordId) => markCorrect("gaps", wordId)}
-                onBatchComplete={() => completeModeBatch("gaps")}
-              />
-            )}
           </div>
         </div>
         )}

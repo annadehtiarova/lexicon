@@ -1,56 +1,8 @@
 import StudySetClient from "./StudySetClient";
-import { ARBEITSRAEUME_SET_ID } from "@/lib/arbeitsraeumeData";
-import { UMZUG_SET_ID } from "@/lib/umzugData";
-import { ADILS_JOB_SET_ID } from "@/lib/adilsJobData";
-import { PROBLEM_SET_ID } from "@/lib/problemData";
-import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
-import { AUSDRUECKE_SET_ID } from "@/lib/ausdrueckeData";
-import { SPAETI_SET_ID } from "@/lib/spaetiData";
-import { GESPRAECH_MEHMET_SET_ID } from "@/lib/gespraechMitMehmetData";
-import { BEITRAEGE_SET_ID } from "@/lib/beitraegeData";
-import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
-import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
-import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
-import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
-import { TEAMROLLE_SET_ID } from "@/lib/teamrolleData";
-import { REISEANGEBOTE_SET_ID } from "@/lib/reiseangeboteData";
-import { VERTRAEGE_SET_ID } from "@/lib/vertraegeData";
-import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
-import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
-import { AKTIV_IM_HANDWERK_SET_ID } from "@/lib/aktivImHandwerkData";
-import { TOURISMUS_SET_ID } from "@/lib/tourismusData";
-import { KAPITEL3_SET_ID } from "@/lib/kapitel3Data";
-import { MEIN_EIGENER_LADEN_SET_ID } from "@/lib/meinEigenerLadenData";
-import { HIER_ARBEITE_ICH_SET_ID } from "@/lib/hierArbeiteIchData";
 import { THEMA1_VERBS_SET_ID } from "@/lib/thema1VerbsData";
 
 export function generateStaticParams() {
-  return [
-    { id: ARBEITSRAEUME_SET_ID },
-    { id: UMZUG_SET_ID },
-    { id: ADILS_JOB_SET_ID },
-    { id: PROBLEM_SET_ID },
-    { id: EMAIL_HAUSVERWALTUNG_SET_ID },
-    { id: AUSDRUECKE_SET_ID },
-    { id: SPAETI_SET_ID },
-    { id: GESPRAECH_MEHMET_SET_ID },
-    { id: BEITRAEGE_SET_ID },
-    { id: DIENSTPLAN_SET_ID },
-    { id: TEAMARBEIT_SET_ID },
-    { id: PROTOKOLL_SET_ID },
-    { id: TEAMGESPRÄCH_SET_ID },
-    { id: TEAMROLLE_SET_ID },
-    { id: REISEANGEBOTE_SET_ID },
-    { id: VERTRAEGE_SET_ID },
-    { id: ANDERE_URLAUB_MACHEN_SET_ID },
-    { id: BERUFLICH_WEITERKOMMEN_SET_ID },
-    { id: AKTIV_IM_HANDWERK_SET_ID },
-    { id: TOURISMUS_SET_ID },
-    { id: KAPITEL3_SET_ID },
-    { id: MEIN_EIGENER_LADEN_SET_ID },
-    { id: HIER_ARBEITE_ICH_SET_ID },
-    { id: THEMA1_VERBS_SET_ID },
-  ];
+  return [{ id: THEMA1_VERBS_SET_ID }];
 }
 
 export default async function StudySetPage({

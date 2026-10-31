@@ -7,74 +7,11 @@ import {
   LayersIcon,
   BookOpenIcon,
   CameraIcon,
-  ChevronDownIcon,
   TrashIcon,
 } from "@/components/icons";
-import { ARBEITSRAEUME_SET_ID } from "@/lib/arbeitsraeumeData";
-import { UMZUG_SET_ID } from "@/lib/umzugData";
-import { ADILS_JOB_SET_ID } from "@/lib/adilsJobData";
-import { PROBLEM_SET_ID } from "@/lib/problemData";
-import { EMAIL_HAUSVERWALTUNG_SET_ID } from "@/lib/emailHausverwaltungData";
-import { AUSDRUECKE_SET_ID } from "@/lib/ausdrueckeData";
-import { SPAETI_SET_ID } from "@/lib/spaetiData";
-import { GESPRAECH_MEHMET_SET_ID } from "@/lib/gespraechMitMehmetData";
-import { BEITRAEGE_SET_ID } from "@/lib/beitraegeData";
-import { DIENSTPLAN_SET_ID } from "@/lib/dienstplanData";
-import { TEAMARBEIT_SET_ID } from "@/lib/teamarbeitData";
-import { PROTOKOLL_SET_ID } from "@/lib/protokollData";
-import { TEAMGESPRÄCH_SET_ID } from "@/lib/teamgespraechData";
-import { TEAMROLLE_SET_ID } from "@/lib/teamrolleData";
-import { REISEANGEBOTE_SET_ID } from "@/lib/reiseangeboteData";
-import { VERTRAEGE_SET_ID } from "@/lib/vertraegeData";
-import { ANDERE_URLAUB_MACHEN_SET_ID } from "@/lib/andereUrlaubMachenData";
-import { BERUFLICH_WEITERKOMMEN_SET_ID } from "@/lib/beruflichWeiterkommenData";
-import { AKTIV_IM_HANDWERK_SET_ID } from "@/lib/aktivImHandwerkData";
-import { TOURISMUS_SET_ID } from "@/lib/tourismusData";
-import { KAPITEL3_SET_ID } from "@/lib/kapitel3Data";
-import { MEIN_EIGENER_LADEN_SET_ID } from "@/lib/meinEigenerLadenData";
-import { HIER_ARBEITE_ICH_SET_ID } from "@/lib/hierArbeiteIchData";
 import { THEMA1_VERBS_SET_ID } from "@/lib/thema1VerbsData";
 
-const BUILT_IN_SET_IDS = new Set([
-  ARBEITSRAEUME_SET_ID,
-  UMZUG_SET_ID,
-  ADILS_JOB_SET_ID,
-  PROBLEM_SET_ID,
-  EMAIL_HAUSVERWALTUNG_SET_ID,
-  AUSDRUECKE_SET_ID,
-  SPAETI_SET_ID,
-  GESPRAECH_MEHMET_SET_ID,
-  BEITRAEGE_SET_ID,
-  DIENSTPLAN_SET_ID,
-  TEAMARBEIT_SET_ID,
-  PROTOKOLL_SET_ID,
-  TEAMGESPRÄCH_SET_ID,
-  TEAMROLLE_SET_ID,
-  REISEANGEBOTE_SET_ID,
-  VERTRAEGE_SET_ID,
-  ANDERE_URLAUB_MACHEN_SET_ID,
-  BERUFLICH_WEITERKOMMEN_SET_ID,
-  AKTIV_IM_HANDWERK_SET_ID,
-  TOURISMUS_SET_ID,
-  KAPITEL3_SET_ID,
-  MEIN_EIGENER_LADEN_SET_ID,
-  HIER_ARBEITE_ICH_SET_ID,
-  THEMA1_VERBS_SET_ID,
-]);
-
-const SELECTED_CHAPTER_KEY = "lexikon.selectedChapter";
-
-function loadSelectedChapter() {
-  if (typeof window === "undefined") return "1";
-  try {
-    const savedChapter = window.localStorage.getItem(SELECTED_CHAPTER_KEY);
-    return savedChapter && Number(savedChapter) >= 1 && Number(savedChapter) <= 16
-      ? savedChapter
-      : "1";
-  } catch {
-    return "1";
-  }
-}
+const BUILT_IN_SET_IDS = new Set([THEMA1_VERBS_SET_ID]);
 
 interface SetsListProps {
   sets: StudySet[];
@@ -89,23 +26,7 @@ export default function SetsList({
   onToggleUpload,
   uploadOpen,
 }: SetsListProps) {
-  const [selectedChapter, setSelectedChapter] = useState(loadSelectedChapter);
-  const changeChapter = (chapter: string) => {
-    setSelectedChapter(chapter);
-    try {
-      window.localStorage.setItem(SELECTED_CHAPTER_KEY, chapter);
-    } catch {
-      // Keep the selection for this page even when storage is unavailable.
-    }
-  };
-  const populatedChapters = new Set(
-    sets.flatMap((set) => set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1] ?? []),
-  );
-  const visibleSets = sets.filter((set) => {
-    const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
-    if (chapter) return chapter === selectedChapter;
-    return !BUILT_IN_SET_IDS.has(set.id) || set.id === THEMA1_VERBS_SET_ID;
-  });
+  const visibleSets = sets;
 
   return (
     <div className="w-full max-w-[760px] border-t-[3px] border-[#263fd6] pt-3.5">
@@ -130,37 +51,13 @@ export default function SetsList({
             <p className="font-body text-xs text-[#5d6f74]">
               {visibleSets.length} sets
             </p>
-            <label className="flex items-center">
-              <span className="relative block">
-                <select
-                  value={selectedChapter}
-                  onChange={(event) => changeChapter(event.target.value)}
-                  className="h-9 w-[120px] appearance-none rounded-full border border-[#263fd6] bg-white pl-4 pr-7 text-sm text-[#172b35] outline-none focus:border-[#1d2fb5]"
-                  aria-label="Filter by chapter"
-                >
-                  {Array.from({ length: 16 }, (_, index) => {
-                    const chapter = String(index + 1);
-                    return (
-                      <option
-                        key={chapter}
-                        value={chapter}
-                        disabled={!populatedChapters.has(chapter)}
-                      >
-                        Kapitel {chapter}
-                      </option>
-                    );
-                  })}
-                </select>
-                <ChevronDownIcon className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#263fd6]" />
-              </span>
-            </label>
           </div>
         )}
       </div>
 
       {visibleSets.length === 0 ? (
         <div className="mt-5 border border-dashed border-[#9bb8bc] bg-white py-10 text-center text-[#5d6f74]">
-          No sets found in this chapter.
+          No sets found.
         </div>
       ) : (
         <ul className="mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2">

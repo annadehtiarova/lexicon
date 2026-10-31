@@ -9,102 +9,15 @@ import {
   loadMasteredWordIds,
   loadBuiltInWords,
   loadSets,
+  saveSets,
 } from "@/lib/storage";
 import { extractVocabFromImages } from "@/lib/extractVocab";
 import { StudySet } from "@/lib/types";
-import { ARBEITSRAEUME_SET_ID, getArbeitsraeumeSet } from "@/lib/arbeitsraeumeData";
-import { UMZUG_SET_ID, getUmzugSet } from "@/lib/umzugData";
-import { ADILS_JOB_SET_ID, getAdilsJobSet } from "@/lib/adilsJobData";
-import { PROBLEM_SET_ID, getProblemSet } from "@/lib/problemData";
-import {
-  EMAIL_HAUSVERWALTUNG_SET_ID,
-  getEmailHausverwaltungSet,
-} from "@/lib/emailHausverwaltungData";
-import { AUSDRUECKE_SET_ID, getAusdrueckeSet } from "@/lib/ausdrueckeData";
-import { SPAETI_SET_ID, getSpaetiSet } from "@/lib/spaetiData";
-import {
-  GESPRAECH_MEHMET_SET_ID,
-  getGespraechMehmetSet,
-} from "@/lib/gespraechMitMehmetData";
-import { BEITRAEGE_SET_ID, getBeitraegeSet } from "@/lib/beitraegeData";
-import { DIENSTPLAN_SET_ID, getDienstplanSet } from "@/lib/dienstplanData";
-import { TEAMARBEIT_SET_ID, getTeamarbeitSet } from "@/lib/teamarbeitData";
-import { PROTOKOLL_SET_ID, getProtokollSet } from "@/lib/protokollData";
-import { TEAMGESPRÄCH_SET_ID, getTeamgesprächSet } from "@/lib/teamgespraechData";
-import { TEAMROLLE_SET_ID, getTeamrolleSet } from "@/lib/teamrolleData";
-import { REISEANGEBOTE_SET_ID, getReiseangeboteSet } from "@/lib/reiseangeboteData";
-import { VERTRAEGE_SET_ID, getVertraegeSet } from "@/lib/vertraegeData";
-import {
-  ANDERE_URLAUB_MACHEN_SET_ID,
-  getAndereUrlaubMachenSet,
-} from "@/lib/andereUrlaubMachenData";
-import {
-  BERUFLICH_WEITERKOMMEN_SET_ID,
-  getBeruflichWeiterkommenSet,
-} from "@/lib/beruflichWeiterkommenData";
-import {
-  AKTIV_IM_HANDWERK_SET_ID,
-  getAktivImHandwerkSet,
-} from "@/lib/aktivImHandwerkData";
-import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
-import { KAPITEL3_SET_ID, getKapitel3Set } from "@/lib/kapitel3Data";
-import { MEIN_EIGENER_LADEN_SET_ID, getMeinEigenerLadenSet } from "@/lib/meinEigenerLadenData";
-import { HIER_ARBEITE_ICH_SET_ID, getHierArbeiteIchSet } from "@/lib/hierArbeiteIchData";
 import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
 
-const BUILT_IN_SET_IDS = new Set([
-  ARBEITSRAEUME_SET_ID,
-  UMZUG_SET_ID,
-  ADILS_JOB_SET_ID,
-  PROBLEM_SET_ID,
-  EMAIL_HAUSVERWALTUNG_SET_ID,
-  AUSDRUECKE_SET_ID,
-  SPAETI_SET_ID,
-  GESPRAECH_MEHMET_SET_ID,
-  BEITRAEGE_SET_ID,
-  DIENSTPLAN_SET_ID,
-  TEAMARBEIT_SET_ID,
-  PROTOKOLL_SET_ID,
-  TEAMGESPRÄCH_SET_ID,
-  TEAMROLLE_SET_ID,
-  REISEANGEBOTE_SET_ID,
-  VERTRAEGE_SET_ID,
-  ANDERE_URLAUB_MACHEN_SET_ID,
-  BERUFLICH_WEITERKOMMEN_SET_ID,
-  AKTIV_IM_HANDWERK_SET_ID,
-  TOURISMUS_SET_ID,
-  KAPITEL3_SET_ID,
-  MEIN_EIGENER_LADEN_SET_ID,
-  HIER_ARBEITE_ICH_SET_ID,
-  THEMA1_VERBS_SET_ID,
-]);
+const BUILT_IN_SET_IDS = new Set([THEMA1_VERBS_SET_ID]);
 
-const BUILT_IN_SETS = [
-  getArbeitsraeumeSet(),
-  getUmzugSet(),
-  getAdilsJobSet(),
-  getProblemSet(),
-  getEmailHausverwaltungSet(),
-  getAusdrueckeSet(),
-  getSpaetiSet(),
-  getGespraechMehmetSet(),
-  getBeitraegeSet(),
-  getDienstplanSet(),
-  getTeamarbeitSet(),
-  getProtokollSet(),
-  getTeamgesprächSet(),
-  getTeamrolleSet(),
-  getReiseangeboteSet(),
-  getVertraegeSet(),
-  getAndereUrlaubMachenSet(),
-  getBeruflichWeiterkommenSet(),
-  getAktivImHandwerkSet(),
-  getTourismusSet(),
-  getKapitel3Set(),
-  getMeinEigenerLadenSet(),
-  getHierArbeiteIchSet(),
-  getThema1VerbsSet(),
-];
+const BUILT_IN_SETS = [getThema1VerbsSet()];
 
 function withBuiltInProgress(set: StudySet): StudySet {
   const words = loadBuiltInWords(set.id, set.words);
@@ -122,12 +35,20 @@ export default function Home() {
 
   useEffect(() => {
     const builtInSets = BUILT_IN_SETS.map(withBuiltInProgress);
-    const customSets = loadSets()
-      .filter((set) => !BUILT_IN_SET_IDS.has(set.id))
+    const savedSets = loadSets();
+    const customSets = savedSets
+      .filter(
+        (set) =>
+          !BUILT_IN_SET_IDS.has(set.id) &&
+          !/\bKapitel\s+\d+\b/i.test(set.name),
+      )
       .map((set) => ({
         ...set,
         masteredWordIds: loadMasteredWordIds(set.id, set.words),
       }));
+    if (customSets.length !== savedSets.length) {
+      saveSets(customSets);
+    }
     setSets([...builtInSets, ...customSets]);
   }, []);
 
