@@ -50,6 +50,7 @@ import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
 import { KAPITEL3_SET_ID, getKapitel3Set } from "@/lib/kapitel3Data";
 import { MEIN_EIGENER_LADEN_SET_ID, getMeinEigenerLadenSet } from "@/lib/meinEigenerLadenData";
 import { HIER_ARBEITE_ICH_SET_ID, getHierArbeiteIchSet } from "@/lib/hierArbeiteIchData";
+import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -75,6 +76,7 @@ const BUILT_IN_SET_IDS = new Set([
   KAPITEL3_SET_ID,
   MEIN_EIGENER_LADEN_SET_ID,
   HIER_ARBEITE_ICH_SET_ID,
+  THEMA1_VERBS_SET_ID,
 ]);
 
 const BUILT_IN_SETS = [
@@ -101,6 +103,7 @@ const BUILT_IN_SETS = [
   getKapitel3Set(),
   getMeinEigenerLadenSet(),
   getHierArbeiteIchSet(),
+  getThema1VerbsSet(),
 ];
 
 function withBuiltInProgress(set: StudySet): StudySet {

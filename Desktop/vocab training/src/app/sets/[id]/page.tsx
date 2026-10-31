@@ -22,6 +22,7 @@ import { TOURISMUS_SET_ID } from "@/lib/tourismusData";
 import { KAPITEL3_SET_ID } from "@/lib/kapitel3Data";
 import { MEIN_EIGENER_LADEN_SET_ID } from "@/lib/meinEigenerLadenData";
 import { HIER_ARBEITE_ICH_SET_ID } from "@/lib/hierArbeiteIchData";
+import { THEMA1_VERBS_SET_ID } from "@/lib/thema1VerbsData";
 
 export function generateStaticParams() {
   return [
@@ -48,6 +49,7 @@ export function generateStaticParams() {
     { id: KAPITEL3_SET_ID },
     { id: MEIN_EIGENER_LADEN_SET_ID },
     { id: HIER_ARBEITE_ICH_SET_ID },
+    { id: THEMA1_VERBS_SET_ID },
   ];
 }
 

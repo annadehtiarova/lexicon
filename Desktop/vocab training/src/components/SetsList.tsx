@@ -33,6 +33,7 @@ import { TOURISMUS_SET_ID } from "@/lib/tourismusData";
 import { KAPITEL3_SET_ID } from "@/lib/kapitel3Data";
 import { MEIN_EIGENER_LADEN_SET_ID } from "@/lib/meinEigenerLadenData";
 import { HIER_ARBEITE_ICH_SET_ID } from "@/lib/hierArbeiteIchData";
+import { THEMA1_VERBS_SET_ID } from "@/lib/thema1VerbsData";
 
 const BUILT_IN_SET_IDS = new Set([
   ARBEITSRAEUME_SET_ID,
@@ -58,6 +59,7 @@ const BUILT_IN_SET_IDS = new Set([
   KAPITEL3_SET_ID,
   MEIN_EIGENER_LADEN_SET_ID,
   HIER_ARBEITE_ICH_SET_ID,
+  THEMA1_VERBS_SET_ID,
 ]);
 
 const SELECTED_CHAPTER_KEY = "lexikon.selectedChapter";
@@ -102,7 +104,7 @@ export default function SetsList({
   const visibleSets = sets.filter((set) => {
     const chapter = set.name.match(/\bKapitel\s+(\d+)\b/i)?.[1];
     if (chapter) return chapter === selectedChapter;
-    return !BUILT_IN_SET_IDS.has(set.id);
+    return !BUILT_IN_SET_IDS.has(set.id) || set.id === THEMA1_VERBS_SET_ID;
   });
 
   return (

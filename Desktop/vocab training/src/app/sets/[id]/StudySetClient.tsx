@@ -65,6 +65,7 @@ import { TOURISMUS_SET_ID, getTourismusSet } from "@/lib/tourismusData";
 import { KAPITEL3_SET_ID, getKapitel3Set } from "@/lib/kapitel3Data";
 import { MEIN_EIGENER_LADEN_SET_ID, getMeinEigenerLadenSet } from "@/lib/meinEigenerLadenData";
 import { HIER_ARBEITE_ICH_SET_ID, getHierArbeiteIchSet } from "@/lib/hierArbeiteIchData";
+import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
@@ -340,6 +341,16 @@ function resolveSet(id: string): ResolvedSet | null {
     };
   }
 
+  if (id === THEMA1_VERBS_SET_ID) {
+    const builtInSet = getThema1VerbsSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
   const stored = getSet(id);
 
   if (!stored) return null;
@@ -450,7 +461,7 @@ export default function StudySetClient({ id }: { id: string }) {
   const visibleWords = words.filter((word) => {
     const query = wordSearch.trim().toLowerCase();
     if (!query) return true;
-    return [word.german, word.english, word.pos, word.example]
+    return [word.b1, word.german, word.english, word.pos, word.example]
       .join(" ")
       .toLowerCase()
       .includes(query);
@@ -931,18 +942,25 @@ export default function StudySetClient({ id }: { id: string }) {
             )}
           </div>
 
-          <div className="mt-4 overflow-hidden rounded-xl border border-[#dce4bd] bg-white">
+          <div className="mt-4 overflow-x-auto rounded-xl border border-[#dce4bd] bg-white">
+            {words.some((word) => word.b1) && (
+              <div className="grid min-w-130 grid-cols-3 gap-3 border-b border-[#d5ddd7] bg-[#f8fbdc] px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[#5d6f74]">
+                <span>B1</span>
+                <span>B2</span>
+                <span>English</span>
+              </div>
+            )}
             {visibleWords.map((word, i) => (
               <div
                 key={word.id}
-                className={`flex items-center justify-between gap-4 px-3 py-2.5 ${
+                className={`${word.b1 ? "grid min-w-130 grid-cols-3 items-center gap-3" : "flex items-center justify-between gap-4"} px-3 py-2.5 ${
                   i !== visibleWords.length - 1
                     ? "border-b border-[#d5ddd7]"
                     : ""
                 }`}
               >
                 {editingWordId === word.id ? (
-                  <div className="flex w-full flex-col gap-3">
+                  <div className={`${word.b1 ? "col-span-3 " : ""}flex w-full flex-col gap-3`}>
                     <input
                       value={draftGerman}
                       onChange={(event) => setDraftGerman(event.target.value)}
@@ -1013,6 +1031,9 @@ export default function StudySetClient({ id }: { id: string }) {
                   </div>
                 ) : (
                   <>
+                    {word.b1 && (
+                      <p className="text-sm text-[#5d6f74]">{word.b1}</p>
+                    )}
                     <div className="flex items-start gap-2">
                       {masteredIds.has(word.id) && (
                         <span
@@ -1029,13 +1050,15 @@ export default function StudySetClient({ id }: { id: string }) {
                           {displayGerman(word)}
                         </button>
 
-                        <p className="font-body pt-1 text-xs italic text-[#5d6f74]">
-                          {word.example}
-                        </p>
+                        {word.example && (
+                          <p className="font-body pt-1 text-xs italic text-[#5d6f74]">
+                            {word.example}
+                          </p>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex shrink-0 items-center gap-3">
+                    <div className="flex min-w-0 items-center justify-between gap-3">
                       <div className="text-right">
                         <button
                           type="button"
@@ -1045,9 +1068,11 @@ export default function StudySetClient({ id }: { id: string }) {
                           {word.english}
                         </button>
 
-                        <p className="font-body pt-0.5 text-[11px] uppercase tracking-[0.55px] text-[#5d6f74]">
-                          {word.pos}
-                        </p>
+                        {!word.b1 && (
+                          <p className="font-body pt-0.5 text-[11px] uppercase tracking-[0.55px] text-[#5d6f74]">
+                            {word.pos}
+                          </p>
+                        )}
                       </div>
 
                       <button
