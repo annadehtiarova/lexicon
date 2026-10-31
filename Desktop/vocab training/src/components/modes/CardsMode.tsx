@@ -13,12 +13,16 @@ interface CardsModeProps {
   words: VocabWord[];
   onCorrect: (id: string) => void;
   onBatchComplete: () => void;
+  frontLabel?: string;
+  backLabel?: string;
 }
 
 export default function CardsMode({
   words,
   onCorrect,
   onBatchComplete,
+  frontLabel = "German",
+  backLabel = "English",
 }: CardsModeProps) {
   const [cardOrder, setCardOrder] = useState(() => words);
   const [index, setIndex] = useState(0);
@@ -72,14 +76,35 @@ export default function CardsMode({
               "linear-gradient(135deg, rgba(255,255,255,0.35), rgba(248,251,220,0.8))",
           }}
         >
-          <p className="font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]">
-            {flipped ? "English" : "German"}
-          </p>
-          <p className="font-heading text-2xl tracking-[-0.4px] text-[#172b35]">
-            {flipped ? word.english : word.german}
-          </p>
+          {flipped ? (
+            <>
+              <p className="font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]">
+                {backLabel}
+              </p>
+              <p className="font-heading text-2xl tracking-[-0.4px] text-[#172b35]">
+                {word.english}
+              </p>
+              {word.b1 && (
+                <div className="mt-1 border-t border-[#dce4bd] pt-3">
+                  <p className="font-body text-xs uppercase tracking-[2px] text-[#5d6f74]">
+                    B1 · Basic
+                  </p>
+                  <p className="mt-1 text-sm text-[#172b35]">{word.b1}</p>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <p className="font-body text-xs uppercase tracking-[2.4px] text-[#5d6f74]">
+                {frontLabel}
+              </p>
+              <p className="font-heading text-2xl tracking-[-0.4px] text-[#172b35]">
+                {word.german}
+              </p>
+            </>
+          )}
           <p className="font-body text-xs text-[#5d6f74]">
-            Tap the card to reveal
+            {flipped ? "Tap the card to flip back" : "Tap the card to reveal"}
           </p>
         </button>
       </div>

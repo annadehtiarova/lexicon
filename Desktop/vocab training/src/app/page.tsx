@@ -14,17 +14,34 @@ import {
 import { extractVocabFromImages } from "@/lib/extractVocab";
 import { StudySet } from "@/lib/types";
 import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
+import { THEMA1_NOUNS_SET_ID, getThema1NounsSet } from "@/lib/thema1NounsData";
+import { THEMA1_ADJECTIVES_SET_ID, getThema1AdjectivesSet } from "@/lib/thema1AdjectivesData";
+import { THEMA1_SENTENCES_SET_ID, getThema1SentencesSet } from "@/lib/thema1SentencesData";
 
-const BUILT_IN_SET_IDS = new Set([THEMA1_VERBS_SET_ID]);
+const BUILT_IN_SET_IDS = new Set([
+  THEMA1_VERBS_SET_ID,
+  THEMA1_NOUNS_SET_ID,
+  THEMA1_ADJECTIVES_SET_ID,
+  THEMA1_SENTENCES_SET_ID,
+]);
 
-const BUILT_IN_SETS = [getThema1VerbsSet()];
+const BUILT_IN_SETS = [
+  getThema1VerbsSet(),
+  getThema1NounsSet(),
+  getThema1AdjectivesSet(),
+  getThema1SentencesSet(),
+];
 
 function withBuiltInProgress(set: StudySet): StudySet {
   const words = loadBuiltInWords(set.id, set.words);
   return {
     ...set,
     words,
-    masteredWordIds: loadMasteredWordIds(set.id, words),
+    masteredWordIds: loadMasteredWordIds(
+      set.id,
+      words,
+      set.id === THEMA1_SENTENCES_SET_ID ? ["cards"] : undefined,
+    ),
   };
 }
 

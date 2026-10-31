@@ -34,7 +34,7 @@ export const THEMA1_VERBS_SET_ID = "thema-1-verbs";
 export function getThema1VerbsSet(): StudySet {
   return {
     id: THEMA1_VERBS_SET_ID,
-    name: "Thema 1 - Verbs",
+    name: "Thema 1 - Ein guter Arbeitgeber (Verben)",
     createdAt: 0,
     sourceImageCount: 0,
     words: RAW_WORDS.map((word, index) => ({

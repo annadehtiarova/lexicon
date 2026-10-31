@@ -66,14 +66,23 @@ export function loadExerciseProgress(setId: string): ExerciseProgress {
   }
 }
 
-export function isWordMastered(wordId: string, progress: ExerciseProgress) {
-  const requiredExercises: ExerciseKey[] = ["cards", "quiz", "match"];
+export function isWordMastered(
+  wordId: string,
+  progress: ExerciseProgress,
+  requiredExercises: ExerciseKey[] = ["cards", "quiz", "match"],
+) {
   return requiredExercises.every((exercise) => progress[exercise].includes(wordId));
 }
 
-export function loadMasteredWordIds(setId: string, words: StudySet["words"]) {
+export function loadMasteredWordIds(
+  setId: string,
+  words: StudySet["words"],
+  requiredExercises?: ExerciseKey[],
+) {
   const progress = loadExerciseProgress(setId);
-  return words.filter((word) => isWordMastered(word.id, progress)).map((word) => word.id);
+  return words
+    .filter((word) => isWordMastered(word.id, progress, requiredExercises))
+    .map((word) => word.id);
 }
 
 export function saveExerciseProgress(setId: string, progress: ExerciseProgress) {

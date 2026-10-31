@@ -25,6 +25,9 @@ import {
 import { VocabWord } from "@/lib/types";
 import { displayGerman } from "@/lib/wordDisplay";
 import { THEMA1_VERBS_SET_ID, getThema1VerbsSet } from "@/lib/thema1VerbsData";
+import { THEMA1_NOUNS_SET_ID, getThema1NounsSet } from "@/lib/thema1NounsData";
+import { THEMA1_ADJECTIVES_SET_ID, getThema1AdjectivesSet } from "@/lib/thema1AdjectivesData";
+import { THEMA1_SENTENCES_SET_ID, getThema1SentencesSet } from "@/lib/thema1SentencesData";
 import CardsMode from "@/components/modes/CardsMode";
 import MultipleChoiceMode from "@/components/modes/MultipleChoiceMode";
 import MatchingMode from "@/components/modes/MatchingMode";
@@ -56,6 +59,36 @@ interface ResolvedSet {
 function resolveSet(id: string): ResolvedSet | null {
   if (id === THEMA1_VERBS_SET_ID) {
     const builtInSet = getThema1VerbsSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === THEMA1_NOUNS_SET_ID) {
+    const builtInSet = getThema1NounsSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === THEMA1_ADJECTIVES_SET_ID) {
+    const builtInSet = getThema1AdjectivesSet();
+    return {
+      name: builtInSet.name,
+      words: builtInSet.words,
+      masteredWordIds: [],
+      isPersisted: false,
+    };
+  }
+
+  if (id === THEMA1_SENTENCES_SET_ID) {
+    const builtInSet = getThema1SentencesSet();
     return {
       name: builtInSet.name,
       words: builtInSet.words,
@@ -127,6 +160,8 @@ export default function StudySetClient({ id }: { id: string }) {
         : resolved,
     );
     const progress = loadExerciseProgress(id);
+    const requiredExercises: ExerciseKey[] =
+      id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"];
     pendingProgressRef.current = progress;
     setExerciseProgress(progress);
     const savedBatchResult = loadLastBatchResult(id);
@@ -134,7 +169,7 @@ export default function StudySetClient({ id }: { id: string }) {
     setPracticeBatch(savedBatchResult?.batch ?? 0);
     const remainingWords = resolvedWords;
     const mastered = remainingWords
-      .filter((word) => isWordMastered(word.id, progress))
+      .filter((word) => isWordMastered(word.id, progress, requiredExercises))
       .map((word) => word.id);
     setMasteredIds(new Set(mastered));
     setPracticeWordIds(
@@ -193,7 +228,13 @@ export default function StudySetClient({ id }: { id: string }) {
     saveExerciseProgress(id, next);
     setExerciseProgress(next);
     const masteredWords = words
-      .filter((word) => isWordMastered(word.id, next));
+      .filter((word) =>
+        isWordMastered(
+          word.id,
+          next,
+          id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"],
+        ),
+      );
     const masteredWordIds = new Set(masteredWords.map((word) => word.id));
     setMasteredIds(masteredWordIds);
     const readyWordIds = [
@@ -229,7 +270,8 @@ export default function StudySetClient({ id }: { id: string }) {
     nextCompleted.add(completedMode);
     setCompletedModes(nextCompleted);
 
-    const sequence: ModeKey[] = ["cards", "quiz", "match"];
+    const sequence: ModeKey[] =
+      id === THEMA1_SENTENCES_SET_ID ? ["cards"] : ["cards", "quiz", "match"];
     const nextMode = sequence[sequence.indexOf(completedMode) + 1];
     if (nextMode) {
       setMode(nextMode);
@@ -277,7 +319,10 @@ export default function StudySetClient({ id }: { id: string }) {
     count: practiceWords.filter((word) => exerciseProgress[key].includes(word.id)).length,
     complete: completedModes.has(key),
   }));
-  const visibleModes = MODES;
+  const visibleModes =
+    id === THEMA1_SENTENCES_SET_ID
+      ? MODES.filter(({ key }) => key === "cards")
+      : MODES;
 
   if (set === undefined || practiceWordIds === null) return null;
 
@@ -498,6 +543,8 @@ export default function StudySetClient({ id }: { id: string }) {
                 words={practiceWords}
                 onCorrect={handleKnewIt}
                 onBatchComplete={() => completeModeBatch("cards")}
+                frontLabel={id === THEMA1_SENTENCES_SET_ID ? "B1 sentence" : undefined}
+                backLabel={id === THEMA1_SENTENCES_SET_ID ? "B2 sentence" : undefined}
               />
             )}
 
